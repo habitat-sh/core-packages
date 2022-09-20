@@ -34,8 +34,8 @@ These are a minimal set of packages that can be used to build an isolated set of
 At this stage the build process completely depends on tools available on the host system.
 
 - native-libgmp
-- native-libmpc
 - native-libmpfr
+- native-libmpc
 - native-libisl
 - native-cross-binutils
 - native-cross-gcc-real
