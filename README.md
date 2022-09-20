@@ -56,3 +56,15 @@ This list is incomplete as this repo is still a work in progress.
 - build-tools-m4
 - build-tools-ncurses
 - build-tools-bash
+- build-tools-coreutils
+- build-tools-diffutils
+- build-tools-file
+- build-tools-findutils
+- build-tools-gawk
+- build-tools-grep
+- build-tools-gzip
+- build-tools-make
+- build-tools-patch
+- build-tools-sed
+- build-tools-tar
+- build-tools-xz
