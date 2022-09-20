@@ -5,12 +5,14 @@ that are completely isolated from the host system environment. These build tools
 bootstrap a set of standard habitat packages for new platforms. 
 
 This repo build on knowledge available from the Linux From Scratch project (LFS) and adapts it for 
-Habitat's packaging system.
+Habitat's packaging system. There are many variants of the LFS project for different platforms and versions. This repo largely follows the instructions [mentioned here](https://clfs.org/~kb0iic/lfs-systemd/index.html). 
 
 ## Building Bootstrap Packages
 
 The packages involved in the bootstrapping process are almost always native packages. 
 To build them you must make sure you have enabled native package support.
+
+You must also ensure that your host system has all the [required build tools](https://clfs.org/~kb0iic/lfs-systemd/chapter02/hostreqs.html) available.
 
 As of this writing, you need a habitat build of the latest commit on [jj/aarch64-linux-bootstrap branch](https://github.com/habitat-sh/habitat/tree/jj/aarch64-linux-bootstrap) to build these plans.
 
