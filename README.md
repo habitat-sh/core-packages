@@ -58,6 +58,7 @@ This list is incomplete as this repo is still a work in progress.
 - build-tools-bash
 - build-tools-coreutils
 - build-tools-diffutils
+- native-file
 - build-tools-file
 - build-tools-findutils
 - build-tools-gawk
