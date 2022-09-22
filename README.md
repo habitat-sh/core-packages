@@ -69,3 +69,9 @@ This list is incomplete as this repo is still a work in progress.
 - build-tools-sed
 - build-tools-tar
 - build-tools-xz
+- build-tools-binutils
+- build-tools-libgmp
+- build-tools-libmpfr
+- build-tools-libmpc
+- build-tools-libisl
+- build-tools-gcc (Not working yet)

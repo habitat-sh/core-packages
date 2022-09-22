@@ -94,6 +94,7 @@ if [[ "$(basename @program@)" = *++ ]]; then
     libc_cflags="$libc_cflags -L@libstdcpp@/lib"
     libc_cflags="$libc_cflags -isystem @libstdcpp@/include/c++/*"
     libc_cflags="$libc_cflags -isystem @libstdcpp@/include/c++/*/@native_target@"
+    libc_cflags="$libc_cflags -isystem @libstdcpp@/include/c++/*/backward"
   fi
 fi
 
