@@ -1,5 +1,5 @@
 app_name="m4"
-native_target="${pkg_target%%-*}-hab-linux-gnu"
+native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-m4"
 pkg_origin="core"

@@ -1,5 +1,5 @@
 app_name="file"
-native_target="${pkg_target%%-*}-hab-linux-gnu"
+native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-file"
 pkg_origin="core"

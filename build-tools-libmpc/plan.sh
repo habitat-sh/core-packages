@@ -1,5 +1,5 @@
 app_name="mpc"
-native_target="${pkg_target%%-*}-hab-linux-gnu"
+native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-libmpc"
 pkg_origin="core"
