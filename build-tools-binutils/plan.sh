@@ -1,5 +1,5 @@
 app_name="binutils"
-native_target="${TARGET_ARCH}-hab-linux-gnu"
+native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-binutils"
 pkg_origin="core"
