@@ -1,5 +1,5 @@
 app_name="isl"
-native_target="${pkg_target%%-*}-hab-linux-gnu"
+native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-libisl"
 pkg_origin="core"

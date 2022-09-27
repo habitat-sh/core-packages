@@ -26,7 +26,7 @@ do_build() {
     ./configure \
         --prefix="$pkg_prefix" \
         --build="$(./config.guess)" \
-        --host=$native_target \
+        --host="$(./config.guess)" \
         --disable-static
     make
 }

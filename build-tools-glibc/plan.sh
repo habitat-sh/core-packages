@@ -1,5 +1,5 @@
 app_name="glibc"
-native_target="${pkg_target%%-*}-hab-linux-gnu"
+native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-glibc"
 pkg_origin="core"

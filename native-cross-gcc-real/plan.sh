@@ -1,5 +1,5 @@
 app_name="gcc"
-native_target="${pkg_target%%-*}-hab-linux-gnu"
+native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 glibc_version="2.36"
 
 pkg_name="native-cross-gcc-real"

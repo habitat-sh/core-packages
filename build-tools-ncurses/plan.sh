@@ -1,5 +1,5 @@
 app_name="ncurses"
-native_target="${pkg_target%%-*}-hab-linux-gnu"
+native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-ncurses"
 pkg_origin="core"
