@@ -28,6 +28,7 @@ pkg_deps=(
 
 pkg_build_deps=(
     core/build-tools-binutils
+    core/build-tools-linux-headers
     core/native-cross-gcc
     core/native-cross-binutils
 )
@@ -45,39 +46,16 @@ do_prepare() {
     # By default LDFLAGS, CFLAGS, CPPFLAGS and CXXFLAGS get used by the
     # build compiler. To prevent this we set *FLAGS_FOR_BUILD="" to
     # prevent any interference with the build compiler and linker.
-    export LDFLAGS_FOR_BUILD=""
+    export LDFLAGS_FOR_BUILD="${LDFLAGS}"
     export CFLAGS_FOR_BUILD=""
     export CPPFLAGS_FOR_BUILD=""
     export CXXFLAGS_FOR_BUILD=""
-    # export LD_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/ld"
-    # export AS_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/as"
-    # export AR_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/ar"
-    # export NM_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/nm"
-    # export OBJCOPY_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/objcopy"
-    # export OBJDUMP_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/objdump"
-    # export RANLIB_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/ranlib"
-    # export READELF_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/readelf"
-    # export STRIP_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/strip"
     
-    export LDFLAGS_FOR_TARGET="-L$(pwd)/${native_target}/libgcc ${LDFLAGS}"
+    export LDFLAGS_FOR_TARGET="-L$(pwd)/build/${native_target}/libgcc ${LDFLAGS}"
     export CPPFLAGS_FOR_TARGET="${CPPFLAGS}"
     export CFLAGS_FOR_TARGET="${CFLAGS}"
     export CXXFLAGS_FOR_TARGET="${CXXFLAGS}"
-    export CC_FOR_TARGET="$(pkg_path_for native-cross-gcc)/bin/${native_target}-gcc"
-    # export LD_FOR_TARGET="$(pkg_path_for native-cross-binutils)/bin/${native_target}-ld"
-    # export AS_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/as"
-    # export AR_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/ar"
-    # export NM_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/nm"
-    # export OBJCOPY_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/objcopy"
-    # export OBJDUMP_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/objdump"
-    # export RANLIB_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/ranlib"
-    # export READELF_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/readelf"
-    # export STRIP_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/strip"
-
     
-
-    export NATIVE_SYSTEM_HEADER_DIR="$(pkg_path_for build-tools-glibc)/include"
-
     unset LDFLAGS
     unset CPPFLAGS
     unset CFLAGS
@@ -95,43 +73,19 @@ do_prepare() {
 do_build() {
     mkdir -v build
     pushd build || exit 1
-    # LDFLAGS_FOR_BUILD="" \
-    #     CFLAGS_FOR_BUILD="" \
-    #     CPPFLAGS_FOR_BUILD="" \
-    #     CXXFLAGS_FOR_BUILD="" \
-    #     LD_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/ld" \
-    #     AS_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/as" \
-    #     AR_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/ar" \
-    #     NM_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/nm" \
-    #     OBJCOPY_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/objcopy" \
-    #     OBJDUMP_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/objdump" \
-    #     RANLIB_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/ranlib" \
-    #     READELF_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/readelf" \
-    #     STRIP_FOR_BUILD="$(pkg_path_for native-cross-binutils)/${native_target}/bin/strip" \
-    #     LDFLAGS_FOR_TARGET="-L$(pwd)/${native_target}/libgcc ${LDFLAGS}" \
-    #     CPPFLAGS_FOR_TARGET="${CPPFLAGS}" \
-    #     CFLAGS_FOR_TARGET="${CFLAGS}" \
-    #     CXXFLAGS_FOR_TARGET="${CXXFLAGS}" \
-    #     LD_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/ld" \
-    #     AS_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/as" \
-    #     AR_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/ar" \
-    #     NM_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/nm" \
-    #     OBJCOPY_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/objcopy" \
-    #     OBJDUMP_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/objdump" \
-    #     RANLIB_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/ranlib" \
-    #     READELF_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/readelf" \
-    #     STRIP_FOR_TARGET="$(pkg_path_for build-tools-binutils)/bin/strip" \
-    #     NATIVE_SYSTEM_HEADER_DIR="$(pkg_path_for build-tools-glibc)/include" \
+    
     ../configure \
         --prefix="$pkg_prefix" \
         --build="$(../config.guess)" \
         --host="$native_target" \
         --target="$native_target" \
-        --with-sysroot="$pkg_prefix" \
         --with-gmp="$(pkg_path_for build-tools-libgmp)" \
         --with-isl="$(pkg_path_for build-tools-libisl)" \
         --with-mpfr="$(pkg_path_for build-tools-libmpfr)" \
         --with-mpc="$(pkg_path_for build-tools-libmpc)" \
+        --with-build-sysroot="" \
+        --with-sysroot="" \
+        --with-native-system-header-dir="$(pkg_path_for build-tools-glibc)/include" \
         --with-glibc-version="$glibc_version" \
         --enable-initfini-array \
         --enable-default-pie \
@@ -145,7 +99,7 @@ do_build() {
         --disable-libssp \
         --disable-libvtv \
         --enable-languages=c,c++
-    make
+    make -j"$(nproc)"
     popd || exit 1
 }
 

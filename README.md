@@ -12,8 +12,6 @@ Habitat's packaging system. There are many variants of the LFS project for diffe
 The packages involved in the bootstrapping process are almost always native packages. 
 To build them you must make sure you have enabled native package support.
 
-You must also ensure that your host system has all the [required build tools](https://clfs.org/~kb0iic/lfs-systemd/chapter02/hostreqs.html) available.
-
 As of this writing, you need a habitat build of the latest commit on [jj/aarch64-linux-bootstrap branch](https://github.com/habitat-sh/habitat/tree/jj/aarch64-linux-bootstrap) to build these plans.
 
 ```bash
@@ -26,6 +24,35 @@ To build a package you can use the following command
 # In the root folder of this repo
 hab pkg build -N <package-folder>
 # Eg: hab pkg build -N build-tools-glibc
+```
+
+### Checking the Host System tools
+
+You can run the `version-check.sh` script to check the versions of the various required tools on your system.
+Be sure to cross check the version meets the minimum specified version mentioned [here](https://clfs.org/~kb0iic/lfs-systemd/chapter02/hostreqs.html).
+
+```bash
+bash version-check.sh
+```
+
+### Cross Building
+
+You should theoretically be able to follow the same build process to cross build the arm packages on 
+`x86_64` linux platforms as well. To do so you need to set an additional environment variable before 
+running a build.
+
+```bash
+# On an x86_64 machine
+export TARGET_ARCH="aarch64-linux"
+```
+
+### Running Tests
+
+Most of the packages have tests defined. You can run it by setting the `DO_CHECK` environment variable.
+
+```bash
+DO_CHECK=1 hab pkg build -N <package-folder>
+# Eg: DO_CHECK=1 hab pkg build -N build-tools-file
 ```
 
 ## Build Order
@@ -74,4 +101,4 @@ This list is incomplete as this repo is still a work in progress.
 - build-tools-libmpfr
 - build-tools-libmpc
 - build-tools-libisl
-- build-tools-gcc (Not working yet)
+- build-tools-gcc

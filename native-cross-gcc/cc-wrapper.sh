@@ -40,41 +40,46 @@ set -e
 # `#include_next <limits.h>` to find the limits.h file in ../includes-fixed. To
 # remedy the problem, another `-idirafter` is necessary to add that directory
 # again.
-libc_cflags="-B@glibc@/lib/"
-libc_cflags="$libc_cflags -idirafter @glibc@/include"
-libc_cflags="$libc_cflags -idirafter @linux_headers@/include"
-
+extraFlags="-B@glibc@/lib/"
 # Force gcc to use our ld wrapper from binutils when calling `ld`
-libc_cflags="$libc_cflags -B@binutils@/@native_target@/bin"
+extraFlags="$extraFlags -B@binutils@/@native_target@/bin"
 
 # Figure out if linker flags should be passed.  GCC prints annoying
 # warnings when they are not needed.
 dontLink=0
 nonFlagArgs=0
+# shellcheck disable=SC2193
+[[ "@program@" = *++ ]] && isCxx=1 || isCxx=0
+cxxInclude=1
+cxxLibrary=1
+cInclude=1
 
+params=("$@")
+
+declare -i n=0
+nParams=${#params[@]}
 # Determine is we add dynamic linker arguments to the extra arguments by
 # looking at the calling arguments to this program. This may not work 100% of
 # the time, but it has shown to be fairly reliable
-for i in "$@"; do
-  if [ "$i" = -c ]; then
-    dontLink=1
-  elif [ "$i" = -S ]; then
-    dontLink=1
-  elif [ "$i" = -E ]; then
-    dontLink=1
-  elif [ "$i" = -E ]; then
-    dontLink=1
-  elif [ "$i" = -M ]; then
-    dontLink=1
-  elif [ "$i" = -MM ]; then
-    dontLink=1
-  elif [ "$i" = -x ]; then
-    # At least for the cases c-header or c++-header we should set dontLink.
-    # I expect no one use -x other than making precompiled headers.
-    dontLink=1
-  elif [ "${i:0:1}" != - ]; then
-    nonFlagArgs=1
-  fi
+while (("$n" < "$nParams")); do
+  p=${params[n]}
+  p2=${params[n + 1]:-} # handle `p` being last one
+  n+=1
+
+  case "$p" in
+  -[cSEM] | -MM) dontLink=1 ;;
+  -nostdinc) cInclude=0 cxxInclude=0 ;;
+  -nostdinc++) cxxInclude=0 ;;
+  -nostdlib) cxxLibrary=0 ;;
+  -x)
+    case "$p2" in
+    *-header) dontLink=1 ;;
+    c++*) isCxx=1 ;;
+    esac
+    ;;
+  -?*) ;;
+  *) nonFlagArgs=1 ;; # Includes a solitary dash (`-`) which signifies standard input; it is not a flag
+  esac
 done
 
 # If we pass a flag like -Wl, then gcc will call the linker unless it
@@ -86,21 +91,28 @@ if [ "$nonFlagArgs" = 0 ]; then
   dontLink=1
 fi
 
-params=("$@")
-
 # If we are calling a c/g++ style program, set additional flags.
-if [[ "$(basename @program@)" = *++ ]]; then
-  if  echo "$@" | grep -qv -- -nostdlib; then
-    libc_cflags="$libc_cflags -L@libstdcpp@/lib"
-    libc_cflags="$libc_cflags -isystem @libstdcpp@/include/c++/*"
-    libc_cflags="$libc_cflags -isystem @libstdcpp@/include/c++/*/@native_target@"
-    libc_cflags="$libc_cflags -isystem @libstdcpp@/include/c++/*/backward"
+if [[ "$isCxx" = 1 ]]; then
+  if [[ "$cxxLibrary" = 1 ]]; then
+    extraFlags="$extraFlags -L@libstdcpp@/lib"
   fi
+
+  if [[ "$cxxInclude" = 1 ]]; then
+    extraFlags="$extraFlags -isystem @libstdcpp@/include/c++/*"
+    extraFlags="$extraFlags -isystem @libstdcpp@/include/c++/*/@native_target@"
+    extraFlags="$extraFlags -isystem @libstdcpp@/include/c++/*/backward"
+  fi
+fi
+
+
+if [[ "$cInclude" = 1 ]]; then
+  extraFlags="$extraFlags -idirafter @glibc@/include"
+  extraFlags="$extraFlags -idirafter @linux_headers@/include"
 fi
 
 # Add the flags for the C compiler proper.
 extraBefore=()
-extraAfter=($libc_cflags)
+extraAfter=($extraFlags)
 
 if [ "$dontLink" != 1 ]; then
   extraBefore+=("-Wl,-dynamic-linker=@dynamic_linker@")

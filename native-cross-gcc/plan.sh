@@ -32,6 +32,7 @@ do_install() {
     for file in "$(pkg_path_for native-cross-gcc-real)"/bin/*; do
         ln -sv "$file" "${pkg_prefix:?}/bin/$(basename "$file")"
     done
+    wrap_binary "${native_target}-c++"
     wrap_binary "${native_target}-gcc"
     wrap_binary "${native_target}-g++"
     wrap_binary "${native_target}-cpp"
