@@ -21,9 +21,8 @@
 #
 # There is one environment variables that is consumed by this program:
 #
-# * `$DEBUG` (*Optional*): If set, this program will output the original and
+# * `$HAB_DEBUG` (*Optional*): If set, this program will output the original and
 #    extra flags added to standard error
-#
 #
 
 # # Main program
@@ -40,9 +39,9 @@ set -e
 # `#include_next <limits.h>` to find the limits.h file in ../includes-fixed. To
 # remedy the problem, another `-idirafter` is necessary to add that directory
 # again.
-extraFlags="-B@glibc@/lib/"
+extraAfterFlags="-B@glibc@/lib/"
 # Force gcc to use our ld wrapper from binutils when calling `ld`
-extraFlags="$extraFlags -B@binutils@/@native_target@/bin"
+extraAfterFlags="$extraAfterFlags -B@binutils@/@native_target@/bin"
 
 # Figure out if linker flags should be passed.  GCC prints annoying
 # warnings when they are not needed.
@@ -94,25 +93,28 @@ fi
 # If we are calling a c/g++ style program, set additional flags.
 if [[ "$isCxx" = 1 ]]; then
   if [[ "$cxxLibrary" = 1 ]]; then
-    extraFlags="$extraFlags -L@libstdcpp@/lib"
+    extraAfterFlags="$extraAfterFlags -L@libstdcpp@/lib"
   fi
 
   if [[ "$cxxInclude" = 1 ]]; then
-    extraFlags="$extraFlags -isystem @libstdcpp@/include/c++/*"
-    extraFlags="$extraFlags -isystem @libstdcpp@/include/c++/*/@native_target@"
-    extraFlags="$extraFlags -isystem @libstdcpp@/include/c++/*/backward"
+    extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*"
+    extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*/@native_target@"
+    extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*/backward"
   fi
 fi
 
+if [[ "$cxxLibrary" = 1 ]]; then
+  extraAfterFlags="$extraAfterFlags -L@glibc@/lib"
+fi
 
 if [[ "$cInclude" = 1 ]]; then
-  extraFlags="$extraFlags -idirafter @glibc@/include"
-  extraFlags="$extraFlags -idirafter @linux_headers@/include"
+  extraAfterFlags="$extraAfterFlags -idirafter @glibc@/include"
+  extraAfterFlags="$extraAfterFlags -idirafter @linux_headers@/include"
 fi
 
 # Add the flags for the C compiler proper.
 extraBefore=()
-extraAfter=($extraFlags)
+extraAfter=($extraAfterFlags)
 
 if [ "$dontLink" != 1 ]; then
   extraBefore+=("-Wl,-dynamic-linker=@dynamic_linker@")
@@ -128,7 +130,7 @@ if [ "$*" = -v ]; then
 fi
 
 # Optionally print debug info.
-if [ -n "$DEBUG" ]; then
+if (( "${HAB_DEBUG:-0}" >= 1 )); then
   echo "original flags to @program@:" >&2
   for i in "${params[@]}"; do
     echo "  $i" >&2

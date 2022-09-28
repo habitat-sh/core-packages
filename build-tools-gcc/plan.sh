@@ -35,27 +35,24 @@ pkg_build_deps=(
 
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
-pkg_lib_dirs=(lib)
+pkg_lib_dirs=(lib lib64)
 
 do_prepare() {
-    # We move the LD_RUN_PATH into the LDFLAGS and unset LD_RUN_PATH
-    # so that the build compiler and linker doesn't pick it up.
-    export LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
-    unset LD_RUN_PATH
-
     # By default LDFLAGS, CFLAGS, CPPFLAGS and CXXFLAGS get used by the
     # build compiler. To prevent this we set *FLAGS_FOR_BUILD="" to
     # prevent any interference with the build compiler and linker.
-    export LDFLAGS_FOR_BUILD="${LDFLAGS}"
+    export LDFLAGS_FOR_BUILD=""
     export CFLAGS_FOR_BUILD=""
     export CPPFLAGS_FOR_BUILD=""
     export CXXFLAGS_FOR_BUILD=""
-    
+
     export LDFLAGS_FOR_TARGET="-L$(pwd)/build/${native_target}/libgcc ${LDFLAGS}"
     export CPPFLAGS_FOR_TARGET="${CPPFLAGS}"
     export CFLAGS_FOR_TARGET="${CFLAGS}"
     export CXXFLAGS_FOR_TARGET="${CXXFLAGS}"
-    
+
+    # We unset all flags that will interfere with the compiler
+    unset LD_RUN_PATH
     unset LDFLAGS
     unset CPPFLAGS
     unset CFLAGS
@@ -73,7 +70,7 @@ do_prepare() {
 do_build() {
     mkdir -v build
     pushd build || exit 1
-    
+
     ../configure \
         --prefix="$pkg_prefix" \
         --build="$(../config.guess)" \

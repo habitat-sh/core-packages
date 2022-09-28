@@ -42,11 +42,11 @@ wrap_binary() {
     local wrapper_bin="$1"
     local real_bin
     real_bin="$(pkg_path_for native-cross-gcc-real)/bin/$wrapper_bin"
-    case $pkg_target in
-    aarch64-linux)
+    case $native_target in
+    aarch64-hab-linux-gnu)
         dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-aarch64.so.1"
         ;;
-    x86_64-linux)
+    x86_64-hab-linux-gnu)
         dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-x86-64.so.2"
         ;;
     esac

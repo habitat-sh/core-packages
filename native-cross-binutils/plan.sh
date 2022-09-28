@@ -42,4 +42,16 @@ do_check() {
 
 do_install() {
     make install
+    wrap_binary "${native_target}-ld"
+    wrap_binary "${native_target}-ld.bfd"
+}
+
+wrap_binary() {
+    local bin="$pkg_prefix/bin/$1"
+    build_line "Adding wrapper $bin to ${bin}.real"
+    mv -v "$bin" "${bin}.real"
+    sed "$PLAN_CONTEXT/ld-wrapper.sh" \
+        -e "s^@program@^${bin}.real^g" \
+        >"$bin"
+    chmod 755 "$bin"
 }

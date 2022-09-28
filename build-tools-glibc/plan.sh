@@ -65,7 +65,7 @@ do_build() {
         --enable-kernel=5.4 \
         libc_cv_slibdir="$pkg_prefix"/lib
 
-    make -j"$(nprocs)"
+    make -j"$(nproc)"
 
     popd >/dev/null || exit 1
 }
