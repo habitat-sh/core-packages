@@ -32,7 +32,7 @@ if (("${HAB_DEBUG:-0}" >= 7)); then
     set -x
 fi
 
-HAB_STORE="/hab/pkgs"
+HAB_STORE="/hab"
 
 # This is copy of the wrapper script utilities used by nix: https://github.com/NixOS/nixpkgs/blob/350fd0044447ae8712392c6b212a18bdf2433e71/pkgs/build-support/wrapper-common/utils.bash
 skip () {
