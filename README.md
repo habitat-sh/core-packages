@@ -128,3 +128,9 @@ hab pkg build -N -s `pwd`/component/backline components/backline/bootstrap
 hab pkg build -N -s `pwd`/component/studio components/studio/bootstrap
 ```
 
+### Running the Bootstrap Studio
+
+```bash
+hab pkg exec core/build-tools-hab-studio hab-studio -- -t bootstrap enter
+```
+
