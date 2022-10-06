@@ -46,7 +46,7 @@ do_prepare() {
     # We don't want to search for libraries in system directories such as `/lib`,
     # `/usr/local/lib`, etc. This prevents us breaking out of habitat.
     echo 'NATIVE_LIB_DIRS=' >>ld/configure.tgt
-    
+
     # Use symlinks instead of hard links to save space (otherwise `strip(1)`
     # needs to process each hard link seperately)
     for f in binutils/Makefile.in gas/Makefile.in ld/Makefile.in gold/Makefile.in; do
@@ -80,6 +80,18 @@ do_strip() {
 
 do_install() {
     make install
+    wrap_binary "ld"
+    wrap_binary "ld.bfd"
     # Remove unnecessary binaries
     rm -v "${pkg_prefix:?}"/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.{a,la}
+}
+
+wrap_binary() {
+    local bin="$pkg_prefix/bin/$1"
+    build_line "Adding wrapper $bin to ${bin}.real"
+    mv -v "$bin" "${bin}.real"
+    sed "$PLAN_CONTEXT/ld-wrapper.sh" \
+        -e "s^@program@^${bin}.real^g" \
+        >"$bin"
+    chmod 755 "$bin"
 }

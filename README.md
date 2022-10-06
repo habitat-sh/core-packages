@@ -78,8 +78,6 @@ At this stage the build process completely depends on tools available on the hos
 These are the set of packages that compromise the isolated build tools. They still depend on tools 
 available on the host for their build process, however they have no runtime dependencies on the host system.
 
-This list is incomplete as this repo is still a work in progress.
-
 - build-tools-m4
 - build-tools-ncurses
 - build-tools-bash
@@ -96,9 +94,37 @@ This list is incomplete as this repo is still a work in progress.
 - build-tools-sed
 - build-tools-tar
 - build-tools-xz
+- build-tools-cacerts
+- build-tools-openssl
+- build-tools-wget
 - build-tools-binutils
 - build-tools-libgmp
 - build-tools-libmpfr
 - build-tools-libmpc
 - build-tools-libisl
 - build-tools-gcc
+- native-busybox-static
+
+### Hab Bootstrap Studio Toolchain
+
+These next set of packages are the minimum set of native packages required to get a functional
+habitat bootstrap studio running to start building standard packages in a clean room environment.
+
+Since these components already have existing standard plans, we have an alternative set of native
+bootstrapping plans which we run instead. The bootstrap plans are only available in [jj/aarch64-linux-bootstrap branch](https://github.com/habitat-sh/habitat/tree/jj/aarch64-linux-bootstrap) right now.
+
+- build-tools-hab
+- build-tools-hab-plan-build
+- build-tools-hab-backline
+- build-tools-studio
+
+You can build each component using the following command:
+
+```bash
+# Inside the habitat repo
+hab pkg build -N -s `pwd`/component/hab components/hab/bootstrap
+hab pkg build -N -s `pwd`/component/plan-build components/plan-build/bootstrap
+hab pkg build -N -s `pwd`/component/backline components/backline/bootstrap
+hab pkg build -N -s `pwd`/component/studio components/studio/bootstrap
+```
+

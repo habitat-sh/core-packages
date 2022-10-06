@@ -19,6 +19,7 @@ pkg_shasum="e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff"
 pkg_dirname="${app_name}-${pkg_version}"
 
 pkg_deps=(
+    core/build-tools-binutils
     core/build-tools-glibc
     core/build-tools-libgmp
     core/build-tools-libisl
@@ -27,10 +28,8 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
-    core/build-tools-binutils
     core/build-tools-linux-headers
     core/native-cross-gcc
-    core/native-cross-binutils
 )
 
 pkg_bin_dirs=(bin)
@@ -46,10 +45,19 @@ do_prepare() {
     export CPPFLAGS_FOR_BUILD=""
     export CXXFLAGS_FOR_BUILD=""
 
-    export LDFLAGS_FOR_TARGET="-L$(pwd)/build/${native_target}/libgcc ${LDFLAGS}"
-    export CPPFLAGS_FOR_TARGET="${CPPFLAGS}"
-    export CFLAGS_FOR_TARGET="${CFLAGS}"
-    export CXXFLAGS_FOR_TARGET="${CXXFLAGS}"
+    case $native_target in
+    aarch64-hab-linux-gnu)
+        dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-aarch64.so.1"
+        ;;
+    x86_64-hab-linux-gnu)
+        dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-x86-64.so.2"
+        ;;
+    esac
+    EXTRA_LDFLAGS_FOR_TARGET="${LDFLAGS} -Wl,-dynamic-linker=${dynamic_linker}"
+    export LDFLAGS_FOR_TARGET="-L$(pwd)/build/${native_target}/libgcc ${EXTRA_LDFLAGS_FOR_TARGET}"
+    export CPPFLAGS_FOR_TARGET="${CPPFLAGS} ${EXTRA_LDFLAGS_FOR_TARGET}"
+    export CFLAGS_FOR_TARGET="${CFLAGS} ${EXTRA_LDFLAGS_FOR_TARGET}"
+    export CXXFLAGS_FOR_TARGET="${CXXFLAGS} ${EXTRA_LDFLAGS_FOR_TARGET}"
 
     # We unset all flags that will interfere with the compiler
     unset LD_RUN_PATH
@@ -57,6 +65,12 @@ do_prepare() {
     unset CPPFLAGS
     unset CFLAGS
     unset CXXFLAGS
+
+    # Remove the gcc and binutils binary directory from the PATH, otherwise the build process
+    # will begin to pick up the just built compilers and the built-tools-binutils linker for compilation
+    PATH=$(path_remove "${PATH}" "${pkg_prefix}/bin")
+    PATH=$(path_remove "${PATH}" "$(pkg_path_for build-tools-binutils)/bin")
+    build_line "Updated PATH=${PATH}"
 
     # Tell gcc not to look under the default `/lib/` and `/usr/lib/` directories
     # for libraries
@@ -96,12 +110,54 @@ do_build() {
         --disable-libssp \
         --disable-libvtv \
         --enable-languages=c,c++
-    make -j"$(nproc)"
+    make -j"$(nproc)" --output-sync
     popd || exit 1
 }
 
 do_install() {
     pushd build || exit 1
     make install
+    wrap_binary "c++"
+    wrap_binary "gcc"
+    wrap_binary "g++"
+    wrap_binary "cpp"
     popd || exit 1
+}
+
+wrap_binary() {
+    local bin="$pkg_prefix/bin/$1"
+    build_line "Adding wrapper $bin to ${bin}.real"
+    mv -v "$bin" "${bin}.real"
+    case $native_target in
+    aarch64-hab-linux-gnu)
+        dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-aarch64.so.1"
+        ;;
+    x86_64-hab-linux-gnu)
+        dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-x86-64.so.2"
+        ;;
+    esac
+    sed "$PLAN_CONTEXT/cc-wrapper.sh" \
+        -e "s^@glibc@^$(pkg_path_for build-tools-glibc)^g" \
+        -e "s^@linux_headers@^$(pkg_path_for build-tools-linux-headers)^g" \
+        -e "s^@binutils@^$(pkg_path_for build-tools-binutils)^g" \
+        -e "s^@libstdcpp@^$(pkg_path_for build-tools-libstdcpp)^g" \
+        -e "s^@native_target@^${native_target}^g" \
+        -e "s^@dynamic_linker@^${dynamic_linker}^g" \
+        -e "s^@program@^${bin}.real^g" \
+        >"$bin"
+    chmod 755 "$bin"
+}
+
+# Courtesy https://unix.stackexchange.com/questions/108873/removing-a-directory-from-path
+function path_remove {
+    local new_path="$1"
+    # Delete path by parts so we can never accidentally remove sub paths
+    if [ "$new_path" == "$2" ]; then
+        new_path=""
+    fi
+    new_path=${new_path//":$2:"/":"} # delete any instances in the middle
+    new_path=${new_path/#"$2:"/}     # delete any instance at the beginning
+    new_path=${new_path/%":$2"/}     # delete any instance in the at the end
+    echo "$new_path"
+    return 0
 }
