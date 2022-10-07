@@ -122,10 +122,10 @@ You can build each component using the following command:
 
 ```bash
 # Inside the habitat repo
-hab pkg build -N -s `pwd`/component/hab components/hab/bootstrap
-hab pkg build -N -s `pwd`/component/plan-build components/plan-build/bootstrap
-hab pkg build -N -s `pwd`/component/backline components/backline/bootstrap
-hab pkg build -N -s `pwd`/component/studio components/studio/bootstrap
+hab pkg build -N -s `pwd`/components/hab components/hab/bootstrap
+hab pkg build -N -s `pwd`/components/plan-build components/plan-build/bootstrap
+hab pkg build -N -s `pwd`/components/backline components/backline/bootstrap
+hab pkg build -N -s `pwd`/components/studio components/studio/bootstrap
 ```
 
 ### Running the Bootstrap Studio
