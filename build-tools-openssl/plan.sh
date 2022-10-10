@@ -32,7 +32,6 @@ pkg_pconfig_dirs=(lib/pkgconfig)
 do_prepare() {
     patch -p1 <"$PLAN_CONTEXT/hab-ssl-cert-file.patch"
     export CROSS_SSL_ARCH="${native_target}"
-    export CC="gcc"
 }
 
 do_build() {

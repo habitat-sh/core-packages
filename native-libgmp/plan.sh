@@ -1,4 +1,4 @@
-app_name="gmp"
+program="gmp"
 
 pkg_name="native-libgmp"
 pkg_origin="core"
@@ -10,9 +10,9 @@ integers, rational numbers, and floating-point numbers.\
 "
 pkg_upstream_url="https://gmplib.org"
 pkg_license=('GPL-3.0-or-later')
-pkg_source="http://ftp.gnu.org/gnu/${app_name}/${app_name}-${pkg_version}.tar.xz"
+pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"
-pkg_dirname="${app_name}-${pkg_version}"
+pkg_dirname="${program}-${pkg_version}"
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 

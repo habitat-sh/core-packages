@@ -1,4 +1,4 @@
-app_name="gcc"
+program="gcc"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 glibc_version="2.36"
 
@@ -14,9 +14,9 @@ systems.\
 "
 pkg_upstream_url="https://gcc.gnu.org/"
 pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
-pkg_source="http://ftp.gnu.org/gnu/$app_name/${app_name}-${pkg_version}/${app_name}-${pkg_version}.tar.xz"
+pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff"
-pkg_dirname="${app_name}-${pkg_version}"
+pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
     core/build-tools-binutils
@@ -37,14 +37,6 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib lib64)
 
 do_prepare() {
-    # By default LDFLAGS, CFLAGS, CPPFLAGS and CXXFLAGS get used by the
-    # build compiler. To prevent this we set *FLAGS_FOR_BUILD="" to
-    # prevent any interference with the build compiler and linker.
-    export LDFLAGS_FOR_BUILD=""
-    export CFLAGS_FOR_BUILD=""
-    export CPPFLAGS_FOR_BUILD=""
-    export CXXFLAGS_FOR_BUILD=""
-
     case $native_target in
     aarch64-hab-linux-gnu)
         dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-aarch64.so.1"
@@ -53,6 +45,17 @@ do_prepare() {
         dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-x86-64.so.2"
         ;;
     esac
+
+    sed '/thread_header =/s/@.*@/gthr-posix.h/' -i libgcc/Makefile.in libstdc++-v3/include/Makefile.in
+
+    # By default LDFLAGS, CFLAGS, CPPFLAGS and CXXFLAGS get used by the
+    # build compiler. To prevent this we set *FLAGS_FOR_BUILD="" to
+    # prevent any interference with the build compiler and linker.
+    export LDFLAGS_FOR_BUILD=""
+    export CFLAGS_FOR_BUILD=""
+    export CPPFLAGS_FOR_BUILD=""
+    export CXXFLAGS_FOR_BUILD=""
+
     EXTRA_LDFLAGS_FOR_TARGET="${LDFLAGS} -Wl,-dynamic-linker=${dynamic_linker}"
     export LDFLAGS_FOR_TARGET="-L$(pwd)/build/${native_target}/libgcc ${EXTRA_LDFLAGS_FOR_TARGET}"
     export CPPFLAGS_FOR_TARGET="${CPPFLAGS} ${EXTRA_LDFLAGS_FOR_TARGET}"
@@ -117,6 +120,10 @@ do_build() {
 do_install() {
     pushd build || exit 1
     make install
+
+    # Many packages use the name cc to call the C compiler
+    ln -sv gcc "$pkg_prefix/bin/cc"
+
     wrap_binary "c++"
     wrap_binary "gcc"
     wrap_binary "g++"

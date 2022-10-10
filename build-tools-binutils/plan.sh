@@ -1,4 +1,4 @@
-app_name="binutils"
+program="binutils"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-binutils"
@@ -12,9 +12,9 @@ and assembly source code.\
 "
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
 pkg_license=('GPL-2.0-or-later')
-pkg_source="http://ftp.gnu.org/gnu/${app_name}/${app_name}-${pkg_version}.tar.bz2"
+pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.bz2"
 pkg_shasum="da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148"
-pkg_dirname="${app_name}-${pkg_version}"
+pkg_dirname="${program}-${pkg_version}"
 pkg_bin_dirs=(
     bin
 )

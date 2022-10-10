@@ -1,4 +1,4 @@
-app_name="grep"
+program="grep"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-grep"
@@ -11,9 +11,9 @@ specified pattern. By default, Grep outputs the matching lines.\
 "
 pkg_upstream_url="https://www.gnu.org/software/grep/"
 pkg_license=('GPL-3.0-or-later')
-pkg_source="http://ftp.gnu.org/gnu/${app_name}/${app_name}-${pkg_version}.tar.xz"
+pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="498d7cc1b4fb081904d87343febb73475cf771e424fb7e6141aff66013abc382"
-pkg_dirname="${app_name}-${pkg_version}"
+pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
     core/build-tools-glibc

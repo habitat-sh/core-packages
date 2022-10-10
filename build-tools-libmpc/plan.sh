@@ -1,4 +1,4 @@
-app_name="mpc"
+program="mpc"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-libmpc"
@@ -11,9 +11,9 @@ high precision and correct rounding of the result.\
 "
 pkg_upstream_url="http://www.multiprecision.org/"
 pkg_license=('LGPL-3.0-or-later')
-pkg_source="https://ftp.gnu.org/gnu/${app_name}/${app_name}-${pkg_version}.tar.gz"
+pkg_source="https://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459"
-pkg_dirname="${app_name}-${pkg_version}"
+pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
     core/build-tools-libgmp

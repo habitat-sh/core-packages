@@ -1,4 +1,4 @@
-app_name="m4"
+program="m4"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-m4"
@@ -13,9 +13,9 @@ functions for including files, running shell commands, doing arithmetic, etc.\
 "
 pkg_upstream_url="http://www.gnu.org/software/m4"
 pkg_license=('gplv3')
-pkg_source="http://ftp.gnu.org/gnu/${app_name}/${app_name}-${pkg_version}.tar.xz"
+pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="63aede5c6d33b6d9b13511cd0be2cac046f2e70fd0a07aa9573a04a82783af96"
-pkg_dirname="${app_name}-${pkg_version}"
+pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
     core/build-tools-glibc
 )

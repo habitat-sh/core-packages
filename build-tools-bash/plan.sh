@@ -1,4 +1,4 @@
-app_name="bash"
+program="bash"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-bash"
@@ -15,9 +15,9 @@ most sh scripts can be run by Bash without modification.\
 "
 pkg_upstream_url="http://www.gnu.org/software/bash/bash.html"
 pkg_license=('GPL-3.0-or-later')
-pkg_source="http://ftp.gnu.org/gnu/${app_name}/${app_name}-${pkg_version}.tar.gz"
+pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="cc012bc860406dcf42f64431bcd3d2fa7560c02915a601aba9cd597a39329baa"
-pkg_dirname="${app_name}-${pkg_version}"
+pkg_dirname="${program}-${pkg_version}"
 pkg_interpreters=(bin/bash)
 pkg_deps=(
     core/build-tools-glibc

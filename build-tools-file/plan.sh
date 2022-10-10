@@ -1,4 +1,4 @@
-app_name="file"
+program="file"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-file"
@@ -11,9 +11,9 @@ a computer file.\
 "
 pkg_upstream_url="https://www.darwinsys.com/file/"
 pkg_license=('custom')
-pkg_source="ftp://ftp.astron.com/pub/${app_name}/${app_name}-${pkg_version}.tar.gz"
+pkg_source="ftp://ftp.astron.com/pub/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="c076fb4d029c74073f15c43361ef572cfb868407d347190ba834af3b1639b0e4"
-pkg_dirname="${app_name}-${pkg_version}"
+pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
     core/build-tools-glibc
 )

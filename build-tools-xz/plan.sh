@@ -1,4 +1,4 @@
-app_name="xz"
+program="xz"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-xz"
@@ -12,9 +12,9 @@ work on some not-so-POSIX systems. XZ Utils are the successor to LZMA Utils.\
 "
 pkg_upstream_url="http://tukaani.org/xz/"
 pkg_license=('GPL-2.0-or-later' 'LGPL-2.0-or-later')
-pkg_source="http://tukaani.org/${app_name}/${app_name}-${pkg_version}.tar.gz"
+pkg_source="http://tukaani.org/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="a2105abee17bcd2ebd15ced31b4f5eda6e17efd6b10f921a01cda4a44c91b3a0"
-pkg_dirname="${app_name}-${pkg_version}"
+pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
     core/build-tools-glibc

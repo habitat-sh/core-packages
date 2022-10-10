@@ -1,4 +1,4 @@
-app_name="mpfr"
+program="mpfr"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-libmpfr"
@@ -12,9 +12,9 @@ correct rounding, based on GNU Multi-Precision Library.\
 "
 pkg_upstream_url="http://www.mpfr.org/"
 pkg_license=('LGPL-3.0-or-later')
-pkg_source="http://www.mpfr.org/${app_name}-${pkg_version}/${app_name}-${pkg_version}.tar.xz"
+pkg_source="http://www.mpfr.org/${program}-${pkg_version}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="0c98a3f1732ff6ca4ea690552079da9c597872d30e96ec28414ee23c95558a7f"
-pkg_dirname="${app_name}-${pkg_version}"
+pkg_dirname="${program}-${pkg_version}"
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 

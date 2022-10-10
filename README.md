@@ -78,6 +78,14 @@ At this stage the build process completely depends on tools available on the hos
 These are the set of packages that compromise the isolated build tools. They still depend on tools 
 available on the host for their build process, however they have no runtime dependencies on the host system.
 
+- build-tools-binutils
+- build-tools-libgmp
+- build-tools-libmpfr
+- build-tools-libmpc
+- build-tools-libisl
+- build-tools-gcc
+- build-tools-gcc-libs
+- build-tools-patchelf
 - build-tools-m4
 - build-tools-ncurses
 - build-tools-bash
@@ -97,12 +105,6 @@ available on the host for their build process, however they have no runtime depe
 - build-tools-cacerts
 - build-tools-openssl
 - build-tools-wget
-- build-tools-binutils
-- build-tools-libgmp
-- build-tools-libmpfr
-- build-tools-libmpc
-- build-tools-libisl
-- build-tools-gcc
 - native-busybox-static
 
 ### Hab Bootstrap Studio Toolchain
@@ -131,6 +133,6 @@ hab pkg build -N -s `pwd`/component/studio components/studio/bootstrap
 ### Running the Bootstrap Studio
 
 ```bash
-hab pkg exec core/build-tools-hab-studio hab-studio -- -t bootstrap enter
+sudo HAB_LICENSE=accept-no-persist HAB_ORIGIN=core hab pkg exec core/build-tools-hab-studio hab-studio -- -t bootstrap enter
 ```
 

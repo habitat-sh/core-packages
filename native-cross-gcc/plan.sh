@@ -1,4 +1,4 @@
-app_name="gcc"
+program="gcc"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="native-cross-gcc"
@@ -32,6 +32,10 @@ do_install() {
     for file in "$(pkg_path_for native-cross-gcc-real)"/bin/*; do
         ln -sv "$file" "${pkg_prefix:?}/bin/$(basename "$file")"
     done
+    
+    # Many packages use the name cc to call the C compiler
+    ln -sv gcc "$pkg_prefix/bin/cc"
+
     wrap_binary "${native_target}-c++"
     wrap_binary "${native_target}-gcc"
     wrap_binary "${native_target}-g++"
