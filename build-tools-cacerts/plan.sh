@@ -1,6 +1,5 @@
 pkg_name="build-tools-cacerts"
 pkg_origin="core"
-pkg_version="2022-07-19"
 pkg_description="\
 The Mozilla CA certificate store in PEM format (around 250KB uncompressed).
 "
