@@ -147,7 +147,6 @@ wrap_binary() {
         -e "s^@glibc@^$(pkg_path_for build-tools-glibc)^g" \
         -e "s^@linux_headers@^$(pkg_path_for build-tools-linux-headers)^g" \
         -e "s^@binutils@^$(pkg_path_for build-tools-binutils)^g" \
-        -e "s^@libstdcpp@^$(pkg_path_for build-tools-libstdcpp)^g" \
         -e "s^@native_target@^${native_target}^g" \
         -e "s^@dynamic_linker@^${dynamic_linker}^g" \
         -e "s^@program@^${bin}.real^g" \

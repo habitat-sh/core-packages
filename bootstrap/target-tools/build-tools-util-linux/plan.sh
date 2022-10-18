@@ -1,7 +1,7 @@
-program=util-linux
-pkg_name=build-tools-util-linux
-pkg_origin=core
-pkg_version=2.38.1
+program="util-linux"
+pkg_name="build-tools-util-linux"
+pkg_origin="core"
+pkg_version="2.38.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Miscellaneous system utilities for Linux"
 pkg_upstream_url="https://www.kernel.org/pub/linux/utils/util-linux"
@@ -10,9 +10,11 @@ pkg_source="https://www.kernel.org/pub/linux/utils/${program}/v${pkg_version%.?}
 pkg_shasum="60492a19b44e6cf9a3ddff68325b333b8b52b6c59ce3ebd6a0ecaa4c5117e84f"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
+  core/build-tools-glibc
 )
 pkg_build_deps=(
   core/build-tools-gcc
+  core/build-tools-coreutils
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -40,22 +42,3 @@ do_build() {
 do_install() {
   make install usrsbin_execdir="$pkg_prefix/bin"
 }
-
-
-# ----------------------------------------------------------------------------
-# **NOTICE:** What follows are implementation details required for building a
-# first-pass, "stage1" toolchain and environment. It is only used when running
-# in a "stage1" Studio and can be safely ignored by almost everyone. Having
-# said that, it performs a vital bootstrapping process and cannot be removed or
-# significantly altered. Thank you!
-# ----------------------------------------------------------------------------
-if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(
-    core/gcc
-    core/coreutils
-    core/sed
-    core/diffutils
-    core/make
-    core/patch
-  )
-fi

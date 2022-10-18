@@ -1,0 +1,17 @@
+{
+    "repos": [
+        {
+            "source": ".",
+            "bootstrap_studio_package": "core/build-tools-hab-studio",
+            "native_packages": [
+                "bootstrap/cross-compiler/**",
+                "bootstrap/host-tools/**",
+                "bootstrap/cross-tools/**"
+            ],
+            "bootstrap_packages": [
+                "bootstrap/target-tools/**",
+                "standard/bootstrapped/**"
+            ]
+        }
+    ]
+}

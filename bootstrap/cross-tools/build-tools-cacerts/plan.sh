@@ -1,5 +1,6 @@
 pkg_name="build-tools-cacerts"
 pkg_origin="core"
+pkg_version="2022-10-11"
 pkg_description="\
 The Mozilla CA certificate store in PEM format (around 250KB uncompressed).
 "
@@ -7,7 +8,7 @@ pkg_upstream_url="https://curl.se/docs/caextract.html"
 pkg_license=('MPL-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://curl.se/ca/cacert-${pkg_version}.pem"
-pkg_shasum="6ed95025fba2aef0ce7b647607225745624497f876d74ef6ec22b26e73e9de77"
+pkg_shasum="2cff03f9efdaf52626bd1b451d700605dc1ea000c5da56bd0fc59f8f43071040"
 pkg_deps=()
 pkg_build_deps=()
 
