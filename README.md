@@ -1,8 +1,8 @@
-# Habitat Build Toolchain Bootstrap
+# Habitat Packages Bootstrap
 
 This repo contains plan files that can be used to bootstrap a set of self contained GNU build tools
 that are completely isolated from the host system environment. These build tools can then be used to
-bootstrap a set of standard habitat packages for new platforms. 
+bootstrap a set of standard habitat packages for new platforms.
 
 This repo builds on knowledge available from the Linux From Scratch project (LFS) and adapts it for 
 Habitat's packaging system. There are many variants of the LFS project for different platforms and versions. 
@@ -21,7 +21,7 @@ bash version-check.sh
 
 ### Building with hab-auto-build
 
-The packages in this repo can be built using [hab-auto-build](). 
+The packages in this repo can be built using [hab-auto-build](https://github.com/habitat-sh/hab-auto-build). 
 
 To build all the packages you can use the following command:
 
@@ -38,6 +38,7 @@ the following command:
 
 ```bash
 hab-auto-build build -i dev <package-name>
+#Eg: hab-auto-build build -i dev core/build-tools-glibc
 ```
 
 ### Building Manually
