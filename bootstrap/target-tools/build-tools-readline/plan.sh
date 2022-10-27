@@ -25,7 +25,7 @@ do_build() {
 		--disable-bracketed-paste-default \
 		--disable-static \
 		--with-curses \
-		--docdir=/usr/share/doc/readline-8.2
+		--docdir="$pkg_prefix"/share/doc/readline-8.2
 	make SHLIB_LIBS="-lncursesw"
 }
 

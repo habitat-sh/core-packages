@@ -1,5 +1,4 @@
 program="glibc"
-
 pkg_name="build-tools-glibc"
 pkg_origin="core"
 pkg_version="2.36"
