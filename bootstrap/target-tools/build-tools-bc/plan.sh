@@ -12,12 +12,13 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
 	core/build-tools-gcc
+	core/build-tools-binutils
 )
 
 pkg_bin_dirs=(bin)
 
 do_build() {
-	CC=gcc
+	export CC=gcc
 	# why NLS is disabled refer url
 	# https://github.com/gavinhoward/bc/blob/dc451d675fc2550cda1f079c1aaa3d4d4089d9c3/configure.sh#L140
 	./configure \

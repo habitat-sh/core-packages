@@ -52,6 +52,6 @@ do_check() {
 do_install() {
     pushd build || exit 1
     make install
-    popd || exit 1
+    popd >/dev/null || exit 1
     rm -f "$pkg_prefix/bin/sln"
 }

@@ -38,5 +38,5 @@ do_install() {
 	# remove unrequired directory
 	rm -rv "${pkg_prefix}/bin"
 	# install documentation
-	install -v -m644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-8.2
+	install -v -m644 doc/*.{ps,pdf,html,dvi} ${pkg_prefix}/share/doc/readline-8.2
 }
