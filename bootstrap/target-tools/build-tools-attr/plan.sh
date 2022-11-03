@@ -9,8 +9,6 @@ pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="http://download.savannah.gnu.org/releases/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="bae1c6949b258a0d68001367ce0c741cebdacdd3b62965d17e5eb23cd78adaf8"
 pkg_dirname="${program}-${pkg_version}"
-pkg_deps=(
-)
 
 pkg_build_deps=(
 	core/build-tools-gcc

@@ -146,7 +146,7 @@ the `bootstrap` studio type.
 - build-tools-hab
 - build-tools-hab-plan-build
 - build-tools-hab-backline
-- build-tools-studio
+- build-tools-hab-studio
 
 On you have built a bootstrap studio you can use it for isolated package builds using the following 
 commands. 

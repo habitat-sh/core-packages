@@ -9,8 +9,6 @@ pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="http://downloads.sourceforge.net/project/${program}/Expect/${pkg_version}/${program}${pkg_version}.tar.gz"
 pkg_shasum="49a7da83b0bdd9f46d04a04deec19c7767bb9a323e40c4781f89caf760b92c34"
 pkg_dirname="${program}${pkg_version}"
-pkg_deps=(
-)
 
 pkg_build_deps=(
 	core/build-tools-gcc
@@ -19,7 +17,6 @@ pkg_build_deps=(
 
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
-pkg_lib_dirs=(lib)
 
 do_build() {
 	./configure \

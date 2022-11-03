@@ -9,8 +9,6 @@ pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="https://github.com/westes/flex/releases/download/v${pkg_version}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="e87aae032bf07c26f85ac0ed3250998c37621d95f8bd748b31f15b33c45ee995"
 pkg_dirname="${program}-${pkg_version}"
-pkg_deps=(
-)
 
 pkg_build_deps=(
 	core/build-tools-gcc

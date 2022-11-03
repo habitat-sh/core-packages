@@ -9,8 +9,6 @@ pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="645c25f563b8adc0a81dbd6a41cffbf4d37083a382e02d5d3df4f65c09516d00"
 pkg_dirname="${program}-${pkg_version}"
-pkg_deps=(
-)
 
 pkg_build_deps=(
 	core/build-tools-gcc
@@ -38,9 +36,17 @@ do_build() {
 	    --enable-64-bit-bfd \
 	    --with-system-zlib
 
+    # Check the environment to make sure all the necessary tools are available
+    make configure-host
+
     make tooldir="${pkg_prefix}"
 
     popd >/dev/null || exit 1
+}
+
+# skip stripping of binaries
+do_strip() {
+        return 0
 }
 
 do_check() {
@@ -48,7 +54,9 @@ do_check() {
 }
 
 do_install() {
-    #make tooldir="${pkg_prefix}" install
-    #make --prefix="${pkg_prefix}" install
-    make install
+	pushd build || exit 1
+
+	make prefix="${pkg_prefix}" tooldir="${pkg_prefix}" install
+
+	popd >/dev/null || exit 1
 }
