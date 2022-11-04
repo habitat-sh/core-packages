@@ -30,19 +30,8 @@
 # Fail whenever a command returns a non-zero exit code.
 set -e
 
-# The `-B$libc/lib/` flag is a quick hack to force gcc to link against the
-# crt1.o from our own glibc, rather than the one in `/usr/lib`.
-#
-# Unfortunately, setting `-B` appears to override the default search path.
-# Thus, the gcc-specific `../includes-fixed` directory is now longer searched
-# and glibc's `<limits.h>` header fails to compile, because it uses
-# `#include_next <limits.h>` to find the limits.h file in ../includes-fixed. To
-# remedy the problem, another `-idirafter` is necessary to add that directory
-# again.
-extraAfterFlags="-B@glibc@/lib/"
 # Force gcc to use our ld wrapper from binutils when calling `ld`
-extraAfterFlags="$extraAfterFlags -B@binutils@/@native_target@/bin"
-
+extraAfterFlags="-B@binutils@/@native_target@/bin"
 # Figure out if linker flags should be passed.  GCC prints annoying
 # warnings when they are not needed.
 dontLink=0
@@ -52,6 +41,7 @@ nonFlagArgs=0
 cxxInclude=1
 cxxLibrary=1
 cInclude=1
+startFilesInclude=1
 
 params=("$@")
 
@@ -70,6 +60,7 @@ while (("$n" < "$nParams")); do
   -nostdinc) cInclude=0 cxxInclude=0 ;;
   -nostdinc++) cxxInclude=0 ;;
   -nostdlib) cxxLibrary=0 ;;
+  -nostartfiles) startFilesInclude=0 ;;
   -x)
     case "$p2" in
     *-header) dontLink=1 ;;
@@ -88,6 +79,11 @@ done
 # "gcc: no input files") and "gcc -v" (should print the version).
 if [ "$nonFlagArgs" = 0 ]; then
   dontLink=1
+fi
+
+# Add the path to the C runtime start files if they are required
+if [[ "$startFilesInclude" = 1 ]]; then
+  extraAfterFlags="$extraAfterFlags -B@glibc@/lib/"
 fi
 
 # If we are calling a c/g++ style program, set additional flags.
@@ -130,7 +126,7 @@ if [ "$*" = -v ]; then
 fi
 
 # Optionally print debug info.
-if (( "${HAB_DEBUG:-0}" >= 1 )); then
+if (("${HAB_DEBUG:-0}" >= 1)); then
   echo "original flags to @program@:" >&2
   for i in "${params[@]}"; do
     echo "  $i" >&2

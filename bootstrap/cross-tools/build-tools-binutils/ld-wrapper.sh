@@ -32,7 +32,8 @@ if (("${HAB_DEBUG:-0}" >= 7)); then
     set -x
 fi
 
-HAB_STORE="/hab"
+HAB_PKGS="/hab/pkgs"
+HAB_CACHE="/hab/cache"
 
 # This is copy of the wrapper script utilities used by nix: https://github.com/NixOS/nixpkgs/blob/350fd0044447ae8712392c6b212a18bdf2433e71/pkgs/build-support/wrapper-common/utils.bash
 skip () {
@@ -55,7 +56,8 @@ badPath() {
     # directory (including the build directory).
     test \
         "$p" != "/dev/null" -a \
-        "${p#${HAB_STORE}}"     = "$p" -a \
+        "${p#${HAB_PKGS}}"      = "$p" -a \
+        "${p#${HAB_CACHE}}"      = "$p" -a \
         "${p#/tmp}"             = "$p" -a \
         "${p#${TMP:-/tmp}}"     = "$p" -a \
         "${p#${TMPDIR:-/tmp}}"  = "$p" -a \
@@ -129,16 +131,16 @@ while (("$n" < "$nParams")); do
     p=${params[n]}
     p2=${params[n + 1]:-} # handle `p` being last one
     if [ "${p:0:3}" = -L/ ] && badPath "${p:2}"; then
-        skip "${p:2}"
+        skip "${p:2} passed via -L"
     elif [ "$p" = -L ] && badPath "$p2"; then
         n+=1
-        skip "$p2"
+        skip "$p2 passed via -L"
     elif [ "$p" = -rpath ] && badPath "$p2"; then
         n+=1
-        skip "$p2"
+        skip "$p2 passed via -rpath"
     elif [ "$p" = -dynamic-linker ] && badPath "$p2"; then
         n+=1
-        skip "$p2"
+        skip "$p2 passed via -dynamic-linker"
     elif [ "${p:0:1}" = / ] && badPath "$p"; then
         # We cannot skip this; barf.
         echo "impure path \`$p' used in link" >&2
@@ -194,8 +196,8 @@ for p in \
         -l?*)
             libs["lib${p:2}.so"]=1
             ;;
-        "${HAB_STORE:-}"/*.so | "${HAB_STORE:-}"/*.so.*)
-            # This is a direct reference to a shared library.
+        "${HAB_PKGS:-}"/*.so | "${HAB_PKGS:-}"/*.so.*)
+            # This is a direct reference to a shared library in another package.
             libDirs+=("${p%/*}")
             libs["${p##*/}"]=1
             ;;
@@ -219,10 +221,10 @@ if [[ "$linkType" != static-pie ]]; then
         if [[ "$dir" =~ [/.][/.] ]] && dir2=$(readlink -f "$dir"); then
             dir="$dir2"
         fi
-        if [ -n "${rpaths[$dir]:-}" ] || [[ "$dir" != "${HAB_STORE:-}"/* ]]; then
-            # If the path is not in the store, don't add it to the rpath.
-            # This typically happens for libraries in /tmp that are later
-            # copied to $out/lib.  If not, we're screwed.
+        if [ -n "${rpaths[$dir]:-}" ] || [[ "$dir" != "${HAB_PKGS:-}"/* ]]; then
+            # If the path is not in the hab packages, don't add it to the rpath.
+            # This typically happens for libraries in /hab/cache/* that are later
+            # copied to $pkg_prefix.  If not, we're screwed.
             continue
         fi
         for path in "$dir"/*; do
