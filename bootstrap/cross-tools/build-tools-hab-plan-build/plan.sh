@@ -23,6 +23,7 @@ pkg_deps=(
     core/build-tools-sed
     core/build-tools-tar
     core/build-tools-xz
+    core/build-tools-cacerts
     core/build-tools-wget
 )
 

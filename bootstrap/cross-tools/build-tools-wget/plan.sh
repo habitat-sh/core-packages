@@ -16,7 +16,6 @@ pkg_shasum="5726bb8bc5ca0f6dc7110f6416e4bb7019e2d2ff5bf93d1ca2ffcc6656f220e5"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
-  core/build-tools-cacerts
   core/build-tools-glibc
   core/build-tools-openssl
   core/build-tools-coreutils
@@ -42,13 +41,4 @@ do_build() {
     --host="$native_target" \
     --with-ssl=openssl 
   make -j"$(nproc)"
-}
-
-do_install() {
-  make install
-
-  cat <<EOF >> "$pkg_prefix/etc/wgetrc"
-# Default root CA certs location
-ca_certificate=$(pkg_path_for core/build-tools-cacerts)/ssl/certs/cacert.pem
-EOF
 }

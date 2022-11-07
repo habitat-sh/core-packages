@@ -30,18 +30,13 @@
 # Fail whenever a command returns a non-zero exit code.
 set -e
 
-# The `-B$libc/lib/` flag is a quick hack to force gcc to link against the
-# crt1.o from our own glibc, rather than the one in `/usr/lib`.
-#
-# Unfortunately, setting `-B` appears to override the default search path.
-# Thus, the gcc-specific `../includes-fixed` directory is now longer searched
-# and glibc's `<limits.h>` header fails to compile, because it uses
-# `#include_next <limits.h>` to find the limits.h file in ../includes-fixed. To
-# remedy the problem, another `-idirafter` is necessary to add that directory
-# again.
-extraAfterFlags="-B@glibc@/lib/"
+: "${HAB_BINUTILS_PKG_PATH:=@binutils@}"
+: "${HAB_GLIBC_PKG_PATH:=@glibc@}"
+: "${HAB_GLIBC_DYNAMIC_LINKER:=@dynamic_linker@}"
+: "${HAB_LINUX_HEADERS_PKG_PATH:=@linux_headers@}"
+
 # Force gcc to use our ld wrapper from binutils when calling `ld`
-extraAfterFlags="$extraAfterFlags -B@binutils@/@native_target@/bin"
+extraAfterFlags="$extraAfterFlags -B${HAB_BINUTILS_PKG_PATH}/@native_target@/bin"
 
 # Figure out if linker flags should be passed.  GCC prints annoying
 # warnings when they are not needed.
@@ -49,6 +44,7 @@ dontLink=0
 nonFlagArgs=0
 cxxLibrary=1
 cInclude=1
+startFilesInclude=1
 
 params=("$@")
 
@@ -85,13 +81,18 @@ if [ "$nonFlagArgs" = 0 ]; then
   dontLink=1
 fi
 
+# Add the path to the C runtime start files if they are required
+if [[ "$startFilesInclude" = 1 ]]; then
+  extraAfterFlags="$extraAfterFlags -B${HAB_GLIBC_PKG_PATH}/lib/"
+fi
+
 if [[ "$cxxLibrary" = 1 ]]; then
-  extraAfterFlags="$extraAfterFlags -L@glibc@/lib"
+  extraAfterFlags="$extraAfterFlags -L${HAB_GLIBC_PKG_PATH}/lib"
 fi
 
 if [[ "$cInclude" = 1 ]]; then
-  extraAfterFlags="$extraAfterFlags -idirafter @glibc@/include"
-  extraAfterFlags="$extraAfterFlags -idirafter @linux_headers@/include"
+  extraAfterFlags="$extraAfterFlags -idirafter ${HAB_GLIBC_PKG_PATH}/include"
+  extraAfterFlags="$extraAfterFlags -idirafter ${HAB_LINUX_HEADERS_PKG_PATH}/include"
 fi
 
 # Add the flags for the C compiler proper.
@@ -99,7 +100,7 @@ extraBefore=()
 extraAfter=($extraAfterFlags)
 
 if [ "$dontLink" != 1 ]; then
-  extraBefore+=("-Wl,-dynamic-linker=@dynamic_linker@")
+  extraBefore+=("-Wl,-dynamic-linker=${HAB_GLIBC_DYNAMIC_LINKER}")
 fi
 
 # As a very special hack, if the arguments are just `-v', then don't

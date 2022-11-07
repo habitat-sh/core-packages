@@ -18,7 +18,6 @@ pkg_shasum="aa7d8d9bef71ad6525c55ba11e5f4397889ce49c2c9349dcea6d3e4f0b024a7a"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
     core/build-tools-glibc
-    core/build-tools-cacerts
 )
 pkg_build_deps=(
     core/native-cross-gcc

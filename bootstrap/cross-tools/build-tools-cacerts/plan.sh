@@ -34,6 +34,10 @@ do_unpack() {
   cp -v "$HAB_CACHE_SRC_PATH/$pkg_filename" "$HAB_CACHE_SRC_PATH/$pkg_dirname"
 }
 
+do_prepare() {
+  set_runtime_env "HAB_SSL_CERT_FILE" "${pkg_prefix}/ssl/certs/cacert.pem"
+}
+
 do_build() {
   return 0
 }
