@@ -15,36 +15,17 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
-    core/linux-headers
-    core/build-tools-gcc
+    core/gcc-bootstrap
     core/build-tools-make
     core/build-tools-coreutils
     core/build-tools-patchelf
 )
 
+pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-    case $pkg_target in
-    aarch64-linux)
-        HAB_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1"
-        ;;
-    x86_64-linux)
-        HAB_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
-        ;;
-    esac
-    export HAB_GLIBC_DYNAMIC_LINKER
-    build_line "Setting HAB_GLIBC_DYNAMIC_LINKER=${HAB_GLIBC_DYNAMIC_LINKER}"
-
-    HAB_GLIBC_PKG_PATH="$(pkg_path_for glibc)"
-    export HAB_GLIBC_PKG_PATH
-    build_line "Setting HAB_GLIBC_PKG_PATH=${HAB_GLIBC_PKG_PATH}"
-
-    HAB_LINUX_HEADERS_PKG_PATH="$(pkg_path_for linux-headers)"
-    export HAB_LINUX_HEADERS_PKG_PATH
-    build_line "Setting HAB_LINUX_HEADERS_PKG_PATH=${HAB_LINUX_HEADERS_PKG_PATH}"
-
     unset LDFLAGS
     unset LD_RUN_PATH
     unset CFLAGS
@@ -92,5 +73,6 @@ do_install() {
     # Removes unnecesary rpath entry to build-tools-gcc/lib64
     patchelf --shrink-rpath "${pkg_prefix}/bin/bzip2"
     patchelf --shrink-rpath "${pkg_prefix}/bin/bzip2recover"
+    patchelf --shrink-rpath "${pkg_prefix}/lib/libbz2.so.${pkg_version}"
 
 }

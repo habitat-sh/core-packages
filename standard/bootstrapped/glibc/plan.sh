@@ -65,7 +65,6 @@ do_prepare() {
     unset CXXFLAGS
     unset CPPFLAGS
     build_line "Unset CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS and LD_RUN_PATH"
-    export HAB_DEBUG=1
 }
 
 do_build() {
