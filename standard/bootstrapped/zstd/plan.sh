@@ -37,6 +37,8 @@ do_check() {
 }
 
 do_install() {
+    make install 
+    
     patchelf --shrink-rpath "${pkg_prefix}/bin/zstd"
     patchelf --shrink-rpath "${pkg_prefix}/lib/libzstd.so.${pkg_version}"
 }
