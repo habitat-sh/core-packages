@@ -1,5 +1,4 @@
 program="zlib"
-native_target="${pkg_target%%-*}-hab-linux-gnu"
 
 pkg_name="zlib"
 pkg_origin="core"
@@ -19,7 +18,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
     core/gcc-bootstrap
-    core/build-tools-patch
     core/build-tools-make
     core/build-tools-patchelf
 )

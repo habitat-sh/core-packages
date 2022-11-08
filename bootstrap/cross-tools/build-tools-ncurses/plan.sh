@@ -28,7 +28,6 @@ pkg_lib_dirs=(lib)
 
 do_prepare() {
     # Cross building ncurses still requires use of the host system's compiler.
-    # We have to be careful to ensure that our  on the
     # We move the LD_RUN_PATH into the LDFLAGS instead and unset LD_RUN_PATH so 
     # it doesn't get picked up by the native compiler. 
     # We alse use the --with-build-ldflags="" to ensure the native compiler doesn't pick up rpath
@@ -79,7 +78,6 @@ do_build() {
         --with-build-cflags="" \
         --with-build-cppflags="" \
         --with-build-ldflags="" \
-        --with-pkg-config-libdir="$pkg_prefix/lib/pkgconfig" \
         --enable-widec
     make
 }

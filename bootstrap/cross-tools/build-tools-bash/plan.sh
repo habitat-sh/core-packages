@@ -18,7 +18,10 @@ pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="cc012bc860406dcf42f64431bcd3d2fa7560c02915a601aba9cd597a39329baa"
 pkg_dirname="${program}-${pkg_version}"
-pkg_interpreters=(bin/bash)
+pkg_interpreters=(
+    bin/sh
+    bin/bash 
+)
 pkg_deps=(
     core/build-tools-glibc
     core/build-tools-ncurses
@@ -58,4 +61,7 @@ do_build() {
 do_install() {
     make install
     ln -sv bash "$pkg_prefix/bin/sh"
+
+    # Remove unnecessary binaries
+    rm -v "${pkg_prefix}/bin/bashbug"
 }

@@ -32,3 +32,10 @@ do_build() {
         --host="$native_target"
     make
 }
+
+do_install() {
+    make install
+
+    # Remove unnecessary binaries
+    rm -v "${pkg_prefix}/bin/gawkbug"
+}

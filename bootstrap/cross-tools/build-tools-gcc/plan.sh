@@ -25,6 +25,7 @@ pkg_deps=(
     core/build-tools-libisl
     core/build-tools-libmpfr
     core/build-tools-libmpc
+    core/build-tools-bash
 )
 
 pkg_build_deps=(
@@ -128,6 +129,9 @@ do_install() {
     wrap_binary "gcc"
     wrap_binary "g++"
     wrap_binary "cpp"
+
+    fix_interpreter "${pkg_prefix}/bin/ld" core/build-tools-bash bin/bash
+    fix_interpreter "${pkg_prefix}/bin/ld.bfd" core/build-tools-bash bin/bash
     popd || exit 1
 }
 
@@ -144,6 +148,7 @@ wrap_binary() {
         ;;
     esac
     sed "$PLAN_CONTEXT/cc-wrapper.sh" \
+        -e "s^@bash@^$(pkg_path_for build-tools-bash)/bin/bash^g" \
         -e "s^@glibc@^$(pkg_path_for build-tools-glibc)^g" \
         -e "s^@linux_headers@^$(pkg_path_for build-tools-linux-headers)^g" \
         -e "s^@binutils@^$(pkg_path_for build-tools-binutils)^g" \

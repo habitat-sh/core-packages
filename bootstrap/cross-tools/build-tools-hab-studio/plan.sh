@@ -11,6 +11,7 @@ pkg_dirname="habitat-${commit_hash}"
 
 pkg_deps=(
     core/build-tools-hab-backline
+    core/build-tools-bash
 )
 pkg_build_deps=(
     core/native-busybox-static
@@ -55,4 +56,7 @@ do_install() {
     install -v -D "$(pkg_path_for build-tools-hab)"/bin/hab "$pkg_prefix/libexec/hab"
 
     cp -rv "${SRC_PATH}/components/studio/defaults" "${pkg_prefix}"
+
+    # Fix scripts
+    fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash bin/sh
 }

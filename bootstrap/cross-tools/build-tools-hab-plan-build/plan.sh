@@ -60,4 +60,7 @@ do_install() {
     install -D "$SRC_PATH"/components/plan-build/bin/shared.bash "$pkg_prefix"/bin/
     install -D "$SRC_PATH"/components/plan-build/bin/public.bash "$pkg_prefix"/bin/
     install -D "$SRC_PATH"/components/plan-build/bin/environment.bash "$pkg_prefix"/bin/
+
+    # Fix scripts
+    fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash bin/bash
 }

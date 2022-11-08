@@ -24,6 +24,7 @@ pkg_lib_dirs=(
 
 pkg_deps=(
     core/build-tools-glibc
+    core/build-tools-bash
 )
 pkg_build_deps=(
     core/native-cross-gcc
@@ -91,6 +92,7 @@ wrap_binary() {
     build_line "Adding wrapper $bin to ${bin}.real"
     mv -v "$bin" "${bin}.real"
     sed "$PLAN_CONTEXT/ld-wrapper.sh" \
+        -e "s^@bash@^$(pkg_path_for build-tools-bash)/bin/bash^g" \
         -e "s^@program@^${bin}.real^g" \
         >"$bin"
     chmod 755 "$bin"

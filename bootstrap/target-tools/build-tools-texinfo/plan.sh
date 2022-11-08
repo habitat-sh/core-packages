@@ -30,6 +30,9 @@ do_build() {
 }
 do_install() {
   make install
+  
+  # Fix scripts
+  fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash bin/sh
 }
 do_check() {
   make check
