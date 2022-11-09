@@ -11,6 +11,9 @@ pkg_license=('LGPL-3.0-or-later')
 pkg_source="https://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459"
 
+pkg_deps=(
+	core/glibc
+)
 pkg_build_deps=(
 	core/build-tools-make
 	core/gcc-bootstrap
