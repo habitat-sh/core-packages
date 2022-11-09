@@ -14,11 +14,11 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
 	core/glibc
+	core/ncurses-bootstrap
 )
 
 pkg_build_deps=(
 	core/gcc-bootstrap
-	core/ncurses-bootstrap
 	core/build-tools-make
 	core/build-tools-bash
 	core/build-tools-coreutils
