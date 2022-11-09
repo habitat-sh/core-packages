@@ -10,6 +10,9 @@ pkg_license=('MIT')
 pkg_source="https://libisl.sourceforge.io/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="be7b210647ccadf90a2f0b000fca11a4d40546374a850db67adb32fad4b230d9"
 
+pkg_deps=(
+	core/glibc
+)
 pkg_build_deps=(
 	core/build-tools-make
 	core/gcc-bootstrap
