@@ -12,6 +12,9 @@ pkg_license=('LGPL-3.0-or-later')
 pkg_source="http://www.mpfr.org/${pkg_name}-${pkg_version}/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="0c98a3f1732ff6ca4ea690552079da9c597872d30e96ec28414ee23c95558a7f"
 
+pkg_deps=(
+	core/glibc
+)
 pkg_build_deps=(
 	core/build-tools-make
 	core/gcc-bootstrap
