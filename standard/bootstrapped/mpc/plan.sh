@@ -13,12 +13,12 @@ pkg_shasum="17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459"
 
 pkg_deps=(
 	core/glibc
+	core/gmp
+	core/mpfr
 )
 pkg_build_deps=(
 	core/build-tools-make
 	core/gcc-bootstrap
-	core/gmp
-	core/mpfr
 	core/build-tools-patchelf
 )
 
