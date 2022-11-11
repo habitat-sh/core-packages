@@ -13,27 +13,30 @@ pkg_source="https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/${pkg
 pkg_shasum="20fbc13a2443881bf13f67eb4ec7f8d6b93843bf1ce7b3015ae1890ddfbd7324"
 
 pkg_deps=(
-	core/glibc
+    core/glibc
 )
 pkg_build_deps=(
-	core/build-tools-make
-	core/gcc-bootstrap
-	core/build-tools-sed
-	core/build-tools-patchelf
+    core/build-tools-make
+    core/gcc-bootstrap
+    core/build-tools-sed
+    core/build-tools-patchelf
+    core/build-tools-grep
 )
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-pkg_bin_dirs=(sbin)
+pkg_bin_dirs=(bin)
 
 do_prepare() {
-	# Prevent static libraries from being installed
-	sed -i '/install -m.*STA/d' libcap/Makefile
-	LDFLAGS="${LDFLAGS} -L${pkg_prefix}/lib"
+    # Prevent static libraries from being installed
+    sed -i '/install -m.*STA/d' libcap/Makefile
+
+    LDFLAGS="${LDFLAGS} -L${pkg_prefix}/lib -Wl,-rpath=${pkg_prefix}/lib"
+    build_line "Updating LDFLAGS=${LDFLAGS}"
 }
 
 do_build() {
-    make prefix="$pkg_prefix" lib=lib
+    make prefix="$pkg_prefix" lib=lib sbin=bin
 }
 
 do_check() {
@@ -41,20 +44,11 @@ do_check() {
 }
 
 do_install() {
-	make prefix="$pkg_prefix" lib=lib install
-	patchelf --shrink-rpath "${pkg_prefix}/sbin/capsh"
-	patchelf --shrink-rpath "${pkg_prefix}/sbin/getcap"
-      	patchelf --shrink-rpath "${pkg_prefix}/sbin/getpcaps"
-	patchelf --shrink-rpath "${pkg_prefix}/sbin/setcap"
-	patchelf --shrink-rpath "${pkg_prefix}/lib/libcap.so.${pkg_version}"
-	patchelf --shrink-rpath "${pkg_prefix}/lib/libpsx.so.${pkg_version}"
-
-	out=$(patchelf --print-rpath "${pkg_prefix}/sbin/getcap")
-	patchelf --set-rpath "$out:${pkg_prefix}/lib" "${pkg_prefix}/sbin/getcap"
-	out=$(patchelf --print-rpath "${pkg_prefix}/sbin/getpcaps")
-	patchelf --set-rpath "$out:${pkg_prefix}/lib" "${pkg_prefix}/sbin/getpcaps"
-	out=$(patchelf --print-rpath "${pkg_prefix}/sbin/setcap")
-	patchelf --set-rpath "$out:${pkg_prefix}/lib" "${pkg_prefix}/sbin/setcap"
-	out=$(patchelf --print-rpath "${pkg_prefix}/sbin/capsh")
-	patchelf --set-rpath "$out:${pkg_prefix}/lib" "${pkg_prefix}/sbin/capsh"
+    make prefix="$pkg_prefix" lib=lib sbin=bin install
+    patchelf --shrink-rpath "${pkg_prefix}/bin/capsh"
+    patchelf --shrink-rpath "${pkg_prefix}/bin/getcap"
+    patchelf --shrink-rpath "${pkg_prefix}/bin/getpcaps"
+    patchelf --shrink-rpath "${pkg_prefix}/bin/setcap"
+    patchelf --shrink-rpath "${pkg_prefix}/lib/libcap.so.${pkg_version}"
+    patchelf --shrink-rpath "${pkg_prefix}/lib/libpsx.so.${pkg_version}"
 }

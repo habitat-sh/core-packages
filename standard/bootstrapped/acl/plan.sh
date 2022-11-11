@@ -11,13 +11,16 @@ pkg_source="http://download.savannah.gnu.org/releases/$pkg_name/$pkg_name-${pkg_
 pkg_shasum="760c61c68901b37fdd5eefeeaf4c0c7a26bdfdd8ac747a1edff1ce0e243c11af"
 
 pkg_deps=(
-	core/glibc
-	core/attr
+    core/glibc
+    core/attr
 )
 pkg_build_deps=(
-	core/build-tools-make
-	core/gcc-bootstrap
-	core/build-tools-patchelf
+    core/gcc-bootstrap
+    core/build-tools-make
+    core/build-tools-grep
+    core/build-tools-sed
+    core/build-tools-patchelf
+    core/build-tools-coreutils
 )
 
 pkg_include_dirs=(include)
@@ -29,18 +32,17 @@ do_build() {
         --prefix="$pkg_prefix" \
         --docdir="$pkg_prefix/share/doc/acl-2.3.1" \
         --disable-static
-
     make
 }
 
 do_check() {
-	make check
+    make check
 }
 
 do_install() {
-	make install
-	patchelf --shrink-rpath "${pkg_prefix}/bin/chacl"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/getfacl"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/setfacl"
-	patchelf --shrink-rpath "${pkg_prefix}/lib/libacl.so.1.1.2301"
+    make install
+    patchelf --shrink-rpath "${pkg_prefix}/bin/chacl"
+    patchelf --shrink-rpath "${pkg_prefix}/bin/getfacl"
+    patchelf --shrink-rpath "${pkg_prefix}/bin/setfacl"
+    patchelf --shrink-rpath "${pkg_prefix}/lib/libacl.so.1.1.2301"
 }
