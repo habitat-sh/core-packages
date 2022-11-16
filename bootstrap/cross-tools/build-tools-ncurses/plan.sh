@@ -28,8 +28,8 @@ pkg_lib_dirs=(lib)
 
 do_prepare() {
     # Cross building ncurses still requires use of the host system's compiler.
-    # We move the LD_RUN_PATH into the LDFLAGS instead and unset LD_RUN_PATH so 
-    # it doesn't get picked up by the native compiler. 
+    # We move the LD_RUN_PATH into the LDFLAGS instead and unset LD_RUN_PATH so
+    # it doesn't get picked up by the native compiler.
     # We alse use the --with-build-ldflags="" to ensure the native compiler doesn't pick up rpath
     LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
     build_line "Updating LDFLAGS=${LDFLAGS}"
@@ -43,7 +43,7 @@ do_build() {
     (
         mkdir build
         pushd build || exit 1
-        
+
         # We clear out all environment variables that interfere with the native compiler
         unset PREFIX
         unset PKG_CONFIG_PATH
@@ -70,7 +70,6 @@ do_build() {
         --build="$(./config.guess)" \
         --host="$native_target" \
         --with-shared \
-        --without-normal \
         --with-cxx-shared \
         --without-debug \
         --without-ada \
@@ -84,7 +83,12 @@ do_build() {
 
 do_install() {
     make TIC_PATH="$(pwd)"/build/progs/tic install
-    echo "INPUT(-lncursesw)" >"$pkg_prefix/lib/libncurses.so"
+
+    for x in ncurses ncurses++ form panel menu tinfo; do
+        echo "INPUT(-l${x}w)" >"$pkg_prefix/lib/lib${x}.so"
+    done
+    echo "INPUT(-lncursesw)" >"$pkg_prefix/lib/libcurses.so"
+    echo "INPUT(-lncursesw)" >"$pkg_prefix/lib/libcurses.a"
 }
 
 do_check() {

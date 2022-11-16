@@ -32,7 +32,7 @@ do_install() {
     for file in "$(pkg_path_for native-cross-gcc-real)"/bin/*; do
         ln -sv "$file" "${pkg_prefix:?}/bin/$(basename "$file")"
     done
-    
+
     # Many packages use the name cc to call the C compiler
     ln -sv gcc "$pkg_prefix/bin/cc"
 

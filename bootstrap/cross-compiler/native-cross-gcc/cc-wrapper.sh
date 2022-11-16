@@ -21,8 +21,8 @@
 #
 # There is one environment variables that is consumed by this program:
 #
-# * `$HAB_DEBUG` (*Optional*): If set, this program will output the original and
-#    extra flags added to standard error
+# * `$HAB_DEBUG`, `$HAB_GCC_DEBUG`, `$HAB_NATIVE_CROSS_GCC_DEBUG` (*Optional*): If one of these is set,
+#    this program will output the original and extra flags added to standard error
 #
 
 # # Main program
@@ -30,11 +30,14 @@
 # Fail whenever a command returns a non-zero exit code.
 set -e
 
+HAB_NATIVE_CROSS_GCC_DEBUG=${HAB_DEBUG:-${HAB_GCC_DEBUG:-${HAB_NATIVE_CROSS_GCC_DEBUG:-0}}}
+
 # Force gcc to use our ld wrapper from binutils when calling `ld`
 extraAfterFlags="-B@binutils@/@native_target@/bin"
 # Figure out if linker flags should be passed.  GCC prints annoying
 # warnings when they are not needed.
 dontLink=0
+linkType="dynamic"
 nonFlagArgs=0
 # shellcheck disable=SC2193
 [[ "@program@" = *++ ]] && isCxx=1 || isCxx=0
@@ -61,6 +64,8 @@ while (("$n" < "$nParams")); do
   -nostdinc++) cxxInclude=0 ;;
   -nostdlib) cxxLibrary=0 ;;
   -nostartfiles) startFilesInclude=0 ;;
+  -static) linkType="static" ;;
+  -static-pie) linkType="static-pie" ;;
   -x)
     case "$p2" in
     *-header) dontLink=1 ;;
@@ -112,8 +117,11 @@ fi
 extraBefore=()
 extraAfter=($extraAfterFlags)
 
-if [ "$dontLink" != 1 ]; then
-  extraBefore+=("-Wl,-dynamic-linker=@dynamic_linker@")
+if [[ "$dontLink" != 1 ]]; then
+  if [[ "$linkType" = "dynamic" ]]; then
+    extraBefore+=("-Wl,-dynamic-linker=@dynamic_linker@")
+  fi
+  export HAB_LINK_TYPE=${linkType}
 fi
 
 # As a very special hack, if the arguments are just `-v', then don't
@@ -126,7 +134,7 @@ if [ "$*" = -v ]; then
 fi
 
 # Optionally print debug info.
-if (("${HAB_DEBUG:-0}" >= 1)); then
+if (("${HAB_NATIVE_CROSS_GCC_DEBUG}" >= 1)); then
   echo "original flags to @program@:" >&2
   for i in "${params[@]}"; do
     echo "  $i" >&2

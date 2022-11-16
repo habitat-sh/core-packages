@@ -42,7 +42,6 @@ do_check() {
 
 do_install() {
     make install
-    wrap_binary "${native_target}-ld"
     wrap_binary "${native_target}-ld.bfd"
 }
 

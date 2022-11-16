@@ -39,6 +39,6 @@ do_build() {
   ./configure \
     --prefix="$pkg_prefix" \
     --host="$native_target" \
-    --with-ssl=openssl 
+    --with-ssl=openssl
   make -j"$(nproc)"
 }

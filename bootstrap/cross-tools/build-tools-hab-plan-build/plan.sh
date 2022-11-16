@@ -1,18 +1,18 @@
 # shellcheck disable=2034
-commit_hash="7019864f710013f1806ba2aea0febb0c3b50fb44"
+commit_hash="fa041724ef87d90b87e03bb87cba80c846a59a34"
 
 pkg_name="build-tools-hab-plan-build"
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/habitat-sh/habitat/archive/${commit_hash}.tar.gz"
-pkg_shasum="5b09edc7054f2d0e5e1382882b3f8d8af31159f9c71719d167165088aaf0dabf"
+pkg_shasum="5791bd21bb115ec83fb3dbb610cd5eb02a54a99c45c8b5e10e70631a7b55fe67"
 pkg_dirname="habitat-${commit_hash}"
 
 pkg_bin_dirs=(bin)
 
 pkg_deps=(
-    core/build-tools-bash
+    core/build-tools-bash-static
     core/build-tools-coreutils
     core/build-tools-file
     core/build-tools-findutils
@@ -62,5 +62,5 @@ do_install() {
     install -D "$SRC_PATH"/components/plan-build/bin/environment.bash "$pkg_prefix"/bin/
 
     # Fix scripts
-    fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash bin/bash
+    fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/bash
 }

@@ -20,15 +20,17 @@
 #
 # There is one environment variables that is consumed by this program:
 #
-# * `$DEBUG` (*Optional*): If set, this program will output the original and
-#    extra flags added to standard error
+# * `$HAB_DEBUG`, `$HAB_LD_DEBUG`, `$HAB_BUILD_TOOLS_BINUTILS_DEBUG` (*Optional*): If one of these is set,
+#    this program will output the original and extra flags added to standard error
 #
 
 # # Main program
 set -eu -o pipefail +o posix
 shopt -s nullglob
 
-if (("${HAB_DEBUG:-0}" >= 7)); then
+HAB_BUILD_TOOLS_BINUTILS_DEBUG=${HAB_DEBUG:-${HAB_LD_DEBUG:-${HAB_BUILD_TOOLS_BINUTILS_DEBUG:-0}}}
+
+if (("${HAB_BUILD_TOOLS_BINUTILS_DEBUG}" >= 7)); then
     set -x
 fi
 
@@ -36,12 +38,11 @@ HAB_PKGS="/hab/pkgs"
 HAB_CACHE="/hab/cache"
 
 # This is copy of the wrapper script utilities used by nix: https://github.com/NixOS/nixpkgs/blob/350fd0044447ae8712392c6b212a18bdf2433e71/pkgs/build-support/wrapper-common/utils.bash
-skip () {
-    if (( "${HAB_DEBUG:-0}" >= 1 )); then
+skip() {
+    if (("${HAB_BUILD_TOOLS_BINUTILS_DEBUG}" >= 1)); then
         echo "skipping impure path $1" >&2
     fi
 }
-
 
 # Checks whether a path is impure.  E.g., `/lib/foo.so' is impure, but
 # `/hab/pkgs/.../lib/foo.so' isn't.
@@ -56,12 +57,12 @@ badPath() {
     # directory (including the build directory).
     test \
         "$p" != "/dev/null" -a \
-        "${p#${HAB_PKGS}}"      = "$p" -a \
-        "${p#${HAB_CACHE}}"      = "$p" -a \
-        "${p#/tmp}"             = "$p" -a \
-        "${p#${TMP:-/tmp}}"     = "$p" -a \
-        "${p#${TMPDIR:-/tmp}}"  = "$p" -a \
-        "${p#${TEMP:-/tmp}}"    = "$p" -a \
+        "${p#${HAB_PKGS}}" = "$p" -a \
+        "${p#${HAB_CACHE}}" = "$p" -a \
+        "${p#/tmp}" = "$p" -a \
+        "${p#${TMP:-/tmp}}" = "$p" -a \
+        "${p#${TMPDIR:-/tmp}}" = "$p" -a \
+        "${p#${TEMP:-/tmp}}" = "$p" -a \
         "${p#${TEMPDIR:-/tmp}}" = "$p"
 }
 
@@ -82,45 +83,10 @@ expandResponseParams() {
     done
 }
 
-checkLinkType() {
-    local arg
-    type="dynamic"
-    for arg in "$@"; do
-        if [[ "$arg" = -static ]]; then
-            type="static"
-        elif [[ "$arg" = -static-pie ]]; then
-            type="static-pie"
-        fi
-    done
-    echo "$type"
-}
-
-# When building static-pie executables we cannot have rpath
-# set. At least glibc requires rpath to be empty
-filterRpathFlags() {
-    local linkType=$1 ret i
-    shift
-
-    if [[ "$linkType" == "static-pie" ]]; then
-        while [[ "$#" -gt 0 ]]; do
-            i="$1"; shift 1
-            if [[ "$i" == -rpath ]]; then
-                # also skip its argument
-                shift
-            else
-                ret+=("$i")
-            fi
-        done
-    else
-        ret=("$@")
-    fi
-    echo "${ret[@]}"
-}
-
 # Optionally filter out paths not refering to the store.
 expandResponseParams "$@"
 
-linkType=$(checkLinkType "${params[@]}")
+linkType=${HAB_LINK_TYPE:-"dynamic"}
 
 # Verify that all library paths are from hab packages
 rest=()
@@ -163,8 +129,6 @@ extraBefore=()
 declare -a libDirs
 declare -A libs
 
-linkerOutput="a.out"
-
 prev=
 # Old bash thinks empty arrays are undefined, ugh.
 for p in \
@@ -177,13 +141,6 @@ for p in \
         ;;
     -l)
         libs["lib${p}.so"]=1
-        ;;
-    -m)
-        # Presumably only the last `-m` flag has any effect.
-        case "$p" in
-        elf_i386) link32=1 ;;
-        *) link32=0 ;;
-        esac
         ;;
     -dynamic-linker | -plugin)
         # Ignore this argument, or it will match *.so and be added to rpath.
@@ -218,6 +175,7 @@ if [[ "$linkType" != static-pie ]]; then
     # the link time chosen objects will be those of runtime linking.
     declare -A rpaths
     for dir in ${libDirs+"${libDirs[@]}"}; do
+        # Normalize relative paths
         if [[ "$dir" =~ [/.][/.] ]] && dir2=$(readlink -f "$dir"); then
             dir="$dir2"
         fi
@@ -230,11 +188,6 @@ if [[ "$linkType" != static-pie ]]; then
         for path in "$dir"/*; do
             file="${path##*/}"
             if [ "${libs[$file]:-}" ]; then
-                # This library may have been provided by a previous directory,
-                # but if that library file is inside an output of the current
-                # derivation, it can be deleted after this compilation and
-                # should be found in a later directory, so we add all
-                # directories that contain any of the libraries to rpath.
                 rpaths["$dir"]=1
                 extraAfter+=(-rpath "$dir")
                 break
@@ -245,7 +198,7 @@ if [[ "$linkType" != static-pie ]]; then
 fi
 
 # Optionally print debug info.
-if (("${HAB_DEBUG:-0}" >= 1)); then
+if (("${HAB_BUILD_TOOLS_BINUTILS_DEBUG}" >= 1)); then
     # Old bash workaround, see above.
     echo "extra flags before to @program@:" >&2
     printf "  %q\n" ${extraBefore+"${extraBefore[@]}"} >&2

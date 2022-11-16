@@ -25,12 +25,20 @@ pkg_deps=(
     core/build-tools-libisl
     core/build-tools-libmpfr
     core/build-tools-libmpc
-    core/build-tools-bash
+    core/build-tools-bash-static
 )
 
 pkg_build_deps=(
-    core/build-tools-linux-headers
     core/native-cross-gcc
+    core/build-tools-coreutils
+    core/build-tools-gawk
+    core/build-tools-grep
+    core/build-tools-linux-headers
+    core/build-tools-make
+    core/build-tools-patch
+    core/build-tools-sed
+    core/build-tools-tar
+    core/build-tools-xz
 )
 
 pkg_bin_dirs=(bin)
@@ -130,8 +138,6 @@ do_install() {
     wrap_binary "g++"
     wrap_binary "cpp"
 
-    fix_interpreter "${pkg_prefix}/bin/ld" core/build-tools-bash bin/bash
-    fix_interpreter "${pkg_prefix}/bin/ld.bfd" core/build-tools-bash bin/bash
     popd || exit 1
 }
 
@@ -148,11 +154,10 @@ wrap_binary() {
         ;;
     esac
     sed "$PLAN_CONTEXT/cc-wrapper.sh" \
-        -e "s^@bash@^$(pkg_path_for build-tools-bash)/bin/bash^g" \
+        -e "s^@bash@^$(pkg_path_for build-tools-bash-static)/bin/bash^g" \
         -e "s^@glibc@^$(pkg_path_for build-tools-glibc)^g" \
         -e "s^@linux_headers@^$(pkg_path_for build-tools-linux-headers)^g" \
-        -e "s^@binutils@^$(pkg_path_for build-tools-binutils)^g" \
-        -e "s^@native_target@^${native_target}^g" \
+        -e "s^@binutils@^$(pkg_path_for build-tools-binutils)/${native_target}/bin^g" \
         -e "s^@dynamic_linker@^${dynamic_linker}^g" \
         -e "s^@program@^${bin}.real^g" \
         >"$bin"

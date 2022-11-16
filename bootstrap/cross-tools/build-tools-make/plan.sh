@@ -22,7 +22,6 @@ pkg_build_deps=(
     core/native-cross-gcc
 )
 pkg_bin_dirs=(bin)
-pkg_include_dirs=(include)
 
 do_build() {
     ./configure \

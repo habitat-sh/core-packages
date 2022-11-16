@@ -59,7 +59,6 @@ do_build() {
         --disable-multilib \
         --disable-nls \
         --disable-libstdcxx-pch \
-        --enable-shared=libgcc,libstdc++ \
         --with-gxx-include-dir="${pkg_prefix}/include/c++/${pkg_version}"
     make -j"$(nproc)"
     popd || exit 1

@@ -20,24 +20,24 @@ pkg_include_dirs=(include)
 pkg_interpreters=(bin/python bin/python3 bin/python3.10)
 
 pkg_deps=(
-  core/build-tools-glibc
+    core/build-tools-glibc
 )
 
 pkg_build_deps=(
-  core/build-tools-gcc
+    core/build-tools-gcc
 )
 
 do_prepare() {
-  LDFLAGS="${LDFLAGS} -Wl,-rpath=${pkg_prefix}/lib"
+    LDFLAGS="${LDFLAGS} -Wl,-rpath=${pkg_prefix}/lib"
 }
 
 do_build() {
-  ./configure --prefix="$pkg_prefix" \
-    --enable-shared \
-    --without-ensurepip
-  make
+    ./configure --prefix="$pkg_prefix" \
+        --enable-shared \
+        --without-ensurepip
+    make
 }
 
 do_install() {
-  make install
+    make install
 }

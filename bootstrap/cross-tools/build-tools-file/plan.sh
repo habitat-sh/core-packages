@@ -22,8 +22,6 @@ pkg_build_deps=(
     "core/native-file/${pkg_version}"
 )
 pkg_bin_dirs=(bin)
-pkg_include_dirs=(include)
-pkg_lib_dirs=(lib)
 
 do_build() {
     ./configure \

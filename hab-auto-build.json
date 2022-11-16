@@ -10,7 +10,8 @@
             ],
             "bootstrap_packages": [
                 "bootstrap/target-tools/**",
-                "standard/bootstrapped/**"
+                "stage0/**",
+                "stage1/**"
             ]
         }
     ]

@@ -9,7 +9,7 @@ pkg_dirname="busybox-1.35.0"
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-    export LDFLAGS="--static";
+    export LDFLAGS="--static"
 }
 
 do_build() {

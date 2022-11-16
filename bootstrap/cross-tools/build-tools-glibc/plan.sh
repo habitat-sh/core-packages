@@ -57,13 +57,11 @@ do_build() {
         --prefix="$pkg_prefix" \
         --build="$(../config.guess)" \
         --host="$native_target" \
-        --sbindir="$pkg_prefix/bin" \
         --with-headers="$(pkg_path_for build-tools-linux-headers)/include" \
-        --libdir="$pkg_prefix/lib" \
-        --libexecdir="$pkg_prefix/lib/glibc" \
         --sysconfdir="$pkg_prefix/etc" \
         --enable-kernel=5.4 \
-        libc_cv_slibdir="$pkg_prefix"/lib
+        libc_cv_slibdir="$pkg_prefix"/lib \
+        libc_cv_rootsbindir="$pkg_prefix"/bin
 
     make -j"$(nproc)"
 

@@ -17,7 +17,7 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
     core/build-tools-glibc
-    core/build-tools-bash
+    core/build-tools-bash-static
 )
 pkg_build_deps=(
     core/native-cross-gcc
@@ -37,7 +37,7 @@ do_check() {
 
 do_install() {
     make install
-    
+
     # Fix scripts
-    fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash bin/sh
+    fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
 }

@@ -24,7 +24,6 @@ pkg_deps=(
     core/native-libisl
     core/native-libmpfr
     core/native-libmpc
-
 )
 
 # We don't specify a bin directory so that the cross compiler
@@ -92,7 +91,7 @@ do_install() {
 
     # Create the full limits.h file
     cat ../gcc/limitx.h ../gcc/glimits.h ../gcc/limity.h >"$(dirname "$("$pkg_prefix"/bin/"$native_target"-gcc -print-libgcc-file-name)")"/install-tools/include/limits.h
-    
+
     # Install the full limits.h file
     "$pkg_prefix"/libexec/gcc/"$native_target"/12.2.0/install-tools/mkheaders
     popd || exit 1

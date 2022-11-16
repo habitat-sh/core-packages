@@ -21,8 +21,8 @@
 #
 # There is one environment variables that is consumed by this program:
 #
-# * `$HAB_DEBUG` (*Optional*): If set, this program will output the original and
-#    extra flags added to standard error
+# * `$HAB_DEBUG`, `$HAB_GCC_DEBUG`, `$HAB_BUILD_TOOLS_GCC_DEBUG` (*Optional*): If one of these is set,
+#    this program will output the original and extra flags added to standard error
 #
 
 # # Main program
@@ -30,17 +30,20 @@
 # Fail whenever a command returns a non-zero exit code.
 set -e
 
-: "${HAB_BINUTILS_PKG_PATH:=@binutils@}"
-: "${HAB_GLIBC_PKG_PATH:=@glibc@}"
-: "${HAB_GLIBC_DYNAMIC_LINKER:=@dynamic_linker@}"
-: "${HAB_LINUX_HEADERS_PKG_PATH:=@linux_headers@}"
+HAB_BUILD_TOOLS_GCC_DEBUG=${HAB_DEBUG:-${HAB_GCC_DEBUG:-${HAB_BUILD_TOOLS_GCC_DEBUG:-0}}}
+
+: "${HAB_BUILD_TOOLS_GCC_BINUTILS_BIN_PATH:=@binutils@}"
+: "${HAB_BUILD_TOOLS_GCC_GLIBC_PKG_PATH:=@glibc@}"
+: "${HAB_BUILD_TOOLS_GCC_GLIBC_DYNAMIC_LINKER:=@dynamic_linker@}"
+: "${HAB_BUILD_TOOLS_GCC_LINUX_HEADERS_PKG_PATH:=@linux_headers@}"
 
 # Force gcc to use our ld wrapper from binutils when calling `ld`
-extraAfterFlags="$extraAfterFlags -B${HAB_BINUTILS_PKG_PATH}/@native_target@/bin"
+extraAfterFlags="$extraAfterFlags -B${HAB_BUILD_TOOLS_GCC_BINUTILS_BIN_PATH}"
 
 # Figure out if linker flags should be passed.  GCC prints annoying
 # warnings when they are not needed.
 dontLink=0
+linkType="dynamic"
 nonFlagArgs=0
 cxxLibrary=1
 cInclude=1
@@ -62,6 +65,9 @@ while (("$n" < "$nParams")); do
   -[cSEM] | -MM) dontLink=1 ;;
   -nostdinc) cInclude=0 ;;
   -nostdlib) cxxLibrary=0 ;;
+  -nostartfiles) startFilesInclude=0 ;;
+  -static) linkType="static" ;;
+  -static-pie) linkType="static-pie" ;;
   -x)
     case "$p2" in
     *-header) dontLink=1 ;;
@@ -83,16 +89,16 @@ fi
 
 # Add the path to the C runtime start files if they are required
 if [[ "$startFilesInclude" = 1 ]]; then
-  extraAfterFlags="$extraAfterFlags -B${HAB_GLIBC_PKG_PATH}/lib/"
+  extraAfterFlags="$extraAfterFlags -B${HAB_BUILD_TOOLS_GCC_GLIBC_PKG_PATH}/lib/"
 fi
 
 if [[ "$cxxLibrary" = 1 ]]; then
-  extraAfterFlags="$extraAfterFlags -L${HAB_GLIBC_PKG_PATH}/lib"
+  extraAfterFlags="$extraAfterFlags -L${HAB_BUILD_TOOLS_GCC_GLIBC_PKG_PATH}/lib"
 fi
 
 if [[ "$cInclude" = 1 ]]; then
-  extraAfterFlags="$extraAfterFlags -idirafter ${HAB_GLIBC_PKG_PATH}/include"
-  extraAfterFlags="$extraAfterFlags -idirafter ${HAB_LINUX_HEADERS_PKG_PATH}/include"
+  extraAfterFlags="$extraAfterFlags -idirafter ${HAB_BUILD_TOOLS_GCC_GLIBC_PKG_PATH}/include"
+  extraAfterFlags="$extraAfterFlags -idirafter ${HAB_BUILD_TOOLS_GCC_LINUX_HEADERS_PKG_PATH}/include"
 fi
 
 # Add the flags for the C compiler proper.
@@ -100,7 +106,10 @@ extraBefore=()
 extraAfter=($extraAfterFlags)
 
 if [ "$dontLink" != 1 ]; then
-  extraBefore+=("-Wl,-dynamic-linker=${HAB_GLIBC_DYNAMIC_LINKER}")
+  if [[ "$linkType" = "dynamic" ]]; then
+    extraBefore+=("-Wl,-dynamic-linker=${HAB_BUILD_TOOLS_GCC_GLIBC_DYNAMIC_LINKER}")
+  fi
+  export HAB_LINK_TYPE=${linkType}
 fi
 
 # As a very special hack, if the arguments are just `-v', then don't
@@ -113,7 +122,7 @@ if [ "$*" = -v ]; then
 fi
 
 # Optionally print debug info.
-if (("${HAB_DEBUG:-0}" >= 1)); then
+if (("${HAB_BUILD_TOOLS_GCC_DEBUG}" >= 1)); then
   echo "original flags to @program@:" >&2
   for i in "${params[@]}"; do
     echo "  $i" >&2

@@ -24,10 +24,16 @@ pkg_lib_dirs=(
 
 pkg_deps=(
     core/build-tools-glibc
-    core/build-tools-bash
+    core/build-tools-bash-static
 )
 pkg_build_deps=(
     core/native-cross-gcc
+    core/build-tools-coreutils
+    core/build-tools-gawk
+    core/build-tools-grep
+    core/build-tools-make
+    core/build-tools-sed
+    core/build-tools-tar
 )
 
 do_prepare() {
@@ -81,9 +87,9 @@ do_strip() {
 
 do_install() {
     make install
-    wrap_binary "ld"
     wrap_binary "ld.bfd"
-    # Remove unnecessary binaries
+    # Remove unnecessary static libraries. We also remove libtool archive
+    # files because they interfere with cross compilation.
     rm -v "${pkg_prefix:?}"/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.{a,la}
 }
 
@@ -92,7 +98,7 @@ wrap_binary() {
     build_line "Adding wrapper $bin to ${bin}.real"
     mv -v "$bin" "${bin}.real"
     sed "$PLAN_CONTEXT/ld-wrapper.sh" \
-        -e "s^@bash@^$(pkg_path_for build-tools-bash)/bin/bash^g" \
+        -e "s^@bash@^$(pkg_path_for build-tools-bash-static)/bin/bash^g" \
         -e "s^@program@^${bin}.real^g" \
         >"$bin"
     chmod 755 "$bin"

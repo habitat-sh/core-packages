@@ -47,7 +47,7 @@ do_build() {
         --cross-compile-prefix="${native_target}-" \
         --prefix="${pkg_prefix}" \
         --openssldir=ssl \
-        -Wl,-rpath="${LD_RUN_PATH}"\
+        -Wl,-rpath="${LD_RUN_PATH}" \
         fips \
         $openssl_arch
 
