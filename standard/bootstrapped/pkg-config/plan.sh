@@ -21,7 +21,7 @@ pkg_build_deps=(
   core/build-tools-patch
   core/build-tools-patchelf
   core/build-tools-make
-  core/build-tools-gcc
+  core/gcc-bootstrap
 )
 pkg_bin_dirs=(bin)
 
