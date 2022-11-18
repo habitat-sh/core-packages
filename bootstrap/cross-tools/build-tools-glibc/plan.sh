@@ -19,12 +19,12 @@ pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="1c959fea240906226062cb4b1e7ebce71a9f0e3c0836c09e7e3423d434fcfe75"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
-    core/build-tools-linux-headers
+	core/build-tools-linux-headers
 )
 
 pkg_build_deps=(
-    core/native-cross-binutils
-    core/native-cross-gcc-real
+	core/native-cross-binutils
+	core/native-cross-gcc-real
 )
 
 pkg_bin_dirs=(bin sbin)
@@ -32,45 +32,45 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-    PATH="$(pkg_path_for native-cross-binutils)/$native_target/bin:$(pkg_path_for native-cross-gcc-real)/bin:${PATH}"
-    # Don't use the system's `/etc/ld.so.cache` and `/etc/ld.so.preload`, but
-    # rather the version under `$pkg_prefix/etc`.
-    #
-    # Thanks to https://github.com/NixOS/nixpkgs/blob/54fc2db/pkgs/development/libraries/glibc/dont-use-system-ld-so-cache.patch
-    # and to https://github.com/NixOS/nixpkgs/blob/dac591a/pkgs/development/libraries/glibc/dont-use-system-ld-so-preload.patch
-    # shellcheck disable=SC2002
-    cat "$PLAN_CONTEXT/dont-use-system-ld-so-preload.patch" |
-        sed "s,@PREFIX@,$pkg_prefix,g" |
-        patch -p1
+	PATH="$(pkg_path_for native-cross-binutils)/$native_target/bin:$(pkg_path_for native-cross-gcc-real)/bin:${PATH}"
+	# Don't use the system's `/etc/ld.so.cache` and `/etc/ld.so.preload`, but
+	# rather the version under `$pkg_prefix/etc`.
+	#
+	# Thanks to https://github.com/NixOS/nixpkgs/blob/54fc2db/pkgs/development/libraries/glibc/dont-use-system-ld-so-cache.patch
+	# and to https://github.com/NixOS/nixpkgs/blob/dac591a/pkgs/development/libraries/glibc/dont-use-system-ld-so-preload.patch
+	# shellcheck disable=SC2002
+	cat "$PLAN_CONTEXT/dont-use-system-ld-so-preload.patch" |
+		sed "s,@PREFIX@,$pkg_prefix,g" |
+		patch -p1
 
-    patch -p1 <"$PLAN_CONTEXT/dont-use-system-ld-so-cache.patch"
-    CPPFLAGS="${CPPFLAGS} -isystem $(pkg_path_for native-cross-gcc-real)/bootstrap-include"
-    # We cannot have RPATH set in the glibc binaries
-    unset LD_RUN_PATH
+	patch -p1 <"$PLAN_CONTEXT/dont-use-system-ld-so-cache.patch"
+	CPPFLAGS="${CPPFLAGS} -isystem $(pkg_path_for native-cross-gcc-real)/bootstrap-include"
+	# We cannot have RPATH set in the glibc binaries
+	unset LD_RUN_PATH
 }
 
 do_build() {
-    mkdir -v build
-    pushd build || exit 1
+	mkdir -v build
+	pushd build || exit 1
 
-    "../configure" \
-        --prefix="$pkg_prefix" \
-        --build="$(../config.guess)" \
-        --host="$native_target" \
-        --with-headers="$(pkg_path_for build-tools-linux-headers)/include" \
-        --sysconfdir="$pkg_prefix/etc" \
-        --enable-kernel=5.4 \
-        libc_cv_slibdir="$pkg_prefix"/lib \
-        libc_cv_rootsbindir="$pkg_prefix"/bin
+	"../configure" \
+		--prefix="$pkg_prefix" \
+		--build="$(../config.guess)" \
+		--host="$native_target" \
+		--with-headers="$(pkg_path_for build-tools-linux-headers)/include" \
+		--sysconfdir="$pkg_prefix/etc" \
+		--enable-kernel=5.4 \
+		libc_cv_slibdir="$pkg_prefix"/lib \
+		libc_cv_rootsbindir="$pkg_prefix"/bin
 
-    make -j"$(nproc)"
+	make -j"$(nproc)"
 
-    popd >/dev/null || exit 1
+	popd >/dev/null || exit 1
 }
 
 do_install() {
-    pushd build || exit 1
-    make install
-    popd || exit 1
-    rm -f "$pkg_prefix/bin/sln"
+	pushd build || exit 1
+	make install
+	popd || exit 1
+	rm -f "$pkg_prefix/bin/sln"
 }

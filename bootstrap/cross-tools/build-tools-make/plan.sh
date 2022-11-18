@@ -16,23 +16,23 @@ pkg_shasum="e05fdde47c5f7ca45cb697e973894ff4f5d79e13b750ed57d7b66d8defc78e19"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
-    core/build-tools-glibc
+	core/build-tools-glibc
 )
 pkg_build_deps=(
-    core/native-cross-gcc
+	core/native-cross-gcc
 )
 pkg_bin_dirs=(bin)
 
 do_build() {
-    ./configure \
-        --prefix="$pkg_prefix" \
-        --build="$(build-aux/config.guess)" \
-        --host="$native_target" \
-        --without-guile
+	./configure \
+		--prefix="$pkg_prefix" \
+		--build="$(build-aux/config.guess)" \
+		--host="$native_target" \
+		--without-guile
 
-    make
+	make
 }
 
 do_check() {
-    make check
+	make check
 }

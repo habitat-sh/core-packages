@@ -15,22 +15,22 @@ pkg_shasum="17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
-    core/native-libgmp
-    core/native-libmpfr
+	core/native-libgmp
+	core/native-libmpfr
 )
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_build() {
-    ./configure \
-        --prefix="$pkg_prefix" \
-        --build="$(./config.guess)" \
-        --host="$(./config.guess)" \
-        --disable-static
-    make
+	./configure \
+		--prefix="$pkg_prefix" \
+		--build="$(./config.guess)" \
+		--host="$(./config.guess)" \
+		--disable-static
+	make
 }
 
 do_check() {
-    make check
+	make check
 }

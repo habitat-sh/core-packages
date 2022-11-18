@@ -17,21 +17,21 @@ pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="63aede5c6d33b6d9b13511cd0be2cac046f2e70fd0a07aa9573a04a82783af96"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
-    core/build-tools-glibc
+	core/build-tools-glibc
 )
 pkg_build_deps=(
-    core/native-cross-gcc
+	core/native-cross-gcc
 )
 pkg_bin_dirs=(bin)
 
 do_build() {
-    ./configure \
-        --prefix="$pkg_prefix" \
-        --build="$(build-aux/config.guess)" \
-        --host="$native_target"
-    make
+	./configure \
+		--prefix="$pkg_prefix" \
+		--build="$(build-aux/config.guess)" \
+		--host="$native_target"
+	make
 }
 
 do_check() {
-    make check
+	make check
 }

@@ -11,26 +11,26 @@ pkg_dirname="habitat-${commit_hash}"
 pkg_build_deps=()
 
 pkg_deps=(
-    core/build-tools-hab-plan-build
-    core/build-tools-diffutils
-    core/build-tools-make
-    core/build-tools-ncurses
-    core/build-tools-patch
+	core/build-tools-hab-plan-build
+	core/build-tools-diffutils
+	core/build-tools-make
+	core/build-tools-ncurses
+	core/build-tools-patch
 )
 
 pkg_version() {
-    cat "$SRC_PATH/VERSION"
+	cat "$SRC_PATH/VERSION"
 }
 
 do_unpack() {
-    do_default_unpack
-    update_pkg_version
+	do_default_unpack
+	update_pkg_version
 }
 
 do_build() {
-    return 0
+	return 0
 }
 
 do_install() {
-    return 0
+	return 0
 }

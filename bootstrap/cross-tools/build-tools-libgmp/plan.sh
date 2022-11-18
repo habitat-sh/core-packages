@@ -18,22 +18,22 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 pkg_deps=(
-    core/build-tools-glibc
+	core/build-tools-glibc
 )
 pkg_build_deps=(
-    core/native-cross-gcc
+	core/native-cross-gcc
 )
 
 do_build() {
-    ./configure \
-        --prefix="$pkg_prefix" \
-        --build="$(./config.guess)" \
-        --host="$native_target" \
-        --target="$native_target" \
-        --disable-static
-    make
+	./configure \
+		--prefix="$pkg_prefix" \
+		--build="$(./config.guess)" \
+		--host="$native_target" \
+		--target="$native_target" \
+		--disable-static
+	make
 }
 
 do_check() {
-    make check
+	make check
 }

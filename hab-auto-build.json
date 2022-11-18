@@ -11,7 +11,11 @@
             "bootstrap_packages": [
                 "bootstrap/target-tools/**",
                 "stage0/**",
-                "stage1/**"
+                "stage1/**",
+                "final/**"
+            ],
+            "ignored_packages": [
+                "final_draft/**"
             ]
         }
     ]

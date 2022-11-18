@@ -16,27 +16,27 @@ pkg_shasum="17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
-    core/build-tools-libgmp
-    core/build-tools-libmpfr
-    core/build-tools-glibc
+	core/build-tools-libgmp
+	core/build-tools-libmpfr
+	core/build-tools-glibc
 )
 
 pkg_build_deps=(
-    core/native-cross-gcc
+	core/native-cross-gcc
 )
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_build() {
-    ./configure \
-        --prefix="$pkg_prefix" \
-        --build="$(./config.guess)" \
-        --host="$native_target" \
-        --disable-static
-    make
+	./configure \
+		--prefix="$pkg_prefix" \
+		--build="$(./config.guess)" \
+		--host="$native_target" \
+		--disable-static
+	make
 }
 
 do_check() {
-    make check
+	make check
 }

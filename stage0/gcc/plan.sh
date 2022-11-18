@@ -16,30 +16,30 @@ pkg_upstream_url="https://gcc.gnu.org/"
 pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
 
 pkg_deps=(
-    core/glibc-stage0
-    core/build-tools-gcc
-    core/linux-headers
+	core/glibc-stage0
+	core/build-tools-gcc
+	core/linux-headers
 )
 
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-    case $pkg_target in
-    aarch64-linux)
-        set_runtime_env "HAB_BUILD_TOOLS_GCC_GLIBC_DYNAMIC_LINKER" "$(pkg_path_for glibc-stage0)/lib/ld-linux-aarch64.so.1"
-        ;;
-    x86_64-linux)
-        set_runtime_env "HAB_BUILD_TOOLS_GCC_GLIBC_DYNAMIC_LINKER" "$(pkg_path_for glibc-stage0)/lib/ld-linux-x86-64.so.2"
-        ;;
-    esac
-    set_runtime_env "HAB_BUILD_TOOLS_GCC_GLIBC_PKG_PATH" "$(pkg_path_for glibc-stage0)"
-    set_runtime_env "HAB_BUILD_TOOLS_GCC_LINUX_HEADERS_PKG_PATH" "$(pkg_path_for linux-headers)"
+	case $pkg_target in
+	aarch64-linux)
+		set_runtime_env "HAB_BUILD_TOOLS_GCC_GLIBC_DYNAMIC_LINKER" "$(pkg_path_for glibc-stage0)/lib/ld-linux-aarch64.so.1"
+		;;
+	x86_64-linux)
+		set_runtime_env "HAB_BUILD_TOOLS_GCC_GLIBC_DYNAMIC_LINKER" "$(pkg_path_for glibc-stage0)/lib/ld-linux-x86-64.so.2"
+		;;
+	esac
+	set_runtime_env "HAB_BUILD_TOOLS_GCC_GLIBC_PKG_PATH" "$(pkg_path_for glibc-stage0)"
+	set_runtime_env "HAB_BUILD_TOOLS_GCC_LINUX_HEADERS_PKG_PATH" "$(pkg_path_for linux-headers)"
 }
 
 do_build() {
-    return 0
+	return 0
 }
 
 do_install() {
-    return 0
+	return 0
 }

@@ -12,24 +12,24 @@ pkg_shasum="63aede5c6d33b6d9b13511cd0be2cac046f2e70fd0a07aa9573a04a82783af96"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
-    core/glibc-stage0
+	core/glibc-stage0
 )
 
 pkg_build_deps=(
-    core/gcc-stage0
-    core/build-tools-make
-    core/build-tools-bash-static
-    core/build-tools-coreutils
-    core/build-tools-patchelf
+	core/gcc-stage0
+	core/build-tools-make
+	core/build-tools-bash-static
+	core/build-tools-coreutils
+	core/build-tools-patchelf
 )
 
 pkg_bin_dirs=(bin)
 
 do_check() {
-    make check
+	make check
 }
 
 do_install() {
-    make install
-    patchelf --shrink-rpath "$pkg_prefix/bin/m4"
+	make install
+	patchelf --shrink-rpath "$pkg_prefix/bin/m4"
 }

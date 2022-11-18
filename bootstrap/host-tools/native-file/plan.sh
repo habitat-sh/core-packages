@@ -20,15 +20,15 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_build() {
-    ./configure \
-        --prefix="$pkg_prefix" \
-        --disable-bzlib \
-        --disable-libseccomp \
-        --disable-xzlib \
-        --disable-zlib
-    make
+	./configure \
+		--prefix="$pkg_prefix" \
+		--disable-bzlib \
+		--disable-libseccomp \
+		--disable-xzlib \
+		--disable-zlib
+	make
 }
 
 do_install() {
-    make install
+	make install
 }

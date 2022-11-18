@@ -12,11 +12,11 @@ pkg_dirname="linux-$pkg_version"
 pkg_include_dirs=(include)
 
 do_build() {
-    make headers
+	make headers
 }
 
 do_install() {
-    find usr/include -name '.*' -delete
-    rm usr/include/Makefile
-    cp -rv usr/include "$pkg_prefix"
+	find usr/include -name '.*' -delete
+	rm usr/include/Makefile
+	cp -rv usr/include "$pkg_prefix"
 }

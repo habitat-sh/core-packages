@@ -9,21 +9,21 @@ pkg_dirname="busybox-1.35.0"
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-    export LDFLAGS="--static"
+	export LDFLAGS="--static"
 }
 
 do_build() {
-    make defconfig
-    make
+	make defconfig
+	make
 }
 
 do_install() {
-    install -Dm755 busybox "$pkg_prefix/bin/busybox"
-    # Check that busybox executable is not failing
-    "$pkg_prefix"/bin/busybox >/dev/null
+	install -Dm755 busybox "$pkg_prefix/bin/busybox"
+	# Check that busybox executable is not failing
+	"$pkg_prefix"/bin/busybox >/dev/null
 
-    # Generate the symlinks back to the `busybox` executable
-    for l in $(busybox --list); do
-        ln -sv busybox "$pkg_prefix/bin/$l"
-    done
+	# Generate the symlinks back to the `busybox` executable
+	for l in $(busybox --list); do
+		ln -sv busybox "$pkg_prefix/bin/$l"
+	done
 }

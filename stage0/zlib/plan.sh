@@ -14,36 +14,33 @@ pkg_source="http://zlib.net/${program}-${pkg_version}.tar.gz"
 pkg_shasum="b3a24de97a8fdbc835b9833169501030b8977031bcb54b3b3ac13740f846ab30"
 pkg_dirname="${program}-${pkg_version}"
 
-pkg_deps=(
-    core/glibc-stage0
-)
 pkg_build_deps=(
-    core/gcc-stage0
-    core/build-tools-make
-    core/build-tools-patchelf
+	core/gcc-stage0
+	core/build-tools-coreutils
+	core/build-tools-make
 )
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
-    unset LD_RUN_PATH
-    unset LDFLAGS
-    unset CFLAGS
-    unset CXXFLAGS
-    unset CPPFLAGS
-    build_line "Unset CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS and LD_RUN_PATH"
+	unset LD_RUN_PATH
+	unset LDFLAGS
+	unset CFLAGS
+	unset CXXFLAGS
+	unset CPPFLAGS
+	build_line "Unset CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS and LD_RUN_PATH"
 }
 
 do_install() {
-    make install
-    # Remove static library
-    rm -fv "${pkg_prefix}/lib/libz.a"
-    # Removes unnecesary rpath entry to build-tools-gcc/lib64
-    patchelf --shrink-rpath "${pkg_prefix}/lib/libz.so.${pkg_version}"
+	make install
+
+	# We want to statically link zlib into gcc and binutils so we remove
+	# unnecessary shared libraries and pkgconfig
+	rm -fv "${pkg_prefix}"/lib/*.so*
+	rm -rfv "${pkg_prefix}"/lib/pkgconfig
 }
 
 do_check() {
-    make check
+	make check
 }

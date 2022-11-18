@@ -17,25 +17,25 @@ pkg_shasum="ef5af4449cb0269faf3af24bf4c02273d455f0741bf3c50f86ddc09332d6cf56"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
-    core/build-tools-glibc
+	core/build-tools-glibc
 )
 pkg_build_deps=(
-    core/native-cross-gcc
+	core/native-cross-gcc
 )
 pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/awk bin/gawk)
 
 do_build() {
-    ./configure \
-        --prefix="$pkg_prefix" \
-        --build="$(build-aux/config.guess)" \
-        --host="$native_target"
-    make
+	./configure \
+		--prefix="$pkg_prefix" \
+		--build="$(build-aux/config.guess)" \
+		--host="$native_target"
+	make
 }
 
 do_install() {
-    make install
+	make install
 
-    # Remove unnecessary binaries
-    rm -v "${pkg_prefix}/bin/gawkbug"
+	# Remove unnecessary binaries
+	rm -v "${pkg_prefix}/bin/gawkbug"
 }

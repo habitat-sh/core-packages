@@ -18,30 +18,30 @@ pkg_shasum="a2bfb8c09d436770edc59f50fa483e785b161a3b7b9d547573cb08065fd462fe"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
-    core/build-tools-glibc
-    core/build-tools-bash-static
+	core/build-tools-glibc
+	core/build-tools-bash-static
 )
 pkg_build_deps=(
-    core/native-cross-gcc
+	core/native-cross-gcc
 )
 pkg_bin_dirs=(bin)
 
 do_build() {
-    ./configure \
-        --prefix="$pkg_prefix" \
-        --build="$(build-aux/config.guess)" \
-        --host="$native_target" \
-        --localstatedir="$pkg_svc_var_path/locate"
-    make
+	./configure \
+		--prefix="$pkg_prefix" \
+		--build="$(build-aux/config.guess)" \
+		--host="$native_target" \
+		--localstatedir="$pkg_svc_var_path/locate"
+	make
 }
 
 do_check() {
-    make check
+	make check
 }
 
 do_install() {
-    make install
+	make install
 
-    # Fix shell scripts
-    fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
+	# Fix shell scripts
+	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
 }

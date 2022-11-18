@@ -12,12 +12,12 @@ pkg_shasum="a2105abee17bcd2ebd15ced31b4f5eda6e17efd6b10f921a01cda4a44c91b3a0"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
-    core/glibc-stage0
+	core/glibc-stage0
 )
 pkg_build_deps=(
-    core/gcc-stage0
-    core/build-tools-make
-    core/build-tools-patchelf
+	core/gcc-stage0
+	core/build-tools-make
+	core/build-tools-patchelf
 )
 
 pkg_bin_dirs=(bin)
@@ -26,23 +26,23 @@ pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
-    ./configure \
-        --prefix="$pkg_prefix" \
-        --disable-static \
-        --docdir="$pkg_prefix"/share/doc/xz-5.2.6
+	./configure \
+		--prefix="$pkg_prefix" \
+		--disable-static \
+		--docdir="$pkg_prefix"/share/doc/xz-5.2.6
 
-    make
+	make
 }
 
 do_check() {
-    make check
+	make check
 }
 
 do_install() {
-    make install
-    patchelf --shrink-rpath "${pkg_prefix}/bin/lzmadec"
-    patchelf --shrink-rpath "${pkg_prefix}/bin/lzmainfo"
-    patchelf --shrink-rpath "${pkg_prefix}/bin/xz"
-    patchelf --shrink-rpath "${pkg_prefix}/bin/xzdec"
-    patchelf --shrink-rpath "${pkg_prefix}/lib/liblzma.so.${pkg_version}"
+	make install
+	patchelf --shrink-rpath "${pkg_prefix}/bin/lzmadec"
+	patchelf --shrink-rpath "${pkg_prefix}/bin/lzmainfo"
+	patchelf --shrink-rpath "${pkg_prefix}/bin/xz"
+	patchelf --shrink-rpath "${pkg_prefix}/bin/xzdec"
+	patchelf --shrink-rpath "${pkg_prefix}/lib/liblzma.so.${pkg_version}"
 }

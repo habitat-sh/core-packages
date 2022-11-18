@@ -54,27 +54,27 @@ nParams=${#params[@]}
 # looking at the calling arguments to this program. This may not work 100% of
 # the time, but it has shown to be fairly reliable
 while (("$n" < "$nParams")); do
-  p=${params[n]}
-  p2=${params[n + 1]:-} # handle `p` being last one
-  n+=1
+	p=${params[n]}
+	p2=${params[n + 1]:-} # handle `p` being last one
+	n+=1
 
-  case "$p" in
-  -[cSEM] | -MM) dontLink=1 ;;
-  -nostdinc) cInclude=0 cxxInclude=0 ;;
-  -nostdinc++) cxxInclude=0 ;;
-  -nostdlib) cxxLibrary=0 ;;
-  -nostartfiles) startFilesInclude=0 ;;
-  -static) linkType="static" ;;
-  -static-pie) linkType="static-pie" ;;
-  -x)
-    case "$p2" in
-    *-header) dontLink=1 ;;
-    c++*) isCxx=1 ;;
-    esac
-    ;;
-  -?*) ;;
-  *) nonFlagArgs=1 ;; # Includes a solitary dash (`-`) which signifies standard input; it is not a flag
-  esac
+	case "$p" in
+	-[cSEM] | -MM) dontLink=1 ;;
+	-nostdinc) cInclude=0 cxxInclude=0 ;;
+	-nostdinc++) cxxInclude=0 ;;
+	-nostdlib) cxxLibrary=0 ;;
+	-nostartfiles) startFilesInclude=0 ;;
+	-static) linkType="static" ;;
+	-static-pie) linkType="static-pie" ;;
+	-x)
+		case "$p2" in
+		*-header) dontLink=1 ;;
+		c++*) isCxx=1 ;;
+		esac
+		;;
+	-?*) ;;
+	*) nonFlagArgs=1 ;; # Includes a solitary dash (`-`) which signifies standard input; it is not a flag
+	esac
 done
 
 # If we pass a flag like -Wl, then gcc will call the linker unless it
@@ -83,34 +83,34 @@ done
 # linker flags.  This catches cases like "gcc" (should just print
 # "gcc: no input files") and "gcc -v" (should print the version).
 if [ "$nonFlagArgs" = 0 ]; then
-  dontLink=1
+	dontLink=1
 fi
 
 # Add the path to the C runtime start files if they are required
 if [[ "$startFilesInclude" = 1 ]]; then
-  extraAfterFlags="$extraAfterFlags -B@glibc@/lib/"
+	extraAfterFlags="$extraAfterFlags -B@glibc@/lib/"
 fi
 
 # If we are calling a c/g++ style program, set additional flags.
 if [[ "$isCxx" = 1 ]]; then
-  if [[ "$cxxLibrary" = 1 ]]; then
-    extraAfterFlags="$extraAfterFlags -L@libstdcpp@/lib"
-  fi
+	if [[ "$cxxLibrary" = 1 ]]; then
+		extraAfterFlags="$extraAfterFlags -L@libstdcpp@/lib"
+	fi
 
-  if [[ "$cxxInclude" = 1 ]]; then
-    extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*"
-    extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*/@native_target@"
-    extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*/backward"
-  fi
+	if [[ "$cxxInclude" = 1 ]]; then
+		extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*"
+		extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*/@native_target@"
+		extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*/backward"
+	fi
 fi
 
 if [[ "$cxxLibrary" = 1 ]]; then
-  extraAfterFlags="$extraAfterFlags -L@glibc@/lib"
+	extraAfterFlags="$extraAfterFlags -L@glibc@/lib"
 fi
 
 if [[ "$cInclude" = 1 ]]; then
-  extraAfterFlags="$extraAfterFlags -idirafter @glibc@/include"
-  extraAfterFlags="$extraAfterFlags -idirafter @linux_headers@/include"
+	extraAfterFlags="$extraAfterFlags -idirafter @glibc@/include"
+	extraAfterFlags="$extraAfterFlags -idirafter @linux_headers@/include"
 fi
 
 # Add the flags for the C compiler proper.
@@ -118,10 +118,10 @@ extraBefore=()
 extraAfter=($extraAfterFlags)
 
 if [[ "$dontLink" != 1 ]]; then
-  if [[ "$linkType" = "dynamic" ]]; then
-    extraBefore+=("-Wl,-dynamic-linker=@dynamic_linker@")
-  fi
-  export HAB_LINK_TYPE=${linkType}
+	if [[ "$linkType" = "dynamic" ]]; then
+		extraBefore+=("-Wl,-dynamic-linker=@dynamic_linker@")
+	fi
+	export HAB_LINK_TYPE=${linkType}
 fi
 
 # As a very special hack, if the arguments are just `-v', then don't
@@ -129,24 +129,24 @@ fi
 # out the version number and returns exit code 0) from printing out
 # `No input files specified' and returning exit code 1.
 if [ "$*" = -v ]; then
-  extraAfter=()
-  extraBefore=()
+	extraAfter=()
+	extraBefore=()
 fi
 
 # Optionally print debug info.
 if (("${HAB_NATIVE_CROSS_GCC_DEBUG}" >= 1)); then
-  echo "original flags to @program@:" >&2
-  for i in "${params[@]}"; do
-    echo "  $i" >&2
-  done
-  echo "extraBefore flags to @program@:" >&2
-  for i in ${extraBefore[@]}; do
-    echo "  $i" >&2
-  done
-  echo "extraAfter flags to @program@:" >&2
-  for i in ${extraAfter[@]}; do
-    echo "  $i" >&2
-  done
+	echo "original flags to @program@:" >&2
+	for i in "${params[@]}"; do
+		echo "  $i" >&2
+	done
+	echo "extraBefore flags to @program@:" >&2
+	for i in ${extraBefore[@]}; do
+		echo "  $i" >&2
+	done
+	echo "extraAfter flags to @program@:" >&2
+	for i in ${extraAfter[@]}; do
+		echo "  $i" >&2
+	done
 fi
 
 # Become the underlying real program

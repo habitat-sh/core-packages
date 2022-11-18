@@ -15,25 +15,25 @@ pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}.tar.xz"
 pkg_shasum="8eb753ed28bca21f8f56c1a180362aed789229bd62fff58bf8368e9beb59fec4"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
-    core/build-tools-perl
-    core/build-tools-glibc
-    core/build-tools-bash-static
+	core/build-tools-perl
+	core/build-tools-glibc
+	core/build-tools-bash-static
 )
 pkg_build_deps=(
-    core/build-tools-gcc
+	core/build-tools-gcc
 )
 pkg_bin_dirs=(bin)
 
 do_build() {
-    ./configure --prefix="$pkg_prefix"
-    make
+	./configure --prefix="$pkg_prefix"
+	make
 }
 do_install() {
-    make install
+	make install
 
-    # Fix scripts
-    fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
+	# Fix scripts
+	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
 }
 do_check() {
-    make check
+	make check
 }

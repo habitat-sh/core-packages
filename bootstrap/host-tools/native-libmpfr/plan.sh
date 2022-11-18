@@ -18,20 +18,20 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 pkg_deps=(
-    core/native-libgmp
+	core/native-libgmp
 )
 
 do_build() {
-    ./configure \
-        --prefix="$pkg_prefix" \
-        --build="$(./config.guess)" \
-        --host="$(./config.guess)" \
-        --with-gmp="$(pkg_path_for native-libgmp)" \
-        --disable-static \
-        --enable-thread-safe
-    make
+	./configure \
+		--prefix="$pkg_prefix" \
+		--build="$(./config.guess)" \
+		--host="$(./config.guess)" \
+		--with-gmp="$(pkg_path_for native-libgmp)" \
+		--disable-static \
+		--enable-thread-safe
+	make
 }
 
 do_check() {
-    make check
+	make check
 }

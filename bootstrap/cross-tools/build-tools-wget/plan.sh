@@ -16,29 +16,29 @@ pkg_shasum="5726bb8bc5ca0f6dc7110f6416e4bb7019e2d2ff5bf93d1ca2ffcc6656f220e5"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
-  core/build-tools-glibc
-  core/build-tools-openssl
-  core/build-tools-coreutils
+	core/build-tools-glibc
+	core/build-tools-openssl
+	core/build-tools-coreutils
 )
 
 pkg_build_deps=(
-  core/native-cross-gcc
+	core/native-cross-gcc
 )
 
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-  # Purge the codebase (mostly tests & build Perl scripts) of the hardcoded
-  # reliance on `/usr/bin/env`.
-  grep -lr '/usr/bin/env' . | while read -r f; do
-    sed -e "s,/usr/bin/env,$(pkg_path_for build-tools-coreutils)/bin/env,g" -i "$f"
-  done
+	# Purge the codebase (mostly tests & build Perl scripts) of the hardcoded
+	# reliance on `/usr/bin/env`.
+	grep -lr '/usr/bin/env' . | while read -r f; do
+		sed -e "s,/usr/bin/env,$(pkg_path_for build-tools-coreutils)/bin/env,g" -i "$f"
+	done
 }
 
 do_build() {
-  ./configure \
-    --prefix="$pkg_prefix" \
-    --host="$native_target" \
-    --with-ssl=openssl
-  make -j"$(nproc)"
+	./configure \
+		--prefix="$pkg_prefix" \
+		--host="$native_target" \
+		--with-ssl=openssl
+	make -j"$(nproc)"
 }

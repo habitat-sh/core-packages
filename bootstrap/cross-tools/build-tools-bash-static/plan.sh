@@ -19,45 +19,45 @@ pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="cc012bc860406dcf42f64431bcd3d2fa7560c02915a601aba9cd597a39329baa"
 pkg_dirname="${program}-${pkg_version}"
 pkg_interpreters=(
-    bin/sh
-    bin/bash
+	bin/sh
+	bin/bash
 )
 pkg_build_deps=(
-    core/native-cross-gcc
+	core/native-cross-gcc
 )
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-    # Cross building ncurses still requires use of the host system's compiler.
-    # We have to be careful to ensure that our  on the
-    # We move the LD_RUN_PATH into the LDFLAGS instead and unset LD_RUN_PATH so
-    # it doesn't get picked up by the native compiler.
-    LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
-    build_line "Updating LDFLAGS=${LDFLAGS}"
-    unset LD_RUN_PATH
-    build_line "Updating LD_RUN_PATH=${LD_RUN_PATH}"
-    CFLAGS_FOR_BUILD=""
-    build_line "Setting CFLAGS_FOR_BUILD=$CFLAGS_FOR_BUILD"
-    CPPFLAGS_FOR_BUILD=""
-    build_line "Setting CPPFLAGS_FOR_BUILD=$CPPFLAGS_FOR_BUILD"
-    LDFLAGS_FOR_BUILD=""
-    build_line "Setting LDFLAGS_FOR_BUILD=$LDFLAGS_FOR_BUILD"
+	# Cross building ncurses still requires use of the host system's compiler.
+	# We have to be careful to ensure that our  on the
+	# We move the LD_RUN_PATH into the LDFLAGS instead and unset LD_RUN_PATH so
+	# it doesn't get picked up by the native compiler.
+	LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
+	build_line "Updating LDFLAGS=${LDFLAGS}"
+	unset LD_RUN_PATH
+	build_line "Updating LD_RUN_PATH=${LD_RUN_PATH}"
+	CFLAGS_FOR_BUILD=""
+	build_line "Setting CFLAGS_FOR_BUILD=$CFLAGS_FOR_BUILD"
+	CPPFLAGS_FOR_BUILD=""
+	build_line "Setting CPPFLAGS_FOR_BUILD=$CPPFLAGS_FOR_BUILD"
+	LDFLAGS_FOR_BUILD=""
+	build_line "Setting LDFLAGS_FOR_BUILD=$LDFLAGS_FOR_BUILD"
 }
 
 do_build() {
-    ./configure \
-        --prefix="$pkg_prefix" \
-        --build="$(support/config.guess)" \
-        --host="$native_target" \
-        --without-bash-malloc \
-        --enable-static-link
-    make
+	./configure \
+		--prefix="$pkg_prefix" \
+		--build="$(support/config.guess)" \
+		--host="$native_target" \
+		--without-bash-malloc \
+		--enable-static-link
+	make
 }
 
 do_install() {
-    make install
-    ln -sv bash "$pkg_prefix/bin/sh"
+	make install
+	ln -sv bash "$pkg_prefix/bin/sh"
 
-    # Remove unnecessary binaries
-    rm -v "${pkg_prefix}/bin/bashbug"
+	# Remove unnecessary binaries
+	rm -v "${pkg_prefix}/bin/bashbug"
 }
