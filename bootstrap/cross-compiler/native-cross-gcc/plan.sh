@@ -9,14 +9,14 @@ pkg_description="\
 The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \
 Project supporting various programming languages. GCC is a key component of \
 the GNU toolchain and the standard compiler for most Unix-like operating \
-systems.This package is a wrapper around the native-cross-gcc-real package.\
+systems.This package is a wrapper around the native-cross-gcc-base package.\
 "
 pkg_upstream_url="https://gcc.gnu.org/"
 pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
 
 pkg_deps=(
 	core/native-cross-binutils
-	core/native-cross-gcc-real
+	core/native-cross-gcc-base
 	core/build-tools-glibc
 	core/build-tools-libstdcpp
 	core/build-tools-linux-headers
@@ -29,7 +29,7 @@ do_build() {
 }
 
 do_install() {
-	for file in "$(pkg_path_for native-cross-gcc-real)"/bin/*; do
+	for file in "$(pkg_path_for native-cross-gcc-base)"/bin/*; do
 		ln -sv "$file" "${pkg_prefix:?}/bin/$(basename "$file")"
 	done
 
@@ -46,7 +46,7 @@ do_install() {
 wrap_binary() {
 	local wrapper_bin="$1"
 	local real_bin
-	real_bin="$(pkg_path_for native-cross-gcc-real)/bin/$wrapper_bin"
+	real_bin="$(pkg_path_for native-cross-gcc-base)/bin/$wrapper_bin"
 	case $native_target in
 	aarch64-hab-linux-gnu)
 		dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-aarch64.so.1"

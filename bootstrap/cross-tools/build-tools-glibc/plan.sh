@@ -24,7 +24,7 @@ pkg_deps=(
 
 pkg_build_deps=(
 	core/native-cross-binutils
-	core/native-cross-gcc-real
+	core/native-cross-gcc-base
 )
 
 pkg_bin_dirs=(bin sbin)
@@ -32,7 +32,7 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-	PATH="$(pkg_path_for native-cross-binutils)/$native_target/bin:$(pkg_path_for native-cross-gcc-real)/bin:${PATH}"
+	PATH="$(pkg_path_for native-cross-binutils)/$native_target/bin:$(pkg_path_for native-cross-gcc-base)/bin:${PATH}"
 	# Don't use the system's `/etc/ld.so.cache` and `/etc/ld.so.preload`, but
 	# rather the version under `$pkg_prefix/etc`.
 	#
@@ -44,7 +44,7 @@ do_prepare() {
 		patch -p1
 
 	patch -p1 <"$PLAN_CONTEXT/dont-use-system-ld-so-cache.patch"
-	CPPFLAGS="${CPPFLAGS} -isystem $(pkg_path_for native-cross-gcc-real)/bootstrap-include"
+	CPPFLAGS="${CPPFLAGS} -isystem $(pkg_path_for native-cross-gcc-base)/bootstrap-include"
 	# We cannot have RPATH set in the glibc binaries
 	unset LD_RUN_PATH
 }

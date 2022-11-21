@@ -22,13 +22,13 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/native-cross-binutils
-	core/native-cross-gcc-real
+	core/native-cross-gcc-base
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-	PATH="$(pkg_path_for native-cross-binutils)/$native_target/bin:$(pkg_path_for native-cross-gcc-real)/bin:${PATH}"
+	PATH="$(pkg_path_for native-cross-binutils)/$native_target/bin:$(pkg_path_for native-cross-gcc-base)/bin:${PATH}"
 
 	case $pkg_target in
 	aarch64-linux)

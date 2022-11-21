@@ -2,7 +2,7 @@ program="gcc"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 glibc_version="2.36"
 
-pkg_name="native-cross-gcc-real"
+pkg_name="native-cross-gcc-base"
 pkg_origin="core"
 pkg_version="12.2.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
