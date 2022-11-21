@@ -33,13 +33,14 @@ do_install() {
 		ln -sv "$file" "${pkg_prefix:?}/bin/$(basename "$file")"
 	done
 
-	# Many packages use the name cc to call the C compiler
-	ln -sv gcc "$pkg_prefix/bin/cc"
-
 	wrap_binary "${native_target}-c++"
-	wrap_binary "${native_target}-gcc"
 	wrap_binary "${native_target}-g++"
 	wrap_binary "${native_target}-cpp"
+	wrap_binary "${native_target}-gcc"
+	wrap_binary "${native_target}-gcc-${pkg_version}"
+	
+	# Many packages use the name cc to call the C compiler
+	ln -sv "${native_target}-gcc" "$pkg_prefix/bin/cc"
 }
 
 wrap_binary() {

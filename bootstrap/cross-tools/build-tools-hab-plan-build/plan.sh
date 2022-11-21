@@ -25,6 +25,7 @@ pkg_deps=(
 	core/build-tools-xz
 	core/build-tools-cacerts
 	core/build-tools-wget
+	core/build-tools-binutils
 )
 
 program="hab-plan-build"

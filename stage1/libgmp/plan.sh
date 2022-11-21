@@ -15,6 +15,7 @@ pkg_shasum="fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
+	core/glibc-base
 	core/gcc-stage1
 	core/m4-stage0
 	core/build-tools-coreutils
@@ -25,6 +26,23 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
+	# Change the dynamic linker and glibc library to link against core/glibc-base
+	case $pkg_target in
+	aarch64-linux)
+		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc-base)/lib/ld-linux-aarch64.so.1"
+		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
+		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
+		;;
+	x86_64-linux)
+		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc-base)/lib/ld-linux-x86-64.so.2"
+		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
+		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
+		;;
+	esac
+	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc-base)"
+	export HAB_GCC_STAGE1_GLIBC_PKG_PATH
+	build_line "Setting HAB_GCC_STAGE1_GLIBC_PKG_PATH=${HAB_GCC_STAGE1_GLIBC_PKG_PATH}"
+	
 	# default settings of GMP produce libraries optimized for the host processor. \
 	# If libraries suitable for processors less capable than the host's CPU are desired, \
 	# generic libraries can be created by

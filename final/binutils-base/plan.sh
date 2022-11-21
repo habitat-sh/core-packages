@@ -1,6 +1,6 @@
 program="binutils"
 
-pkg_name="binutils-stage1"
+pkg_name="binutils-base"
 pkg_origin="core"
 pkg_version="2.39"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -25,8 +25,11 @@ pkg_deps=(
 	core/glibc-base
 	core/bash-static
 )
+
 pkg_build_deps=(
-	core/gcc-stage1
+	core/gcc-base
+	core/gcc-libs
+	core/binutils-stage1
 	core/zlib-stage1
 	core/bzip2-stage0
 	core/build-tools-texinfo
@@ -37,23 +40,7 @@ pkg_build_deps=(
 )
 
 do_prepare() {
-	# Change the dynamic linker and glibc library to link against core/glibc-base
-	case $pkg_target in
-	aarch64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc-base)/lib/ld-linux-aarch64.so.1"
-		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
-		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
-		;;
-	x86_64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc-base)/lib/ld-linux-x86-64.so.2"
-		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
-		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
-		;;
-	esac
-	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc-base)"
-	export HAB_GCC_STAGE1_GLIBC_PKG_PATH
-	build_line "Setting HAB_GCC_STAGE1_GLIBC_PKG_PATH=${HAB_GCC_STAGE1_GLIBC_PKG_PATH}"
-
+	
 	# We don't want to search for libraries in system directories such as `/lib`,
 	# `/usr/local/lib`, etc. This prevents us breaking out of habitat.
 	echo 'NATIVE_LIB_DIRS=' >>ld/configure.tgt

@@ -133,6 +133,11 @@ do_install() {
 	# Many packages use the name cc to call the C compiler
 	ln -sv gcc "$pkg_prefix/bin/cc"
 
+	wrap_binary "${native_target}-c++"
+	wrap_binary "${native_target}-g++"
+	wrap_binary "${native_target}-gcc"
+	wrap_binary "${native_target}-gcc-${pkg_version}"
+
 	wrap_binary "c++"
 	wrap_binary "gcc"
 	wrap_binary "g++"

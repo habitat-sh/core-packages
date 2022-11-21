@@ -18,8 +18,11 @@ pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="1c959fea240906226062cb4b1e7ebce71a9f0e3c0836c09e7e3423d434fcfe75"
 pkg_dirname="${program}-${pkg_version}"
 
-pkg_build_deps=(
+pkg_deps=(
 	core/linux-headers
+)
+
+pkg_build_deps=(
 	core/gcc-stage1
 	core/m4-stage0
 	core/build-tools-bison
@@ -80,7 +83,7 @@ do_build() {
 		libc_cv_slibdir="$pkg_prefix"/lib \
 		libc_cv_rootsbindir="$pkg_prefix"/bin
 
-	make -j"$(nproc)"
+	make -j "$(nproc)" --output-sync
 
 	popd >/dev/null || exit 1
 }
