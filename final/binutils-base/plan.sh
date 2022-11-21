@@ -91,7 +91,7 @@ wrap_binary() {
 	build_line "Adding wrapper $bin to ${bin}.real"
 	mv -v "$bin" "${bin}.real"
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
-		-e "s^@bash@^$(pkg_path_for build-tools-bash-static)/bin/bash^g" \
+		-e "s^@bash@^$(pkg_path_for bash-static)/bin/bash^g" \
 		-e "s^@program@^${bin}.real^g" \
 		>"$bin"
 	chmod 755 "$bin"
