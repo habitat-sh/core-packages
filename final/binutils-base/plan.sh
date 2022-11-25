@@ -22,7 +22,7 @@ pkg_lib_dirs=(
 )
 
 pkg_deps=(
-	core/glibc-base
+	core/glibc
 	core/bash-static
 )
 
@@ -30,6 +30,8 @@ pkg_build_deps=(
 	core/gcc-base
 	core/gcc-libs
 	core/binutils-stage1
+	core/dejagnu-stage1
+	core/flex-stage1
 	core/zlib-stage1
 	core/bzip2-stage0
 	core/build-tools-texinfo
@@ -40,11 +42,18 @@ pkg_build_deps=(
 )
 
 do_prepare() {
-	
+
 	# We don't want to search for libraries in system directories such as `/lib`,
 	# `/usr/local/lib`, etc. This prevents us breaking out of habitat.
 	echo 'NATIVE_LIB_DIRS=' >>ld/configure.tgt
 
+	# Replace dynamic link with libfl from flex with a static link so that
+	# we don't need to include the flex package at runtime
+	for f in binutils/configure gas/configure ld/configure; do
+		sed -i "$f" -e 's|-lfl|-l:libfl.a|'
+	done
+
+	sed -i  /hab/cache/src/binutils-2.39/ld/configure -e 's|-lfl|-l:libfl.a|'
 	# Use symlinks instead of hard links to save space (otherwise `strip(1)`
 	# needs to process each hard link seperately)
 	for f in binutils/Makefile.in gas/Makefile.in ld/Makefile.in gold/Makefile.in; do
@@ -80,7 +89,6 @@ do_strip() {
 
 do_install() {
 	make tooldir="${pkg_prefix}" install
-	wrap_binary "ld"
 	wrap_binary "ld.bfd"
 	# Remove unnecessary binaries
 	rm -v "${pkg_prefix:?}"/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.{a,la}

@@ -33,8 +33,7 @@ pkg_lib_dirs=(lib)
 do_build() {
 	./configure \
 		--prefix="${pkg_prefix}" \
-		--docdir="${pkg_prefix}"/share/doc/flex-2.6.4 \
-		--disable-static
+		--docdir="${pkg_prefix}"/share/doc/flex-2.6.4
 }
 
 do_check() {

@@ -22,10 +22,12 @@ pkg_lib_dirs=(
 )
 
 pkg_deps=(
-	core/glibc-base
+	core/glibc
 	core/bash-static
+	core/gcc-libs-stage1
 )
 pkg_build_deps=(
+	core/flex-stage1
 	core/gcc-stage1
 	core/zlib-stage1
 	core/bzip2-stage0
@@ -37,26 +39,32 @@ pkg_build_deps=(
 )
 
 do_prepare() {
-	# Change the dynamic linker and glibc library to link against core/glibc-base
+	# Change the dynamic linker and glibc library to link against core/glibc
 	case $pkg_target in
 	aarch64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc-base)/lib/ld-linux-aarch64.so.1"
+		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1"
 		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
 		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
 		;;
 	x86_64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc-base)/lib/ld-linux-x86-64.so.2"
+		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
 		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
 		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
 		;;
 	esac
-	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc-base)"
+	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc)"
 	export HAB_GCC_STAGE1_GLIBC_PKG_PATH
 	build_line "Setting HAB_GCC_STAGE1_GLIBC_PKG_PATH=${HAB_GCC_STAGE1_GLIBC_PKG_PATH}"
 
 	# We don't want to search for libraries in system directories such as `/lib`,
 	# `/usr/local/lib`, etc. This prevents us breaking out of habitat.
 	echo 'NATIVE_LIB_DIRS=' >>ld/configure.tgt
+
+	# Replace dynamic link with libfl from flex with a static link so that
+	# we don't need to include the flex package at runtime
+	for f in binutils/configure gas/configure ld/configure; do
+		sed -i "$f" -e 's|-lfl|-l:libfl.a|'
+	done
 
 	# Use symlinks instead of hard links to save space (otherwise `strip(1)`
 	# needs to process each hard link seperately)
