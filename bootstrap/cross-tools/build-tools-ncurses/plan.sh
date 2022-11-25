@@ -23,7 +23,10 @@ pkg_build_deps=(
 	core/native-cross-gcc
 )
 pkg_bin_dirs=(bin)
-pkg_include_dirs=(include)
+pkg_include_dirs=(
+	include
+	include/ncursesw
+)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
@@ -89,6 +92,16 @@ do_install() {
 	done
 	echo "INPUT(-lncursesw)" >"$pkg_prefix/lib/libcurses.so"
 	echo "INPUT(-lncursesw)" >"$pkg_prefix/lib/libcurses.a"
+
+	# Packages depending on curses or ncurses may include headers
+	# in multiple ways:
+	# * #include <curses.h>
+	# * #include <ncurses/curses.h>
+	# * #include <ncursesw/curses.h>
+	# By adding a symlink from 'ncurses' to 'ncursesw' and including
+	# both the 'include' and 'include/ncursesw' folder to the include dirs
+	# we can satisfy all these cases correctly
+	ln -sv ncursesw "${pkg_prefix}/include/ncurses"
 }
 
 do_check() {

@@ -11,6 +11,7 @@ pkg_shasum="60492a19b44e6cf9a3ddff68325b333b8b52b6c59ce3ebd6a0ecaa4c5117e84f"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/build-tools-glibc
+	core/build-tools-ncurses
 )
 pkg_build_deps=(
 	core/build-tools-gcc

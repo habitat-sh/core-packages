@@ -41,8 +41,7 @@ do_build() {
 }
 
 do_check() {
-	export LOCPATH="$(pkg_path_for glibc)"/share/locale
-	make check
+	make RUN_EXPENSIVE_TESTS=yes check
 }
 
 do_install() {

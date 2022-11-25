@@ -19,21 +19,29 @@ pkg_deps=(
 	core/glibc
 	core/gcc-libs
 	core/bash-static
-	core/pkg-config
 )
 
 pkg_build_deps=(
-	core/gcc
-	core/make
 	core/coreutils
+	core/gcc
+	core/grep
+	core/make
+	core/pcre2
+	core/pkg-config
 )
 pkg_bin_dirs=(bin)
-pkg_include_dirs=(include)
+pkg_include_dirs=(include include/ncursesw)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
-	export PKG_CONFIG_LIBDIR="${pkg_prefix}/lib/pkgconfig"
+	# Add the ncurses's lib folder to the rpath because several
+	# binaries look for ncurses's own libraries.
+	LDFLAGS="${LDFLAGS} -Wl,-rpath=${pkg_prefix}/lib"
+	build_line "Updating LDFLAGS=${LDFLAGS}"
+	PKG_CONFIG_LIBDIR="${pkg_prefix}/lib/pkgconfig"
+	export PKG_CONFIG_LIBDIR
+	build_line "Setting PKG_CONFIG_LIBDIR=${PKG_CONFIG_LIBDIR}"
 }
 
 do_build() {
@@ -41,6 +49,7 @@ do_build() {
 		--prefix="$pkg_prefix" \
 		--with-shared \
 		--with-normal \
+		--with-pcre2 \
 		--with-cxx-shared \
 		--without-debug \
 		--enable-pc-files \
@@ -50,6 +59,17 @@ do_build() {
 		--enable-ext-mouse \
 		--enable-sigwinch \
 		--enable-widec
+
+	# Replace pcre2 linking flag with -l:libpcre2-posix.a in all the
+	# generate makefiles which will force the linker to statically link in pcre2.
+	# We do not want to have pcre2 as a runtime dep as it brings in a lot of extra
+	# runtime dependencies of it's own.
+	# We have to do this here at this point, because the configure script gets
+	# the linking flags from pkg-config which will always return '-lpcre2-posix' no
+	# matter what. Also since we are static linking we have to mention all additional
+	# dependencies our static library refers to, in this case we add '-l:libpcre2-8.a'.
+	find ./ -name Makefile -exec sed -i -e 's|-lpcre2-posix|-l:libpcre2-posix.a -l:libpcre2-8.a|' {} +
+
 	make
 }
 
@@ -71,6 +91,16 @@ do_install() {
 	# will find ncurses
 	echo "INPUT(-lncursesw)" >"${pkg_prefix}/lib/libcurses.so"
 	echo "INPUT(-lncursesw)" >"${pkg_prefix}/lib/libcurses.a"
+
+	# Packages depending on curses or ncurses may include headers
+	# in multiple ways:
+	# * #include <curses.h>
+	# * #include <ncurses/curses.h>
+	# * #include <ncursesw/curses.h>
+	# By adding a symlink from 'ncurses' to 'ncursesw' and including
+	# both the 'include' and 'include/ncursesw' folder to the include dirs
+	# we can satisfy all these cases correctly
+	ln -sv ncursesw "${pkg_prefix}/include/ncurses"
 
 	# Fix scripts
 	fix_interpreter "${pkg_prefix}/bin/ncursesw6-config" core/bash-static bin/sh

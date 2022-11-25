@@ -20,8 +20,6 @@ pkg_deps=(
 	core/gcc-libs
 	core/bzip2
 	core/zlib
-	core/readline
-	core/ncurses
 	core/bash-static
 )
 pkg_build_deps=(
@@ -31,6 +29,8 @@ pkg_build_deps=(
 	core/make
 	core/patch
 	core/sed
+	core/ncurses-stage1
+	core/readline-stage1
 	core/build-tools-grep
 )
 pkg_bin_dirs=(bin)
