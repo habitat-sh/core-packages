@@ -12,7 +12,7 @@ pkg_source="https://static.rust-lang.org/dist/rust-${pkg_version}-aarch64-unknow
 pkg_shasum="4b701dc3cbac04ebf0e336cff2f4ce5fc1a1984c183226863c9ed911eb00b07e"
 pkg_dirname="rust-${pkg_version}-aarch64-unknown-linux-musl"
 pkg_deps=(
-	core/glibc-base
+	core/musl
 	core/gcc-libs
 )
 pkg_build_deps=(
@@ -40,8 +40,8 @@ do_install() {
 	for b in cargo cargo-fmt rls rustc rustdoc rustfmt;
 	do
 		patchelf \
-			--interpreter "$(pkg_path_for glibc-base)/lib/ld-linux-aarch64.so.1" \
-			--set-rpath "$LD_RUN_PATH" \
+			--interpreter "$(pkg_path_for musl)/lib/ld-musl-aarch64.so.1" \
+			--add-rpath "$(pkg_path_for gcc-libs)/lib:$(pkg_path_for musl)/lib" \
 			"$pkg_prefix/bin/$b"
 
 		patchelf --shrink-rpath "$pkg_prefix/bin/$b"
@@ -50,14 +50,8 @@ do_install() {
 	# Set `RUNPATH` for all shared libraries under `lib/`
 	find "$pkg_prefix/lib" -name "*.so" -print0 \
 		| xargs -0 -I '%' patchelf \
-		--set-rpath "$LD_RUN_PATH" \
+		--set-rpath "$(pkg_path_for gcc-libs)/lib:$(pkg_path_for musl)/lib" \
 		%
-
-	# Install all targets
-	build_line "Installing Rust from ${CACHE_PATH}"
-	pushd ${CACHE_PATH} || exit 1
-	./install.sh --prefix="$("$pkg_prefix/bin/rustc" --print sysroot)"
-	popd > /dev/null || exit 1
 
 	# Add a wrapper for cargo to properly set SSL certificates. We're wrapping
 	# this to set an OpenSSL environment variable. Normally this would not be
