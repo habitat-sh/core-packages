@@ -14,11 +14,11 @@ pkg_dirname="${pkg_name}-${pkg_version}-aarch64-unknown-linux-gnu"
 pkg_deps=(
 	core/glibc
 	core/gcc-libs
+	core/bash-static
 )
 pkg_build_deps=(
 	core/build-tools-patchelf
 	core/build-tools-cacerts
-	core/bash-static
 )
 
 pkg_bin_dirs=(bin)
@@ -41,7 +41,7 @@ do_install() {
 	do
 		patchelf \
 			--interpreter "$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1" \
-			--set-rpath "$(pkg_path_for gcc-libs)/lib:$(pkg_path_for glibc)/lib" \
+			--set-rpath "${pkg_prefix}/lib:$(pkg_path_for gcc-libs)/lib:$(pkg_path_for glibc)/lib" \
 			"$pkg_prefix/bin/$b"
 
 		patchelf --shrink-rpath "$pkg_prefix/bin/$b"
