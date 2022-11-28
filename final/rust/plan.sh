@@ -36,10 +36,21 @@ do_strip() {
 do_install() {
 	./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
+	# Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
+	for b in cargo cargo-fmt rls rustc rustdoc rustfmt;
+	do
+		patchelf \
+			--interpreter "$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1" \
+			--set-rpath "$(pkg_path_for gcc-libs)/lib:$(pkg_path_for glibc)/lib" \
+			"$pkg_prefix/bin/$b"
+
+		patchelf --shrink-rpath "$pkg_prefix/bin/$b"
+	done; unset b
+
 	# Set `RUNPATH` for all shared libraries under `lib/`
 	find "$pkg_prefix/lib" -name "*.so" -print0 \
 		| xargs -0 -I '%' patchelf \
-		--set-rpath "$LD_RUN_PATH" \
+		--set-rpath "$(pkg_path_for gcc-libs)/lib:$(pkg_path_for glibc)/lib" \
 		%
 
 	# Add a wrapper for cargo to properly set SSL certificates. We're wrapping
