@@ -50,7 +50,7 @@ do_install() {
 	# Set `RUNPATH` for all shared libraries under `lib/`
 	find "$pkg_prefix/lib" -name "*.so" -print0 \
 		| xargs -0 -I '%' patchelf \
-		--set-rpath "$(pkg_path_for gcc-libs)/lib:$(pkg_path_for glibc)/lib" \
+		--set-rpath "${pkg_prefix}/lib:$(pkg_path_for gcc-libs)/lib:$(pkg_path_for glibc)/lib" \
 		%
 
 	# Add a wrapper for cargo to properly set SSL certificates. We're wrapping
