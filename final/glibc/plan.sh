@@ -102,9 +102,8 @@ do_install() {
 	rm -v "${pkg_prefix}"/bin/{mtrace,sotruss,xtrace,sln}
 
 	mkdir -pv "$pkg_prefix/lib/locale"
-
-	# Ensure we use the correct localedef as there are multiple
-	# glibc-stage0 and build-tools-glibc in the path at this point
+	# Ensure we use the correct localedef as there may be multiple
+	# glibcs in the path at this point
 	local localedef_bin="${pkg_prefix}/bin/localedef"
 	$localedef_bin -i POSIX -f UTF-8 C.UTF-8 2>/dev/null || true
 	$localedef_bin -i cs_CZ -f UTF-8 cs_CZ.UTF-8
@@ -165,5 +164,12 @@ rpc: files
 # End nsswitch.conf
 EOF
 
+	# Fix scripts
+	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
+
 	popd || exit 1
+}
+
+do_strip() {
+	return 0
 }

@@ -16,6 +16,7 @@ pkg_shasum="ef5af4449cb0269faf3af24bf4c02273d455f0741bf3c50f86ddc09332d6cf56"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
+	core/bash-static
 	core/glibc
 	core/libmpfr
 	core/libgmp
@@ -44,4 +45,7 @@ do_check() {
 	# This currently passes in core-plans CI but may fail on some workstations.
 	# Ref: https://github.com/habitat-sh/core-plans/issues/2879
 	make check
+
+	# Fix scripts
+	fix_interpreter "${pkg_prefix}/bin/gawkbug" core/bash-static bin/sh
 }

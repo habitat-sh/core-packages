@@ -17,6 +17,7 @@ pkg_deps=(
 	core/build-tools-m4
 	core/build-tools-glibc
 	core/build-tools-bash-static
+	core/build-tools-gettext
 )
 pkg_build_deps=(
 	core/build-tools-gcc
