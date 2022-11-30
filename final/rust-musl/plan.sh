@@ -17,7 +17,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/build-tools-patchelf
-	core/build-tools-cacerts
+	core/cacerts
 	core/bash-static
 )
 
