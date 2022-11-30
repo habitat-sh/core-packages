@@ -32,9 +32,12 @@ pkg_build_deps=(
 pkg_bin_dirs=(bin)
 
 do_check() {
-	# Some of the bison test cases around diagnostics require this environment variable to be set.
-	# If it is not set, the bash shell emits an warning which causes the test to fail.
-	export LC_ALL="en_US.utf8"
+	# Some of the bison test cases are invoked by shell scripts which set
+	# the locale. This requires a shell that has been built with the supported
+	# locales. So we replace the standard shell with bash-static
+	rm -v /bin/{sh,bash}
+	ln -sv "$(pkg_path_for bash-static)"/bin/bash /bin/sh
+	ln -sv "$(pkg_path_for bash-static)"/bin/bash /bin/bash
 	make check
 }
 

@@ -21,8 +21,8 @@ pkg_build_deps=(
 	core/bison
 	core/sed
 	core/grep
-	core/texinfo
 	core/m4
+	core/build-tools-texinfo
 )
 
 pkg_bin_dirs=(bin)
