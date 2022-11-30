@@ -14,11 +14,11 @@ pkg_dirname="rust-${pkg_version}-aarch64-unknown-linux-musl"
 pkg_deps=(
 	core/musl
 	core/gcc-libs
+	core/bash-static
+	core/cacerts
 )
 pkg_build_deps=(
 	core/build-tools-patchelf
-	core/cacerts
-	core/bash-static
 )
 
 pkg_bin_dirs=(bin)

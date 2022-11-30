@@ -15,10 +15,10 @@ pkg_deps=(
 	core/glibc
 	core/gcc-libs
 	core/bash-static
+	core/cacerts
 )
 pkg_build_deps=(
 	core/build-tools-patchelf
-	core/cacerts
 )
 
 pkg_bin_dirs=(bin)
