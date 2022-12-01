@@ -23,6 +23,7 @@ pkg_deps=(
 	core/readline
 )
 pkg_build_deps=(
+	core/gettext
 	core/coreutils
 	core/diffutils
 	core/gcc

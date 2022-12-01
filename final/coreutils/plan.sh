@@ -25,6 +25,7 @@ pkg_build_deps=(
 	core/bash-static
 	core/gcc
 	core/shadow
+	core/valgrind-stage1
 	core/build-tools-coreutils
 	core/build-tools-findutils
 	core/build-tools-make

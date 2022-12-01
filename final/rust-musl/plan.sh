@@ -37,21 +37,21 @@ do_install() {
 	./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
 	# Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
-	for b in cargo cargo-fmt rls rustc rustdoc rustfmt;
-	do
+	for b in cargo cargo-fmt rls rustc rustdoc rustfmt; do
 		patchelf \
 			--interpreter "$(pkg_path_for musl)/lib/ld-musl-aarch64.so.1" \
 			--add-rpath "$(pkg_path_for gcc-libs)/lib:$(pkg_path_for musl)/lib" \
 			"$pkg_prefix/bin/$b"
 
 		patchelf --shrink-rpath "$pkg_prefix/bin/$b"
-	done; unset b
+	done
+	unset b
 
 	# Set `RUNPATH` for all shared libraries under `lib/`
-	find "$pkg_prefix/lib" -name "*.so" -print0 \
-		| xargs -0 -I '%' patchelf \
-		--set-rpath "$(pkg_path_for gcc-libs)/lib:$(pkg_path_for musl)/lib" \
-		%
+	find "$pkg_prefix/lib" -name "*.so" -print0 |
+		xargs -0 -I '%' patchelf \
+			--set-rpath "$(pkg_path_for gcc-libs)/lib:$(pkg_path_for musl)/lib" \
+			%
 
 	# Add a wrapper for cargo to properly set SSL certificates. We're wrapping
 	# this to set an OpenSSL environment variable. Normally this would not be
@@ -65,7 +65,7 @@ do_install() {
 	build_line "Adding wrapper $bin to ${bin}.real"
 	mv -v "$bin" "${bin}.real"
 	# TODO could core/bash-static be used instead of core/busybox-musl
-	cat <<EOF > "$bin"
+	cat <<EOF >"$bin"
 #!$(pkg_path_for bash-static)/bin/sh
 set -e
 export SSL_CERT_FILE="$HAB_SSL_CERT_FILE"

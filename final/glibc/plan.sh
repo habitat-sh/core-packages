@@ -164,9 +164,6 @@ rpc: files
 # End nsswitch.conf
 EOF
 
-	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
-
 	popd || exit 1
 }
 
