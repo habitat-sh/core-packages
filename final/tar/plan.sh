@@ -17,23 +17,35 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc
 	core/acl
+	core/attr
+	core/bzip2
+	core/gzip
+	core/lzip
+	core/lzop
+	core/xz
+	core/zstd
 )
 pkg_build_deps=(
 	core/coreutils
+	core/gettext
 	core/gcc
 	core/grep
 	core/make
 	core/sed
+	core/shadow
+	core/build-tools-util-linux
 )
 pkg_bin_dirs=(bin)
 
 do_build() {
-	./configure \
+	FORCE_UNSAFE_CONFIGURE=1 ./configure \
 		--prefix="$pkg_prefix"
 
 	make
 }
 
 do_check() {
-	make check
+	# make check-full for star tests
+	chown -R hab .
+	su hab -c "PATH=$PATH FULL_TEST=1 make check"
 }

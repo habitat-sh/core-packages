@@ -1,6 +1,6 @@
 program="bash"
 
-pkg_name="bash-static"
+pkg_name="bash"
 pkg_origin="core"
 pkg_version="5.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -27,11 +27,15 @@ pkg_deps=(
 	core/readline
 )
 pkg_build_deps=(
+	core/bison
 	core/coreutils
 	core/gcc
 	core/grep
 	core/make
 	core/sed
+	core/shadow
+	core/expect-stage1
+	core/build-tools-perl
 )
 pkg_bin_dirs=(bin)
 
@@ -45,6 +49,20 @@ do_build() {
 }
 
 do_check() {
+	# Create symlinks to all package binaries used during the tests
+	for prog in "$(pkg_path_for coreutils)"/bin/*; do
+		ln -s "$prog" /bin/"$(basename "$prog")"
+	done
+
+	chown -R hab .
+	su -s "$(pkg_path_for expect-stage1)"/bin/expect hab <<EOF
+set timeout -1
+set ::env(PATH) "${PATH}"
+spawn make tests
+expect eof
+lassign [wait] _ _ _ value
+exit $value
+EOF
 	make check
 }
 

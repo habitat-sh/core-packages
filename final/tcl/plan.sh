@@ -17,13 +17,14 @@ pkg_deps=(
 	core/tzdata
 )
 pkg_build_deps=(
-	core/gcc
 	core/coreutils
 	core/diffutils
-	core/patch
+	core/gcc
+	core/grep
 	core/make
+	core/patch
 	core/sed
-	core/util-linux
+	core/build-tools-util-linux
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
