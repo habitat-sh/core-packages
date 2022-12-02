@@ -19,6 +19,7 @@ pkg_build_deps=(
   core/coreutils
   core/make
   core/pkg-config
+  core/patch
   core/build-tools-patchelf
   core/native-busybox-static
   core/shadow

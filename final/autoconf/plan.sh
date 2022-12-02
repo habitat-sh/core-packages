@@ -13,7 +13,7 @@ pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="f14c83cfebcc9427f2c3cea7258bd90df972d92eb26752da4ddad81c87a0faa4"
 pkg_deps=(
   core/m4
-  core/build-tools-perl
+  core/perl
 )
 pkg_build_deps=(
   core/diffutils

@@ -12,7 +12,7 @@ pkg_license=("GPL-2.0-or-later")
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="f01d58cd6d9d77fbdca9eb4bbd5ead1988228fdb73d6f7a201f5f8d6b118b469"
 pkg_deps=(
-  core/build-tools-perl
+  core/perl
 )
 pkg_build_deps=(
   core/autoconf
