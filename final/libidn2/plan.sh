@@ -17,6 +17,7 @@ pkg_build_deps=(
 	core/gettext
 	core/make
 	core/pkg-config
+	core/valgrind-stage1
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)

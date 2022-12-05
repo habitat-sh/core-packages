@@ -192,3 +192,7 @@ wrap_binary() {
 		>"$bin"
 	chmod 755 "$bin"
 }
+
+do_strip() {
+	return 0
+}

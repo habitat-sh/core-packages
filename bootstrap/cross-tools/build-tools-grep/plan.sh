@@ -24,6 +24,10 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 
+do_prepare() {
+	sed -i "s/echo/#echo/" src/egrep.sh
+}
+
 do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \

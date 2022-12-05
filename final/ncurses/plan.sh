@@ -19,6 +19,7 @@ pkg_deps=(
 	core/glibc
 	core/gcc-libs
 	core/bash-static
+	core/libpcre2
 )
 
 pkg_build_deps=(
@@ -26,7 +27,6 @@ pkg_build_deps=(
 	core/gcc
 	core/grep
 	core/make
-	core/pcre2
 	core/pkg-config
 )
 pkg_bin_dirs=(bin)
@@ -59,16 +59,6 @@ do_build() {
 		--enable-ext-mouse \
 		--enable-sigwinch \
 		--enable-widec
-
-	# Replace pcre2 linking flag with -l:libpcre2-posix.a in all the
-	# generate makefiles which will force the linker to statically link in pcre2.
-	# We do not want to have pcre2 as a runtime dep as it brings in a lot of extra
-	# runtime dependencies of it's own.
-	# We have to do this here at this point, because the configure script gets
-	# the linking flags from pkg-config which will always return '-lpcre2-posix' no
-	# matter what. Also since we are static linking we have to mention all additional
-	# dependencies our static library refers to, in this case we add '-l:libpcre2-8.a'.
-	find ./ -name Makefile -exec sed -i -e 's|-lpcre2-posix|-l:libpcre2-posix.a -l:libpcre2-8.a|' {} +
 
 	make
 }

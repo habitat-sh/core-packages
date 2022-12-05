@@ -42,3 +42,7 @@ do_install() {
 do_build() {
 	return 0
 }
+
+do_strip() {
+	return 0
+}
