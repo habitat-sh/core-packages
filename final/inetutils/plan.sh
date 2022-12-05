@@ -1,5 +1,4 @@
 program="inetutils"
-
 pkg_name="inetutils"
 pkg_origin="core"
 pkg_version="2.4"
