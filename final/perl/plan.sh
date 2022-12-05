@@ -20,6 +20,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/iana-etc
+	core/diffutils
 	core/gawk
 	core/patch
 	core/make
@@ -33,8 +34,12 @@ pkg_lib_dirs=(lib)
 pkg_interpreters=(bin/perl)
 
 do_prepare() {
-	do_default_prepare
-
+	# Fix a spurious test failure due to a long PATH environment
+	# variable (> 1000 characters). This can be removed once the 
+	# original PR gets merged and released in a new version of perl
+	# Patch source: https://github.com/Perl/perl5/pull/20497
+	patch -p1 <"$PLAN_CONTEXT/perlbug-test-failure.patch"
+	
 	#  Make Cwd work with the `pwd` command from `coreutils` (we cannot rely
 	#  on `/bin/pwd` exisiting in an environment)
 	sed -i "s,'/bin/pwd','$(pkg_path_for coreutils)/bin/pwd',g" \
@@ -112,6 +117,10 @@ do_check() {
 		cp -v "$(pkg_path_for iana-etc)/etc/protocols" /etc/protocols
 		local clean_protocols=true
 	fi
+	if [[ ! -f /bin/diff ]]; then
+		ln -sfv "$(pkg_path_for diffutils)"/bin/diff /bin/diff
+		local clean_diff=true
+	fi
 
 	make test
 
@@ -122,5 +131,8 @@ do_check() {
 	fi
 	if [[ -n "$clean_protocols" ]]; then
 		rm -fv /etc/protocols
+	fi
+	if [[ -n "$clean_diff" ]]; then
+		rm -fv /bin/diff
 	fi
 }
