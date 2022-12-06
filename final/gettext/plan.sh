@@ -22,11 +22,11 @@ pkg_deps=(
 	core/xz
 )
 pkg_build_deps=(
-	core/gawk
 	core/gcc
 	core/grep
 	core/make
 	core/tcl-stage1
+	core/build-tools-gawk
 	core/build-tools-bison
 	core/build-tools-perl
 	core/build-tools-python

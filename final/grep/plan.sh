@@ -17,9 +17,9 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc
 	core/bash-static
+	core/libpcre2
 )
 pkg_build_deps=(
-	core/pcre2
 	core/coreutils
 	core/diffutils
 	core/gcc
@@ -35,7 +35,6 @@ do_prepare() {
 
 do_build() {
 	./configure \
-		PCRE_LIBS="-L$(pkg_path_for pcre2)/lib -l:libpcre2-8.a" \
 		--prefix="$pkg_prefix"
 	make
 }

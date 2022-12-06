@@ -17,9 +17,9 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc
 	core/ncurses
+	core/libpcre2
 )
 pkg_build_deps=(
-	core/pcre2
 	core/coreutils
 	core/diffutils
 	core/gcc
@@ -29,15 +29,6 @@ pkg_build_deps=(
 
 )
 pkg_bin_dirs=(bin)
-
-do_prepare() {
-	# Statically link in PCRE2 by replacing the linking flag
-	# from -lpcre2-8 to -l:libpcre2-8.a which forces the linker
-	# to pick up the static archive instead of the shared library.
-	# We do this to remove pcre2 as a runtime dep as it has several
-	# binaries and runtime deps itself.
-	sed -i configure -e 's|-lpcre2-8|-l:libpcre2-8.a|'
-}
 
 do_build() {
 	./configure \

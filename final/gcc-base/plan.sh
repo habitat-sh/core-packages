@@ -64,7 +64,6 @@ do_prepare() {
 	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc)"
 	export HAB_GCC_STAGE1_GLIBC_PKG_PATH
 	build_line "Setting HAB_GCC_STAGE1_GLIBC_PKG_PATH=${HAB_GCC_STAGE1_GLIBC_PKG_PATH}"
-	
 
 	# This plan does not require a full bootstrap build of gcc because
 	# core/gcc-stage1 is a fully bootstrapped compiler of the same version.
@@ -140,9 +139,9 @@ do_build() {
 	# It is important to not run this build in parallel due to this
 	# race condition: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=106162
 	make \
-		FLAGS_FOR_TARGET="${FLAGS_FOR_TARGET}"
-	# -j "$(nproc)" \
-	# --output-sync
+		FLAGS_FOR_TARGET="${FLAGS_FOR_TARGET}" \
+		-j "$(nproc)" \
+		--output-sync
 
 	popd || exit 1
 }
@@ -188,4 +187,8 @@ wrap_binary() {
 		-e "s^@program@^${bin}.real^g" \
 		>"$bin"
 	chmod 755 "$bin"
+}
+
+do_strip() {
+	return 0
 }

@@ -1,0 +1,31 @@
+From 5c9edd8f1e1844c0a311bc7f10928253a5e8da71 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?H=C3=A5kon=20H=C3=A6gland?= <hakon.hagland@gmail.com>
+Date: Wed, 9 Nov 2022 14:19:39 +0100
+Subject: [PATCH] Don't test if PATHs are wrapped
+
+This fixes issue #15544. If the user has PATH, or similar variables
+containing a list of directories separated by e.g. a colon character
+these can easily become lines with more than 1000 characters in a perlbug
+report, resulting in a test failure in lib/perlbug.t.
+---
+ lib/perlbug.t | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/lib/perlbug.t b/lib/perlbug.t
+index 08c34d986dbd..b1f876e97654 100644
+--- a/lib/perlbug.t
++++ b/lib/perlbug.t
+@@ -148,7 +148,12 @@ my $maxlen1 = 0; # body
+ my $maxlen2 = 0; # attachment
+ for (split(/\n/, $contents)) {
+         my $len = length;
+-        $maxlen1 = $len if $len > $maxlen1 and !/$B/;
++        # content lines setting path-like environment variables like PATH, PERLBREW_PATH, MANPATH,...
++        #  will start "\s*xxxxPATH=" where "xxx" is zero or more non white space characters. These lines can
++        #  easily get over 1000 characters (see ok-test below) with no internal spaces, so they
++        #  will not get wrapped at white space.
++        # See also https://github.com/perl/perl5/issues/15544 for more information
++        $maxlen1 = $len if $len > $maxlen1 and !/(?:$B|^\s*\S*PATH=)/;
+         $maxlen2 = $len if $len > $maxlen2 and  /$B/;
+ }
+ ok($maxlen1 < 1000, "[perl #128020] long body lines are wrapped: maxlen $maxlen1");
