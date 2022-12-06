@@ -44,7 +44,9 @@ do_install() {
 
 	install --mode 0644 COPYING "$pkg_prefix"/
 
-	# A few programs do not know about `flex` yet and try to run its predecessor,
-	# `lex`
+	# A few programs do not know about `flex` yet and try to run
+	# or link to its predecessor `lex`
 	ln -sv flex "$pkg_prefix/bin/lex"
+	echo "INPUT(-lfl)" >"${pkg_prefix}/lib/libl.so"
+	echo "INPUT(-lfl)" >"${pkg_prefix}/lib/libl.a"
 }
