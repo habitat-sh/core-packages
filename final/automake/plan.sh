@@ -8,9 +8,10 @@ Automake is a tool for automatically generating Makefile.in files compliant \
 with the GNU Coding Standards.\
 "
 pkg_upstream_url="https://www.gnu.org/software/automake/"
-pkg_license=("GPL-2.0-or-later")
-pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
+pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
+pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="f01d58cd6d9d77fbdca9eb4bbd5ead1988228fdb73d6f7a201f5f8d6b118b469"
+
 pkg_deps=(
 	core/perl
 	core/autoconf
@@ -33,6 +34,7 @@ pkg_build_deps=(
 	core/build-tools-texinfo
 	core/pkg-config
 )
+
 pkg_bin_dirs=(bin)
 
 do_check() {
