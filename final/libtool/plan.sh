@@ -32,7 +32,7 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-	sed -e "s,/usr/bin/env,$(pkg_path_for coreutils)/bin/env,g" -i libtoolize.in
+	sed -e "s,/usr/bin/env,$(pkg_interpreter_for coreutils bin/env),g" -i libtoolize.in
 	# Drop the dependency on `help2man` by skipping the generation of a man page
 	sed \
 		-e "/^dist_man1_MANS =/ s,^.*$,dist_man1_MANS = $(libtoolize_1),g" \
