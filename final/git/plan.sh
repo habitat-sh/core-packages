@@ -12,12 +12,12 @@ pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum=620ed3df572a34e782a2be4c7d958d443469b2665eac4ae33f27da554d88b270
 pkg_deps=(
   core/cacerts
-  #core/curl
+  core/curl
   core/expat
   core/gettext
   core/gcc-libs
   core/glibc
-  #core/openssh
+  core/openssh
   core/perl
   core/sed
   core/zlib
