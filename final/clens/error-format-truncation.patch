@@ -1,0 +1,11 @@
+--- clens-0.7.0/GNUmakefile	2013-06-03 16:02:37.000000000 +0000
++++ clens-0.7.0_fix/GNUmakefile	2022-12-13 11:33:58.389434911 +0000
+@@ -6,7 +6,7 @@
+ 
+ CPPFLAGS +=
+ INCFLAGS += -I include/clens
+-WARNFLAGS += -Wall -Werror
++WARNFLAGS += -Wall
+ DEBUG += -g
+ CFLAGS += $(INCFLAGS) $(WARNFLAGS) $(DEBUG)
+ LDFLAGS +=
