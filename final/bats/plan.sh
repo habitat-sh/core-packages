@@ -17,14 +17,27 @@ pkg_deps=(
 	core/coreutils
 )
 
+pkg_build_deps=(
+	core/procps-ng
+	core/util-linux
+	core/parallel
+)
+
 pkg_bin_dirs=(bin)
 
 do_build() {
-	fix_interpreter 'install.sh' core/coreutils bin/env
-	fix_interpreter 'libexec/*' core/coreutils bin/env
+	# Replace all occurrences in the codebase of the reliance on `/usr/bin/env`.
+	grep -lr '/usr/bin/env' . | while read -r f; do
+		sed -e "s,/usr/bin/env,$(pkg_interpreter_for coreutils bin/env),g" -i "$f"
+	done
 }
 
 do_check() {
+	# Some of the tests expect coreutils binaries like 'mkdir' to be present in 
+	# standard locations, so we are going to create symlinks to them.
+	for prog in "$(pkg_path_for coreutils)"/bin/*; do
+		ln -s "$prog" /bin/"$(basename "$prog")"
+	done
 	./bin/bats --tap test
 }
 
