@@ -17,17 +17,19 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/patch
-	core/make
+	core/coreutils
 	core/gcc
 	core/libbsd
+	core/make
 )
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-	patch -p1 < "$PLAN_CONTEXT/error-format-truncation.patch"
+	# This flag is required for gcc to be able to compile
+	# the source with no warnings which stop compilation
+	CFLAGS="-Wno-format-truncation ${CFLAGS}"
 }
 
 do_build() {

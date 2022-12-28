@@ -16,9 +16,13 @@ pkg_deps=(
 	core/libmd
 )
 pkg_build_deps=(
+	core/coreutils
 	core/file
+	core/gawk
 	core/gcc
+	core/grep
 	core/make
+	core/sed
 )
 
 pkg_include_dirs=(include)
@@ -26,10 +30,23 @@ pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
-	if [[ ! -r /usr/bin/file ]]; then
-		ln -sv "$(pkg_path_for "core/file")/bin/file" /usr/bin/file
-		_clean_file=true
-	fi
+	# The libbsd headers make use of the #include_next directive in some header
+	# files. These kind of headers must be included in a specific order so that
+	# they behave correctly. In this case the libbsd headers must be included
+	# before the libmd headers. To ensure this we must explicitly add the libmd
+	# include directories via extra -isystem flags. This patch does takes care of
+	# this for us.
+
+	# shellcheck disable=SC2002
+	cat "$PLAN_CONTEXT/libmd-pkg.patch" |
+		sed \
+			-e "s,@LIBMD_LIB@,$(pkg_path_for libmd)/lib,g" \
+			-e "s,@LIBMD_INCLUDE@,$(pkg_path_for libmd)/include,g" |
+		patch -p1
+}
+
+do_check() {
+	make check
 }
 
 do_install() {
@@ -37,14 +54,4 @@ do_install() {
 
 	# Install license file from README
 	install -Dm644 COPYING "${pkg_prefix}/share/licenses/LICENSE"
-}
-
-do_check() {
-	make check
-}
-
-do_end() {
-	if [[ -n "$_clean_file" ]]; then
-		rm -fv /usr/bin/file
-	fi
 }

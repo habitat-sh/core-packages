@@ -12,9 +12,18 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
+	core/coreutils
+	core/gawk
 	core/gcc
+	core/grep
+	core/make
+	core/sed
 )
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
+
+do_check() {
+	make check
+}

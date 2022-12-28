@@ -15,38 +15,33 @@ pkg_deps=(
 	core/glibc
 	core/ncurses
 	core/libbsd
-	core/libmd
 )
 pkg_build_deps=(
-	core/sed
-	core/patch
-	core/coreutils
 	core/binutils
-	core/pkg-config
-	core/make
+	core/coreutils
 	core/gcc
+	core/make
+	core/patch
+	core/pkg-config
+	core/sed
 )
 
 pkg_bin_dirs=(bin)
 
 do_prepare() {
 	# shellcheck disable=SC2002
-	cat "$PLAN_CONTEXT/update-path.patch" \
-		| sed \
+	cat "$PLAN_CONTEXT/update-path.patch" |
+		sed \
 			-e "s,@prefix@,$pkg_prefix,g" \
 			-e "s,@pkgconfig@,$(pkg_path_for pkg-config),g" \
 			-e "s,@coreutils@,$(pkg_path_for coreutils),g" \
-			-e "s,@binutils@,$(pkg_path_for binutils),g" \
-			-e "s,@libbsd_prefix@,$(pkg_path_for libbsd),g" \
-		| patch -p1
+			-e "s,@binutils@,$(pkg_path_for binutils),g" |
+		patch -p1
 }
 
 do_build() {
 	make \
-		prefix="$pkg_prefix" \
-		PKG_CONFIG=pkg-config \
-		INSTALL=install \
-		STRIP=strip
+		prefix="$pkg_prefix"
 }
 
 do_install() {
