@@ -25,6 +25,7 @@ pkg_build_deps=(
 
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
+pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
 	./configure \

@@ -17,11 +17,31 @@ pkg_deps=(
 	core/bzip2
 )
 pkg_build_deps=(
+	core/coreutils
 	core/gcc
 	core/make
+	core/patch
 )
 
 pkg_bin_dirs=(bin)
+
+do_prepare() {
+	# Apply various fixes to unzip, based on corresponding nix pkg
+	# https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/archivers/unzip/default.nix
+	patch -p1 <"$PLAN_CONTEXT/CVE-2014-8139.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2014-8140.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2014-8141.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2014-9636.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2014-9913.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2015-7696.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2015-7697.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2016-9844.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2018-18384.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2019-13232-1.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2019-13232-2.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2019-13232-3.patch"
+	patch -p1 <"$PLAN_CONTEXT/initialize-the-symlink-flag.patch"
+}
 
 do_build() {
 	DEFINES="-DACORN_FTYPE_NFS -DWILD_STOP_AT_DIR -DLARGE_FILE_SUPPORT \
@@ -34,6 +54,11 @@ do_build() {
 		LF2="$LDFLAGS" \
 		CF="$CFLAGS $CPPFLAGS -I. $DEFINES" \
 		unzips
+}
+
+do_check() {
+	# Set timezone for CET
+	TZ=CET make -f unix/Makefile check
 }
 
 do_install() {

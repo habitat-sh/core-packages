@@ -16,6 +16,8 @@ pkg_dirname="icu/source"
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_pconfig_dirs=(lib/pkgconfig)
+
 pkg_deps=(
 	core/glibc
 	core/gcc-libs

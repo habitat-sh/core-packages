@@ -1,53 +1,57 @@
-pkg_name=curl
-pkg_origin=core
-pkg_version=7.86.0
+pkg_name="curl"
+pkg_origin="core"
+pkg_version="7.87.0"
 pkg_description="curl is an open source command line tool and library for
   transferring data with URL syntax."
-pkg_upstream_url=https://curl.haxx.se/
+pkg_upstream_url="https://curl.haxx.se/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('curl')
 pkg_source="https://curl.haxx.se/download/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=3dfdd39ba95e18847965cd3051ea6d22586609d9011d91df7bc5521288987a82
+pkg_shasum="8a063d664d1c23d35526b87a2bf15514962ffdd8ef7fd40519191b3c23e39548"
 pkg_deps=(
-  core/cacerts
-  core/glibc
-  core/openssl
-  core/zlib
-  core/nghttp2
+	core/cacerts
+	core/glibc
+	core/openssl
+	core/zlib
+	core/zstd
+	core/libnghttp2
+	core/libidn2
+	core/libpsl
 )
 pkg_build_deps=(
-  core/coreutils
-  core/gcc
-  core/make
-  core/perl
-  core/pkg-config
+	core/coreutils
+	core/gcc
+	core/make
+	core/perl
+	core/pkg-config
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-  # Patch the zsh-generating program to use our perl at build time
-  sed -i "s,/usr/bin/env/perl,$(pkg_path_for perl)/bin/perl,g" scripts/completion.pl
+	# Patch the zsh-generating program to use our perl at build time
+	sed -i "s,/usr/bin/env/perl,$(pkg_path_for perl)/bin/perl,g" scripts/completion.pl
+	
+	# Stop configuration warnings due to incorrect use of CFLAGS and CXXFLAGS
+	unset CFLAGS
+	unset CXXFLAGS
 }
 
 do_build() {
-  ./configure \
-    --prefix="$pkg_prefix" \
-    --with-ca-bundle="$(pkg_path_for cacerts)/ssl/certs/cacert.pem" \
-    --with-ssl="$(pkg_path_for openssl)" \
-    --with-zlib="$(pkg_path_for zlib)" \
-    --with-nghttp2="$(pkg_path_for nghttp2)" \
-    --disable-manual \
-    --disable-ldap \
-    --disable-ldaps \
-    --disable-rtsp \
-    --enable-proxy \
-    --enable-optimize \
-    --disable-dependency-tracking \
-    --enable-ipv6 \
-    --without-libidn \
-    --without-gnutls \
-    --without-librtmp
-  make
+	./configure \
+		--prefix="$pkg_prefix" \
+		--with-ca-bundle="$(pkg_path_for cacerts)/ssl/certs/cacert.pem" \
+		--with-openssl \
+		--disable-manual \
+		--disable-ldap \
+		--disable-ldaps \
+		--disable-rtsp \
+		--enable-proxy \
+		--enable-optimize \
+		--disable-dependency-tracking \
+		--enable-ipv6 \
+		--without-gnutls \
+		--without-librtmp
+	make
 }

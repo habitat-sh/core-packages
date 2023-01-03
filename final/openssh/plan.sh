@@ -16,7 +16,11 @@ pkg_deps=(
 pkg_build_deps=(
 	core/coreutils
 	core/gcc
+	core/grep
 	core/make
+	core/pkg-config
+	core/util-linux
+	core/sed
 )
 
 pkg_bin_dirs=(bin sbin libexec)
@@ -25,13 +29,30 @@ pkg_svc_user="root"
 pkg_svc_group="root"
 
 do_build() {
+	# Create folders required at runtime to suppress configuration warnings
+	mkdir -p "${pkg_svc_path}"/var/empty
+	mkdir -p "${pkg_svc_path}"/run
+
 	./configure --prefix="${pkg_prefix}" \
 		--sysconfdir="${pkg_svc_path}/config" \
 		--localstatedir="${pkg_svc_path}/var" \
+		--with-pid-dir="${pkg_svc_path}/run" \
 		--datadir="${pkg_svc_data_path}" \
 		--with-privsep-user=hab \
-		--with-privsep-path="${pkg_prefix}/var/empty"
+		--with-privsep-path="${pkg_svc_path}/var/empty"
 	make
+}
+
+do_check() {
+	# Create symlinks to binaries used by tests
+	ln -s "$(pwd)"/scp /bin/scp
+	for prog in "$(pkg_path_for coreutils)"/bin/*; do
+		ln -s "$prog" /bin/"$(basename "$prog")"
+	done
+	for prog in "$(pkg_path_for grep)"/bin/*; do
+		ln -s "$prog" /bin/"$(basename "$prog")"
+	done
+	make -j1 tests
 }
 
 do_install() {

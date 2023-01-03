@@ -11,13 +11,13 @@ pkg_shasum="c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5"
 pkg_deps=(
 	core/glibc
 	core/gcc-libs
-	core/libsodium
 )
 pkg_build_deps=(
 	core/coreutils
 	core/gawk
 	core/gcc
 	core/grep
+	core/libsodium
 	core/make
 	core/pkg-config
 	core/shadow
@@ -25,6 +25,8 @@ pkg_build_deps=(
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_pconfig_dirs=(lib/pkgconfig)
+
 do_prepare() {
 	patch -p0 <"$PLAN_CONTEXT"/tests_fix.patch
 

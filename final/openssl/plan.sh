@@ -34,6 +34,11 @@ pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
 	patch -p1 <"$PLAN_CONTEXT/hab-ssl-cert-file.patch"
+
+	# Apply all reported CVE patches for OpenSSL version 3.0.7
+	# https://www.openssl.org/news/vulnerabilities-3.0.html
+	patch -p1 <"$PLAN_CONTEXT/CVE-2022-3996.patch"
+
 	export CROSS_SSL_ARCH="${native_target}"
 	PERL=$(pkg_path_for core/build-tools-perl)/bin/perl
 	export PERL
@@ -41,9 +46,12 @@ do_prepare() {
 }
 
 do_build() {
+	# Add '-Wl,-rpath' parameter to ensure the openssl binary is able
+	# to find the library in the correct location
 	"$(pkg_path_for core/build-tools-perl)"/bin/perl ./Configure \
 		--prefix="${pkg_prefix}" \
 		--openssldir=ssl \
+		-Wl,-rpath="${pkg_prefix}/lib" \
 		fips
 
 	make -j"$(nproc)"
