@@ -11,7 +11,7 @@ pkg_dirname="habitat-${commit_hash}"
 
 pkg_deps=(
 	core/hab-backline
-	core/bash-static
+	core/bash
 )
 pkg_build_deps=(
 	core/native-busybox-static
@@ -58,5 +58,5 @@ do_install() {
 	cp -rv "${SRC_PATH}/components/studio/defaults" "${pkg_prefix}"
 
 	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/bash-static bin/sh
+	fix_interpreter "${pkg_prefix}/bin/*" core/bash bin/sh
 }

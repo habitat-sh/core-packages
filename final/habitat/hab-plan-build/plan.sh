@@ -12,7 +12,7 @@ pkg_dirname="habitat-${commit_hash}"
 pkg_bin_dirs=(bin)
 
 pkg_deps=(
-	core/bash-static
+	core/bash
 	core/binutils
 	core/cacerts
 	core/coreutils
@@ -68,5 +68,5 @@ do_install() {
 	install -D "$SRC_PATH"/components/plan-build/bin/environment.bash "$pkg_prefix"/bin/
 
 	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/bash-static bin/bash
+	fix_interpreter "${pkg_prefix}/bin/*" core/bash bin/bash
 }
