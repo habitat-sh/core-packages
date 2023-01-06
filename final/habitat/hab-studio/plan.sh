@@ -14,7 +14,7 @@ pkg_deps=(
 	core/bash
 )
 pkg_build_deps=(
-	core/native-busybox-static
+	core/busybox-static
 	core/hab
 )
 pkg_bin_dirs=(bin)
@@ -50,7 +50,7 @@ do_install() {
 		-i "$pkg_prefix"/bin/hab-studio
 
 	# Install a copy of a statically built busybox under `libexec/`
-	install -v -D "$(pkg_path_for native-busybox-static)"/bin/busybox "$pkg_prefix/libexec/busybox"
+	install -v -D "$(pkg_path_for busybox-static)"/bin/busybox "$pkg_prefix/libexec/busybox"
 
 	# Install a copy of a hab under `libexec/`
 	install -v -D "$(pkg_path_for hab)"/bin/hab "$pkg_prefix/libexec/hab"
