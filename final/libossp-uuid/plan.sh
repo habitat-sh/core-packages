@@ -21,3 +21,10 @@ pkg_build_deps=(
 	core/make
 	core/gcc
 )
+do_build() {
+	./configure \
+		--prefix="$pkg_prefix" \
+		--build="${TARGET_ARCH:-${pkg_target%%-*}}-unknown-linux-gnu"
+
+	make
+}
