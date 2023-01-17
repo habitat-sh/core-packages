@@ -44,6 +44,7 @@ pkg_build_deps=(
 do_prepare() {
 	LDFLAGS="${LDFLAGS} -Wl,-rpath=${pkg_prefix}/lib"
 }
+
 do_build() {
   ./configure --prefix="$pkg_prefix" \
               --enable-loadable-sqlite-extensions \
