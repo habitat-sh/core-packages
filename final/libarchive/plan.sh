@@ -14,6 +14,7 @@ pkg_deps=(
 	core/attr
 	core/bzip2
 	core/glibc
+	core/gcc-libs
 	core/libb2
 	core/libxml2
 	core/lz4
