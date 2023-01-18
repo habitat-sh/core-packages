@@ -1,12 +1,12 @@
 # shellcheck disable=2034
-commit_hash="707b086fec72a59aa439fedbc9bf032597d59afc"
+commit_hash="21914065e338e2ce9fb4880b92326abfa79737aa"
 
 pkg_name="build-tools-hab-studio"
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/habitat-sh/habitat/archive/${commit_hash}.tar.gz"
-pkg_shasum="5a8766662c0ea0d3932451c520dd31eadf7deda0b6652020ff61ba3f8c3f3773"
+pkg_shasum="12674359e72fc8a87b5a51dd24119b00abffa1566a9a151637ffe3d9351808ee"
 pkg_dirname="habitat-${commit_hash}"
 
 pkg_deps=(
