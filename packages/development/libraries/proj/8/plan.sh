@@ -1,14 +1,15 @@
 program="proj"
 
-pkg_name="proj"
+pkg_name="proj8"
 pkg_origin="core"
-pkg_version="9.1.1"
+pkg_version="8.2.1"
 pkg_description="Cartographic Projections Library"
 pkg_upstream_url="https://proj.org/"
 pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://download.osgeo.org/proj/proj-${pkg_version}.tar.gz"
-pkg_shasum="003cd4010e52bb5eb8f7de1c143753aa830c8902b6ed01209f294846e40e6d39"
+pkg_shasum="76ed3d0c3a348a6693dfae535e5658bbfd47f71cb7ff7eb96d9f12f7e068b1cf"
+pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc
 	core/libtiff
