@@ -26,7 +26,8 @@ do_build() {
 	mkdir build
 	pushd build || exit 1
 	cmake .. \
-		--install-prefix="${pkg_prefix}"
+		--install-prefix="${pkg_prefix}" \
+		-DCMAKE_INSTALL_RPATH="$pkg_prefix/$lib"
 	cmake --build . --parallel "$(nproc)"
 	popd || exit 1
 }
