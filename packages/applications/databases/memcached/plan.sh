@@ -8,31 +8,32 @@ pkg_license=('BSD-3-Clause')
 pkg_source="http://www.memcached.org/files/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum=cbdd6ab8810649ac5d92fcd0fcb0ca931d8a9dbd0ad8cc575b47222eedd64158
 pkg_deps=(
-          core/glibc
-          core/cyrus-sasl
-          core/libevent
-        )
+	core/glibc
+	core/cyrus-sasl
+	core/libevent
+)
 pkg_build_deps=(
-         core/git
-         core/gcc
-         core/make
-       )
+	core/git
+	core/gcc
+	core/make
+	core/pkg-config
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
-pkg_lib_dirs=(lib)
+
 pkg_svc_run="memcached"
 pkg_exports=(
-  [port]=port
+	[port]=port
 )
 pkg_exposes=(port)
 
 do_build() {
-  ./configure \
-    --prefix="${pkg_prefix}" \
-    --enable-sasl
-  make
+	./configure \
+		--prefix="${pkg_prefix}" \
+		--enable-sasl
+	make
 }
 
 do_check() {
-  make test
+	make test
 }
