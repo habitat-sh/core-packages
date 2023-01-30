@@ -12,12 +12,14 @@ pkg_shasum="06a339e491306783dcf55b97f15a5dbcbdc01ccbde6dc23027c475cab735e914"
 pkg_dirname="${pkg_name}-${pkg_version}"
 
 pkg_build_deps=(
+	core/coreutils
 	core/make
 	core/gcc
 	core/which
 	core/pkg-config
 	core/tcl
 	core/python
+	core/procps-ng
 )
 pkg_deps=(
 	core/glibc
@@ -33,6 +35,10 @@ do_build() {
 }
 
 do_check() {
+	for prog in "$(pkg_path_for coreutils)"/bin/*; do
+		ln -s "$prog" /usr/bin/"$(basename "$prog")"
+	done
+
 	make test
 }
 
@@ -41,4 +47,3 @@ pkg_exports=(
 	[port]=port
 )
 pkg_exposes=(port)
-
