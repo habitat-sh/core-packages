@@ -22,7 +22,9 @@ pkg_deps=(
 	core/libpcre2
 	core/libpng
 	core/libtiff
+	core/libwebp
 	core/libxml2
+	core/openssl
 	core/lz4
 	core/proj8
 	core/xz
@@ -65,7 +67,7 @@ do_build() {
 		-DCMAKE_INSTALL_RPATH="${CMAKE_INSTALL_RPATH}" \
 		-DCMAKE_BUILD_WITH_INSTALL_RPATH=TRUE \
 		-DCMAKE_BUILD_TYPE=Release
-	cmake --build .
+	cmake --build . --parallel "$(nproc)"
 	popd || exit 1
 }
 
