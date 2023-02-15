@@ -1,5 +1,5 @@
 # shellcheck disable=SC2164
-pkg_name="postgis-3"
+pkg_name="postgis3"
 pkg_version="3.3.2"
 pkg_origin="core"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -34,7 +34,7 @@ pkg_build_deps=(
 	core/gcc
 	core/git
 	core/pkg-config
-	core/postgresql-15
+	core/postgresql15
 	core/sed
 	core/which
 )
@@ -55,7 +55,7 @@ do_build() {
 	mkdir -p "$pkg_prefix"/bin
 	# postgis' build system assumes it is being installed to the same place as postgresql, and looks
 	# for the postgres binary relative to $PREFIX. We gently support this system using an illusion.
-	ln -s "$(pkg_path_for postgresql-15)"/bin/postgres "$pkg_prefix"/bin/postgres
+	ln -s "$(pkg_path_for postgresql15)"/bin/postgres "$pkg_prefix"/bin/postgres
 
 	make \
 		datadir="${pkg_prefix}"/share \

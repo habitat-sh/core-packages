@@ -1,5 +1,5 @@
 # shellcheck disable=SC2164
-pkg_name="postgresql-15"
+pkg_name="postgresql15"
 pkg_version="15.1"
 pkg_origin="core"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
