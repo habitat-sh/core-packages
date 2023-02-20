@@ -10,10 +10,7 @@ pkg_source="https://ftp.postgresql.org/pub/source/v${pkg_version}/${pkg_dirname}
 pkg_shasum="64fdf23d734afad0dfe4077daca96ac51dcd697e68ae2d3d4ca6c45cb14e21ae"
 
 pkg_deps=(
-  core/bash
-  core/gawk
   core/glibc
-  core/grep
   core/libossp-uuid
   core/openssl
   core/perl
@@ -46,11 +43,16 @@ server_execs=(
     pg_test_timing
     pg_upgrade
     pg_xlogdump
+    pg_bench
+    pg_resetwal
+    pg_waldump
+    pg_ctl
+    pg_checksums
 )
 
 server_includes=(
-    postgresql/informix
-    postgresql/server
+    informix
+    server
 )
 
 do_prepare() {
