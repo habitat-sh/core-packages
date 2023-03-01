@@ -18,8 +18,6 @@ pkg_shasum="d7939ce614029cdff0b6c20f0e2e5703158a489a72b2507b8bd51bf8c8fd10ca"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
 	core/glibc
-	core/gcc-libs
-	core/cacerts
 )
 pkg_build_deps=(
 	core/coreutils
@@ -29,71 +27,43 @@ pkg_build_deps=(
 	core/gcc
 	core/sed
 	core/grep
-	core/perl
+	core/build-tools-perl
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
-_common_prepare() {
-	do_default_prepare
-	# Set CA dir to `$pkg_prefix/ssl` by default and use the cacerts from the
-	# `cacerts` package. Note that `patch(1)` is making backups because
-	# we need an original for the test suite.
-	# DO NOT REMOVE
-	sed -e "s,@cacerts_prefix@,$(pkg_path_for cacerts),g" \
-		"$PLAN_CONTEXT/ca-dir.patch" |
-		patch -p1 --backup
+ do_prepare() {
+	patch -p1 <"$PLAN_CONTEXT/hab-ssl-cert-file.patch"
+ 	export BUILD_CC=gcc
+ 	build_line "Setting BUILD_CC=$BUILD_CC"
 
-	# The openssl build process hard codes /bin/rm in many places.
 	if [[ ! -f "/bin/rm" ]]; then
-		hab pkg binlink core/coreutils rm --dest /bin
-		BINLINKED_RM=true
-	fi
-}
+ 		hab pkg binlink core/coreutils rm --dest /bin
+ 		BINLINKED_RM=true
+ 	fi
+ }
 
-do_prepare() {
-	_common_prepare
-	export BUILD_CC=gcc
-	build_line "Setting BUILD_CC=$BUILD_CC"
-}
+ do_build() {
+ 	"$(pkg_path_for core/build-tools-perl)/bin/perl" ./Configure \
+ 		no-idea \
+ 		no-mdc2 \
+ 		no-rc5 \
+ 		no-comp \
+ 		shared \
+ 		disable-gost \
+ 		--prefix="${pkg_prefix}" \
+ 		--openssldir=ssl \
+ 		-Wl,-rpath="${pkg_prefix}/lib" \
+ 		linux-aarch64
 
-do_build() {
-	# Set PERL var for scripts in `do_check` that use Perl
-	PERL=$(pkg_path_for core/perl)/bin/perl
-	export PERL
-	"$(pkg_path_for core/perl)/bin/perl" ./Configure \
-		no-idea \
-		no-mdc2 \
-		no-rc5 \
-		no-comp \
-		no-zlib \
-		shared \
-		disable-gost \
-		--prefix="${pkg_prefix}" \
-		--openssldir="$(pkg_path_for cacerts)/ssl" \
-		-Wl,-rpath="${pkg_prefix}/lib" \
-		linux-aarch64
-
-	make CC= depend
-	make --jobs="$(nproc)" CC="$BUILD_CC"
-}
+ 	make CC= depend
+ 	make --jobs="$(nproc)" CC="$BUILD_CC"
+ }
 
 do_check() {
-	# Flip back to the original sources to satisfy the test suite, but keep the
-	# final version for packaging.
-	for f in apps/CA.pl.in apps/openssl.cnf; do
-		cp -fv $f ${f}.final
-		cp -fv ${f}.orig $f
-	done
-
 	make test
-
-	# Finally, restore the final sources to their original locations.
-	for f in apps/CA.pl.in apps/openssl.cnf; do
-		cp -fv ${f}.final $f
-	done
 }
 
 do_install() {
