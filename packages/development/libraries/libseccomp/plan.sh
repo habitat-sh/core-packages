@@ -15,6 +15,7 @@ pkg_deps=(
 pkg_build_deps=(
 	core/gcc
 	core/make
+	core/gperf
 )
 
 pkg_include_dirs=(include)
