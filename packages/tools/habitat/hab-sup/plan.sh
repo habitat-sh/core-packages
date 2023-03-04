@@ -1,7 +1,7 @@
 # shellcheck disable=2034
 git_url="https://github.com/habitat-sh/habitat.git"
-commit_hash="21914065e338e2ce9fb4880b92326abfa79737aa"
-pkg_shasum="12674359e72fc8a87b5a51dd24119b00abffa1566a9a151637ffe3d9351808ee"
+commit_hash="d27edcf40c8061388151965b2372b15a2517c286"
+pkg_shasum="d01fb40e39d5a9a5ab62a53d7186b4c4134f02c0d33ea8316e8f691da3eba7d3"
 
 pkg_name="hab-sup"
 pkg_origin="core"
