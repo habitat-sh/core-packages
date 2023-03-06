@@ -56,7 +56,7 @@ pkg_pconfig_dirs=(lib/pkgconfig)
  		--prefix="${pkg_prefix}" \
  		--openssldir=ssl \
  		-Wl,-rpath="${pkg_prefix}/lib" \
- 		linux-aarch64
+ 		linux-${pkg_target%%-*}
 
  	make CC= depend
  	make --jobs="$(nproc)" CC="$BUILD_CC"

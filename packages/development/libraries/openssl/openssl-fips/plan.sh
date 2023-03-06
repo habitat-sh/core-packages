@@ -19,7 +19,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/make
-	core/perl
+	core/build-tools-perl
 	core/gcc
 )
 pkg_bin_dirs=(bin)
