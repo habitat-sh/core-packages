@@ -20,9 +20,9 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
 	core/native-cross-binutils
-	core/native-libgmp
-	core/native-libisl
-	core/native-libmpfr
+	core/native-gmp
+	core/native-isl
+	core/native-mpfr
 	core/native-libmpc
 )
 
@@ -49,9 +49,9 @@ do_build() {
 		--host="$(../config.guess)" \
 		--target="$native_target" \
 		--with-sysroot="$pkg_prefix" \
-		--with-gmp="$(pkg_path_for native-libgmp)" \
-		--with-isl="$(pkg_path_for native-libisl)" \
-		--with-mpfr="$(pkg_path_for native-libmpfr)" \
+		--with-gmp="$(pkg_path_for native-gmp)" \
+		--with-isl="$(pkg_path_for native-isl)" \
+		--with-mpfr="$(pkg_path_for native-mpfr)" \
 		--with-mpc="$(pkg_path_for native-libmpc)" \
 		--with-glibc-version="$glibc_version" \
 		--with-newlib \

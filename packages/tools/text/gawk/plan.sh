@@ -18,8 +18,8 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/bash-static
 	core/glibc
-	core/libmpfr
-	core/libgmp
+	core/mpfr
+	core/gmp
 	core/readline
 )
 pkg_build_deps=(

@@ -14,7 +14,7 @@ pkg_deps=(
 	core/openssl
 	core/zlib
 	core/zstd
-	core/libnghttp2
+	core/nghttp2
 	core/libidn2
 	core/libpsl
 )

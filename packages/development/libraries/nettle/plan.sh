@@ -9,7 +9,7 @@ pkg_source="https://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.g
 pkg_shasum="364f3e2b77cd7dcde83fd7c45219c834e54b0c75e428b6f894a23d12dd41cbfe"
 pkg_deps=(
 	core/glibc
-	core/libgmp
+	core/gmp
 )
 pkg_build_deps=(
 	core/coreutils

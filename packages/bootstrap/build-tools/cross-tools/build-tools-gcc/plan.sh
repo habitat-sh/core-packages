@@ -21,9 +21,9 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/build-tools-binutils
 	core/build-tools-glibc
-	core/build-tools-libgmp
-	core/build-tools-libisl
-	core/build-tools-libmpfr
+	core/build-tools-gmp
+	core/build-tools-isl
+	core/build-tools-mpfr
 	core/build-tools-libmpc
 	core/build-tools-bash-static
 )
@@ -102,9 +102,9 @@ do_build() {
 		--build="$(../config.guess)" \
 		--host="$native_target" \
 		--target="$native_target" \
-		--with-gmp="$(pkg_path_for build-tools-libgmp)" \
-		--with-isl="$(pkg_path_for build-tools-libisl)" \
-		--with-mpfr="$(pkg_path_for build-tools-libmpfr)" \
+		--with-gmp="$(pkg_path_for build-tools-gmp)" \
+		--with-isl="$(pkg_path_for build-tools-isl)" \
+		--with-mpfr="$(pkg_path_for build-tools-mpfr)" \
 		--with-mpc="$(pkg_path_for build-tools-libmpc)" \
 		--with-build-sysroot="" \
 		--with-sysroot="" \

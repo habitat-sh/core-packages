@@ -1,24 +1,22 @@
-program="mpc"
+program="isl"
 
-pkg_name="libmpc-stage1"
+pkg_name="isl-stage1"
 pkg_origin="core"
-pkg_version="1.2.1"
+pkg_version="0.25"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
-GNU MPC is a C library for the arithmetic of complex numbers with arbitrarily \
-high precision and correct rounding of the result.\
+isl is a library for manipulating sets and relations of integer points bounded by linear constraints.
 "
 pkg_upstream_url="http://www.multiprecision.org/"
-pkg_license=('LGPL-3.0-or-later')
-pkg_source="https://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459"
+pkg_license=('MIT')
+pkg_source="https://libisl.sourceforge.io/${program}-${pkg_version}.tar.xz"
+pkg_shasum="be7b210647ccadf90a2f0b000fca11a4d40546374a850db67adb32fad4b230d9"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
 	core/glibc
 	core/gcc-stage1
 	core/gmp-stage1
-	core/mpfr-stage1
 	core/build-tools-coreutils
 	core/build-tools-make
 )
@@ -51,7 +49,7 @@ do_build() {
 	# a runtime dependency back to this library.
 	./configure \
 		--prefix="$pkg_prefix" \
-		--docdir="$pkg_prefix/share/doc/mpc-1.2.1" \
+		--docdir="$pkg_prefix/share/doc/isl-0.25" \
 		--disable-shared
 
 	make
@@ -63,6 +61,8 @@ do_check() {
 
 do_install() {
 	make install
-	# Remove unneccessary files
-	rm -v "${pkg_prefix}/lib/libmpc.la"
+
+	# Remove unnecessary files and pkgconfig
+	rm -v "${pkg_prefix}/lib/libisl.la"
+	rm -rfv "${pkg_prefix}/lib/pkgconfig"
 }

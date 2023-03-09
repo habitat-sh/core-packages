@@ -19,7 +19,7 @@ pkg_deps=(
 	core/jsoncpp
 	core/libarchive
 	core/libuv
-	core/libnghttp2
+	core/nghttp2
 	core/librhash
 	core/ncurses
 	core/openssl

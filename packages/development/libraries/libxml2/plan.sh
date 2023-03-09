@@ -14,7 +14,7 @@ pkg_deps=(
 	core/glibc
 	core/readline
 	core/ncurses
-	core/libicu
+	core/icu
 	core/xz
 )
 pkg_build_deps=(
