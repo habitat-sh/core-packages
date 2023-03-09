@@ -19,7 +19,7 @@ pkg_deps=(
 	core/json-c
 	core/libpcre2
 	core/libxml2
-	core/libicu
+	core/icu
 	core/perl
 	core/proj
 	core/protobuf-c

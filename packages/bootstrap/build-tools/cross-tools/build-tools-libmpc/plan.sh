@@ -16,8 +16,8 @@ pkg_shasum="17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
-	core/build-tools-libgmp
-	core/build-tools-libmpfr
+	core/build-tools-gmp
+	core/build-tools-mpfr
 	core/build-tools-glibc
 )
 

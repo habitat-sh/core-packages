@@ -1,24 +1,23 @@
-program="mpc"
+program="gmp"
 
-pkg_name="libmpc-stage1"
+pkg_name="gmp-stage1"
 pkg_origin="core"
-pkg_version="1.2.1"
+pkg_version="6.2.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
-GNU MPC is a C library for the arithmetic of complex numbers with arbitrarily \
-high precision and correct rounding of the result.\
+GMP is a free library for arbitrary precision arithmetic, operating on signed \
+integers, rational numbers, and floating-point numbers.\
 "
-pkg_upstream_url="http://www.multiprecision.org/"
-pkg_license=('LGPL-3.0-or-later')
-pkg_source="https://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459"
+pkg_upstream_url="https://gmplib.org"
+pkg_license=('GPL-3.0-or-later')
+pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
+pkg_shasum="fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
 	core/glibc
 	core/gcc-stage1
-	core/gmp-stage1
-	core/mpfr-stage1
+	core/m4-stage0
 	core/build-tools-coreutils
 	core/build-tools-make
 )
@@ -43,6 +42,12 @@ do_prepare() {
 	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc)"
 	export HAB_GCC_STAGE1_GLIBC_PKG_PATH
 	build_line "Setting HAB_GCC_STAGE1_GLIBC_PKG_PATH=${HAB_GCC_STAGE1_GLIBC_PKG_PATH}"
+	
+	# default settings of GMP produce libraries optimized for the host processor. \
+	# If libraries suitable for processors less capable than the host's CPU are desired, \
+	# generic libraries can be created by
+	cp -v configfsf.guess config.guess
+	cp -v configfsf.sub config.sub
 }
 
 do_build() {
@@ -51,7 +56,9 @@ do_build() {
 	# a runtime dependency back to this library.
 	./configure \
 		--prefix="$pkg_prefix" \
-		--docdir="$pkg_prefix/share/doc/mpc-1.2.1" \
+		--enable-cxx \
+		--docdir="$pkg_prefix/share/doc/gmp-6.2.1" \
+		--build="aarch64-unknown-linux-gnu" \
 		--disable-shared
 
 	make
@@ -63,6 +70,9 @@ do_check() {
 
 do_install() {
 	make install
-	# Remove unneccessary files
-	rm -v "${pkg_prefix}/lib/libmpc.la"
+
+	# Remove unnecessary files and pkgconfig
+	rm -v "${pkg_prefix}/lib/libgmp.la"
+	rm -v "${pkg_prefix}/lib/libgmpxx.la"
+	rm -rfv "${pkg_prefix}/lib/pkgconfig"
 }

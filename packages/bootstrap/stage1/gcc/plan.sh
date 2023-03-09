@@ -25,9 +25,9 @@ pkg_deps=(
 
 pkg_build_deps=(
 	core/gcc-stage0
-	core/libgmp-stage0
-	core/libisl-stage0
-	core/libmpfr-stage0
+	core/gmp-stage0
+	core/isl-stage0
+	core/mpfr-stage0
 	core/libmpc-stage0
 	core/zlib-stage0
 	core/zstd-stage0
@@ -124,9 +124,9 @@ do_build() {
 		CXXFLAGS_FOR_TARGET="${CXXFLAGS}" \
 		LD="$(pkg_path_for binutils-stage0)"/bin/ld \
 		--prefix="$pkg_prefix" \
-		--with-gmp="$(pkg_path_for libgmp-stage0)" \
-		--with-isl="$(pkg_path_for libisl-stage0)" \
-		--with-mpfr="$(pkg_path_for libmpfr-stage0)" \
+		--with-gmp="$(pkg_path_for gmp-stage0)" \
+		--with-isl="$(pkg_path_for isl-stage0)" \
+		--with-mpfr="$(pkg_path_for mpfr-stage0)" \
 		--with-mpc="$(pkg_path_for libmpc-stage0)" \
 		--with-zstd="$(pkg_path_for zstd-stage0)" \
 		--with-native-system-header-dir="$(pkg_path_for glibc-stage0)/include" \
