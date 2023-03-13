@@ -30,7 +30,7 @@ do_build() {
 	pushd build_unix > /dev/null
 	../dist/configure \
 		--prefix="${pkg_prefix}" \
-		--build="aarch64-unknown-linux-gnu" \
+		--build="${pkg_target%%-*}"-unknown-linux-gnu \
 		--enable-compat185 \
 		--enable-cxx \
 		--enable-dbm \
