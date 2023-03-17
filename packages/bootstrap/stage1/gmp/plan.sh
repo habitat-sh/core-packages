@@ -42,7 +42,7 @@ do_prepare() {
 	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc)"
 	export HAB_GCC_STAGE1_GLIBC_PKG_PATH
 	build_line "Setting HAB_GCC_STAGE1_GLIBC_PKG_PATH=${HAB_GCC_STAGE1_GLIBC_PKG_PATH}"
-	
+
 	# default settings of GMP produce libraries optimized for the host processor. \
 	# If libraries suitable for processors less capable than the host's CPU are desired, \
 	# generic libraries can be created by

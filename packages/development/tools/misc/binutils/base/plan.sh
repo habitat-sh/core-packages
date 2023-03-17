@@ -53,7 +53,7 @@ do_prepare() {
 		sed -i "$f" -e 's|-lfl|-l:libfl.a|'
 	done
 
-	sed -i  /hab/cache/src/binutils-2.39/ld/configure -e 's|-lfl|-l:libfl.a|'
+	sed -i /hab/cache/src/binutils-2.39/ld/configure -e 's|-lfl|-l:libfl.a|'
 	# Use symlinks instead of hard links to save space (otherwise `strip(1)`
 	# needs to process each hard link seperately)
 	for f in binutils/Makefile.in gas/Makefile.in ld/Makefile.in gold/Makefile.in; do

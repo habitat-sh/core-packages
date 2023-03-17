@@ -51,9 +51,9 @@ do_install() {
 	# build system does not generate them by default
 	sed cunit.pc.in \
 		-e "s^@prefix@^${pkg_prefix}^g" \
-		-e "s^@exec_prefix@^\${prefix}^g" \
-		-e "s^@libdir@^\${exec_prefix}/lib^g" \
-		-e "s^@includedir@^\${prefix}/include^g" \
+		-e 's^@exec_prefix@^${prefix}^g' \
+		-e 's^@libdir@^${exec_prefix}/lib^g' \
+		-e 's^@includedir@^${prefix}/include^g' \
 		-e "s^@VERSION@-@RELEASE@^${pkg_version}^g" \
 		>"${pkg_prefix}/lib/pkgconfig/cunit.pc"
 }

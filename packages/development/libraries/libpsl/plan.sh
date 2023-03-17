@@ -10,7 +10,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/rockdaboot/libpsl/releases/download/${pkg_version}/libpsl-${pkg_version}.tar.gz"
 pkg_shasum="ac6ce1e1fbd4d0254c4ddb9d37f1fa99dec83619c1253328155206b896210d4c"
 # We build libpsl against libidn2 instead of libicu as libidn2 is a lot
-# smaller than libicu: https://bugs.archlinux.org/task/52690 
+# smaller than libicu: https://bugs.archlinux.org/task/52690
 pkg_deps=(
 	core/glibc
 	core/libidn2

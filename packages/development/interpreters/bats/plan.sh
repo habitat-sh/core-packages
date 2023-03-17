@@ -33,7 +33,7 @@ do_build() {
 }
 
 do_check() {
-	# Some of the tests expect coreutils binaries like 'mkdir' to be present in 
+	# Some of the tests expect coreutils binaries like 'mkdir' to be present in
 	# standard locations, so we are going to create symlinks to them.
 	for prog in "$(pkg_path_for coreutils)"/bin/*; do
 		ln -s "$prog" /bin/"$(basename "$prog")"

@@ -39,7 +39,7 @@ do_check() {
 
 do_install() {
 	make prefix="$pkg_prefix" lib=lib sbin=bin install
-	
+
 	# Remove unnecessary components not required to build static coreutils
 	rm -rfv "${pkg_prefix:?}"/bin
 	rm -v "${pkg_prefix:?}"/lib/*.so*

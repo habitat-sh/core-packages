@@ -40,7 +40,7 @@ dontLink=0
 linkType="dynamic"
 nonFlagArgs=0
 # shellcheck disable=SC2193
-[[ "@program@" = *++ ]] && isCxx=1 || isCxx=0
+[[ "@program@" == *++ ]] && isCxx=1 || isCxx=0
 cxxInclude=1
 cxxLibrary=1
 cInclude=1
@@ -55,7 +55,7 @@ nParams=${#params[@]}
 # the time, but it has shown to be fairly reliable
 while (("$n" < "$nParams")); do
 	p=${params[n]}
-	p2=${params[n + 1]:-} # handle `p` being last one
+	p2=${params[n + 1]-} # handle `p` being last one
 	n+=1
 
 	case "$p" in
@@ -87,28 +87,28 @@ if [ "$nonFlagArgs" = 0 ]; then
 fi
 
 # Add the path to the C runtime start files if they are required
-if [[ "$startFilesInclude" = 1 ]]; then
+if [[ $startFilesInclude == 1 ]]; then
 	extraAfterFlags="$extraAfterFlags -B@glibc@/lib/"
 fi
 
 # If we are calling a c/g++ style program, set additional flags.
-if [[ "$isCxx" = 1 ]]; then
-	if [[ "$cxxLibrary" = 1 ]]; then
+if [[ $isCxx == 1 ]]; then
+	if [[ $cxxLibrary == 1 ]]; then
 		extraAfterFlags="$extraAfterFlags -L@libstdcpp@/lib"
 	fi
 
-	if [[ "$cxxInclude" = 1 ]]; then
+	if [[ $cxxInclude == 1 ]]; then
 		extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*"
 		extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*/@native_target@"
 		extraAfterFlags="$extraAfterFlags -isystem @libstdcpp@/include/c++/*/backward"
 	fi
 fi
 
-if [[ "$cxxLibrary" = 1 ]]; then
+if [[ $cxxLibrary == 1 ]]; then
 	extraAfterFlags="$extraAfterFlags -L@glibc@/lib"
 fi
 
-if [[ "$cInclude" = 1 ]]; then
+if [[ $cInclude == 1 ]]; then
 	extraAfterFlags="$extraAfterFlags -idirafter @glibc@/include"
 	extraAfterFlags="$extraAfterFlags -idirafter @linux_headers@/include"
 fi
@@ -117,8 +117,8 @@ fi
 extraBefore=()
 extraAfter=($extraAfterFlags)
 
-if [[ "$dontLink" != 1 ]]; then
-	if [[ "$linkType" = "dynamic" ]]; then
+if [[ $dontLink != 1 ]]; then
+	if [[ $linkType == "dynamic" ]]; then
 		extraBefore+=("-Wl,-dynamic-linker=@dynamic_linker@")
 	fi
 	export HAB_LINK_TYPE=${linkType}

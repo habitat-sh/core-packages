@@ -70,7 +70,7 @@ expandResponseParams() {
 	declare -ga params=("$@")
 	local arg
 	for arg in "$@"; do
-		if [[ "$arg" == @* ]]; then
+		if [[ $arg == @* ]]; then
 			# phase separation makes this look useless
 			# shellcheck disable=SC2157
 			if [ -x "@expandResponseParams@" ]; then
@@ -95,7 +95,7 @@ declare -i n=0
 
 while (("$n" < "$nParams")); do
 	p=${params[n]}
-	p2=${params[n + 1]:-} # handle `p` being last one
+	p2=${params[n + 1]-} # handle `p` being last one
 	if [ "${p:0:3}" = -L/ ] && badPath "${p:2}"; then
 		skip "${p:2} passed via -L"
 	elif [ "$p" = -L ] && badPath "$p2"; then
@@ -153,7 +153,7 @@ for p in \
 		-l?*)
 			libs["lib${p:2}.so"]=1
 			;;
-		"${HAB_PKGS:-}"/*.so | "${HAB_PKGS:-}"/*.so.*)
+		"${HAB_PKGS-}"/*.so | "${HAB_PKGS-}"/*.so.*)
 			# This is a direct reference to a shared library in another package.
 			libDirs+=("${p%/*}")
 			libs["${p##*/}"]=1
@@ -167,7 +167,7 @@ for p in \
 done
 
 # Add all used dynamic libraries to the rpath.
-if [[ "$linkType" != static-pie ]]; then
+if [[ $linkType != static-pie ]]; then
 	# For each directory in the library search path (-L...),
 	# see if it contains a dynamic library used by a -l... flag.  If
 	# so, add the directory to the rpath.
@@ -176,10 +176,10 @@ if [[ "$linkType" != static-pie ]]; then
 	declare -A rpaths
 	for dir in ${libDirs+"${libDirs[@]}"}; do
 		# Normalize relative paths
-		if [[ "$dir" =~ [/.][/.] ]] && dir2=$(readlink -f "$dir"); then
+		if [[ $dir =~ [/.][/.] ]] && dir2=$(readlink -f "$dir"); then
 			dir="$dir2"
 		fi
-		if [ -n "${rpaths[$dir]:-}" ] || [[ "$dir" != "${HAB_PKGS:-}"/* ]]; then
+		if [ -n "${rpaths[$dir]-}" ] || [[ $dir != "${HAB_PKGS-}"/* ]]; then
 			# If the path is not in the hab packages, don't add it to the rpath.
 			# This typically happens for libraries in /hab/cache/* that are later
 			# copied to $pkg_prefix.  If not, we're screwed.
@@ -187,7 +187,7 @@ if [[ "$linkType" != static-pie ]]; then
 		fi
 		for path in "$dir"/*; do
 			file="${path##*/}"
-			if [ "${libs[$file]:-}" ]; then
+			if [ "${libs[$file]-}" ]; then
 				rpaths["$dir"]=1
 				extraAfter+=(-rpath "$dir")
 				break

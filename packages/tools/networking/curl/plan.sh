@@ -32,7 +32,7 @@ pkg_lib_dirs=(lib)
 do_prepare() {
 	# Patch the zsh-generating program to use our perl at build time
 	sed -i "s,/usr/bin/env/perl,$(pkg_path_for perl)/bin/perl,g" scripts/completion.pl
-	
+
 	# Stop configuration warnings due to incorrect use of CFLAGS and CXXFLAGS
 	unset CFLAGS
 	unset CXXFLAGS

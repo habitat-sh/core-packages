@@ -17,28 +17,28 @@ pkg_include_dirs=(include)
 pkg_interpreters=(bin/python bin/python3 bin/python3.10)
 
 pkg_deps=(
-  core/bzip2
-  core/expat
-  core/gcc-libs
-  core/gdbm
-  core/glibc
-  core/libffi
-  core/ncurses
-  core/openssl
-  core/readline
-  core/sqlite
-  core/xz
-  core/zlib
+	core/bzip2
+	core/expat
+	core/gcc-libs
+	core/gdbm
+	core/glibc
+	core/libffi
+	core/ncurses
+	core/openssl
+	core/readline
+	core/sqlite
+	core/xz
+	core/zlib
 )
 
 pkg_build_deps=(
-  core/pkg-config
-  core/coreutils
-  core/diffutils
-  core/gcc
-  core/linux-headers
-  core/make
-  core/build-tools-util-linux
+	core/pkg-config
+	core/coreutils
+	core/diffutils
+	core/gcc
+	core/linux-headers
+	core/make
+	core/build-tools-util-linux
 )
 
 do_prepare() {
@@ -46,39 +46,38 @@ do_prepare() {
 }
 
 do_build() {
-  ./configure --prefix="$pkg_prefix" \
-              --enable-loadable-sqlite-extensions \
-              --enable-shared \
-              --with-system-expat \
-              --with-ensurepip \
-	      --with-openssl="$(pkg_path_for openssl)" \
-              --enable-optimizations
-  make
+	./configure --prefix="$pkg_prefix" \
+		--enable-loadable-sqlite-extensions \
+		--enable-shared \
+		--with-system-expat \
+		--with-ensurepip \
+		--with-openssl="$(pkg_path_for openssl)" \
+		--enable-optimizations
+	make
 }
 
 do_check() {
-  make test
+	make test
 }
 
 do_install() {
-  do_default_install
+	do_default_install
 
-  # link pythonx.x to python for pkg_interpreters
-  local minor=${pkg_version%.*}
-  local major=${minor%.*}
-  ln -rs "$pkg_prefix/bin/pip$minor" "$pkg_prefix/bin/pip"
-  ln -rs "$pkg_prefix/bin/pydoc$minor" "$pkg_prefix/bin/pydoc"
-  ln -rs "$pkg_prefix/bin/python$minor" "$pkg_prefix/bin/python"
-  ln -rs "$pkg_prefix/bin/python$minor-config" "$pkg_prefix/bin/python-config"
+	# link pythonx.x to python for pkg_interpreters
+	local minor=${pkg_version%.*}
+	local major=${minor%.*}
+	ln -rs "$pkg_prefix/bin/pip$minor" "$pkg_prefix/bin/pip"
+	ln -rs "$pkg_prefix/bin/pydoc$minor" "$pkg_prefix/bin/pydoc"
+	ln -rs "$pkg_prefix/bin/python$minor" "$pkg_prefix/bin/python"
+	ln -rs "$pkg_prefix/bin/python$minor-config" "$pkg_prefix/bin/python-config"
 
-  # Remove idle as we are not building with Tk/x11 support so it is useless
-  rm -vf "$pkg_prefix/bin/idle$major"
-  rm -vf "$pkg_prefix/bin/idle$minor"
+	# Remove idle as we are not building with Tk/x11 support so it is useless
+	rm -vf "$pkg_prefix/bin/idle$major"
+	rm -vf "$pkg_prefix/bin/idle$minor"
 
-  platlib=$(python -c "import sysconfig;print(sysconfig.get_path('platlib'))")
-  cat <<EOF > "$platlib/_manylinux.py"
+	platlib=$(python -c "import sysconfig;print(sysconfig.get_path('platlib'))")
+	cat <<EOF >"$platlib/_manylinux.py"
 # Disable binary manylinux1(CentOS 5) wheel support
 manylinux1_compatible = False
 EOF
 }
-

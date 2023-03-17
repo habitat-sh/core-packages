@@ -59,7 +59,7 @@ do_install() {
 
 	# Install license file
 	install -Dm644 LICENCE "$pkg_prefix/share/licenses/LICENSE"
-	
+
 	# Fix scripts
 	fix_interpreter "${pkg_prefix}/bin/pcre-config" core/bash-static bin/sh
 }

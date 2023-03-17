@@ -58,7 +58,7 @@ nParams=${#params[@]}
 # the time, but it has shown to be fairly reliable
 while (("$n" < "$nParams")); do
 	p=${params[n]}
-	p2=${params[n + 1]:-} # handle `p` being last one
+	p2=${params[n + 1]-} # handle `p` being last one
 	n+=1
 
 	case "$p" in
@@ -88,15 +88,15 @@ if [ "$nonFlagArgs" = 0 ]; then
 fi
 
 # Add the path to the C runtime start files if they are required
-if [[ "$startFilesInclude" = 1 ]]; then
+if [[ $startFilesInclude == 1 ]]; then
 	extraAfterFlags="$extraAfterFlags -B${HAB_GCC_STAGE1_GLIBC_PKG_PATH}/lib/"
 fi
 
-if [[ "$cxxLibrary" = 1 ]]; then
+if [[ $cxxLibrary == 1 ]]; then
 	extraAfterFlags="$extraAfterFlags -L${HAB_GCC_STAGE1_GLIBC_PKG_PATH}/lib"
 fi
 
-if [[ "$cInclude" = 1 ]]; then
+if [[ $cInclude == 1 ]]; then
 	extraAfterFlags="$extraAfterFlags -idirafter ${HAB_GCC_STAGE1_GLIBC_PKG_PATH}/include"
 	extraAfterFlags="$extraAfterFlags -idirafter ${HAB_GCC_STAGE1_LINUX_HEADERS_PKG_PATH}/include"
 fi
@@ -106,7 +106,7 @@ extraBefore=()
 extraAfter=($extraAfterFlags)
 
 if [ "$dontLink" != 1 ]; then
-	if [[ "$linkType" = "dynamic" ]]; then
+	if [[ $linkType == "dynamic" ]]; then
 		extraBefore+=("-Wl,-dynamic-linker=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}")
 	fi
 	export HAB_LINK_TYPE=${linkType}

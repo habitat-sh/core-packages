@@ -10,18 +10,18 @@ pkg_source="https://ftp.postgresql.org/pub/source/v${pkg_version}/${pkg_dirname}
 pkg_shasum="64fdf23d734afad0dfe4077daca96ac51dcd697e68ae2d3d4ca6c45cb14e21ae"
 
 pkg_deps=(
-  core/glibc
-  core/libossp-uuid
-  core/openssl
-  core/perl
-  core/readline
-  core/zlib
+	core/glibc
+	core/libossp-uuid
+	core/openssl
+	core/perl
+	core/readline
+	core/zlib
 )
 
 pkg_build_deps=(
-  core/coreutils
-  core/gcc
-  core/make
+	core/coreutils
+	core/gcc
+	core/make
 )
 
 pkg_bin_dirs=(bin)
@@ -33,26 +33,26 @@ pkg_lib_dirs=(lib)
 # with that install
 
 server_execs=(
-    ecpg
-    initdb
-    pg_archivecleanup
-    pg_controldata
-    pg_resetxlog
-    pg_rewind
-    pg_test_fsync
-    pg_test_timing
-    pg_upgrade
-    pg_xlogdump
-    pg_bench
-    pg_resetwal
-    pg_waldump
-    pg_ctl
-    pg_checksums
+	ecpg
+	initdb
+	pg_archivecleanup
+	pg_controldata
+	pg_resetxlog
+	pg_rewind
+	pg_test_fsync
+	pg_test_timing
+	pg_upgrade
+	pg_xlogdump
+	pg_bench
+	pg_resetwal
+	pg_waldump
+	pg_ctl
+	pg_checksums
 )
 
 server_includes=(
-    informix
-    server
+	informix
+	server
 )
 
 do_prepare() {
@@ -61,13 +61,13 @@ do_prepare() {
 }
 
 do_build() {
-    ./configure --disable-rpath \
-              --with-openssl \
-              --prefix="$pkg_prefix" \
-              --with-uuid=ossp \
-              --sysconfdir="$pkg_svc_config_path" \
-              --localstatedir="$pkg_svc_var_path"
-    make --jobs="$(nproc)" world
+	./configure --disable-rpath \
+		--with-openssl \
+		--prefix="$pkg_prefix" \
+		--with-uuid=ossp \
+		--sysconfdir="$pkg_svc_config_path" \
+		--localstatedir="$pkg_svc_var_path"
+	make --jobs="$(nproc)" world
 }
 
 do_install() {
@@ -76,19 +76,17 @@ do_install() {
 	make -C src/interfaces install
 
 	# Clean up files needed only for server installs
-    # this shrinks the package by about 60%
-    echo "Purging unneeded execs"
-    for unneeded in "${server_execs[@]}"
-    do
-       target="$pkg_prefix/bin/${unneeded}"
-       echo "rm -f ${target}"
-       rm -f "${target}"
-    done
-    echo "Purging unneeded includes"
-    for unneeded in "${server_includes[@]}"
-    do
-       target="$pkg_prefix/include/${unneeded}"
-       echo "rm -rf ${target}"
-       rm -rf "${target}"
-    done
+	# this shrinks the package by about 60%
+	echo "Purging unneeded execs"
+	for unneeded in "${server_execs[@]}"; do
+		target="$pkg_prefix/bin/${unneeded}"
+		echo "rm -f ${target}"
+		rm -f "${target}"
+	done
+	echo "Purging unneeded includes"
+	for unneeded in "${server_includes[@]}"; do
+		target="$pkg_prefix/include/${unneeded}"
+		echo "rm -rf ${target}"
+		rm -rf "${target}"
+	done
 }

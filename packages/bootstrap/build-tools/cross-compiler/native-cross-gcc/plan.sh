@@ -38,7 +38,7 @@ do_install() {
 	wrap_binary "${native_target}-cpp"
 	wrap_binary "${native_target}-gcc"
 	wrap_binary "${native_target}-gcc-${pkg_version}"
-	
+
 	# Many packages use the name cc to call the C compiler
 	ln -sv "${native_target}-gcc" "$pkg_prefix/bin/cc"
 }

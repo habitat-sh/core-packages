@@ -52,7 +52,7 @@ do_build() {
 
 do_check() {
 	chown -R hab .
-	su hab -c "PATH=$PATH LANG=en_US.UTF-8 make -j1 test &>vim-test.log" 
+	su hab -c "PATH=$PATH LANG=en_US.UTF-8 make -j1 test &>vim-test.log"
 }
 
 do_install() {

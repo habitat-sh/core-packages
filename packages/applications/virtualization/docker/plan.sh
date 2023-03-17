@@ -15,16 +15,16 @@ pkg_build_deps=(
 )
 
 do_build() {
-  return 0
+	return 0
 }
 
 do_install() {
-  for bin in *; do
-    install -v -D "${bin}" "${pkg_prefix}/bin/${bin}"
-  done
+	for bin in *; do
+		install -v -D "${bin}" "${pkg_prefix}/bin/${bin}"
+	done
 }
 
 # Skip stripping down the Go binaries
 do_strip() {
-  return 0
+	return 0
 }

@@ -36,7 +36,7 @@ do_build() {
 
 do_install() {
 	make install
-	
+
 	# Remove unnecessary components not required to build static coreutils
 	rm -rfv "${pkg_prefix:?}"/bin
 	rm -v "${pkg_prefix:?}"/lib/*.la

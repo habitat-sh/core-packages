@@ -35,11 +35,11 @@ pkg_interpreters=(bin/perl)
 
 do_prepare() {
 	# Fix a spurious test failure due to a long PATH environment
-	# variable (> 1000 characters). This can be removed once the 
+	# variable (> 1000 characters). This can be removed once the
 	# original PR gets merged and released in a new version of perl
 	# Patch source: https://github.com/Perl/perl5/pull/20497
 	patch -p1 <"$PLAN_CONTEXT/perlbug-test-failure.patch"
-	
+
 	#  Make Cwd work with the `pwd` command from `coreutils` (we cannot rely
 	#  on `/bin/pwd` exisiting in an environment)
 	sed -i "s,'/bin/pwd','$(pkg_path_for coreutils)/bin/pwd',g" \
@@ -126,13 +126,13 @@ do_check() {
 
 	# If the `/etc/services` or `/etc/protocols` files were added for the
 	# purposes of this test suite, clean them up. Otherwise leave them be.
-	if [[ -n "$clean_services" ]]; then
+	if [[ -n $clean_services ]]; then
 		rm -fv /etc/services
 	fi
-	if [[ -n "$clean_protocols" ]]; then
+	if [[ -n $clean_protocols ]]; then
 		rm -fv /etc/protocols
 	fi
-	if [[ -n "$clean_diff" ]]; then
+	if [[ -n $clean_diff ]]; then
 		rm -fv /bin/diff
 	fi
 }

@@ -34,33 +34,33 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
- do_prepare() {
+do_prepare() {
 	patch -p1 <"$PLAN_CONTEXT/hab-ssl-cert-file.patch"
- 	export BUILD_CC=gcc
- 	build_line "Setting BUILD_CC=$BUILD_CC"
+	export BUILD_CC=gcc
+	build_line "Setting BUILD_CC=$BUILD_CC"
 
 	if [[ ! -f "/bin/rm" ]]; then
- 		hab pkg binlink core/coreutils rm --dest /bin
- 		BINLINKED_RM=true
- 	fi
- }
+		hab pkg binlink core/coreutils rm --dest /bin
+		BINLINKED_RM=true
+	fi
+}
 
- do_build() {
- 	"$(pkg_path_for core/build-tools-perl)/bin/perl" ./Configure \
- 		no-idea \
- 		no-mdc2 \
- 		no-rc5 \
- 		no-comp \
- 		shared \
- 		disable-gost \
- 		--prefix="${pkg_prefix}" \
- 		--openssldir=ssl \
- 		-Wl,-rpath="${pkg_prefix}/lib" \
- 		linux-${pkg_target%%-*}
+do_build() {
+	"$(pkg_path_for core/build-tools-perl)/bin/perl" ./Configure \
+		no-idea \
+		no-mdc2 \
+		no-rc5 \
+		no-comp \
+		shared \
+		disable-gost \
+		--prefix="${pkg_prefix}" \
+		--openssldir=ssl \
+		-Wl,-rpath="${pkg_prefix}/lib" \
+		linux-${pkg_target%%-*}
 
- 	make CC= depend
- 	make --jobs="$(nproc)" CC="$BUILD_CC"
- }
+	make CC= depend
+	make --jobs="$(nproc)" CC="$BUILD_CC"
+}
 
 do_check() {
 	make test

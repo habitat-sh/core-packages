@@ -27,7 +27,7 @@ pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin)
 
 do_build() {
-	pushd build_unix > /dev/null
+	pushd build_unix >/dev/null
 	../dist/configure \
 		--prefix="${pkg_prefix}" \
 		--build="${pkg_target%%-*}"-unknown-linux-gnu \
@@ -36,15 +36,15 @@ do_build() {
 		--enable-dbm \
 		--enable-stl
 	make LIBSO_LIBS=-lpthread -j"$(nproc)"
-	popd > /dev/null
+	popd >/dev/null
 }
 
 do_install() {
-	pushd build_unix > /dev/null
+	pushd build_unix >/dev/null
 	do_default_install
 	make uninstall_docs
 	rm -rf ${pkg_prefix}/docs
-	popd > /dev/null
+	popd >/dev/null
 
 	# Install license file
 	install -Dm644 LICENSE "${pkg_prefix}/share/licenses/LICENSE"

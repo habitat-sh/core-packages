@@ -8,19 +8,19 @@ pkg_upstream_url=https://github.com/protobuf-c/protobuf-c
 pkg_description="Protocol Buffers implementation in C"
 pkg_shasum=4cc4facd508172f3e0a4d3a8736225d472418aee35b4ad053384b137b220339f
 pkg_deps=(
-  core/gcc-libs
-  core/protobuf-cpp
-  core/zlib
+	core/gcc-libs
+	core/protobuf-cpp
+	core/zlib
 )
 pkg_build_deps=(
-  core/gcc
-  core/make
-  core/pkg-config
+	core/gcc
+	core/make
+	core/pkg-config
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_check() {
-  make check
+	make check
 }

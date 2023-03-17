@@ -10,12 +10,12 @@ pkg_source=http://pyyaml.org/download/"${pkg_name}"/yaml-"${pkg_version}".tar.gz
 pkg_filename=yaml-"${pkg_version}".tar.gz
 pkg_shasum=c642ae9b75fee120b2d96c712538bd2cf283228d2337df2cf2988e3c02678ef4
 pkg_deps=(
-    core/glibc
+	core/glibc
 )
 pkg_build_deps=(
-    core/coreutils
-    core/make
-    core/gcc
+	core/coreutils
+	core/make
+	core/gcc
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

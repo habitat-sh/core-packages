@@ -69,7 +69,7 @@ do_build() {
 }
 
 do_install() {
-	
+
 	# For each package we need to combine we sync the necessary folders
 	# to the final pkg_prefix folder.
 	for pkg in "${all_pkgs[@]}"; do
@@ -95,7 +95,7 @@ do_install() {
 		for pkg in "${all_pkgs[@]}"; do
 			new_rpath=${new_rpath//"$(pkg_path_for $pkg)/"/"${pkg_prefix}/"}
 		done
-		if [[ "$new_rpath" != "$old_rpath" ]]; then
+		if [[ $new_rpath != "$old_rpath" ]]; then
 			echo "Patching rpath of $f"
 			patchelf --set-rpath "$new_rpath" "$f"
 		fi

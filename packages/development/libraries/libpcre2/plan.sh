@@ -52,7 +52,7 @@ do_check() {
 
 do_install() {
 	make install
-	
+
 	# Remove binaries and man
 	rm -rf "${pkg_prefix:?}"/{bin,share}
 	# Install license file
