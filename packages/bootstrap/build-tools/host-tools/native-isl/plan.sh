@@ -26,7 +26,7 @@ do_build() {
 		--build="$(./config.guess)" \
 		--host="$(./config.guess)" \
 		--disable-static
-	make
+	make V=1
 }
 
 do_check() {

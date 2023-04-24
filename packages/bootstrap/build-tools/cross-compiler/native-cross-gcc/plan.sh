@@ -12,7 +12,7 @@ the GNU toolchain and the standard compiler for most Unix-like operating \
 systems.This package is a wrapper around the native-cross-gcc-base package.\
 "
 pkg_upstream_url="https://gcc.gnu.org/"
-pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
+pkg_license=('GPL-3.0-or-later WITH GCC-exception-3.1' 'LGPL-3.0-or-later')
 
 pkg_deps=(
 	core/native-cross-binutils

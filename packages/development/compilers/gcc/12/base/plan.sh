@@ -45,7 +45,7 @@ pkg_lib_dirs=(lib lib64)
 
 do_prepare() {
 	# We unset all flags that will interfere with the compiler
-	unset LD_RUN_PATH
+	# unset LD_RUN_PATH
 
 	case $pkg_target in
 	aarch64-linux)

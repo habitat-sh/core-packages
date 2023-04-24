@@ -9,7 +9,7 @@ context-free grammar into a deterministic LR or generalized LR (GLR) parser \
 employing LALR(1) parser tables.\
 "
 pkg_upstream_url="https://www.gnu.org/software/bison/"
-pkg_license=('GPL-3.0')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}.tar.xz"
 pkg_shasum="9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2"
 pkg_dirname="${program}-${pkg_version}"

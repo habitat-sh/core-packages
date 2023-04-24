@@ -17,7 +17,6 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/build-tools-gmp
 	core/build-tools-glibc
-	core/build-tools-libstdcpp
 )
 pkg_build_deps=(
 	core/native-cross-gcc
@@ -27,9 +26,14 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-	# We move the LD_RUN_PATH into the LDFLAGS and unset LD_RUN_PATH
-	# so that the build compiler and linker doesn't pick it up.
-	export LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH} -Wl,-rpath-link=${LD_RUN_PATH}"
+	# We have to add extra -rpath-link flags to ensure the compiler finds libgmp in
+	# certain build steps. This seems like a bug in the ISL makefile that we are fixing for.
+	export LDFLAGS="${LDFLAGS} -Wl,-rpath-link=${LD_RUN_PATH}"
+
+	# To prevent the build compiler/linker from being affected by LD_RUN_PATH,
+	# we transfer its value to HAB_LD_RUN_PATH and unset LD_RUN_PATH.
+	# This allows the native-cross-binutils linker to utilize HAB_LD_RUN_PATH instead.
+	export HAB_LD_RUN_PATH="${LD_RUN_PATH}"
 	unset LD_RUN_PATH
 
 	# By default LDFLAGS, CFLAGS, CPPFLAGS and CXXFLAGS get used by the
@@ -45,9 +49,8 @@ do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \
 		--build="$(./config.guess)" \
-		--host="$native_target" \
-		--disable-static
-	make
+		--host="$native_target"
+	make V=1
 }
 
 do_check() {

@@ -12,7 +12,7 @@ Sockets Layer (SSL) protocols. It is also a general-purpose cryptography \
 library.\
 "
 pkg_upstream_url="https://www.openssl.org"
-pkg_license=('OpenSSL')
+pkg_license=('Apache-2.0')
 pkg_source="https://www.openssl.org/source/old/${_version}/${_distname}-${pkg_version}.tar.gz"
 pkg_shasum="d7939ce614029cdff0b6c20f0e2e5703158a489a72b2507b8bd51bf8c8fd10ca"
 pkg_dirname="${_distname}-${pkg_version}"
@@ -55,7 +55,6 @@ do_build() {
 		disable-gost \
 		--prefix="${pkg_prefix}" \
 		--openssldir=ssl \
-		-Wl,-rpath="${pkg_prefix}/lib" \
 		linux-${pkg_target%%-*}
 
 	make CC= depend

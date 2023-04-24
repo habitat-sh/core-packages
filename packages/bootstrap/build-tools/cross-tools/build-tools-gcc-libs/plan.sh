@@ -4,7 +4,7 @@ pkg_version="12.2.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Runtime libraries shipped by GCC."
 pkg_upstream_url="https://gcc.gnu.org/"
-pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
+pkg_license=('GPL-3.0-or-later WITH GCC-exception-3.1' 'LGPL-3.0-or-later')
 
 pkg_lib_dirs=(lib)
 

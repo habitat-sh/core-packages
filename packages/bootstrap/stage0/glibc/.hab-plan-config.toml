@@ -1,0 +1,7 @@
+[rules]
+missing-license = { level = "off", source-shasum = "1c959fea240906226062cb4b1e7ebce71a9f0e3c0836c09e7e3423d434fcfe75" }
+license-not-found = { level = "off", source-shasum = "1c959fea240906226062cb4b1e7ebce71a9f0e3c0836c09e7e3423d434fcfe75" }
+# Certain glibc headers include the linux headers, making it a runtime dependency
+unused-dependency = { ignored_packages = ["core/linux-headers"] }
+# The glibc libc library is also an executable and hence has an interpreter
+unexpected-elf-interpreter = { ignored_files = ["lib/libc.*"] }

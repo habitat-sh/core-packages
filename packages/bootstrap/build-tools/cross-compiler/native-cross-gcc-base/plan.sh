@@ -13,7 +13,7 @@ the GNU toolchain and the standard compiler for most Unix-like operating \
 systems.\
 "
 pkg_upstream_url="https://gcc.gnu.org/"
-pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
+pkg_license=('GPL-3.0-or-later WITH GCC-exception-3.1' 'LGPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff"
 pkg_dirname="${program}-${pkg_version}"
@@ -28,7 +28,6 @@ pkg_deps=(
 
 # We don't specify a bin directory so that the cross compiler
 # from the native-cross-gcc is found
-pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
@@ -86,6 +85,8 @@ do_install() {
 	# when building glibc.
 
 	# Create a copy of the partial limits.h file that we use to compile glibc
+	# in a non-standard bootstrap-include folder. We will get this picked up
+	# when building glibc by adding extra -isystem flags to the CPPFLAGS
 	mkdir -v "$pkg_prefix/bootstrap-include"
 	cp -v "$pkg_prefix"/lib/gcc/"$native_target"/$pkg_version/include-fixed/* "$pkg_prefix/bootstrap-include"
 
@@ -94,6 +95,10 @@ do_install() {
 
 	# Install the full limits.h file
 	"$pkg_prefix"/libexec/gcc/"$native_target"/12.2.0/install-tools/mkheaders
+
+	# Remove unnecesary include folder created by 'make install'
+	rm -rf "$pkg_prefix/include"
+
 	popd || exit 1
 
 }

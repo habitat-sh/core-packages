@@ -12,7 +12,7 @@ Sockets Layer (SSL) protocols. It is also a general-purpose cryptography \
 library.\
 "
 pkg_upstream_url="https://www.openssl.org"
-pkg_license=('OpenSSL')
+pkg_license=('Apache-2.0')
 pkg_source="https://www.openssl.org/source/${program}-${pkg_version}.tar.gz"
 pkg_shasum="aa7d8d9bef71ad6525c55ba11e5f4397889ce49c2c9349dcea6d3e4f0b024a7a"
 pkg_dirname="${program}-${pkg_version}"
@@ -47,7 +47,6 @@ do_build() {
 		--cross-compile-prefix="${native_target}-" \
 		--prefix="${pkg_prefix}" \
 		--openssldir=ssl \
-		-Wl,-rpath="${LD_RUN_PATH}" \
 		fips \
 		$openssl_arch
 

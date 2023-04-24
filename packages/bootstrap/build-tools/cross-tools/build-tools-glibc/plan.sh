@@ -32,7 +32,12 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
+	# We put the native-cross-binutils and native-cross-gcc-base bin directories first on our path to ensure
+	# that our wrapped linker gets picked up by the cross compiler as 'ld'. At this stage we cannot wrap the compiler
+	# as our cc-wrapper.sh script requires glibc's final path.
 	PATH="$(pkg_path_for native-cross-binutils)/$native_target/bin:$(pkg_path_for native-cross-gcc-base)/bin:${PATH}"
+	build_line "Updated PATH=${PATH}"
+
 	# Don't use the system's `/etc/ld.so.cache` and `/etc/ld.so.preload`, but
 	# rather the version under `$pkg_prefix/etc`.
 	#
@@ -44,9 +49,9 @@ do_prepare() {
 		patch -p1
 
 	patch -p1 <"$PLAN_CONTEXT/dont-use-system-ld-so-cache.patch"
+
+	# Add flags to ensure we pick up the partial limits.h created in the core/native-cross-gcc-base package
 	CPPFLAGS="${CPPFLAGS} -isystem $(pkg_path_for native-cross-gcc-base)/bootstrap-include"
-	# We cannot have RPATH set in the glibc binaries
-	unset LD_RUN_PATH
 }
 
 do_build() {
@@ -55,7 +60,7 @@ do_build() {
 
 	"../configure" \
 		--prefix="$pkg_prefix" \
-		--build="$(../config.guess)" \
+		--build="$(../scripts/config.guess)" \
 		--host="$native_target" \
 		--with-headers="$(pkg_path_for build-tools-linux-headers)/include" \
 		--sysconfdir="$pkg_prefix/etc" \

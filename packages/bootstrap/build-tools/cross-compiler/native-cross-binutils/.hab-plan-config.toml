@@ -1,0 +1,9 @@
+[rules]
+missing-license = { level = "off", source-shasum = "da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148" }
+license-not-found = { level = "off", source-shasum = "da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148" }
+library-dependency-not-found = "off"
+host-elf-interpreter = "off"
+# The wrapper script requires bash, which must be provided by the host system
+host-script-interpreter = { ignored_files = [
+    "bin/aarch64-hab-linux-gnu-ld.bfd",
+] }

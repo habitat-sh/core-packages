@@ -16,6 +16,8 @@ pkg_shasum="9b9a95d68fdcb936849a4d6fada8bf8686cddf58b9b26c9c4289ed0c92a77907"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
+	core/build-tools-coreutils
+	core/build-tools-diffutils
 	core/build-tools-glibc
 	core/build-tools-grep
 	core/build-tools-bash-static

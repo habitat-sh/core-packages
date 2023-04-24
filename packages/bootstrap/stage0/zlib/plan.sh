@@ -9,7 +9,7 @@ Compression library implementing the deflate compression method found in gzip \
 and PKZIP.\
 "
 pkg_upstream_url="http://www.zlib.net/"
-pkg_license=('zlib')
+pkg_license=('Zlib')
 pkg_source="http://zlib.net/${program}-${pkg_version}.tar.gz"
 pkg_shasum="b3a24de97a8fdbc835b9833169501030b8977031bcb54b3b3ac13740f846ab30"
 pkg_dirname="${program}-${pkg_version}"
@@ -22,15 +22,6 @@ pkg_build_deps=(
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-
-do_prepare() {
-	unset LD_RUN_PATH
-	unset LDFLAGS
-	unset CFLAGS
-	unset CXXFLAGS
-	unset CPPFLAGS
-	build_line "Unset CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS and LD_RUN_PATH"
-}
 
 do_install() {
 	make install

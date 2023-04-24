@@ -11,7 +11,7 @@ creating and managing binary programs, object files, libraries, profile data, \
 and assembly source code.\
 "
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
-pkg_license=('GPL-2.0-or-later')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.bz2"
 pkg_shasum="da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148"
 pkg_dirname="${program}-${pkg_version}"
@@ -37,9 +37,11 @@ pkg_build_deps=(
 )
 
 do_prepare() {
-	# We move the LD_RUN_PATH into the LDFLAGS and unset LD_RUN_PATH
-	# so that the build compiler and linker doesn't pick it up.
-	export LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
+	# The build process uses the host system's compiler (the build compiler)
+	# to compile certain components.
+	# To prevent the build compiler/linker from being affected by LD_RUN_PATH,
+	# we transfer its value to HAB_LD_RUN_PATH and unset LD_RUN_PATH.
+	export HAB_LD_RUN_PATH="${LD_RUN_PATH}"
 	unset LD_RUN_PATH
 
 	# By default LDFLAGS, CFLAGS, CPPFLAGS and CXXFLAGS get used by the
@@ -64,7 +66,7 @@ do_prepare() {
 do_build() {
 	./configure \
 		--prefix=$pkg_prefix \
-		--build="$(../config.guess)" \
+		--build="$(./config.guess)" \
 		--host="$native_target" \
 		--target="$native_target" \
 		--disable-nls \
@@ -73,7 +75,7 @@ do_build() {
 		--disable-werror \
 		--enable-new-dtags \
 		--enable-64-bit-bfd
-	make
+	make V=1
 }
 
 do_check() {

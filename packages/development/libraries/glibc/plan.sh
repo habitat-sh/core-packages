@@ -62,12 +62,12 @@ do_prepare() {
 	patch -p1 <"$PLAN_CONTEXT/hab-nss-open-files.patch"
 
 	# We cannot have RPATH set in the glibc binaries
-	unset LD_RUN_PATH
+	# unset LD_RUN_PATH
 	unset LDFLAGS
 	unset CFLAGS
 	unset CXXFLAGS
 	unset CPPFLAGS
-	build_line "Unset CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS and LD_RUN_PATH"
+	build_line "Unset CFLAGS, CXXFLAGS, CPPFLAGS and LDFLAGS"
 }
 
 do_build() {

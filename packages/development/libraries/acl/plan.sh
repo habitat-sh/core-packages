@@ -24,7 +24,6 @@ pkg_build_deps=(
 	core/coreutils-stage1
 	core/build-tools-make
 	core/build-tools-grep
-	core/build-tools-patchelf
 	core/build-tools-perl
 	core/build-tools-sed
 )
@@ -51,9 +50,4 @@ do_check() {
 
 do_install() {
 	make install
-
-	patchelf --shrink-rpath "${pkg_prefix}/bin/chacl"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/getfacl"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/setfacl"
-	patchelf --shrink-rpath "${pkg_prefix}/lib/libacl.so.1.1.2301"
 }

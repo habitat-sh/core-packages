@@ -1,0 +1,4 @@
+[rules]
+host-script-interpreter = "off"
+# This package combines multiple packages into a single package 
+unused-dependency = "off"

@@ -1,0 +1,2 @@
+[rules]
+library-dependency-not-found = "off"

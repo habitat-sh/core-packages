@@ -52,7 +52,7 @@ do_build() {
 		--docdir="$pkg_prefix/share/doc/isl-0.25" \
 		--disable-shared
 
-	make
+	make V=1
 }
 
 do_check() {

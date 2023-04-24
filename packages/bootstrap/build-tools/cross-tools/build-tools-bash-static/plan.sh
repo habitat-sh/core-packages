@@ -28,14 +28,8 @@ pkg_build_deps=(
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-	# Cross building ncurses still requires use of the host system's compiler.
-	# We have to be careful to ensure that our  on the
-	# We move the LD_RUN_PATH into the LDFLAGS instead and unset LD_RUN_PATH so
-	# it doesn't get picked up by the native compiler.
-	LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
-	build_line "Updating LDFLAGS=${LDFLAGS}"
-	unset LD_RUN_PATH
-	build_line "Updating LD_RUN_PATH=${LD_RUN_PATH}"
+	# Cross building bash still requires use of the host system's compiler to compile
+	# So we explicitly clear out all CFLAGS, CPPFLAGS and LDFLAGS for build.
 	CFLAGS_FOR_BUILD=""
 	build_line "Setting CFLAGS_FOR_BUILD=$CFLAGS_FOR_BUILD"
 	CPPFLAGS_FOR_BUILD=""

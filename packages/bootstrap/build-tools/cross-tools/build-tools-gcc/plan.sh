@@ -13,7 +13,7 @@ the GNU toolchain and the standard compiler for most Unix-like operating \
 systems.\
 "
 pkg_upstream_url="https://gcc.gnu.org/"
-pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
+pkg_license=('GPL-3.0-or-later WITH GCC-exception-3.1' 'LGPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff"
 pkg_dirname="${program}-${pkg_version}"
@@ -57,6 +57,8 @@ do_prepare() {
 
 	sed '/thread_header =/s/@.*@/gthr-posix.h/' -i libgcc/Makefile.in libstdc++-v3/include/Makefile.in
 
+	# The build process uses the host system's compiler (the build compiler)
+	# to compile certain components.
 	# By default LDFLAGS, CFLAGS, CPPFLAGS and CXXFLAGS get used by the
 	# build compiler. To prevent this we set *FLAGS_FOR_BUILD="" to
 	# prevent any interference with the build compiler and linker.
@@ -71,8 +73,14 @@ do_prepare() {
 	export CFLAGS_FOR_TARGET="${CFLAGS} ${EXTRA_LDFLAGS_FOR_TARGET}"
 	export CXXFLAGS_FOR_TARGET="${CXXFLAGS} ${EXTRA_LDFLAGS_FOR_TARGET}"
 
-	# We unset all flags that will interfere with the compiler
+	# To prevent the build compiler/linker from being affected by LD_RUN_PATH,
+	# we transfer its value to HAB_LD_RUN_PATH and unset LD_RUN_PATH.
+	# This allows the native-cross-binutils linker to correctly put rpath
+	# entries for glibc, isl, gmp, etc.
+	export HAB_LD_RUN_PATH="${LD_RUN_PATH}"
 	unset LD_RUN_PATH
+
+	# We unset all remaining flags that will interfere with the host compiler
 	unset LDFLAGS
 	unset CPPFLAGS
 	unset CFLAGS

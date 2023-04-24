@@ -20,7 +20,6 @@ pkg_build_deps=(
 	core/build-tools-findutils
 	core/build-tools-bash-static
 	core/build-tools-make
-	core/build-tools-patchelf
 	core/build-tools-sed
 )
 pkg_bin_dirs=(bin)
@@ -56,10 +55,4 @@ do_install() {
 	# `./configure`.
 	mv "$pkg_prefix/sbin"/* "$pkg_prefix/bin/"
 	rm -rf "$pkg_prefix/sbin"
-
-	patchelf --shrink-rpath "${pkg_prefix}/bin/getsubids"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/login"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/su"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/nologin"
-	patchelf --shrink-rpath "${pkg_prefix}/lib/libsubid.so.4.0.0"
 }

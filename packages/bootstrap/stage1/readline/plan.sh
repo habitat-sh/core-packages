@@ -20,7 +20,6 @@ pkg_build_deps=(
 	core/build-tools-make
 	core/build-tools-bash-static
 	core/build-tools-coreutils
-	core/build-tools-patchelf
 )
 
 pkg_include_dirs=(include)

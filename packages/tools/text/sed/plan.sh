@@ -10,7 +10,7 @@ typically used for extracting part of a file using pattern matching or \
 substituting multiple occurrences of a string within a file.\
 "
 pkg_upstream_url="https://www.gnu.org/software/sed/"
-pkg_license=('gplv3')
+pkg_license=("GPL-3.0-or-later")
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="f79b0cfea71b37a8eeec8490db6c5f7ae7719c35587f21edb0617f370eeff633"
 pkg_deps=(

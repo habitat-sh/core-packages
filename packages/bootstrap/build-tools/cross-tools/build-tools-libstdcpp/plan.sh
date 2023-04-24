@@ -12,7 +12,7 @@ the GNU toolchain and the standard compiler for most Unix-like operating \
 systems.\
 "
 pkg_upstream_url="https://gcc.gnu.org/"
-pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
+pkg_license=('GPL-3.0-or-later WITH GCC-exception-3.1' 'LGPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff"
 pkg_dirname="${program}-${pkg_version}"
@@ -29,6 +29,7 @@ pkg_lib_dirs=(lib)
 
 do_prepare() {
 	PATH="$(pkg_path_for native-cross-binutils)/$native_target/bin:$(pkg_path_for native-cross-gcc-base)/bin:${PATH}"
+	build_line "Updated PATH=${PATH}"
 
 	case $pkg_target in
 	aarch64-linux)

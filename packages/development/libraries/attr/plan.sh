@@ -21,7 +21,6 @@ pkg_build_deps=(
 	core/gcc
 	core/coreutils-stage1
 	core/build-tools-make
-	core/build-tools-patchelf
 	core/build-tools-perl
 	core/build-tools-sed
 )
@@ -47,8 +46,4 @@ do_check() {
 
 do_install() {
 	make install
-	patchelf --shrink-rpath "${pkg_prefix}/bin/attr"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/setfattr"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/getfattr"
-	patchelf --shrink-rpath "${pkg_prefix}/lib/libattr.so.1.1.2501"
 }

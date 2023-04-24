@@ -17,7 +17,6 @@ pkg_deps=(
 pkg_build_deps=(
 	core/gcc-stage0
 	core/build-tools-make
-	core/build-tools-patchelf
 )
 
 pkg_bin_dirs=(bin)
@@ -40,9 +39,4 @@ do_check() {
 
 do_install() {
 	make install
-	patchelf --shrink-rpath "${pkg_prefix}/bin/lzmadec"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/lzmainfo"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/xz"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/xzdec"
-	patchelf --shrink-rpath "${pkg_prefix}/lib/liblzma.so.${pkg_version}"
 }

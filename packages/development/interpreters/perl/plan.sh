@@ -7,7 +7,7 @@ Perl 5 is a highly capable, feature-rich programming language with over 29 \
 years of development.\
 "
 pkg_upstream_url="http://www.perl.org/"
-pkg_license=('GPL-1.0-or-later' 'Artistic-1.0-Perl')
+pkg_license=('Artistic-1.0 OR GPL-1.0-or-later')
 pkg_source="http://www.cpan.org/src/5.0/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="e26085af8ac396f62add8a533c3a0ea8c8497d836f0689347ac5abd7b7a4e00a"
 pkg_deps=(

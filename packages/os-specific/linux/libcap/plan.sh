@@ -23,7 +23,6 @@ pkg_build_deps=(
 	core/gcc
 	core/build-tools-grep
 	core/build-tools-make
-	core/build-tools-patchelf
 	core/build-tools-sed
 )
 
@@ -47,10 +46,4 @@ do_check() {
 
 do_install() {
 	make prefix="$pkg_prefix" lib=lib sbin=bin install
-	patchelf --shrink-rpath "${pkg_prefix}/bin/capsh"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/getcap"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/getpcaps"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/setcap"
-	patchelf --shrink-rpath "${pkg_prefix}/lib/libcap.so.${pkg_version}"
-	patchelf --shrink-rpath "${pkg_prefix}/lib/libpsx.so.${pkg_version}"
 }

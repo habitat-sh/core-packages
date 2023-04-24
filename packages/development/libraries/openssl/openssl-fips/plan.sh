@@ -10,7 +10,7 @@ designed for use in conjunction with standard OpenSSL 1.0.1 and 1.0.2 \
 distributions. \
 "
 pkg_upstream_url="https://www.openssl.org"
-pkg_license=('OpenSSL')
+pkg_license=('Apache-2.0')
 pkg_source="https://www.openssl.org/source/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="a3cd13d0521d22dd939063d3b4a0d4ce24494374b91408a05bdaca8b681c63d4"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"

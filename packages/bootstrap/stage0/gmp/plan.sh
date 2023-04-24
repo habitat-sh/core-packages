@@ -9,10 +9,14 @@ GMP is a free library for arbitrary precision arithmetic, operating on signed \
 integers, rational numbers, and floating-point numbers.\
 "
 pkg_upstream_url="https://gmplib.org"
-pkg_license=('GPL-3.0-or-later')
+pkg_license=('LGPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"
 pkg_dirname="${program}-${pkg_version}"
+
+pkg_deps=(
+	core/build-tools-gcc-libs
+)
 
 pkg_build_deps=(
 	core/gcc-stage0
@@ -33,6 +37,7 @@ do_prepare() {
 }
 
 do_build() {
+	export HAB_DEBUG=1
 	# We disable shared libraries so that when this package is used as a dependency
 	# for core/gcc-stage1, it will get linked into gcc statically. Thus gcc won't have
 	# a runtime dependency back to this library.

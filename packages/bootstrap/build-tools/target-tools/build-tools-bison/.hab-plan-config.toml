@@ -1,0 +1,6 @@
+[rules]
+# These packages are all used within scripts in gettext
+unused-dependency = { ignored_packages = [
+    "core/build-tools-m4",
+    "core/build-tools-gettext",
+] }

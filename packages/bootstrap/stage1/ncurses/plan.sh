@@ -10,7 +10,7 @@ programming interface (API) that allows the programmer to write text-based \
 user interfaces in a terminal-independent manner.\
 "
 pkg_upstream_url="https://www.gnu.org/software/ncurses/"
-pkg_license=('ncurses')
+pkg_license=('LicenseRef-ncurses')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="97fc51ac2b085d4cde31ef4d2c3122c21abc217e9090a43a30fc5ec21684e059"
 pkg_dirname="${program}-${pkg_version}"
@@ -22,7 +22,6 @@ pkg_build_deps=(
 	core/build-tools-make
 	core/build-tools-bash-static
 	core/build-tools-coreutils
-	core/build-tools-patchelf
 )
 pkg_include_dirs=(
 	include

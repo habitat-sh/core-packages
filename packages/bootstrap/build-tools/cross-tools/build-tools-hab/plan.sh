@@ -46,10 +46,12 @@ do_prepare() {
 	# Restore the original path so gcc does not interfere with the
 	# native C compiler and build process
 	PATH=$path_backup
+
+	# Remove remaining flags that will interfere with the build compiler/linker
+	unset LD_RUN_PATH
 	unset CFLAGS
 	unset CPPFLAGS
 	unset CXXFLAGS
-	unset LD_RUN_PATH
 	unset LDFLAGS
 }
 

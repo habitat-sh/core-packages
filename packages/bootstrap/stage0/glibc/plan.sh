@@ -24,6 +24,7 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
+	core/build-tools-glibc
 	core/build-tools-gcc
 	core/build-tools-bison
 	core/build-tools-python
@@ -62,13 +63,11 @@ do_prepare() {
 	# of glibc. Thanks to https://github.com/NixOS/nixpkgs/pull/137601 for the solution.
 	patch -p1 <"$PLAN_CONTEXT/hab-nss-open-files.patch"
 
-	# We cannot have RPATH set in the glibc binaries
-	unset LD_RUN_PATH
 	unset LDFLAGS
 	unset CFLAGS
 	unset CXXFLAGS
 	unset CPPFLAGS
-	build_line "Unset CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS and LD_RUN_PATH"
+	build_line "Unset CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS"
 }
 
 do_build() {
@@ -166,7 +165,7 @@ rpc: files
 EOF
 
 	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
+	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/bash
 
 	popd || exit 1
 }

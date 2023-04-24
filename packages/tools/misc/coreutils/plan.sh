@@ -10,7 +10,7 @@ utilities of the GNU operating system. These are the core utilities which are \
 expected to exist on every operating system.\
 "
 pkg_upstream_url="https://www.gnu.org/software/coreutils/"
-pkg_license=('GPL-3.0')
+pkg_license=("GPL-3.0-or-later")
 pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}.tar.xz"
 pkg_shasum="61a1f410d78ba7e7f37a5a4f50e6d1320aca33375484a3255eddf17a38580423"
 pkg_dirname="${program}-${pkg_version}"

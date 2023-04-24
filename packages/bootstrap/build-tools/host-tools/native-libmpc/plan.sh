@@ -25,8 +25,8 @@ pkg_lib_dirs=(lib)
 do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \
-		--build="$(./config.guess)" \
-		--host="$(./config.guess)" \
+		--build="$(./build-aux/config.guess)" \
+		--host="$(./build-aux/config.guess)" \
 		--disable-static
 	make
 }

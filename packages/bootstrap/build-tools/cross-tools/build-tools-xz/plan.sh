@@ -28,15 +28,6 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
-do_prepare() {
-	# XZ uses libtool which adds it's own -rpath param.
-	# This causes the LD_RUN_PATH to be ignored.
-	# So we add our own rpath via LDFLAGS which libtool respects
-	LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
-	build_line "Updating LDFLAGS=${LDFLAGS}"
-	unset LD_RUN_PATH
-}
-
 do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \

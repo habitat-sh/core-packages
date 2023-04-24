@@ -11,7 +11,7 @@ programming interface (API) that allows the programmer to write text-based \
 user interfaces in a terminal-independent manner.\
 "
 pkg_upstream_url="https://www.gnu.org/software/ncurses/"
-pkg_license=('ncurses')
+pkg_license=('LicenseRef-ncurses')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="97fc51ac2b085d4cde31ef4d2c3122c21abc217e9090a43a30fc5ec21684e059"
 pkg_dirname="${program}-${pkg_version}"
@@ -30,13 +30,14 @@ pkg_include_dirs=(
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-	# Cross building ncurses still requires use of the host system's compiler.
-	# We move the LD_RUN_PATH into the LDFLAGS instead and unset LD_RUN_PATH so
-	# it doesn't get picked up by the native compiler.
-	# We alse use the --with-build-ldflags="" to ensure the native compiler doesn't pick up rpath
-	LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
-	build_line "Updating LDFLAGS=${LDFLAGS}"
+	# During ncurses cross-building, the host system's compiler is used to compile
+	# intermediate tools. To avoid linking issues caused by the LD_RUN_PATH variable,
+	# it is unset before the build process, ensuring the correct glibc version is
+	# used and the tools run properly.  To make sure the native-cross-binutil's linker
+	# uses LD_RUN_PATH for the correct rpath, LD_RUN_PATH is assigned to HAB_LD_RUN_PATH.
+	export HAB_LD_RUN_PATH="${LD_RUN_PATH}"
 	unset LD_RUN_PATH
+	build_line "Unsetting LDFLAGS"
 }
 
 do_build() {

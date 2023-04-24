@@ -10,7 +10,7 @@ creating and managing binary programs, object files, libraries, profile data, \
 and assembly source code.\
 "
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
-pkg_license=('GPL-2.0-or-later')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.bz2"
 pkg_shasum="da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148"
 pkg_dirname="${program}-${pkg_version}"
@@ -75,7 +75,7 @@ do_build() {
 		--enable-64-bit-bfd \
 		--with-system-zlib
 
-	make tooldir="${pkg_prefix}"
+	make tooldir="${pkg_prefix}" V=1
 }
 
 do_check() {
