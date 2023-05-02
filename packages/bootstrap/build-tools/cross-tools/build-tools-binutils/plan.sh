@@ -25,6 +25,7 @@ pkg_lib_dirs=(
 pkg_deps=(
 	core/build-tools-glibc
 	core/build-tools-bash-static
+	core/hab-ld-wrapper
 )
 pkg_build_deps=(
 	core/native-cross-gcc
@@ -96,12 +97,26 @@ do_install() {
 }
 
 wrap_binary() {
-	local bin="$pkg_prefix/bin/$1"
-	build_line "Adding wrapper $bin to ${bin}.real"
-	mv -v "$bin" "${bin}.real"
+	local binary="$1"
+	local env_prefix="BUILD_TOOLS_BINUTILS"
+
+	local shell
+	shell="$(pkg_path_for build-tools-bash-static)"
+	local hab_ld_wrapper
+	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+
+	local wrapper_binary="$pkg_prefix/bin/$binary"
+	local actual_binary="$pkg_prefix/bin/$binary.real"
+
+	build_line "Adding wrapper for $binary"
+	mv -v "$wrapper_binary" "$actual_binary"
+
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
-		-e "s^@bash@^$(pkg_path_for build-tools-bash-static)/bin/bash^g" \
-		-e "s^@program@^${bin}.real^g" \
-		>"$bin"
-	chmod 755 "$bin"
+		-e "s^@shell@^${shell}/bin/sh^g" \
+		-e "s^@env_prefix@^${env_prefix}^g" \
+		-e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
+		-e "s^@program@^${actual_binary}^g" \
+		>"$wrapper_binary"
+
+	chmod 755 "$wrapper_binary"
 }

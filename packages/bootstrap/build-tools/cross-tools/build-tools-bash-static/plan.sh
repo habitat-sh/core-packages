@@ -45,6 +45,7 @@ do_build() {
 		--host="$native_target" \
 		--without-bash-malloc \
 		--enable-static-link
+	HAB_DEBUG=1
 	make
 }
 

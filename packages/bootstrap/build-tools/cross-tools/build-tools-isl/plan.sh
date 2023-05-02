@@ -49,7 +49,8 @@ do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \
 		--build="$(./config.guess)" \
-		--host="$native_target"
+		--host="$native_target" \
+		--disable-static
 	make V=1
 }
 

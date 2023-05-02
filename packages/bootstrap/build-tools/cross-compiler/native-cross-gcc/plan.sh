@@ -20,6 +20,7 @@ pkg_deps=(
 	core/build-tools-glibc
 	core/build-tools-libstdcpp
 	core/build-tools-linux-headers
+	core/hab-cc-wrapper
 )
 
 pkg_bin_dirs=(bin)
@@ -44,29 +45,53 @@ do_install() {
 }
 
 wrap_binary() {
-	local wrapper_bin="$1"
-	local real_bin
-	real_bin="$(pkg_path_for native-cross-gcc-base)/bin/$wrapper_bin"
+	local binary="$1"
+	local env_prefix="NATIVE_CROSS_GCC"
+
+	local hab_cc_wrapper
+	hab_cc_wrapper="$(pkg_path_for hab-cc-wrapper)"
+	local binutils
+	binutils="$(pkg_path_for native-cross-binutils)"
+	local gcc_base
+	gcc_base="$(pkg_path_for native-cross-gcc-base)"
+	local linux_headers
+	linux_headers="$(pkg_path_for build-tools-linux-headers)"
+	local libc
+	libc="$(pkg_path_for build-tools-glibc)"
+	local libcxx
+	libcxx="$(pkg_path_for build-tools-libstdcpp)"
+
+	local wrapper_binary="$pkg_prefix/bin/$binary"
+	local actual_binary="$gcc_base/bin/$binary"
+
 	case $native_target in
 	aarch64-hab-linux-gnu)
-		dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-aarch64.so.1"
+		dynamic_linker="$libc/lib/ld-linux-aarch64.so.1"
 		;;
 	x86_64-hab-linux-gnu)
-		dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-x86-64.so.2"
+		dynamic_linker="$libc/lib/ld-linux-x86-64.so.2"
 		;;
 	esac
 
-	build_line "Adding wrapper $pkg_prefix/bin/$wrapper_bin for $real_bin"
-	rm -v "$pkg_prefix/bin/$wrapper_bin"
-	sed "$PLAN_CONTEXT/cc-wrapper.sh" \
-		-e "s^@glibc@^$(pkg_path_for build-tools-glibc)^g" \
-		-e "s^@linux_headers@^$(pkg_path_for build-tools-linux-headers)^g" \
-		-e "s^@binutils@^$(pkg_path_for native-cross-binutils)^g" \
-		-e "s^@libstdcpp@^$(pkg_path_for build-tools-libstdcpp)^g" \
-		-e "s^@native_target@^${native_target}^g" \
-		-e "s^@dynamic_linker@^${dynamic_linker}^g" \
-		-e "s^@program@^${real_bin}^g" \
-		>"$pkg_prefix/bin/$wrapper_bin"
+	build_line "Adding wrapper for $binary"
+	# remove symbolic link first
+	rm -v "$wrapper_binary"
 
-	chmod 755 "$pkg_prefix/bin/$wrapper_bin"
+	sed "$PLAN_CONTEXT/cc-wrapper.sh" \
+		-e "s^@env_prefix@^${env_prefix}^g" \
+		-e "s^@executable_name@^${binary}^g" \
+		-e "s^@wrapper@^${hab_cc_wrapper}/bin/hab-cc-wrapper^g" \
+		-e "s^@program@^${actual_binary}^g" \
+		-e "s^@ld_bin@^${binutils}/${native_target}/bin^g" \
+		-e "s^@dynamic_linker@^${dynamic_linker}^g" \
+		-e "s^@c_start_files@^${libc}/lib^g" \
+		-e "s^@c_std_libs@^${libc}/lib^g" \
+		-e "s^@c_std_headers@^${libc}/include:${linux_headers}/include^g" \
+		-e "s^@cxx_std_libs@^${libcxx}/lib^g" \
+		-e "s^@cxx_std_headers@^${libcxx}/include/c++/${pkg_version}:${libcxx}/include/c++/${pkg_version}/${native_target}:${libcxx}/include/c++/${pkg_version}/backward^g" \
+		>"$wrapper_binary"
+
+	build_line "WRAPPER FILE: $(file "$wrapper_binary")"
+	build_line "ACTUAL FILE: $(file "$actual_binary")"
+	chmod 755 "$wrapper_binary"
 }

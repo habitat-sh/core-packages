@@ -6,4 +6,4 @@ license-not-found = { level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4
 # environment, when we use core/build-tools-gcc as a runtime dep in core/gcc-stage0
 library-dependency-not-found = { level = "off" }
 # GCC uses binutils at runtime for linking
-unused-dependency = { ignored_packages = ["core/build-tools-binutils"] }
+unused-dependency = { ignored_packages = ["core/build-tools-binutils", "core/hab-cc-wrapper"] }

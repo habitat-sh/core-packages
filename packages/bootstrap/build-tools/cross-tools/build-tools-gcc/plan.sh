@@ -26,6 +26,7 @@ pkg_deps=(
 	core/build-tools-mpfr
 	core/build-tools-libmpc
 	core/build-tools-bash-static
+	core/hab-cc-wrapper
 )
 
 pkg_build_deps=(
@@ -155,26 +156,49 @@ do_install() {
 }
 
 wrap_binary() {
-	local bin="$pkg_prefix/bin/$1"
-	build_line "Adding wrapper $bin to ${bin}.real"
-	mv -v "$bin" "${bin}.real"
+	local binary="$1"
+	local env_prefix="BUILD_TOOLS_GCC"
+
+	local shell
+	shell="$(pkg_path_for build-tools-bash-static)"
+	local hab_cc_wrapper
+	hab_cc_wrapper="$(pkg_path_for hab-cc-wrapper)"
+	local binutils
+	binutils="$(pkg_path_for build-tools-binutils)"
+	local linux_headers
+	linux_headers="$(pkg_path_for build-tools-linux-headers)"
+	local libc
+	libc="$(pkg_path_for build-tools-glibc)"
+
+	local wrapper_binary="$pkg_prefix/bin/$binary"
+	local actual_binary="$pkg_prefix/bin/$binary.real"
+
 	case $native_target in
 	aarch64-hab-linux-gnu)
-		dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-aarch64.so.1"
+		dynamic_linker="$libc/lib/ld-linux-aarch64.so.1"
 		;;
 	x86_64-hab-linux-gnu)
-		dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-x86-64.so.2"
+		dynamic_linker="$libc/lib/ld-linux-x86-64.so.2"
 		;;
 	esac
+
+	build_line "Adding wrapper for $binary"
+	mv -v "$wrapper_binary" "$actual_binary"
+
 	sed "$PLAN_CONTEXT/cc-wrapper.sh" \
-		-e "s^@bash@^$(pkg_path_for build-tools-bash-static)/bin/bash^g" \
-		-e "s^@glibc@^$(pkg_path_for build-tools-glibc)^g" \
-		-e "s^@linux_headers@^$(pkg_path_for build-tools-linux-headers)^g" \
-		-e "s^@binutils@^$(pkg_path_for build-tools-binutils)/${native_target}/bin^g" \
+		-e "s^@shell@^${shell}/bin/sh^g" \
+		-e "s^@env_prefix@^${env_prefix}^g" \
+		-e "s^@executable_name@^${binary}^g" \
+		-e "s^@wrapper@^${hab_cc_wrapper}/bin/hab-cc-wrapper^g" \
+		-e "s^@program@^${actual_binary}^g" \
+		-e "s^@ld_bin@^${binutils}/${native_target}/bin^g" \
 		-e "s^@dynamic_linker@^${dynamic_linker}^g" \
-		-e "s^@program@^${bin}.real^g" \
-		>"$bin"
-	chmod 755 "$bin"
+		-e "s^@c_start_files@^${libc}/lib^g" \
+		-e "s^@c_std_libs@^${libc}/lib^g" \
+		-e "s^@c_std_headers@^${libc}/include:${linux_headers}/include^g" \
+		>"$wrapper_binary"
+
+	chmod 755 "$wrapper_binary"
 }
 
 # Courtesy https://unix.stackexchange.com/questions/108873/removing-a-directory-from-path

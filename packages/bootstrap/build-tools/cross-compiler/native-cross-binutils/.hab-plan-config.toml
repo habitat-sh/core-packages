@@ -7,3 +7,5 @@ host-elf-interpreter = "off"
 host-script-interpreter = { ignored_files = [
     "bin/aarch64-hab-linux-gnu-ld.bfd",
 ] }
+# The hab-ld-wrapper binary is used at runtime to process arguments
+unused-dependency = { ignored_packages = ["core/hab-ld-wrapper"] }

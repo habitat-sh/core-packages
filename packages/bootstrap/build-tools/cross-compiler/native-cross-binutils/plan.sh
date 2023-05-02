@@ -15,9 +15,15 @@ pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.bz2"
 pkg_shasum="da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148"
 pkg_dirname="${program}-${pkg_version}"
+
+pkg_deps=(
+	core/hab-ld-wrapper
+)
+
 pkg_bin_dirs=(
 	bin
 )
+
 do_prepare() {
 	# Use symlinks instead of hard links to save space (otherwise `strip(1)`
 	# needs to process each hard link seperately)
@@ -47,11 +53,23 @@ do_install() {
 }
 
 wrap_binary() {
-	local bin="$pkg_prefix/bin/$1"
-	build_line "Adding wrapper $bin to ${bin}.real"
-	mv -v "$bin" "${bin}.real"
+	local binary="$1"
+	local env_prefix="NATIVE_CROSS_BINUTILS"
+
+	local hab_ld_wrapper
+	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+
+	local wrapper_binary="$pkg_prefix/bin/$binary"
+	local actual_binary="$pkg_prefix/bin/$binary.real"
+
+	build_line "Adding wrapper for $binary"
+	mv -v "$wrapper_binary" "$actual_binary"
+
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
-		-e "s^@program@^${bin}.real^g" \
-		>"$bin"
-	chmod 755 "$bin"
+		-e "s^@env_prefix@^${env_prefix}^g" \
+		-e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
+		-e "s^@program@^${actual_binary}^g" \
+		>"$wrapper_binary"
+
+	chmod 755 "$wrapper_binary"
 }
