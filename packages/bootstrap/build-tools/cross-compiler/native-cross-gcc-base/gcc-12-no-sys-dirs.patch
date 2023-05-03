@@ -1,5 +1,5 @@
---- a/gcc/cppdefault.cc	2013-01-10 21:38:27.000000000 +0100
-+++ b/gcc/cppdefault.cc	2014-08-18 16:20:32.893944536 +0200
+--- a/gcc/cppdefault.c	2013-01-10 21:38:27.000000000 +0100
++++ b/gcc/cppdefault.c	2014-08-18 16:20:32.893944536 +0200
 @@ -35,6 +35,8 @@
  # undef CROSS_INCLUDE_DIR
  #endif
@@ -9,8 +9,8 @@
  const struct default_include cpp_include_defaults[]
  #ifdef INCLUDE_DEFAULTS
  = INCLUDE_DEFAULTS;
---- a/gcc/gcc.cc	2014-03-23 12:30:57.000000000 +0100
-+++ b/gcc/gcc.cc	2014-08-18 13:19:32.689201690 +0200
+--- a/gcc/gcc.c	2014-03-23 12:30:57.000000000 +0100
++++ b/gcc/gcc.c	2014-08-18 13:19:32.689201690 +0200
 @@ -1162,10 +1162,10 @@
  /* Default prefixes to attach to command names.  */
  
