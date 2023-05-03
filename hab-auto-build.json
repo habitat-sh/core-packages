@@ -1,15 +1,17 @@
 {
-    "bootstrap_studio_package": "core/build-tools-hab-studio",
-    "studio_package": "core/hab-studio",
-    "repos": [{
-        "source": ".",
-        "native_packages": [
-            "packages/bootstrap/build-tools/cross-compiler/**",
-            "packages/bootstrap/build-tools/host-tools/**",
-            "packages/bootstrap/build-tools/cross-tools/**"
-        ],
-        "ignored_packages": [
-            "draft/**"
-        ]
-    }]
+    "repos": [
+        {
+            "id": "core",
+            "source": "../core-packages",
+            "native_packages": [
+                "packages/bootstrap/build-support/**",
+                "packages/bootstrap/build-tools/cross-compiler/**",
+                "packages/bootstrap/build-tools/host-tools/**",
+                "packages/bootstrap/build-tools/cross-tools/**"
+            ],
+            "ignored_packages": [
+                "draft/**"
+            ]
+        }
+    ]
 }
