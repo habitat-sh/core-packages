@@ -41,5 +41,5 @@ do_install() {
 	make install
 
 	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
+	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/bash
 }
