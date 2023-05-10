@@ -74,7 +74,7 @@ do_prepare() {
 	# build directory, which will contain the build shared Perl library.
 	#
 	# Thanks to: http://perl5.git.perl.org/perl.git/blob/c52cb8175c7c08890821789b4c7177b1e0e92558:/INSTALL#l478
-	LD_LIBRARY_PATH="$(pwd):$LD_RUN_PATH"
+	LD_LIBRARY_PATH="${SRC_PATH}:$LD_RUN_PATH"
 	export LD_LIBRARY_PATH
 	build_line "Setting LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 }

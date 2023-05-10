@@ -5,7 +5,8 @@ pkg_version="2.38.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Miscellaneous system utilities for Linux"
 pkg_upstream_url="https://www.kernel.org/pub/linux/utils/util-linux"
-pkg_license=('GPLv2-or-later')
+# https://git.kernel.org/pub/scm/utils/util-linux/util-linux.git/tree/README.licensing
+pkg_license=("GPL-2.0-only" "GPL-2.0-or-later" "LGPL-2.1-or-later" "GPL-3.0-or-later" "BSD-2-Clause" "BSD-3-Clause" "BSD-4-Clause-UC")
 pkg_source="https://www.kernel.org/pub/linux/utils/${program}/v${pkg_version%.?}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="60492a19b44e6cf9a3ddff68325b333b8b52b6c59ce3ebd6a0ecaa4c5117e84f"
 pkg_dirname="${program}-${pkg_version}"

@@ -24,11 +24,12 @@ pkg_lib_dirs=(
 pkg_deps=(
 	core/glibc
 	core/bash-static
+	core/hab-ld-wrapper
 	core/gcc-libs-stage1
 )
 pkg_build_deps=(
 	core/flex-stage1
-	core/gcc-stage1
+	core/gcc-stage1-with-glibc
 	core/zlib-stage1
 	core/bzip2-stage0
 	core/build-tools-texinfo
@@ -39,23 +40,6 @@ pkg_build_deps=(
 )
 
 do_prepare() {
-	# Change the dynamic linker and glibc library to link against core/glibc
-	case $pkg_target in
-	aarch64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1"
-		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
-		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
-		;;
-	x86_64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
-		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
-		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
-		;;
-	esac
-	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc)"
-	export HAB_GCC_STAGE1_GLIBC_PKG_PATH
-	build_line "Setting HAB_GCC_STAGE1_GLIBC_PKG_PATH=${HAB_GCC_STAGE1_GLIBC_PKG_PATH}"
-
 	# We don't want to search for libraries in system directories such as `/lib`,
 	# `/usr/local/lib`, etc. This prevents us breaking out of habitat.
 	echo 'NATIVE_LIB_DIRS=' >>ld/configure.tgt
@@ -76,7 +60,8 @@ do_prepare() {
 do_build() {
 	./configure \
 		--prefix=$pkg_prefix \
-		--enable-gold \
+		--enable-gold=yes \
+		--enable-gprofng=no \
 		--enable-ld=default \
 		--enable-shared \
 		--enable-plugins \
@@ -86,7 +71,6 @@ do_build() {
 		--enable-new-dtags \
 		--enable-64-bit-bfd \
 		--with-system-zlib
-
 	make tooldir="${pkg_prefix}" V=1
 }
 
@@ -108,12 +92,29 @@ do_install() {
 }
 
 wrap_binary() {
-	local bin="$pkg_prefix/bin/$1"
-	build_line "Adding wrapper $bin to ${bin}.real"
-	mv -v "$bin" "${bin}.real"
+	local binary
+	local env_prefix
+	local shell
+	local hab_ld_wrapper
+	local wrapper_binary
+	local actual_binary
+
+	binary="$1"
+	env_prefix="BINUTILS_STAGE1"
+	shell="$(pkg_path_for bash-static)"
+	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+	wrapper_binary="$pkg_prefix/bin/$binary"
+	actual_binary="$pkg_prefix/bin/$binary.real"
+
+	build_line "Adding wrapper for $binary"
+	mv -v "$wrapper_binary" "$actual_binary"
+
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
-		-e "s^@bash@^$(pkg_path_for build-tools-bash-static)/bin/bash^g" \
-		-e "s^@program@^${bin}.real^g" \
-		>"$bin"
-	chmod 755 "$bin"
+		-e "s^@shell@^${shell}/bin/sh^g" \
+		-e "s^@env_prefix@^${env_prefix}^g" \
+		-e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
+		-e "s^@program@^${actual_binary}^g" \
+		>"$wrapper_binary"
+
+	chmod 755 "$wrapper_binary"
 }

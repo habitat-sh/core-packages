@@ -17,8 +17,7 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
 	core/glibc
-	core/linux-headers
-	core/gcc-stage1
+	core/gcc-stage1-with-glibc
 	core/build-tools-make
 	core/build-tools-bash-static
 	core/build-tools-coreutils
@@ -28,25 +27,6 @@ pkg_include_dirs=(
 	include/ncursesw
 )
 pkg_lib_dirs=(lib)
-
-do_prepare() {
-	# Change the dynamic linker and glibc library to link against core/glibc
-	case $pkg_target in
-	aarch64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1"
-		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
-		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
-		;;
-	x86_64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
-		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
-		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
-		;;
-	esac
-	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc)"
-	export HAB_GCC_STAGE1_GLIBC_PKG_PATH
-	build_line "Setting HAB_GCC_STAGE1_GLIBC_PKG_PATH=${HAB_GCC_STAGE1_GLIBC_PKG_PATH}"
-}
 
 do_build() {
 	./configure \
@@ -62,6 +42,9 @@ do_build() {
 do_install() {
 	make install
 	rm -rf "${pkg_prefix:?}/bin"
+
+	# We create a link script so anyone linking against libcurses.a
+	# will link to libncursesw.a instead
 	echo "INPUT(-lncursesw)" >"$pkg_prefix/lib/libcurses.a"
 
 	# Packages depending on curses or ncurses may include headers

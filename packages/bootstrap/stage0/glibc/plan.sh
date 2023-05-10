@@ -45,6 +45,11 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
+	unset LDFLAGS
+	unset CFLAGS
+	unset CXXFLAGS
+	unset CPPFLAGS
+
 	# Don't use the system's `/etc/ld.so.cache` and `/etc/ld.so.preload`, but
 	# rather the version under `$pkg_prefix/etc`.
 	#
@@ -63,11 +68,10 @@ do_prepare() {
 	# of glibc. Thanks to https://github.com/NixOS/nixpkgs/pull/137601 for the solution.
 	patch -p1 <"$PLAN_CONTEXT/hab-nss-open-files.patch"
 
-	unset LDFLAGS
-	unset CFLAGS
-	unset CXXFLAGS
-	unset CPPFLAGS
-	build_line "Unset CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS"
+	build_line "Unsetting LDFLAGS"
+	build_line "Unsetting CFLAGS"
+	build_line "Unsetting CXXFLAGS"
+	build_line "Unsetting CPPFLAGS"
 }
 
 do_build() {

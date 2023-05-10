@@ -1,0 +1,13 @@
+[rules]
+missing-license = { level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff" }
+license-not-found = { level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff" }
+# The build system specifically adds rpaths entries for $pkg_prefix/lib and $pkg_prefix/lib64 folders.
+# TODO: Find out why they are needed, though we still cannot remove them using our hab-ld-wrapper.
+unused-runpath-entry = { ignored_files = [
+    "lib64/lib{atomic,cc1,itm,ssp,gomp,stdc++}.so*",
+    "lib/gcc/*/*/plugin/lib{cp1,cc1}plugin.so*",
+] }
+# hab-cc-wrapper is used at runtime
+unused-dependency = { ignored_packages = [
+    "core/hab-cc-wrapper",
+] }

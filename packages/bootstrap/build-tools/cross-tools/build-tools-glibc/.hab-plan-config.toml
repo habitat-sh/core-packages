@@ -8,5 +8,3 @@ unused-dependency = { ignored_packages = ["core/build-tools-linux-headers"] }
 # needs to be /bin/bash, but we haven't built bash yet. Since this package is
 # only intended to be used within a studio where /bin/bash will be binlinked we let this pass
 host-script-interpreter = { ignored_files = ["bin/tzselect", "bin/ldd"] }
-# The glibc libc library is also an executable and hence has an interpreter
-unexpected-elf-interpreter = { ignored_files = ["lib/libc.*"] }

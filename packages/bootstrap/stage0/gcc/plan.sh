@@ -1,5 +1,4 @@
 program="gcc"
-native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="gcc-stage0"
 pkg_origin="core"
@@ -23,8 +22,9 @@ pkg_deps=(
 
 do_prepare() {
 	local libc
-	libc="$(pkg_path_for glibc-stage0)"
 	local linux_headers
+
+	libc="$(pkg_path_for glibc-stage0)"
 	linux_headers="$(pkg_path_for linux-headers)"
 	case $pkg_target in
 	aarch64-linux)

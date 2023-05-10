@@ -84,16 +84,19 @@ do_install() {
 }
 
 wrap_binary() {
-	local binary="$1"
-	local env_prefix="BINUTILS_STAGE0"
-
+	local binary
+	local env_prefix
 	local shell
-	shell="$(pkg_path_for build-tools-bash-static)"
 	local hab_ld_wrapper
-	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+	local wrapper_binary
+	local actual_binary
 
-	local wrapper_binary="$pkg_prefix/bin/$binary"
-	local actual_binary="$pkg_prefix/bin/$binary.real"
+	binary="$1"
+	env_prefix="BINUTILS_STAGE0"
+	shell="$(pkg_path_for build-tools-bash-static)"
+	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+	wrapper_binary="$pkg_prefix/bin/$binary"
+	actual_binary="$pkg_prefix/bin/$binary.real"
 
 	build_line "Adding wrapper for $binary"
 	mv -v "$wrapper_binary" "$actual_binary"

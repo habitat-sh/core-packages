@@ -33,7 +33,6 @@ do_prepare() {
 }
 
 do_build() {
-	export HAB_DEBUG=1
 	# We disable shared libraries so that when this package is used as a dependency
 	# for core/gcc-stage1, it will get linked into gcc statically. Thus gcc won't have
 	# a runtime dependency back to this library.

@@ -18,7 +18,7 @@ pkg_deps=(
 	core/native-cross-binutils
 	core/native-cross-gcc-base
 	core/build-tools-glibc
-	core/build-tools-libstdcpp
+	core/build-tools-libstdcxx
 	core/build-tools-linux-headers
 	core/hab-cc-wrapper
 )
@@ -45,24 +45,27 @@ do_install() {
 }
 
 wrap_binary() {
-	local binary="$1"
-	local env_prefix="NATIVE_CROSS_GCC"
-
+	local binary
+	local env_prefix
 	local hab_cc_wrapper
-	hab_cc_wrapper="$(pkg_path_for hab-cc-wrapper)"
 	local binutils
-	binutils="$(pkg_path_for native-cross-binutils)"
 	local gcc_base
-	gcc_base="$(pkg_path_for native-cross-gcc-base)"
 	local linux_headers
-	linux_headers="$(pkg_path_for build-tools-linux-headers)"
 	local libc
-	libc="$(pkg_path_for build-tools-glibc)"
 	local libcxx
-	libcxx="$(pkg_path_for build-tools-libstdcpp)"
+	local wrapper_binary
+	local actual_binary
 
-	local wrapper_binary="$pkg_prefix/bin/$binary"
-	local actual_binary="$gcc_base/bin/$binary"
+	binary="$1"
+	env_prefix="NATIVE_CROSS_GCC"
+	hab_cc_wrapper="$(pkg_path_for hab-cc-wrapper)"
+	binutils="$(pkg_path_for native-cross-binutils)"
+	gcc_base="$(pkg_path_for native-cross-gcc-base)"
+	linux_headers="$(pkg_path_for build-tools-linux-headers)"
+	libc="$(pkg_path_for build-tools-glibc)"
+	libcxx="$(pkg_path_for build-tools-libstdcxx)"
+	wrapper_binary="$pkg_prefix/bin/$binary"
+	actual_binary="$gcc_base/bin/$binary"
 
 	case $native_target in
 	aarch64-hab-linux-gnu)
@@ -91,7 +94,5 @@ wrap_binary() {
 		-e "s^@cxx_std_headers@^${libcxx}/include/c++/${pkg_version}:${libcxx}/include/c++/${pkg_version}/${native_target}:${libcxx}/include/c++/${pkg_version}/backward^g" \
 		>"$wrapper_binary"
 
-	build_line "WRAPPER FILE: $(file "$wrapper_binary")"
-	build_line "ACTUAL FILE: $(file "$actual_binary")"
 	chmod 755 "$wrapper_binary"
 }

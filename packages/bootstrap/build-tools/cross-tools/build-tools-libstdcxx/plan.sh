@@ -1,7 +1,7 @@
 program="gcc"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
-pkg_name="build-tools-libstdcpp"
+pkg_name="build-tools-libstdcxx"
 pkg_origin="core"
 pkg_version="12.2.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -28,26 +28,38 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-	PATH="$(pkg_path_for native-cross-binutils)/$native_target/bin:$(pkg_path_for native-cross-gcc-base)/bin:${PATH}"
-	build_line "Updated PATH=${PATH}"
+	local binutils
+	local gcc
+	local libc
+	local final_path
+
+	# We put the native-cross-binutils and native-cross-gcc-base bin directories first on our path to ensure
+	# that our wrapped linker gets picked up by the cross compiler as 'ld'. At this stage we cannot wrap the compiler
+	# as our cc-wrapper.sh script requires glibc's final path.
+	binutils="$(pkg_path_for native-cross-binutils)"
+	gcc="$(pkg_path_for native-cross-gcc-base)"
+	libc="$(pkg_path_for build-tools-glibc)"
+	final_path="${binutils}/${native_target}/bin:${gcc}/bin:${PATH}"
+	export PATH="${final_path}"
 
 	case $pkg_target in
 	aarch64-linux)
-		dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-aarch64.so.1"
+		dynamic_linker="${libc}/lib/ld-linux-aarch64.so.1"
 		;;
 	x86_64-linux)
-		dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-aarch64.so.1"
+		dynamic_linker="${libc}/lib/ld-linux-aarch64.so.1"
 		;;
 	esac
-
-	# Specify the dynamic linker and to point to our glibc
-	LDFLAGS="${LDFLAGS} -Wl,--dynamic-linker=$dynamic_linker"
-	build_line "Setting LDFLAGS=$LDFLAGS"
+	# Specify the dynamic linker to point to our glibc
+	export LDFLAGS="${LDFLAGS} -Wl,--dynamic-linker=$dynamic_linker"
 	# Ensure that the cross linker 'ld' finds the crt{i,n,1}.o files in our glibc package
-	CFLAGS="${CFLAGS} -B$(pkg_path_for build-tools-glibc)/lib"
-	CXXFLAGS="${CXXFLAGS} -B$(pkg_path_for build-tools-glibc)/lib"
+	export CFLAGS="${CFLAGS} -B${libc}/lib"
+	export CXXFLAGS="${CXXFLAGS} -B${libc}/lib"
 
+	build_line "Setting PATH=${PATH}"
+	build_line "Setting LDFLAGS=$LDFLAGS"
 	build_line "Setting CFLAGS=$CFLAGS"
+	build_line "Setting CXXFLAGS=$CXXFLAGS"
 }
 
 do_build() {

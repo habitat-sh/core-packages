@@ -1,5 +1,4 @@
 program="xz"
-native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="xz"
 pkg_origin="core"

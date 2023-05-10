@@ -31,11 +31,15 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
-do_build() {
-	pushd unix >/dev/null || exit 1
-
+do_prepare() {
 	# Link libgcc_s so that libpthread works
 	export LDFLAGS="-lgcc_s ${LDFLAGS}"
+
+	build_line "Setting LDFLAGS=${LDFLAGS}"
+}
+
+do_build() {
+	pushd unix >/dev/null || exit 1
 
 	./configure \
 		--prefix="$pkg_prefix" \
@@ -50,9 +54,13 @@ do_build() {
 	#
 	# Thanks to: https://clfs.org/~kb0iic/lfs-systemd/chapter08/tcl.html
 	local srcdir
+	local tdbcver
+	local itclver
+
 	srcdir=$(abspath ..)
-	local tdbcver=tdbc1.1.3
-	local itclver=itcl4.2.2
+	tdbcver="tdbc1.1.3"
+	itclver="itcl4.2.2"
+
 	sed \
 		-e "s#$srcdir/unix#$pkg_prefix/lib#" \
 		-e "s#$srcdir#$pkg_prefix/include#" \

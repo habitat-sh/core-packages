@@ -1,9 +1,5 @@
 [rules]
 missing-license = { level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff" }
 license-not-found = { level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff" }
-# We require core/build-tools-glibc to be manually included in every plan that uses
-# core/build-tools-gcc. This is so that we do not have multiple glibcs in the runtime
-# environment, when we use core/build-tools-gcc as a runtime dep in core/gcc-stage0
-library-dependency-not-found = { level = "off" }
 # GCC uses binutils at runtime for linking
 unused-dependency = { ignored_packages = ["core/build-tools-binutils", "core/hab-cc-wrapper"] }

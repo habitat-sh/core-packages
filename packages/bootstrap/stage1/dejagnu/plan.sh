@@ -20,7 +20,7 @@ pkg_deps=(
 	core/build-tools-gawk
 )
 pkg_build_deps=(
-	core/gcc-stage1
+	core/gcc-stage1-with-glibc
 	core/build-tools-diffutils
 	core/build-tools-patch
 	core/build-tools-make

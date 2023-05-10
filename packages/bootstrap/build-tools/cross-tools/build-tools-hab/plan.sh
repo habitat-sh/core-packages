@@ -34,18 +34,13 @@ do_unpack() {
 
 do_prepare() {
 	build_type="--release"
-	build_line "Building artifacts with \`${build_type#--}' mode"
 	export CARGO_HOME="$HAB_CACHE_SRC_PATH/$pkg_dirname/.cargo"
-	build_line "Setting CARGO_HOME=$CARGO_HOME"
 	export CARGO_TARGET_DIR="$HAB_CACHE_SRC_PATH/$pkg_dirname/target"
-	build_line "Setting CARGO_TARGET_DIR=$CARGO_TARGET_DIR"
-
 	export rustc_target="${TARGET_ARCH:-${pkg_target%%-*}}-unknown-linux-gnu"
-	build_line "Setting rustc_target=$rustc_target"
 
 	# Restore the original path so gcc does not interfere with the
 	# native C compiler and build process
-	PATH=$path_backup
+	export PATH=$path_backup
 
 	# Remove remaining flags that will interfere with the build compiler/linker
 	unset LD_RUN_PATH
@@ -53,11 +48,21 @@ do_prepare() {
 	unset CPPFLAGS
 	unset CXXFLAGS
 	unset LDFLAGS
+
+	build_line "Building artifacts with \`${build_type#--}' mode"
+	build_line "Setting CARGO_HOME=$CARGO_HOME"
+	build_line "Setting CARGO_TARGET_DIR=$CARGO_TARGET_DIR"
+	build_line "Setting rustc_target=$rustc_target"
+	build_line "Unsetting LD_RUN_PATH"
+	build_line "Unsetting CFLAGS"
+	build_line "Unsetting CPPFLAGS"
+	build_line "Unsetting CXXFLAGS"
+	build_line "Unsetting LDFLAGS"
 }
 
 do_build() {
 	pushd "$SRC_PATH" >/dev/null || exit
-	cargo build ${build_type#--debug} --target="$rustc_target" --verbose --bin hab
+	cargo build "${build_type}" --target="$rustc_target" --verbose --bin hab
 	popd >/dev/null || exit
 }
 
@@ -70,7 +75,7 @@ do_install() {
 		dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-x86-64.so.2"
 		;;
 	esac
-	install -v -D "$CARGO_TARGET_DIR"/"$rustc_target"/${build_type#--}/$bin "$pkg_prefix"/bin/$bin
+	install -v -D "$CARGO_TARGET_DIR"/"$rustc_target"/"${build_type#--}"/$bin "$pkg_prefix"/bin/$bin
 	patchelf --set-rpath "$(pkg_path_for build-tools-glibc)/lib:$(pkg_path_for build-tools-gcc-libs)/lib" --set-interpreter "$dynamic_linker" "$pkg_prefix"/bin/$bin
 }
 

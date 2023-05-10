@@ -30,11 +30,12 @@ pkg_bin_dirs=(bin)
 do_prepare() {
 	# Cross building bash still requires use of the host system's compiler to compile
 	# So we explicitly clear out all CFLAGS, CPPFLAGS and LDFLAGS for build.
-	CFLAGS_FOR_BUILD=""
+	export CFLAGS_FOR_BUILD=""
+	export CPPFLAGS_FOR_BUILD=""
+	export LDFLAGS_FOR_BUILD=""
+
 	build_line "Setting CFLAGS_FOR_BUILD=$CFLAGS_FOR_BUILD"
-	CPPFLAGS_FOR_BUILD=""
 	build_line "Setting CPPFLAGS_FOR_BUILD=$CPPFLAGS_FOR_BUILD"
-	LDFLAGS_FOR_BUILD=""
 	build_line "Setting LDFLAGS_FOR_BUILD=$LDFLAGS_FOR_BUILD"
 }
 
@@ -45,7 +46,6 @@ do_build() {
 		--host="$native_target" \
 		--without-bash-malloc \
 		--enable-static-link
-	HAB_DEBUG=1
 	make
 }
 

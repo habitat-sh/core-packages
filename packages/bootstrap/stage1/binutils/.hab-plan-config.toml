@@ -1,2 +1,9 @@
 [rules]
 missing-license = { level = "off", source-shasum = "da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148" }
+# The core/gcc-libs-stage1 lib folder is added extraneously for a lot of binaries because it is linked --as-needed
+# for these binaries. Since core/gcc-libs-stage1 is in the deps, it gets added in.
+unused-runpath-entry = { level = "off" }
+unused-dependency = { ignored_packages = [
+    "core/hab-ld-wrapper",
+    "core/bash-static",
+] }

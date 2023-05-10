@@ -31,9 +31,11 @@ pkg_pconfig_dirs=(lib/pkgconfig)
 do_prepare() {
 	patch -p1 <"$PLAN_CONTEXT/hab-ssl-cert-file.patch"
 	export CROSS_SSL_ARCH="${native_target}"
+	build_line "Setting CROSS_SSL_ARCH=${CROSS_SSL_ARCH}"
 }
 
 do_build() {
+	local openssl_arch
 	case $native_target in
 	aarch64-hab-linux-gnu)
 		openssl_arch="linux-aarch64"
