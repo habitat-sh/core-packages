@@ -23,7 +23,11 @@ pkg_build_deps=(
 	core/build-tools-gcc
 )
 pkg_bin_dirs=(bin)
-
+#Applying patch for gnulib error with newer glibc.
+#can be removed if the next version of texinfo, releases with fix
+do_prepare() {
+    patch -p1 < "$PLAN_CONTEXT/glibc-2.34-fix.patch"
+}
 do_build() {
 	./configure --prefix="$pkg_prefix"
 	make
