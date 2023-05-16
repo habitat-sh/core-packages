@@ -1,0 +1,6 @@
+[rules]
+# This is used to disable license-based warnings. A specific source SHA is required so that the rule
+# exception is disregarded if the sources change. Ideally, a packager should re-evaluate the licensing information
+# whenever the sources change.
+missing-license = { level = "off", source-shasum = "0d9ade222c64e912d6957b11c923e214e2e010a18f39bec102f572e693ba2867" }
+license-not-found = { level = "off", source-shasum = "0d9ade222c64e912d6957b11c923e214e2e010a18f39bec102f572e693ba2867" }
