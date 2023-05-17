@@ -3,7 +3,7 @@ native_target="${pkg_target%%-*}-unknown-linux-gnu"
 
 pkg_name="gcc-base"
 pkg_origin="core"
-pkg_version="12.2.0"
+pkg_version="9.4.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \
@@ -12,9 +12,9 @@ the GNU toolchain and the standard compiler for most Unix-like operating \
 systems.\
 "
 pkg_upstream_url="https://gcc.gnu.org/"
-pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
+pkg_license=('GPL-3.0-or-later WITH GCC-exception-3.1' 'LGPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}/${program}-${pkg_version}.tar.xz"
-pkg_shasum="e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff"
+pkg_shasum="c95da32f440378d7751dd95533186f7fc05ceb4fb65eb5b85234e6299eb9838e"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
@@ -101,9 +101,9 @@ do_prepare() {
 	# Tell gcc not to look under the default `/lib/` and `/usr/lib/` directories
 	# for libraries
 	#
-	# Thanks to: https://raw.githubusercontent.com/NixOS/nixpkgs/release-22.05/pkgs/development/compilers/gcc/gcc-12-no-sys-dirs.patch
+	# Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/compilers/gcc/no-sys-dirs.patch
 	# shellcheck disable=SC2002
-	patch -p1 <"$PLAN_CONTEXT/gcc-12-no-sys-dirs.patch"
+	patch -p1 <"$PLAN_CONTEXT/no-sys-dirs.patch"
 }
 
 do_build() {
