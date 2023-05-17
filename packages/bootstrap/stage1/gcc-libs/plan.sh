@@ -1,6 +1,6 @@
 pkg_name="gcc-libs-stage1"
 pkg_origin="core"
-pkg_version="12.2.0"
+pkg_version="9.4.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Runtime libraries shipped by GCC."
 pkg_upstream_url="https://gcc.gnu.org/"
