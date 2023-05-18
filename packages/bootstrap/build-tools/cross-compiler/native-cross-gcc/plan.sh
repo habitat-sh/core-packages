@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="native-cross-gcc"
 pkg_origin="core"
-pkg_version="12.2.0"
+pkg_version="9.4.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \

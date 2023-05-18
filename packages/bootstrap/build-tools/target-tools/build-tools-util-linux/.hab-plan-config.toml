@@ -1,5 +1,5 @@
 [rules]
-license-not-found = { level = "off", source-shasum = "60492a19b44e6cf9a3ddff68325b333b8b52b6c59ce3ebd6a0ecaa4c5117e84f" }
-missing-license = { level = "off", source-shasum = "60492a19b44e6cf9a3ddff68325b333b8b52b6c59ce3ebd6a0ecaa4c5117e84f" }
+license-not-found = { level = "off", source-shasum = "bd07b7e98839e0359842110525a3032fdb8eaf3a90bedde3dd1652d32d15cce5" }
+missing-license = { level = "off", source-shasum = "bd07b7e98839e0359842110525a3032fdb8eaf3a90bedde3dd1652d32d15cce5" }
 # ignore examples with host script interpreters
 host-script-interpreter = { ignored_files = ["*-example.{bash,tcsh}"] }

@@ -1,6 +1,6 @@
 [rules]
-missing-license = { level = "off", source-shasum="c076fb4d029c74073f15c43361ef572cfb868407d347190ba834af3b1639b0e4" }
-license-not-found = { level = "off", source-shasum="c076fb4d029c74073f15c43361ef572cfb868407d347190ba834af3b1639b0e4" }
+missing-license = { level = "off", source-shasum="13e532c7b364f7d57e23dfeea3147103150cb90593a57af86c10e4f6e411603f" }
+license-not-found = { level = "off", source-shasum="13e532c7b364f7d57e23dfeea3147103150cb90593a57af86c10e4f6e411603f" }
 library-dependency-not-found = "off"
 host-elf-interpreter = "off"
 # Most host system linkers utilize the LD_RUN_PATH environment variable to set 

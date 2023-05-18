@@ -2,7 +2,7 @@ program="gcc"
 
 pkg_name="gcc-stage0"
 pkg_origin="core"
-pkg_version="12.2.0"
+pkg_version="9.4.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \

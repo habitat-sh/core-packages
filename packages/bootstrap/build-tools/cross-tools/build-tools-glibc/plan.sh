@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-glibc"
 pkg_origin="core"
-pkg_version="2.36"
+pkg_version="2.34"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU C Library project provides the core libraries for the GNU system and \
@@ -16,7 +16,7 @@ dlopen, pthread_create, crypt, login, exit and more.\
 pkg_upstream_url="https://www.gnu.org/software/libc"
 pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
-pkg_shasum="1c959fea240906226062cb4b1e7ebce71a9f0e3c0836c09e7e3423d434fcfe75"
+pkg_shasum="44d26a1fe20b8853a48f470ead01e4279e869ac149b195dda4e44a195d981ab2"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/build-tools-linux-headers
@@ -73,7 +73,7 @@ do_build() {
 		--host="$native_target" \
 		--with-headers="$(pkg_path_for build-tools-linux-headers)/include" \
 		--sysconfdir="$pkg_prefix/etc" \
-		--enable-kernel=5.4 \
+		--enable-kernel=3.2 \
 		libc_cv_slibdir="$pkg_prefix"/lib \
 		libc_cv_rootsbindir="$pkg_prefix"/bin
 

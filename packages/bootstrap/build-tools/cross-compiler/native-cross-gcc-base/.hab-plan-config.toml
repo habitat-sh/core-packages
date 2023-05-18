@@ -1,6 +1,6 @@
 [rules]
-missing-license = { level = "off", source-shasum="e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff" }
-license-not-found = { level = "off", source-shasum="e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff" }
+missing-license = { level = "off", source-shasum="c95da32f440378d7751dd95533186f7fc05ceb4fb65eb5b85234e6299eb9838e" }
+license-not-found = { level = "off", source-shasum="c95da32f440378d7751dd95533186f7fc05ceb4fb65eb5b85234e6299eb9838e" }
 host-elf-interpreter = "off"
 library-dependency-not-found = "off"
 # GCC uses binutils binaries at runtime

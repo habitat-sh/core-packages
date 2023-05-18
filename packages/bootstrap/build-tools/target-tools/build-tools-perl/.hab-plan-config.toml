@@ -1,8 +1,8 @@
 [rules]
-missing-license = { level = "off", source-shasum = "e26085af8ac396f62add8a533c3a0ea8c8497d836f0689347ac5abd7b7a4e00a" }
-license-not-found = { level = "off", source-shasum = "e26085af8ac396f62add8a533c3a0ea8c8497d836f0689347ac5abd7b7a4e00a" }
+missing-license = { level = "off", source-shasum = "551efc818b968b05216024fb0b727ef2ad4c100f8cb6b43fab615fa78ae5be9a" }
+license-not-found = { level = "off", source-shasum = "551efc818b968b05216024fb0b727ef2ad4c100f8cb6b43fab615fa78ae5be9a" }
 # Perl handles the shebangs itself in certain scripts. So `#!perl` and `#!./perl` are considered valid.
 # https://stackoverflow.com/questions/45949339/how-does-perl-handle-the-shebang-line
 script-interpreter-not-found = { ignored_files = [
-    "lib/perl5/5.36/core_perl/*",
+    "lib/perl5/5.34/core_perl/*",
 ] }
