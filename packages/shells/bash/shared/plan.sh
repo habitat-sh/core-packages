@@ -28,11 +28,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/bison
-	core/coreutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/shadow
 	core/expect-stage1
 	core/build-tools-perl
@@ -43,7 +39,7 @@ do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \
 		--with-curses \
-		--enable-readline \
+		--with-installed-readline="$(pkg_path_for readline)/lib" \
 		--without-bash-malloc
 	make
 }

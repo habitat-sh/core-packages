@@ -17,14 +17,9 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
 	core/glibc
-	core/bash-static
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/build-tools-gettext
 )
 pkg_bin_dirs=(bin)
@@ -46,6 +41,4 @@ do_check() {
 
 do_install() {
 	make install
-	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/bash-static bin/sh
 }

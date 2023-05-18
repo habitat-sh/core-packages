@@ -13,7 +13,6 @@ pkg_dirname="${pkg_name}-${pkg_version}"
 
 pkg_build_deps=(
 	core/coreutils
-	core/make
 	core/gcc
 	core/which
 	core/pkg-config

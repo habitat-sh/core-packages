@@ -15,7 +15,6 @@ pkg_deps=()
 
 pkg_build_deps=(
 	core/coreutils
-	core/gcc
 	core/perl
 	core/protobuf
 	core/rust/1.62.1
@@ -43,7 +42,7 @@ do_prepare() {
 
 	if [ -z "$HAB_CARGO_TARGET_DIR" ]; then
 		# Used by Cargo to use a pristine, isolated directory for all compilation
-		export CARGO_TARGET_DIR="$HAB_CACHE_SRC_PATH/$pkg_dirname"
+		export CARGO_TARGET_DIR="$HAB_CACHE_SRC_PATH/$pkg_dirname/target"
 	else
 		export CARGO_TARGET_DIR="$HAB_CARGO_TARGET_DIR"
 	fi

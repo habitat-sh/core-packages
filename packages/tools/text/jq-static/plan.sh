@@ -11,10 +11,8 @@ pkg_shasum=5de8c8e29aaa3fb9cc6b47bb27299f271354ebb72514e3accadc7d38b5bbaa72
 pkg_dirname=${pkg_name}-${pkg_version}
 pkg_deps=()
 pkg_build_deps=(
-	core/coreutils
 	core/wget
 	core/gcc
-	core/make
 	core/oniguruma
 )
 pkg_bin_dirs=(bin)

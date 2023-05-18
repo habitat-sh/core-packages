@@ -12,14 +12,9 @@ pkg_deps=(
 	core/gmp
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/grep
-	core/m4
-	core/make
 	core/pkg-config
-	core/sed
-	core/valgrind-stage1
+	core/valgrind
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)

@@ -20,9 +20,7 @@ pkg_deps=(
 pkg_build_deps=(
 	core/gcc
 	core/coreutils-stage1
-	core/build-tools-make
 	core/build-tools-perl
-	core/build-tools-sed
 )
 
 pkg_bin_dirs=(bin)

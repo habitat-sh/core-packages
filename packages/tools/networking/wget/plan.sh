@@ -27,10 +27,7 @@ pkg_build_deps=(
 	core/coreutils
 	core/gcc
 	core/gettext
-	core/grep
-	core/make
 	core/pkg-config
-	core/sed
 	core/build-tools-perl
 )
 

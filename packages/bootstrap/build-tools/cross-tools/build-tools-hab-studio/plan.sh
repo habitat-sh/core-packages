@@ -57,6 +57,5 @@ do_install() {
 
 	cp -rv "${SRC_PATH}/components/studio/defaults" "${pkg_prefix}"
 
-	# Fix scripts
 	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
 }

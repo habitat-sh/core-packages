@@ -19,11 +19,7 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/build-tools-perl
 )
 
@@ -33,15 +29,19 @@ pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
+	local perl
+	perl="$(pkg_path_for core/build-tools-perl)"
+
+	export CROSS_SSL_ARCH="${native_target}"
+	export PERL="${perl}/bin/perl"
+
 	patch -p1 <"$PLAN_CONTEXT/hab-ssl-cert-file.patch"
 
 	# Apply all reported CVE patches for OpenSSL version 3.0.7
 	# https://www.openssl.org/news/vulnerabilities-3.0.html
 	patch -p1 <"$PLAN_CONTEXT/CVE-2022-3996.patch"
 
-	export CROSS_SSL_ARCH="${native_target}"
-	PERL=$(pkg_path_for core/build-tools-perl)/bin/perl
-	export PERL
+	build_line "Setting CROSS_SSL_ARCH=${CROSS_SSL_ARCH}"
 	build_line "Setting PERL=${PERL}"
 }
 

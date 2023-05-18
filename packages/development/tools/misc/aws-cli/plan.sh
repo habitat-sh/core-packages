@@ -13,10 +13,6 @@ pkg_deps=(
 	core/groff
 	core/python
 )
-pkg_build_deps=(
-	core/gawk
-	core/sed
-)
 
 pkg_bin_dirs=(bin)
 

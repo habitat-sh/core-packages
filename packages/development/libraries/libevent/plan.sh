@@ -17,7 +17,6 @@ pkg_deps=(
 pkg_build_deps=(
 	core/cacerts
 	core/gcc
-	core/make
 	core/openssl
 )
 pkg_bin_dirs=(bin)

@@ -10,7 +10,6 @@ pkg_source="https://github.com/google/${pkg_distname}/releases/download/v21.12/$
 pkg_shasum=4eab9b524aa5913c6fffb20b2a8abf5ef7f95a80bc0701f3a6dbb4c607f73460
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_deps=(core/gcc core/zlib)
-pkg_build_deps=(core/make)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

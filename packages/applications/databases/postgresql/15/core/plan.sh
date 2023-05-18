@@ -24,10 +24,8 @@ pkg_deps=(
 
 pkg_build_deps=(
 	core/bison
-	core/coreutils
 	core/flex
 	core/gcc
-	core/make
 	core/pkg-config
 )
 do_prepare() {

@@ -12,11 +12,8 @@ pkg_deps=(
 	core/gcc-libs
 )
 pkg_build_deps=(
-	core/coreutils
 	core/cmake-stage1
 	core/gcc
-	core/grep
-	core/sed
 	core/python
 )
 pkg_lib_dirs=(lib)

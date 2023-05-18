@@ -13,20 +13,15 @@ pkg_deps=(
 	core/zlib
 	core/ncurses
 	core/readline
+	core/libpcre2
 	core/file
 )
 pkg_build_deps=(
 	core/bison
-	core/coreutils
-	core/gawk
 	core/gettext
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/pkg-config
-	core/python
-	core/pcre2
+	core/build-tools-python
 	core/shadow
 )
 pkg_bin_dirs=(bin)

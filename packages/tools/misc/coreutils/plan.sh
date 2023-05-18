@@ -25,17 +25,12 @@ pkg_build_deps=(
 	core/bash-static
 	core/gcc
 	core/shadow
-	core/valgrind-stage1
-	core/build-tools-coreutils
-	core/build-tools-findutils
-	core/build-tools-make
 	core/build-tools-perl
-	core/build-tools-sed
 	core/build-tools-util-linux
 	core/build-tools-python
 )
 pkg_bin_dirs=(bin)
-pkg_interpreters=(bin/env)
+pkg_interpreters=(bin/env bin/coreutils)
 
 do_build() {
 	FORCE_UNSAFE_CONFIGURE=1 ./configure \

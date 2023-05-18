@@ -1,25 +1,21 @@
 program="valgrind"
-pkg_name="valgrind-stage1"
+pkg_name="valgrind"
 pkg_origin="core"
 pkg_version="3.19.0"
 pkg_description="An instrumentation framework for building dynamic analysis tools"
 pkg_upstream_url="http://www.valgrind.org/"
-pkg_license=('GPL-2.0')
+pkg_license=('GPL-2.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://sourceware.org/pub/valgrind/valgrind-${pkg_version}.tar.bz2"
 pkg_shasum="dd5e34486f1a483ff7be7300cc16b4d6b24690987877c3278d797534d6738f02"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
-	core/glibc-stage0
+	core/glibc
+	core/perl
 )
 pkg_build_deps=(
-	core/gcc-stage1
-	core/bzip2-stage0
-	core/build-tools-gawk
-	core/build-tools-make
-	core/build-tools-diffutils
-	core/build-tools-perl
-	core/build-tools-sed
+	core/gcc
+	core/bzip2
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -55,4 +51,9 @@ do_strip() {
 
 do_check() {
 	make check
+}
+
+do_install() {
+	make install
+	fix_interpreter "${pkg_prefix}/bin/*" core/perl bin/perl
 }

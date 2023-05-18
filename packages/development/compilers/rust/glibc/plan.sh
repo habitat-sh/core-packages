@@ -12,10 +12,12 @@ pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-aarch64
 pkg_shasum="1311fa8204f895d054c23a3481de3b158a5cd3b3a6338761fee9cdf4dbf075a5"
 pkg_dirname="${pkg_name}-${pkg_version}-aarch64-unknown-linux-gnu"
 pkg_deps=(
-	core/glibc
-	core/gcc-libs
-	core/bash-static
+	core/binutils-base
 	core/cacerts
+	core/glibc
+	core/gcc-base
+	core/iana-etc
+	core/tzdata
 )
 pkg_build_deps=(
 	core/build-tools-patchelf
@@ -23,7 +25,11 @@ pkg_build_deps=(
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
-pkg_include_dirs=(include)
+
+do_prepare() {
+	# Set gcc to use the correct binutils
+	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for binutils-base)/bin"
+}
 
 do_build() {
 	return 0
@@ -37,39 +43,58 @@ do_install() {
 	./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
 	# Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
-	for b in cargo cargo-fmt rls rustc rustdoc rustfmt; do
-		patchelf \
-			--interpreter "$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1" \
-			--set-rpath "${pkg_prefix}/lib:$(pkg_path_for gcc-libs)/lib:$(pkg_path_for glibc)/lib" \
-			"$pkg_prefix/bin/$b"
-
-		patchelf --shrink-rpath "$pkg_prefix/bin/$b"
+	for binary in "$pkg_prefix"/bin/* "$pkg_prefix"/lib/rustlib/*/bin/* "$pkg_prefix"/lib/rustlib/*/bin/gcc-ld/* "$pkg_prefix"/libexec/*; do
+		case "$(file -bi "$binary")" in
+		*application/x-executable* | *application/x-pie-executable* | *application/x-sharedlib*)
+			patchelf \
+				--set-interpreter "$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1" \
+				--set-rpath "${pkg_prefix}/lib:$(pkg_path_for gcc-base)/lib64:$(pkg_path_for glibc)/lib" \
+				"$binary"
+			patchelf --shrink-rpath "$binary"
+			;;
+		*) continue ;;
+		esac
 	done
-	unset b
 
 	# Set `RUNPATH` for all shared libraries under `lib/`
 	find "$pkg_prefix/lib" -name "*.so" -print0 |
 		xargs -0 -I '%' patchelf \
-			--set-rpath "${pkg_prefix}/lib:$(pkg_path_for gcc-libs)/lib:$(pkg_path_for glibc)/lib" \
+			--set-rpath "${pkg_prefix}/lib:$(pkg_path_for gcc-base)/lib64:$(pkg_path_for glibc)/lib" \
+			%
+	find "$pkg_prefix/lib" -name "*.so" -print0 |
+		xargs -0 -I '%' patchelf \
+			--shrink-rpath \
 			%
 
-	# Add a wrapper for cargo to properly set SSL certificates. We're wrapping
-	# this to set an OpenSSL environment variable. Normally this would not be
-	# required as the Habitat OpenSSL pacakge is compiled with the correct path
-	# to certificates, however in this case we are not source-compiling Rust,
-	# so we can't influence the certificate path after the fact.
-	#
-	# This is largely a reminder for @fnichol, as he keeps trying to remove this
-	# only to remember why it's important in this one instance. Cheers!
-	local bin="$pkg_prefix/bin/cargo"
-	build_line "Adding wrapper $bin to ${bin}.real"
-	mv -v "$bin" "${bin}.real"
-	# TODO could core/bash-static be used instead of core/busybox-musl
-	cat <<EOF >"$bin"
-#!$(pkg_path_for bash-static)/bin/sh
-set -e
-export SSL_CERT_FILE="$HAB_SSL_CERT_FILE"
-exec ${bin}.real \$@
-EOF
-	chmod -v 755 "$bin"
+	# We wrap the rustc binary to include the core/gcc-base lib64 directory consistently in
+	# the LD_RUN_PATH. This guarantees its addition to the runpath of any auxiliary binaries
+	# produced by the rust compiler, irrespective of whether it's a `pkg_dep` on the currently
+	# executed plan. Additionally, we guarantee the integration of a -L linker flag in the
+	# RUSTFLAGS to ensure the library's detection during the linking process.
+	wrap_rustc_binary
+
+	# Delete the uninstaller script as it is not required
+	rm "${pkg_prefix}"/lib/rustlib/uninstall.sh
+}
+
+wrap_rustc_binary() {
+	local binary
+	local gcc_base
+	local wrapper_binary
+	local actual_binary
+
+	binary="rustc"
+	gcc_base="$(pkg_path_for gcc-base)"
+	wrapper_binary="$pkg_prefix/bin/$binary"
+	actual_binary="$pkg_prefix/bin/$binary.real"
+
+	build_line "Adding wrapper for $binary"
+	mv -v "$wrapper_binary" "$actual_binary"
+
+	sed "$PLAN_CONTEXT/rustc-wrapper.sh" \
+		-e "s^@gcc_libs@^${gcc_base}/lib64^g" \
+		-e "s^@program@^${actual_binary}^g" \
+		>"$wrapper_binary"
+
+	chmod 755 "$wrapper_binary"
 }

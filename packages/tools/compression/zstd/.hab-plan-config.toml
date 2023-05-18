@@ -1,0 +1,3 @@
+[rules]
+# less and grep are used in script within the zstd package
+unused-dependency = { ignored_packages = ["core/{less,grep}"]}

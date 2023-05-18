@@ -1,7 +1,7 @@
 [rules]
 license-not-found = { level = "off", source-shasum = "9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2" }
 missing-license = { level = "off", source-shasum = "9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2" }
-# These packages are all used within scripts in gettext
+# Bison has a runtime dependency on m4: https://bugs.gentoo.org/379351
 unused-dependency = { ignored_packages = [
     "core/build-tools-m4",
     "core/build-tools-gettext",

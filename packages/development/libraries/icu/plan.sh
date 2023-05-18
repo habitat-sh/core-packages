@@ -7,7 +7,8 @@ pkg_description="ICU is a mature, widely used set of C/C++ and Java libraries pr
   portable and gives applications the same results on all platforms and \
   between C/C++ and Java software."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=("Unicode-TOU")
+# There are multiple licenses for this package: https://github.com/unicode-org/icu/blob/release-72-1/icu4c/LICENSE
+pkg_license=("ICU" "BSD-2-Clause" "BSD-3-Clause" "NAIST-2003" "Unicode-DFS-2016" "LicenseRef-Public-Domain")
 # shellcheck disable=SC2059
 pkg_upstream_url="http://site.icu-project.org/"
 pkg_source="https://github.com/unicode-org/icu/releases/download/release-${pkg_version//./-}/icu4c-${pkg_version//./_}-src.tgz"
@@ -23,11 +24,7 @@ pkg_deps=(
 	core/gcc-libs
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/build-tools-python
 )
 

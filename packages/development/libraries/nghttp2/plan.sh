@@ -14,13 +14,9 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/coreutils
 	core/cunit
-	core/gawk
 	core/gcc
-	core/grep
 	core/make
-	core/sed
 	core/python
 	core/pkg-config
 )
@@ -43,6 +39,7 @@ do_check() {
 do_install() {
 	make install
 
-	# Remove unnecessary folder
-	rm -rf "${pkg_prefix}/bin"
+	# Remove unnecessary folders
+	rm -rf "${pkg_prefix:?}"/bin
+	rm -rf "${pkg_prefix:?}"/share/nghttp2
 }

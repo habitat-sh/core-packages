@@ -13,15 +13,11 @@ pkg_deps=(
 	core/gcc-libs
 )
 pkg_build_deps=(
-	core/coreutils
-	core/gawk
 	core/gcc
-	core/grep
 	core/libsodium
-	core/make
 	core/pkg-config
 	core/shadow
-	core/valgrind-stage1
+	core/valgrind
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

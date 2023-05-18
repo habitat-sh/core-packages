@@ -14,11 +14,6 @@ pkg_shasum="7d5b0b6062521e4627e099e4c9dc8248d32a30285e959b7eecaa780cf8cfd4a4"
 
 pkg_build_deps=(
 	core/gcc
-	core/build-tools-gawk
-	core/build-tools-coreutils
-	core/build-tools-grep
-	core/build-tools-make
-	core/build-tools-sed
 )
 
 pkg_bin_dirs=(bin)

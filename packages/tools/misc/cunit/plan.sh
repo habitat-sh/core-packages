@@ -7,20 +7,14 @@ with a flexible variety of user interfaces."
 pkg_origin="core"
 pkg_version="3.2.7"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=("LGPL-2.0")
+pkg_license=("LGPL-2.0-or-later")
 pkg_upstream_url="https://gitlab.com/cunity/cunit"
 pkg_source="https://gitlab.com/cunity/cunit/-/archive/${pkg_version}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="9fcbf439249ff3afd4c028dbfb798ec87757aec6680f11ca38e9f52b50ec9c82"
 pkg_dirname="${program}-${pkg_version}"
 
-pkg_deps=(
-	core/glibc
-)
-
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/sed
 	core/cmake-stage1
 )
 

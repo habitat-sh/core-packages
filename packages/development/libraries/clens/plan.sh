@@ -17,10 +17,8 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
 	core/libbsd
-	core/make
 )
 
 pkg_include_dirs=(include)

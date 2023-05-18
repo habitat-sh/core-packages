@@ -1,0 +1,7 @@
+[rules]
+missing-license = { level = "off", source-shasum = "04e96c2404ea70c590c546eba4202a4e12722c640016c12b9b2f1ce3d481e9a8" }
+license-not-found = { level = "off", source-shasum = "04e96c2404ea70c590c546eba4202a4e12722c640016c12b9b2f1ce3d481e9a8" }
+unused-dependency = { ignored_packages = [
+    "core/{coreutils,m4,binutils,sed,grep,file}",
+] }
+host-script-interpreter = { level = "off" }

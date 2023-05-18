@@ -18,15 +18,11 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc
 	core/gcc-libs
-	core/bash-static
 	core/libpcre2
 )
 
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/grep
-	core/make
 	core/pkg-config
 )
 pkg_bin_dirs=(bin)
@@ -35,12 +31,7 @@ pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
-	# Add the ncurses's lib folder to the rpath because several
-	# binaries look for ncurses's own libraries.
-	LDFLAGS="${LDFLAGS} -Wl,-rpath=${pkg_prefix}/lib"
-	build_line "Updating LDFLAGS=${LDFLAGS}"
-	PKG_CONFIG_LIBDIR="${pkg_prefix}/lib/pkgconfig"
-	export PKG_CONFIG_LIBDIR
+	export PKG_CONFIG_LIBDIR="${pkg_prefix}/lib/pkgconfig"
 	build_line "Setting PKG_CONFIG_LIBDIR=${PKG_CONFIG_LIBDIR}"
 }
 
@@ -91,9 +82,6 @@ do_install() {
 	# both the 'include' and 'include/ncursesw' folder to the include dirs
 	# we can satisfy all these cases correctly
 	ln -sv ncursesw "${pkg_prefix}/include/ncurses"
-
-	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/ncursesw6-config" core/bash-static bin/sh
 }
 
 do_check() {

@@ -20,13 +20,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/iana-etc
-	core/diffutils
-	core/gawk
-	core/patch
-	core/make
 	core/gcc
-	core/grep
-	core/sed
 	core/procps-ng
 )
 pkg_bin_dirs=(bin)

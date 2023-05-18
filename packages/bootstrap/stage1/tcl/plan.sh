@@ -14,7 +14,6 @@ pkg_deps=(
 	core/glibc
 	core/gcc-libs-stage1
 	core/tzdata
-	core/build-tools-bash-static
 )
 pkg_build_deps=(
 	core/gcc-stage1-with-glibc
@@ -98,9 +97,6 @@ do_install() {
 
 	chmod -v 755 "$pkg_prefix/lib/libtcl${pkg_version%.??}.so"
 	ln -sfv "libtcl${pkg_version%.??}.so" "$pkg_prefix/lib/libtcl.so"
-
-	# Fix scripts
-	fix_interpreter "${pkg_prefix}"/bin/sqlite3_analyzer core/build-tools-bash-static bin/sh
 
 	# Install license file
 	install -Dm644 ../license.terms "${pkg_prefix}/share/licenses/LICENSE"

@@ -17,7 +17,6 @@ pkg_dirname=${program}${pkg_version}
 pkg_deps=(
 	core/tcl-stage1
 	core/glibc
-	core/build-tools-bash-static
 )
 pkg_build_deps=(
 	core/gcc-stage1-with-glibc
@@ -60,8 +59,4 @@ do_install() {
 	find "$pkg_prefix/bin" \
 		-type f \
 		-exec sed -e "s,exec tclsh,exec $(pkg_path_for tcl-stage1)/bin/tclsh,g" -i {} \;
-
-	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
-
 }

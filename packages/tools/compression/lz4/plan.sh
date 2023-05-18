@@ -1,6 +1,7 @@
 pkg_name="lz4"
 pkg_origin="core"
 pkg_version="1.9.4"
+# https://github.com/lz4/lz4/blob/v1.9.4/LICENSE
 pkg_license=('BSD-2-Clause' 'GPL-2.0-or-later')
 pkg_source="https://github.com/lz4/lz4/archive/refs/tags/v${pkg_version}.tar.gz"
 pkg_upstream_url="https://lz4.github.io/lz4/"
@@ -15,11 +16,7 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/python
 )
 pkg_bin_dirs=(bin)

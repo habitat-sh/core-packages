@@ -20,7 +20,6 @@ pkg_build_deps=(
 	core/autoconf
 	core/automake
 	core/perl
-	core/m4
 )
 
 pkg_bin_dirs=(bin)

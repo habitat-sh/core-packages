@@ -10,10 +10,6 @@ pkg_shasum="2c75cd6c3dc9b81cb5bde664c882e4339a2054e09cf09606f9f7dd6970e7f078"
 pkg_dirname="docker"
 pkg_bin_dirs=(bin)
 
-pkg_build_deps=(
-	core/coreutils
-)
-
 do_build() {
 	return 0
 }

@@ -19,7 +19,6 @@ pkg_build_deps=(
 	core/m4
 )
 pkg_deps=(
-	core/coreutils
 	core/gcc-libs
 	core/glibc
 	core/zlib

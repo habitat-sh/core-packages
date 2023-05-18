@@ -8,19 +8,19 @@ pkg_description="\
 Password and account management tool suite.
 "
 pkg_upstream_url="https://github.com/shadow-maint/shadow"
-pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
+pkg_license=('BSD-3-Clause')
 pkg_source="https://github.com/shadow-maint/shadow/releases/download/${pkg_version}/shadow-${pkg_version}.tar.gz"
 pkg_shasum="f525154adc5605e4ebf03d3e7ee8be4d7f3c7cf9df2c2244043406b6eefca2da"
 pkg_dirname="${program}-${pkg_version}"
 
-pkg_build_deps=(
-	core/gcc
+pkg_deps=(
+	core/glibc
 	core/attr
 	core/acl
-	core/build-tools-findutils
-	core/build-tools-bash-static
-	core/build-tools-make
-	core/build-tools-sed
+)
+
+pkg_build_deps=(
+	core/gcc
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
@@ -37,8 +37,6 @@ do_prepare() {
 		-e '/PATH=/{s@/sbin:@@;s@/bin:@@}' \
 		-i etc/login.defs
 
-	LDFLAGS="${LDFLAGS} -L${pkg_prefix}/lib -Wl,-rpath=${pkg_prefix}/lib"
-	build_line "Updating LDFLAGS=${LDFLAGS}"
 }
 
 do_build() {

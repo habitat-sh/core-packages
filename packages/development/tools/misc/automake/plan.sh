@@ -18,12 +18,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/bison
-	core/coreutils
-	core/diffutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/flex
 	core/gzip
 	core/lzip

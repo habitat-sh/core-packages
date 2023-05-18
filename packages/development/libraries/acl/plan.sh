@@ -8,7 +8,7 @@ pkg_description="\
 Commands for Manipulating POSIX Access Control Lists.
 "
 pkg_upstream_url="https://savannah.nongnu.org/projects/acl/"
-pkg_license=('LGPL-3.0-or-later')
+pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="http://download.savannah.gnu.org/releases/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="760c61c68901b37fdd5eefeeaf4c0c7a26bdfdd8ac747a1edff1ce0e243c11af"
 pkg_dirname="${program}-${pkg_version}"
@@ -22,10 +22,7 @@ pkg_build_deps=(
 	core/gcc
 	core/bash-static
 	core/coreutils-stage1
-	core/build-tools-make
-	core/build-tools-grep
 	core/build-tools-perl
-	core/build-tools-sed
 )
 
 pkg_bin_dirs=(bin)

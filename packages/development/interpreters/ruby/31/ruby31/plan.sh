@@ -1,7 +1,7 @@
 pkg_name=ruby31
 pkg_origin=core
-pkg_major=3.1
-pkg_version=3.1.3
+pkg_major="3.1"
+pkg_version="3.1.3"
 pkg_description="A dynamic, open source programming language with a focus on \
   simplicity and productivity. It has an elegant syntax that is natural to \
   read and easy to write."
@@ -11,22 +11,21 @@ pkg_source=https://cache.ruby-lang.org/pub/ruby/${pkg_major}/ruby-${pkg_version}
 pkg_upstream_url=https://www.ruby-lang.org/en/
 pkg_shasum=5ea498a35f4cd15875200a52dde42b6eb179e1264e17d78732c3a57cd1c6ab9e
 pkg_deps=(
+	core/bash
+	core/coreutils
 	core/glibc
-	core/ncurses
-	core/zlib
-	core/openssl
+	core/gmp
 	core/libyaml
 	core/libffi
 	core/readline
+	core/ncurses
 	core/nss-myhostname
+	core/openssl
+	core/zlib
 )
 pkg_build_deps=(
-	core/coreutils
-	core/diffutils
-	core/patch
-	core/make
 	core/gcc
-	core/sed
+	core/git
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
@@ -34,34 +33,49 @@ pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/ruby)
 pkg_dirname="ruby-$pkg_version"
 
-git update-index --chmod=+x ./tests/test.sh
-
 do_prepare() {
 	export CFLAGS="${CFLAGS} -O3 -g -pipe"
-	build_line "Setting CFLAGS='$CFLAGS'"
 
 	# Replace all host system env interpreters with our packaged env
 	grep -lr '/usr/bin/env' . | while read -r f; do
 		sed -e "s,/usr/bin/env,$(pkg_interpreter_for coreutils bin/env),g" -i "$f"
 	done
+
+	build_line "Setting CFLAGS='$CFLAGS'"
 }
 
 do_build() {
-	./configure \
+	mkdir build
+	pushd build || exit 1
+	../configure \
 		--prefix="$pkg_prefix" \
 		--enable-shared \
 		--disable-install-doc \
 		--with-openssl-dir="$(pkg_path_for core/openssl)" \
-		--with-libyaml-dir="$(pkg_path_for core/libyaml)"
+		--with-libyaml-dir="$(pkg_path_for core/libyaml)" \
+		--without-baseruby
 
-	make
+	make -j"$(nproc)"
+	popd || exit 1
 }
 
 do_check() {
+	pushd build || exit 1
 	make test
+	popd || exit 1
 }
 
 do_install() {
-	do_default_install
-	gem install rb-readline --no-document
+	pushd build || exit 1
+	make install
+
+	local gem_makefiles
+	# Remove unnecessary external intermediate files created by gems
+	gem_makefiles=$(find "$pkg_prefix"/lib/ruby/gems -name Makefile)
+	for makefile in $gem_makefiles; do
+		make -C "$(dirname "$makefile")" distclean
+	done
+	# Delete gem build logs
+	find "$pkg_prefix"/lib/ruby/gems \( -name gem_make.out -o -name mkmf.log \) -delete
+	popd || exit 1
 }

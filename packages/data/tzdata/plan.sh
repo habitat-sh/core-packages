@@ -10,8 +10,6 @@ pkg_upstream_url="http://www.iana.org/time-zones"
 pkg_dirname="${pkg_name}-${pkg_version}"
 
 pkg_build_deps=(
-	core/build-tools-coreutils
-	core/build-tools-tar
 	core/glibc-stage0
 )
 

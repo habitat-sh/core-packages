@@ -1,0 +1,5 @@
+[rules]
+missing-license = { level = "off", source-shasum="5d2cc3d78bec3dbe212a9d7fa629ada25a7da928af432c93060ff5c17ee28a9c" }
+license-not-found = { level = "off", source-shasum="5d2cc3d78bec3dbe212a9d7fa629ada25a7da928af432c93060ff5c17ee28a9c" }
+# Ignore example scripts
+host-script-interpreter = { ignored_files = ["share/doc/libxml2/python/examples/*"]}

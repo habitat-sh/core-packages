@@ -25,21 +25,18 @@ pkg_build_deps=(
 	core/acl-stage1
 	core/attr-stage1
 	core/libcap-stage1
-	core/build-tools-make
 	core/build-tools-perl
-	core/build-tools-findutils
-	core/build-tools-sed
 	core/build-tools-util-linux
 	core/build-tools-python
 )
 pkg_bin_dirs=(bin)
-pkg_interpreters=(bin/env)
+pkg_interpreters=(bin/env bin/coreutils)
 
 do_build() {
 	FORCE_UNSAFE_CONFIGURE=1 ./configure \
 		--prefix="$pkg_prefix" \
 		--enable-single-binary \
-		--enable-no-install-program=kill,uptime
+		--enable-no-install-program="kill,uptime"
 	make
 }
 

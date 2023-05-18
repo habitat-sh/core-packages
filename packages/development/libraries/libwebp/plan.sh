@@ -17,12 +17,8 @@ pkg_deps=(
 	core/zlib
 )
 pkg_build_deps=(
-	core/coreutils
 	core/jbigkit
-	core/gawk
 	core/gcc
-	core/grep
-	core/make
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

@@ -1,0 +1,10 @@
+[rules]
+missing-license = { level = "off", source-shasum = "9b9a95d68fdcb936849a4d6fada8bf8686cddf58b9b26c9c4289ed0c92a77907" }
+license-not-found = { level = "off", source-shasum = "9b9a95d68fdcb936849a4d6fada8bf8686cddf58b9b26c9c4289ed0c92a77907" }
+# grep, diffutils and coreutils are used in certain scripts of the gzip package
+unused-dependency = { ignored_packages = [
+    "core/coreutils",
+    "core/diffutils",
+    "core/grep",
+    "core/less",
+] }

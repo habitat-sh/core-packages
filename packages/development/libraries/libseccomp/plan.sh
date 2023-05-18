@@ -14,7 +14,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc
-	core/make
 	core/gperf
 )
 

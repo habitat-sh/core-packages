@@ -1,0 +1,5 @@
+[rules]
+# This is needed for SSL certificate verification
+unused-dependency = { ignored_packages = ["core/cacerts"] }
+# The build system adds a runpath entry to libunistring's lib folder
+unused-runpath-entry = { ignored_files = ["lib/libcurl.so*"]}

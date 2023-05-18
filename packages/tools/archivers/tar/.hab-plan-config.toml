@@ -1,3 +1,5 @@
 [rules]
 missing-license = { level = "off", source-shasum = "03d908cf5768cfe6b7ad588c921c6ed21acabfb2b79b788d1330453507647aed" }
 license-not-found = { level = "off", source-shasum = "03d908cf5768cfe6b7ad588c921c6ed21acabfb2b79b788d1330453507647aed" }
+# All these packages contain binaries used by tar at runtime
+unused-dependency = { ignored_packages = ["core/{xz,zstd,bzip2,lzip,gzip,lzop,attr,acl}"] }

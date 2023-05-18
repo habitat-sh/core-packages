@@ -20,7 +20,6 @@ pkg_deps=(
 	core/build-tools-diffutils
 	core/build-tools-glibc
 	core/build-tools-grep
-	core/build-tools-bash-static
 )
 pkg_build_deps=(
 	core/native-cross-gcc
@@ -39,7 +38,4 @@ do_check() {
 
 do_install() {
 	make install
-
-	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
 }

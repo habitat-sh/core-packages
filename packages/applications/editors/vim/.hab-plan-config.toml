@@ -1,0 +1,5 @@
+[rules]
+missing-license = { level = "off", source-shasum = "bbfc59e1862db862e3f641b0871cd1162dc1d2a58330588c6e517dbdf54b133c" }
+license-not-found = { level = "off", source-shasum = "bbfc59e1862db862e3f641b0871cd1162dc1d2a58330588c6e517dbdf54b133c" }
+# Script for a use with UNIX that we don't care about
+host-script-interpreter = { ignored_files = ["share/vim/vim90/tools/vim132"] }

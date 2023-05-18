@@ -13,7 +13,6 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
 	core/expect-stage1
-	core/build-tools-bash-static
 	core/build-tools-coreutils
 	core/build-tools-sed
 	core/build-tools-grep
@@ -39,7 +38,4 @@ do_install() {
 	sed \
 		-e "s,expectbin=expect,expectbin=$(pkg_path_for expect-stage1)/bin/expect,g" \
 		-i "$pkg_prefix/bin/runtest"
-
-	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
 }

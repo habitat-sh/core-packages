@@ -13,7 +13,6 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc-stage0
 	core/libunwind-stage1
-	core/build-tools-bash-static
 )
 pkg_build_deps=(
 	core/gcc-stage1
@@ -40,7 +39,4 @@ do_check() {
 
 do_install() {
 	make install
-
-	# Fix shell scripts
-	fix_interpreter "${pkg_prefix}/bin/strace-log-merge" core/build-tools-bash-static bin/sh
 }

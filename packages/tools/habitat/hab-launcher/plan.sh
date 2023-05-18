@@ -72,10 +72,6 @@ do_prepare() {
 	# variables.
 	export PROTOC="$(pkg_path_for protobuf)/bin/protoc"
 	export PROTOC_INCLUDE="$(pkg_path_for protobuf)/include"
-
-	# Add gcc-libs to the library search path to ensure the linker
-	# finds it and adds it to the rpath of the generated binary
-	export RUSTFLAGS="-L $(pkg_path_for gcc-libs)/lib"
 }
 
 do_build() {

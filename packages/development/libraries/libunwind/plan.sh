@@ -17,12 +17,7 @@ pkg_deps=(
 	core/xz
 )
 pkg_build_deps=(
-	core/coreutils
-	core/gawk
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/zlib
 )
 pkg_include_dirs=(include)

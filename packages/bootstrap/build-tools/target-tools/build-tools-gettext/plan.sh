@@ -10,7 +10,6 @@ pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}.tar.gz"
 pkg_shasum="c77d0da3102aec9c07f43671e60611ebff89a996ef159497ce8e59d075786b12"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
-	core/build-tools-bash-static
 	core/build-tools-coreutils
 	core/build-tools-glibc
 	core/build-tools-gzip
@@ -38,6 +37,4 @@ do_check() {
 do_install() {
 	make install
 	cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} "$pkg_prefix"/bin
-	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
 }

@@ -1,0 +1,10 @@
+[rules]
+missing-license = { level = "off", source-shasum = "5ea498a35f4cd15875200a52dde42b6eb179e1264e17d78732c3a57cd1c6ab9e" }
+license-not-found = { level = "off", source-shasum = "5ea498a35f4cd15875200a52dde42b6eb179e1264e17d78732c3a57cd1c6ab9e" }
+# ignore template's interpreters
+env-script-interpreter-not-found = { ignored_files = [
+    "lib/ruby/*/bundler/templates/*",
+] }
+# This is apparently required at runtime, for some DNS lookup behaviour? 
+# https://github.com/habitat-sh/core-plans/commit/7761ccef724292640d14143ccb0cd5466e877fa5
+unused-dependency = { ignored_packages = ["core/nss-myhostname"] }

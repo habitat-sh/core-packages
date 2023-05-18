@@ -16,13 +16,8 @@ pkg_deps=(
 	core/proj8
 )
 pkg_build_deps=(
-	core/coreutils
-	core/gawk
 	core/gcc
-	core/grep
-	core/make
 	core/pkg-config
-	core/sed
 )
 
 pkg_lib_dirs=(lib)

@@ -21,7 +21,6 @@ pkg_deps=(
 pkg_build_deps=(
 	core/gcc
 	core/bash-static
-	core/coreutils
 	core/build-tools-perl
 )
 pkg_bin_dirs=(bin)

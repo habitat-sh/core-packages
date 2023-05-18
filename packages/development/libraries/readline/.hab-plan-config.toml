@@ -1,3 +1,5 @@
 [rules]
 missing-license = { level = "off", source-shasum = "3feb7171f16a84ee82ca18a36d7b9be109a52c04f492a053331d7d1095007c35" }
 license-not-found = { level = "off", source-shasum = "3feb7171f16a84ee82ca18a36d7b9be109a52c04f492a053331d7d1095007c35" }
+# These are rpath entries added by the build system
+unused-runpath-entry = { ignored_files = ["lib/lib{history,readline}.so*"]}

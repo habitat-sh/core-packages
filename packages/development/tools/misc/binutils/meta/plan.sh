@@ -10,7 +10,7 @@ creating and managing binary programs, object files, libraries, profile data, \
 and assembly source code.\
 "
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
-
+pkg_license=('GPL-3.0-or-later')
 pkg_deps=(
 	core/binutils-base
 	core/gcc-libs
