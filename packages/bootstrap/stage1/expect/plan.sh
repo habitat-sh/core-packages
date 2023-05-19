@@ -10,17 +10,17 @@ passwd, fsck, rlogin, tip, etc. Expect really makes this stuff trivial. Expect \
 is also useful for testing these same applications.\
 "
 pkg_upstream_url="https://www.nist.gov/services-resources/software/expect"
-pkg_license=('custom')
+pkg_license=('LicenseRef-Public-Domain')
 pkg_source="https://prdownloads.sourceforge.net/${program}/${program}${pkg_version}.tar.gz"
 pkg_shasum="49a7da83b0bdd9f46d04a04deec19c7767bb9a323e40c4781f89caf760b92c34"
 pkg_dirname=${program}${pkg_version}
 pkg_deps=(
-	core/gcc-libs-stage1
 	core/tcl-stage1
 	core/glibc-stage0
 	core/build-tools-bash-static
 )
 pkg_build_deps=(
+	core/gcc-libs-stage1
 	core/gcc-stage1
 	core/build-tools-coreutils
 	core/build-tools-diffutils
