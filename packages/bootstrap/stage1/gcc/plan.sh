@@ -20,7 +20,6 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/binutils-stage0
 	core/glibc-stage0
-	core/build-tools-bash-static
 	core/hab-cc-wrapper
 )
 
@@ -111,7 +110,7 @@ do_prepare() {
 	#
 	# Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/compilers/gcc/no-sys-dirs.patch
 	# shellcheck disable=SC2002
-	patch -p1 <"$PLAN_CONTEXT/gcc-12-no-sys-dirs.patch"
+	patch -p1 <"$PLAN_CONTEXT/no-sys-dirs.patch"
 
 	build_line "Setting FLAGS_FOR_TARGET=${FLAGS_FOR_TARGET}"
 	build_line "Setting LDFLAGS_FOR_TARGET=${LDFLAGS_FOR_TARGET}"
@@ -183,7 +182,6 @@ do_install() {
 wrap_binary() {
 	local binary
 	local env_prefix
-	local shell
 	local hab_cc_wrapper
 	local binutils
 	local linux_headers
@@ -193,7 +191,6 @@ wrap_binary() {
 
 	binary="$1"
 	env_prefix="GCC_STAGE1"
-	shell="$(pkg_path_for build-tools-bash-static)"
 	hab_cc_wrapper="$(pkg_path_for hab-cc-wrapper)"
 	binutils="$(pkg_path_for binutils-stage0)"
 	linux_headers="$(pkg_path_for linux-headers)"
@@ -214,7 +211,6 @@ wrap_binary() {
 	mv -v "$wrapper_binary" "$actual_binary"
 
 	sed "$PLAN_CONTEXT/cc-wrapper.sh" \
-		-e "s^@shell@^${shell}/bin/sh^g" \
 		-e "s^@env_prefix@^${env_prefix}^g" \
 		-e "s^@executable_name@^${binary}^g" \
 		-e "s^@wrapper@^${hab_cc_wrapper}/bin/hab-cc-wrapper^g" \

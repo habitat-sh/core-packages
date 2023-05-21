@@ -17,8 +17,6 @@ pkg_deps=(
 
 pkg_build_deps=(
 	core/gcc-stage0
-	core/build-tools-make
-	core/build-tools-coreutils
 )
 
 pkg_bin_dirs=(bin)

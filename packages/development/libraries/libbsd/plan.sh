@@ -1,6 +1,6 @@
 pkg_name="libbsd"
 pkg_origin="core"
-pkg_version="0.11.7"
+pkg_version="0.11.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 This library provides useful functions commonly found on BSD systems, and \
@@ -10,7 +10,7 @@ pkg_upstream_url="https://libbsd.freedesktop.org/wiki/"
 # https://cgit.freedesktop.org/libbsd/tree/COPYING
 pkg_license=('BSD-3-Clause' 'BSD-4-Clause' 'BSD-2-Clause-NetBSD' 'ISC' 'Beerware' 'LicenseRef-Public-Domain')
 pkg_source="https://libbsd.freedesktop.org/releases/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="9baa186059ebbf25c06308e9f991fda31f7183c0f24931826d83aa6abd8a0261"
+pkg_shasum="ff95cf8184151dacae4247832f8d4ea8800fa127dbd15033ecfe839f285b42a1"
 
 pkg_deps=(
 	core/glibc
@@ -35,8 +35,8 @@ do_prepare() {
 	# shellcheck disable=SC2002
 	cat "$PLAN_CONTEXT/libmd-pkg.patch" |
 		sed \
-			-e "s,@LIBMD_LIB@,$(pkg_path_for libmd)/lib,g" \
-			-e "s,@LIBMD_INCLUDE@,$(pkg_path_for libmd)/include,g" |
+			-e "s,@libmd_lib@,$(pkg_path_for libmd)/lib,g" \
+			-e "s,@libmd_include@,$(pkg_path_for libmd)/include,g" |
 		patch -p1
 }
 

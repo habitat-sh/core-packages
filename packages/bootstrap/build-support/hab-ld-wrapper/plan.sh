@@ -1,5 +1,5 @@
 # shellcheck disable=2154
-commit_hash="e18b8e3d86ff79e34862d4c8d32db290a92bd5f5"
+commit_hash="dbf96b1bf6711d053864a406634d5be5c620a44d"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="hab-ld-wrapper"
@@ -8,7 +8,7 @@ pkg_version="1.0.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/habitat-sh/hab-pkg-wrappers/archive/${commit_hash}.tar.gz"
-pkg_shasum="c97ca4f9b1b5790bd49e20864b7773208669537256e3d61b76ae2003f5c8cd4a"
+pkg_shasum="c62127bdd4e60916c5556b8be2ee0f10a54450ebda6cd30e71a1add59b78a59b"
 pkg_dirname="hab-pkg-wrappers-${commit_hash}"
 
 # We don't specify 'pkg_bin_dirs' as we always use the wrapper via it's full path

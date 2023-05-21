@@ -20,9 +20,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc-stage1-with-glibc
-	core/build-tools-diffutils
-	core/build-tools-patch
-	core/build-tools-make
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)

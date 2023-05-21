@@ -1,12 +1,12 @@
 pkg_name="openssh"
 pkg_origin="core"
-pkg_version="9.1p1"
+pkg_version="7.9p1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Provides OpenSSH client and server."
 pkg_upstream_url="https://www.openssh.com/"
 pkg_license=('SSH-OpenSSH')
 pkg_source="http://mirror.wdc1.us.leaseweb.net/openbsd/OpenSSH/portable/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="19f85009c7e3e23787f0236fbb1578392ab4d4bf9f8ec5fe6bc1cd7e8bfdd288"
+pkg_shasum="6b4b3ba2253d84ed3771c8050728d597c91cfce898713beb7b64a305b6f11aad"
 
 pkg_deps=(
 	core/glibc

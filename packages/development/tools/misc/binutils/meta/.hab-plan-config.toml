@@ -1,3 +1,0 @@
-[rules]
-# This is a wrapper package
-unused-dependency = { level = "off" }

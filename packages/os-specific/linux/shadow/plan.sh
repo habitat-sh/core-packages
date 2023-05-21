@@ -2,15 +2,15 @@ program="shadow"
 
 pkg_name="shadow"
 pkg_origin="core"
-pkg_version="4.12.3"
+pkg_version="4.9"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Password and account management tool suite.
 "
 pkg_upstream_url="https://github.com/shadow-maint/shadow"
-pkg_license=('BSD-3-Clause')
-pkg_source="https://github.com/shadow-maint/shadow/releases/download/${pkg_version}/shadow-${pkg_version}.tar.gz"
-pkg_shasum="f525154adc5605e4ebf03d3e7ee8be4d7f3c7cf9df2c2244043406b6eefca2da"
+pkg_license=('Artistic-1.0')
+pkg_source="https://github.com/shadow-maint/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum="feec1f2ce9c1b62798afd35a7d1b04cefdfa3a0a30ff3e75d6965ba8978c9144"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
@@ -26,12 +26,23 @@ pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-	# Disable the installation of the groups program and its man pages, as Coreutils provides a better version. Also, prevent the installation of manual pages that were already installed in man-pages
+	# Disable the installation of the `groups` program as Coreutils provides a
+	# better version.
+	#
+	# Thanks to:
+	# http://www.linuxfromscratch.org/lfs/view/stable/chapter06/shadow.html
+	# shellcheck disable=SC201
 	sed -i 's/groups$(EXEEXT) //' src/Makefile.in
 	find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \;
 	find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \;
 	find man -name Makefile.in -exec sed -i 's/passwd\.5 / /' {} \;
 
+	# Instead of using the default crypt method, use the more secure SHA-512
+	# method of password encryption, which also allows passwords longer than 8
+	# characters.
+	#
+	# Thanks to:
+	# http://www.linuxfromscratch.org/lfs/view/stable/chapter06/shadow.html
 	sed -e 's:#ENCRYPT_METHOD DES:ENCRYPT_METHOD SHA512:' \
 		-e 's:/var/spool/mail:/var/mail:' \
 		-e '/PATH=/{s@/sbin:@@;s@/bin:@@}' \

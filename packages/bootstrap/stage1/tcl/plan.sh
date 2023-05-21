@@ -2,13 +2,13 @@ program="tcl"
 
 pkg_name="tcl-stage1"
 pkg_origin="core"
-pkg_version="8.6.12"
+pkg_version="8.6.11"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Tool Command Language -- A dynamic programming language."
 pkg_upstream_url="http://tcl.sourceforge.net/"
 pkg_license=('TCL')
 pkg_source="http://downloads.sourceforge.net/sourceforge/${program}/${program}${pkg_version}-src.tar.gz"
-pkg_shasum="26c995dd0f167e48b11961d891ee555f680c175f7173ff8cb829f4ebcde4c1a6"
+pkg_shasum="8c0486668586672c5693d7d95817cb05a18c5ecca2f40e2836b9578064088258"
 pkg_dirname="${program}${pkg_version}"
 pkg_deps=(
 	core/glibc
@@ -18,11 +18,6 @@ pkg_deps=(
 pkg_build_deps=(
 	core/gcc-stage1-with-glibc
 	core/zlib-stage1
-	core/build-tools-coreutils
-	core/build-tools-diffutils
-	core/build-tools-patch
-	core/build-tools-make
-	core/build-tools-sed
 	core/build-tools-util-linux
 )
 pkg_bin_dirs=(bin)
@@ -57,8 +52,8 @@ do_build() {
 	local itclver
 
 	srcdir=$(abspath ..)
-	tdbcver="tdbc1.1.3"
-	itclver="itcl4.2.2"
+	tdbcver="tdbc1.1.2"
+	itclver="itcl4.2.1"
 
 	sed \
 		-e "s#$srcdir/unix#$pkg_prefix/lib#" \

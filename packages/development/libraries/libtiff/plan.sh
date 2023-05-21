@@ -1,12 +1,12 @@
 pkg_name="libtiff"
 pkg_origin="core"
-pkg_version="4.5.0"
+pkg_version="4.3.0"
 pkg_description="Library for reading and writting files in the Tag Image File Format (TIFF)"
 pkg_upstream_url="http://www.libtiff.org"
 pkg_license=('libtiff')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://download.osgeo.org/libtiff/tiff-${pkg_version}.tar.gz"
-pkg_shasum="c7a1d9296649233979fa3eacffef3fa024d73d05d589cb622727b5b08c423464"
+pkg_shasum="0e46e5acb087ce7d1ac53cf4f56a09b221537fc86dfc5daaad1c2e89e1b37ac8"
 pkg_deps=(
 	core/glibc
 	core/gcc-libs

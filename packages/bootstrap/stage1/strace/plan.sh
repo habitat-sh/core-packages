@@ -16,11 +16,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc-stage1
-	core/build-tools-coreutils
-	core/build-tools-gawk
-	core/build-tools-grep
-	core/build-tools-make
-	core/build-tools-sed
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)

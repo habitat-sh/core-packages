@@ -24,7 +24,6 @@ pkg_lib_dirs=(
 
 pkg_deps=(
 	core/build-tools-glibc
-	core/build-tools-bash-static
 	core/hab-ld-wrapper
 )
 pkg_build_deps=(
@@ -106,14 +105,12 @@ do_install() {
 wrap_binary() {
 	local binary
 	local env_prefix
-	local shell
 	local hab_ld_wrapper
 	local wrapper_binary
 	local actual_binary
 
 	binary="$1"
 	env_prefix="BUILD_TOOLS_BINUTILS"
-	shell="$(pkg_path_for build-tools-bash-static)"
 	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
 	wrapper_binary="$pkg_prefix/bin/$binary"
 	actual_binary="$pkg_prefix/bin/$binary.real"
@@ -122,7 +119,6 @@ wrap_binary() {
 	mv -v "$wrapper_binary" "$actual_binary"
 
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
-		-e "s^@shell@^${shell}/bin/sh^g" \
 		-e "s^@env_prefix@^${env_prefix}^g" \
 		-e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
 		-e "s^@program@^${actual_binary}^g" \

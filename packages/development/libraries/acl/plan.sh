@@ -20,8 +20,8 @@ pkg_deps=(
 
 pkg_build_deps=(
 	core/gcc
-	core/bash-static
 	core/coreutils-stage1
+	core/build-tools-bash-static
 	core/build-tools-perl
 )
 
@@ -38,10 +38,10 @@ do_build() {
 }
 
 do_check() {
-	sed -e "s^#\!.*bin/sh^#\!$(pkg_path_for bash-static)/bin/sh^" -i "test/make-tree"
+	sed -e "s^#\!.*bin/sh^#\!$(pkg_path_for build-tools-bash-static)/bin/sh^" -i "test/make-tree"
 	sed -e "s^#\!.*bin/perl^#\!$(pkg_path_for build-tools-perl)/bin/perl^" -i "test/run"
 	sed -e "s^#\!.*bin/perl^#\!$(pkg_path_for build-tools-perl)/bin/perl^" -i "test/sort-getfacl-output"
-	sed -e "s^#\!.*bin/bash^#\!$(pkg_path_for bash-static)/bin/bash^" -i "test/runwrapper"
+	sed -e "s^#\!.*bin/bash^#\!$(pkg_path_for build-tools-bash-static)/bin/bash^" -i "test/runwrapper"
 	make check
 }
 

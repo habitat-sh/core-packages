@@ -2,7 +2,7 @@ program="gcc"
 
 pkg_name="gcc"
 pkg_origin="core"
-pkg_version="12.2.0"
+pkg_version="9.4.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \
@@ -15,7 +15,7 @@ pkg_upstream_url="https://gcc.gnu.org/"
 pkg_license=('GPL-3.0-or-later WITH GCC-exception-3.1' 'LGPL-3.0-or-later')
 
 pkg_deps=(
-	core/binutils-base
+	core/binutils
 	core/iana-etc
 	core/gcc-base
 	core/tzdata

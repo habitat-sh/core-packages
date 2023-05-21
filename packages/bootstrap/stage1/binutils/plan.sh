@@ -23,7 +23,6 @@ pkg_lib_dirs=(
 
 pkg_deps=(
 	core/glibc
-	core/bash-static
 	core/hab-ld-wrapper
 	core/gcc-libs-stage1
 )
@@ -34,8 +33,6 @@ pkg_build_deps=(
 	core/bzip2-stage0
 	core/build-tools-texinfo
 	core/build-tools-perl
-	core/build-tools-make
-	core/build-tools-coreutils
 	core/build-tools-bison
 )
 
@@ -94,14 +91,12 @@ do_install() {
 wrap_binary() {
 	local binary
 	local env_prefix
-	local shell
 	local hab_ld_wrapper
 	local wrapper_binary
 	local actual_binary
 
 	binary="$1"
 	env_prefix="BINUTILS_STAGE1"
-	shell="$(pkg_path_for bash-static)"
 	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
 	wrapper_binary="$pkg_prefix/bin/$binary"
 	actual_binary="$pkg_prefix/bin/$binary.real"
@@ -110,7 +105,6 @@ wrap_binary() {
 	mv -v "$wrapper_binary" "$actual_binary"
 
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
-		-e "s^@shell@^${shell}/bin/sh^g" \
 		-e "s^@env_prefix@^${env_prefix}^g" \
 		-e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
 		-e "s^@program@^${actual_binary}^g" \

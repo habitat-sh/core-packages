@@ -1,5 +1,5 @@
 [rules]
-missing-license = { level = "off", source-shasum = "2c6a36c7b5a55accae063667ef3c55f2642e67476d96d355ff0acb13dbb47f09" }
+missing-license = { level = "off", source-shasum = "7b8d3ac3d6591ce9d25f90faba80da78d0ef620fda711702367f61a40ba98429" }
 # The core/gcc-base paths are unused and added by the build system
 unused-runpath-entry = { level = "off" }
 missing-runpath-entry-dependency = { level = "off" }

@@ -25,7 +25,6 @@ pkg_deps=(
 	core/build-tools-isl
 	core/build-tools-mpfr
 	core/build-tools-libmpc
-	core/build-tools-bash-static
 	core/hab-cc-wrapper
 )
 
@@ -178,7 +177,6 @@ do_install() {
 wrap_binary() {
 	local binary
 	local env_prefix
-	local shell
 	local hab_cc_wrapper
 	local binutils
 	local linux_headers
@@ -188,7 +186,6 @@ wrap_binary() {
 
 	binary="$1"
 	env_prefix="BUILD_TOOLS_GCC"
-	shell="$(pkg_path_for build-tools-bash-static)"
 	hab_cc_wrapper="$(pkg_path_for hab-cc-wrapper)"
 	binutils="$(pkg_path_for build-tools-binutils)"
 	linux_headers="$(pkg_path_for build-tools-linux-headers)"
@@ -209,7 +206,6 @@ wrap_binary() {
 	mv -v "$wrapper_binary" "$actual_binary"
 
 	sed "$PLAN_CONTEXT/cc-wrapper.sh" \
-		-e "s^@shell@^${shell}/bin/sh^g" \
 		-e "s^@env_prefix@^${env_prefix}^g" \
 		-e "s^@executable_name@^${binary}^g" \
 		-e "s^@wrapper@^${hab_cc_wrapper}/bin/hab-cc-wrapper^g" \

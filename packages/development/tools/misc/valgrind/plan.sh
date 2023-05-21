@@ -1,13 +1,13 @@
 program="valgrind"
 pkg_name="valgrind"
 pkg_origin="core"
-pkg_version="3.19.0"
+pkg_version="3.18.1"
 pkg_description="An instrumentation framework for building dynamic analysis tools"
 pkg_upstream_url="http://www.valgrind.org/"
 pkg_license=('GPL-2.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://sourceware.org/pub/valgrind/valgrind-${pkg_version}.tar.bz2"
-pkg_shasum="dd5e34486f1a483ff7be7300cc16b4d6b24690987877c3278d797534d6738f02"
+pkg_shasum="00859aa13a772eddf7822225f4b46ee0d39afbe071d32778da4d99984081f7f5"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc

@@ -15,8 +15,6 @@ pkg_deps=(
 pkg_build_deps=(
 	core/gcc-stage1/"${pkg_version}"
 	core/build-tools-patchelf
-	core/build-tools-coreutils
-	core/build-tools-findutils
 )
 
 do_install() {

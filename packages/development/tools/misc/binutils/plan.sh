@@ -1,8 +1,8 @@
 program="binutils"
 
-pkg_name="binutils-base"
+pkg_name="binutils"
 pkg_origin="core"
-pkg_version="2.39"
+pkg_version="2.37"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Binary Utilities, or binutils, are a set of programming tools for \
@@ -12,7 +12,7 @@ and assembly source code.\
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.bz2"
-pkg_shasum="da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148"
+pkg_shasum="67fc1a4030d08ee877a4867d3dcab35828148f87e1fd05da6db585ed5a166bd4"
 pkg_dirname="${program}-${pkg_version}"
 pkg_bin_dirs=(
 	bin
@@ -51,7 +51,6 @@ do_prepare() {
 		sed -i "$f" -e 's|-lfl|-l:libfl.a|'
 	done
 
-	sed -i /hab/cache/src/binutils-2.39/ld/configure -e 's|-lfl|-l:libfl.a|'
 	# Use symlinks instead of hard links to save space (otherwise `strip(1)`
 	# needs to process each hard link seperately)
 	for f in binutils/Makefile.in gas/Makefile.in ld/Makefile.in gold/Makefile.in; do

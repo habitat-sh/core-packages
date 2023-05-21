@@ -1,13 +1,13 @@
 pkg_name="curl"
 pkg_origin="core"
-pkg_version="7.87.0"
+pkg_version="7.79.1"
 pkg_description="curl is an open source command line tool and library for
   transferring data with URL syntax."
 pkg_upstream_url="https://curl.haxx.se/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('curl')
 pkg_source="https://curl.haxx.se/download/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="8a063d664d1c23d35526b87a2bf15514962ffdd8ef7fd40519191b3c23e39548"
+pkg_shasum="370b11201349816287fb0ccc995e420277fbfcaf76206e309b3f60f0eda090c2"
 pkg_deps=(
 	core/cacerts
 	core/glibc

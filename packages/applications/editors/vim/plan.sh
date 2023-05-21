@@ -1,6 +1,6 @@
 pkg_name="vim"
 pkg_origin="core"
-pkg_version="9.0.0984"
+pkg_version="8.2.2825"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Vim is a highly configurable text editor built to make creating and changing \
@@ -10,7 +10,7 @@ systems and with Apple OS X.\
 pkg_upstream_url="http://www.vim.org/"
 pkg_license=("Vim")
 pkg_source="http://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum="bbfc59e1862db862e3f641b0871cd1162dc1d2a58330588c6e517dbdf54b133c"
+pkg_shasum="c75acdac8b80e664666663d3429efe1eb25be7f13db0bd3697a2d2a78dd1bb66"
 pkg_deps=(
 	core/acl
 	core/glibc
@@ -28,10 +28,6 @@ pkg_build_deps=(
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-	pushd src >/dev/null
-	autoconf
-	popd >/dev/null
-
 	export CFLAGS="${CFLAGS} -O2"
 	build_line "Setting CFLAGS=${CFLAGS}"
 }
@@ -61,6 +57,6 @@ do_install() {
 
 	# Install license file
 	install -Dm644 runtime/doc/uganda.txt "${pkg_prefix}/share/licenses/license.txt"
-	fix_interpreter "$pkg_prefix/share/vim/vim90/**/*" core/coreutils bin/env
-	sed -e "s,/usr/bin/python,$(pkg_path_for core/coreutils)/bin/env python3,g" -i "$pkg_prefix/share/vim/vim90/tools/demoserver.py"
+	# fix_interpreter "$pkg_prefix/share/vim/vim90/**/*" core/coreutils bin/env
+	# sed -e "s,/usr/bin/python,$(pkg_path_for core/coreutils)/bin/env python3,g" -i "$pkg_prefix/share/vim/vim90/tools/demoserver.py"
 }

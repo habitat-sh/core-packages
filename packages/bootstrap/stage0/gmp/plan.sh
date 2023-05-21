@@ -17,8 +17,6 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_build_deps=(
 	core/gcc-stage0
 	core/m4-stage0
-	core/build-tools-coreutils
-	core/build-tools-make
 )
 
 pkg_include_dirs=(include)

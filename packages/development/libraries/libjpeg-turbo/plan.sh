@@ -2,14 +2,14 @@ program="libjpeg-turbo"
 
 pkg_name="libjpeg-turbo"
 pkg_origin="core"
-pkg_version="2.1.4"
+pkg_version="1.5.3"
 pkg_description="A faster (using SIMD) libjpeg implementation"
 pkg_upstream_url="http://libjpeg-turbo.virtualgl.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('IJG' 'BSD-3-Clause' 'Zlib')
 pkg_source="https://sourceforge.net/projects/${program}/files/${pkg_version}/${program}-${pkg_version}.tar.gz/download"
 pkg_filename=${program}-${pkg_version}.tar.gz
-pkg_shasum="d3ed26a1131a13686dfca4935e520eb7c90ae76fbc45d98bb50a8dc86230342b"
+pkg_shasum="b24890e2bb46e12e72a79f7e965f409f4e16466d00e1dd15d93d73ee6b592523"
 pkg_deps=(
 	core/glibc
 )

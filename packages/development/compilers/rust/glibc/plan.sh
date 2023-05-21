@@ -12,7 +12,7 @@ pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-aarch64
 pkg_shasum="1311fa8204f895d054c23a3481de3b158a5cd3b3a6338761fee9cdf4dbf075a5"
 pkg_dirname="${pkg_name}-${pkg_version}-aarch64-unknown-linux-gnu"
 pkg_deps=(
-	core/binutils-base
+	core/binutils
 	core/cacerts
 	core/glibc
 	core/gcc-base

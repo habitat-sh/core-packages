@@ -1,0 +1,44 @@
+>From 8012c07aae89f9f855b7c0663158b24464248a3d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?P=C3=A1draig=20Brady?= <address@hidden>
+Date: Thu, 5 Mar 2020 17:34:33 +0000
+Subject: [PATCH] build: fix build failure on linux systems without getdents
+
+* src/ls.c (print_dir): aarch64 doesn't define the getdents
+system call, only providing the getdents64 variant.
+This is available enough to use instead.
+---
+ src/ls.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/ls.c b/src/ls.c
+index 24b983287..29462bfee 100644
+--- a/src/ls.c
++++ b/src/ls.c
+@@ -3018,12 +3018,12 @@ print_dir (char const *name, char const *realname, bool command_line_arg)
+           if (errno != EOVERFLOW)
+             break;
+         }
+-#ifdef __linux__
+       else if (! found_any_entries)
+         {
++#if defined __linux__ && defined SYS_getdents64
+           /* If readdir finds no directory entries at all, not even "." or
+              "..", then double check that the directory exists.  */
+-          if (syscall (SYS_getdents, dirfd (dirp), NULL, 0) == -1
++          if (syscall (SYS_getdents64, dirfd (dirp), NULL, 0) == -1
+               && errno != EINVAL)
+             {
+               /* We exclude EINVAL as that pertains to buffer handling,
+@@ -3031,9 +3031,9 @@ print_dir (char const *name, char const *realname, bool command_line_arg)
+                  ENOENT is returned if appropriate before buffer handling.  */
+               file_failure (command_line_arg, _("reading directory %s"), name);
+             }
++#endif
+           break;
+         }
+-#endif
+       else
+         break;
+ 
+-- 
+2.24.1

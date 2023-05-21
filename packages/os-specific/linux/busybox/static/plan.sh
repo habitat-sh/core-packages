@@ -1,6 +1,6 @@
 pkg_name="busybox-static"
 pkg_origin="core"
-pkg_version="1.35.0"
+pkg_version="1.34.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-2.0-only")
 pkg_source="https://busybox.net/downloads/busybox-1.35.0.tar.bz2"

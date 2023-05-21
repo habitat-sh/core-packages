@@ -1,12 +1,12 @@
 pkg_name=oniguruma
 pkg_origin=core
-pkg_version=6.9.8
+pkg_version="6.9.7.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Oniguruma is a modern and flexible regular expressions library"
 pkg_upstream_url="https://github.com/kkos/oniguruma"
 pkg_license=("BSD-2-Clause")
 pkg_source="https://github.com/kkos/oniguruma/archive/v${pkg_version}.tar.gz"
-pkg_shasum=26372720bab6733c869a9eb69377f73971138dc5e3eff4a81f5ba8aea5435fb2
+pkg_shasum="8f9a75b7d90dde0942c30a8b3c17889b2fecf190690988cc381c4e525cbbd22b"
 pkg_deps=(
 	core/glibc
 )

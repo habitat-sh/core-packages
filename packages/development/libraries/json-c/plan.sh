@@ -1,12 +1,12 @@
 pkg_name="json-c"
 pkg_origin="core"
-pkg_version="0.16"
+pkg_version="0.15"
 pkg_description="A JSON implementation in C"
 pkg_upstream_url="https://github.com/json-c/json-c"
 pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://s3.amazonaws.com/json-c_releases/releases/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="8e45ac8f96ec7791eaf3bb7ee50e9c2100bbbc87b8d0f1d030c5ba8a0288d96b"
+pkg_shasum="b8d80a1ddb718b3ba7492916237bbf86609e9709fb007e7f7d4322f02341a4c6"
 pkg_deps=(
 	core/glibc
 )

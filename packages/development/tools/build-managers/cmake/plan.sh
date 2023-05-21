@@ -2,7 +2,7 @@ program="cmake"
 
 pkg_name="cmake"
 pkg_origin="core"
-pkg_version="3.25.1"
+pkg_version="3.21.4"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('BSD-3-Clause')
 pkg_description="CMake is an open-source, cross-platform family of tools designed to build, test and package software"

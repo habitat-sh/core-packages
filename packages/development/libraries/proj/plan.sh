@@ -1,5 +1,5 @@
 program="proj"
-pkg_name="proj4"
+pkg_name="proj"
 pkg_origin="core"
 pkg_version="4.9.3"
 pkg_description="Cartographic Projections Library"

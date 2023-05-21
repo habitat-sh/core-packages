@@ -14,13 +14,9 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
 	core/gcc-stage0
-	core/build-tools-coreutils
-	core/build-tools-make
-	core/build-tools-patch
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-
 
 do_build() {
 	make PREFIX="${pkg_prefix}"

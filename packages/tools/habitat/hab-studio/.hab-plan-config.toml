@@ -4,5 +4,3 @@ unused-dependency = { level = "off" }
 # The studio profiles in libexec are never executed standalone so their 
 # interpreter doesn't matter. It is useful only for shellcheck linting
 host-script-interpreter = { ignored_files = ["libexec/*"] }
-# TODO: remove this after fixing binutils wrapper script interpreters
-duplicate-runtime-binary = { level = "off" }

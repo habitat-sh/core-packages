@@ -14,7 +14,8 @@ pkg_build_deps=(
 	core/build-tools-gcc
 )
 do_build() {
-	arch=$(uname -m)
+	local arch
+	arch="$(uname -m)"
 	case ${arch} in
 	x86_64)
 		arch="x86"
@@ -23,7 +24,7 @@ do_build() {
 		arch="arm64"
 		;;
 	esac
-	make headers_install ARCH=${arch} INSTALL_HDR_PATH="${pkg_prefix}"
+	make headers_install ARCH="${arch}" INSTALL_HDR_PATH="${pkg_prefix}"
 }
 
 do_install() {

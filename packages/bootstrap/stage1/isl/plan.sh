@@ -16,8 +16,6 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_build_deps=(
 	core/gcc-stage1-with-glibc
 	core/gmp-stage1
-	core/build-tools-coreutils
-	core/build-tools-make
 )
 
 pkg_include_dirs=(include)

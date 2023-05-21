@@ -14,7 +14,6 @@ pkg_dirname="rust-${pkg_version}-aarch64-unknown-linux-musl"
 pkg_deps=(
 	core/musl
 	core/gcc-libs
-	core/bash-static
 	core/cacerts
 )
 pkg_build_deps=(
@@ -66,7 +65,7 @@ do_install() {
 	mv -v "$bin" "${bin}.real"
 	# TODO could core/bash-static be used instead of core/busybox-musl
 	cat <<EOF >"$bin"
-#!$(pkg_path_for bash-static)/bin/sh
+#!/bin/sh
 set -e
 export SSL_CERT_FILE="$HAB_SSL_CERT_FILE"
 exec ${bin}.real \$@
