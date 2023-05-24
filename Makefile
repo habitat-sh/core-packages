@@ -4,22 +4,13 @@ HAB_AUTO_BUILD_BRANCH = "v2"
 PACKAGE = "*/*"
 
 check-docker:
-	@if ! command -v docker &> /dev/null; then \
-		echo "Docker is not installed. Please install Docker: https://docs.docker.com/get-docker/"; \
-		exit 1; \
-	fi
+	@command -v docker >/dev/null 2>&1 || (echo "Docker is not installed. Please install Docker:  https://docs.docker.com/get-docker/" && exit 1)
 
 check-rust:
-	@if ! command -v cargo &> /dev/null; then \
-		echo "Cargo is not installed. Please install Rust: https://www.rust-lang.org/tools/install"; \
-		exit 1; \
-	fi
+	@command -v cargo >/dev/null 2>&1 || (echo "Cargo is not installed. Please install Rust: https://www.rust-lang.org/tools/install" && exit 1)
 
 check-hab-auto-build:
-	@if ! command -v hab-auto-build &> /dev/null; then \
-		echo "hab-auto-build is not found. Please install it by running 'make setup'"; \
-		exit 1; \
-	fi
+	@command -v cargo >/dev/null 2>&1 || (echo "hab-auto-build is not found. Please install it by running 'make setup'" && exit 1)
 
 build-hab-bootstrap-image: check-docker
 	@echo "Building Docker Image for build tools: hab-bootstrap:$(HAB_BOOTSTRAP_IMAGE_VERSION)"
@@ -27,14 +18,12 @@ build-hab-bootstrap-image: check-docker
 	@echo "Docker Image built hab-bootstrap:$(HAB_BOOTSTRAP_IMAGE_VERSION)"
 
 install-hab-auto-build: check-rust
-	@if ! command -v hab-auto-build &> /dev/null; then \
-		echo "Installing hab-auto-build"; \
+	@command -v hab-auto-build >/dev/null 2>&1 && \
+	echo "Found hab-auto-build already installed at $$(command -v hab-auto-build)" \
+	|| (echo "Installing hab-auto-build"; \
 		cargo install --git $(HAB_AUTO_BUILD_GIT_REPO) --branch $(HAB_AUTO_BUILD_BRANCH); \
-		echo "Installed hab-auto-build"; \
-	else \
-		echo "Found hab-auto-build already installed at $$(which hab-auto-build)"; \
-	fi
-
+		echo "Installed hab-auto-build")
+		
 update-hab-auto-build: check-rust
 	@echo "Updating hab-auto-build"
 	@cargo install --git $(HAB_AUTO_BUILD_GIT_REPO) --branch $(HAB_AUTO_BUILD_BRANCH) --quiet;
