@@ -38,9 +38,19 @@ update: build-hab-bootstrap-image update-hab-auto-build
 build-dry-run: check-hab-auto-build
 	hab-auto-build build -d $(PACKAGE)
 
-build: check-hab-auto-build setup
+build-debug: setup check-hab-auto-build
 	@echo "Building all packages matching $(PACKAGE)"
-	hab-auto-build build $(PACKAGE)
+	@HAB_AUTO_BUILD_DEBUG=hab_auto_build=debug hab-auto-build build $(PACKAGE)
+	@echo "Built all packages matching $(PACKAGE)"
+
+build-trace: setup check-hab-auto-build
+	@echo "Building all packages matching $(PACKAGE)"
+	@HAB_AUTO_BUILD_DEBUG=hab_auto_build=trace hab-auto-build build $(PACKAGE)
+	@echo "Built all packages matching $(PACKAGE)"
+
+build: setup check-hab-auto-build
+	@echo "Building all packages matching $(PACKAGE)"
+	@HAB_AUTO_BUILD_DEBUG= hab-auto-build build $(PACKAGE)
 	@echo "Built all packages matching $(PACKAGE)"
 
 check: check-hab-auto-build
