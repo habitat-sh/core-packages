@@ -18,7 +18,7 @@ This approach not only simplifies deployment and management of applications but 
 
 ## Creating a Portable Compiler / Linker
 
-he final goal of this process is to create a gportable cc compiler and linker that can work correctly in a ny environment TFor this the compiler and linker needs to be able to do the following.
+The final goal of this process is to create a gportable cc compiler and linker that can work correctly in any environment. For this the compiler and linker needs to be able to do the following.
 
 The compiler must be able to:
 
@@ -31,13 +31,23 @@ The compiler must be able to:
 The linker must be able to:
 
 -   Add RUNPATH entries to a binary/shared library for all required shared libraries
--   Add a custom dynamic linker if the compiling a binary
+-   Add a custom dynamic linker if it is compiling a dynamically linked binary
 
 All these requirements can be met by wrapping the compiler and linker with shell scripts that parse and modify the arguments passed to them. This critical step ensures that the compiler works in any environment.
 
 The plan files for binutils packages, such as 'native-cross-binutils', 'build-tools-binutils', 'binutils-stage0', 'binutils-stage1', and 'binutils-base', include the linker wrapper script 'ld-wrapper.sh'.
 
 Similarly, the plan files for gcc packages, such as 'native-cross-gcc-base', 'build-tools-gcc', 'gcc-stage1', and 'gcc', contain the compiler wrapper script 'cc-wrapper.sh'.
+
+In Habitat we use a rust based ld and cc wrapper for a few reasons:
+- The logic for determining the arguments that have to be modified, added or removed for the compiler and linker can get 
+  quite complex. A few example scenarios:
+    - Determining if a library which is linked with the `--as-needed` flag should be added to the runpath
+    - Determining if the current plan's lib folder should be added to the runpath due to dependencies on just built libraries
+    - Correctly determining the dynamic linker to be used when building the C library
+- By moving most of the complexity to a rust binary we can have a very simple POSIX compliant shell script wrapper. Since almost 
+  all POSIX / UNIX-like environments must have a /bin/sh available, this greatly simplifies the bootstrapping path since we don't
+  need to build bash before building our compiler and linker.
 
 ## Bootstrapping GCC
 
