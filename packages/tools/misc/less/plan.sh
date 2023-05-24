@@ -17,7 +17,7 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc
 	core/ncurses
-	core/libpcre2
+	core/pcre
 )
 pkg_build_deps=(
 	core/gcc
@@ -28,6 +28,6 @@ do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \
 		--sysconfdir=/etc \
-		--with-regex=pcre2
+		--with-regex=pcre
 	make
 }

@@ -14,6 +14,10 @@ pkg_deps=(
 	core/build-tools-glibc
 	core/build-tools-gcc-libs
 )
+pkg_build_deps=(
+	core/native-rust
+	core/native-patchelf
+)
 
 pkg_bin_dirs=(bin)
 
@@ -21,10 +25,6 @@ bin="hab"
 
 pkg_version() {
 	cat "$SRC_PATH/VERSION"
-}
-
-do_begin() {
-	path_backup="$PATH"
 }
 
 do_unpack() {
@@ -37,10 +37,6 @@ do_prepare() {
 	export CARGO_HOME="$HAB_CACHE_SRC_PATH/$pkg_dirname/.cargo"
 	export CARGO_TARGET_DIR="$HAB_CACHE_SRC_PATH/$pkg_dirname/target"
 	export rustc_target="${TARGET_ARCH:-${pkg_target%%-*}}-unknown-linux-gnu"
-
-	# Restore the original path so gcc does not interfere with the
-	# native C compiler and build process
-	export PATH=$path_backup
 
 	# Remove remaining flags that will interfere with the build compiler/linker
 	unset LD_RUN_PATH

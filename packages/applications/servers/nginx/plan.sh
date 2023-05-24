@@ -14,7 +14,7 @@ pkg_deps=(
 	core/zlib
 	core/bzip2
 	core/openssl
-	core/pcre2
+	core/pcre
 )
 pkg_build_deps=(
 	core/gcc

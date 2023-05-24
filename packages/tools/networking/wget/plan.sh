@@ -19,7 +19,7 @@ pkg_deps=(
 	core/openssl
 	core/libidn2
 	core/libpsl
-	core/libpcre2
+	core/pcre
 	core/zlib
 )
 

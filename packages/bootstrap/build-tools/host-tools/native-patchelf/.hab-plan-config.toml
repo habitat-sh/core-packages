@@ -1,4 +1,5 @@
 docker-image = "hab-bootstrap:20230523"
 
 [rules]
+host-elf-interpreter = "off"
 library-dependency-not-found = "off"

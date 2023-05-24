@@ -13,7 +13,6 @@ pkg_deps=(
 	core/zlib
 	core/ncurses
 	core/readline
-	core/libpcre2
 	core/file
 )
 pkg_build_deps=(

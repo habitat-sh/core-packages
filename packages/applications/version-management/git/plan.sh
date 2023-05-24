@@ -17,7 +17,7 @@ pkg_deps=(
 	core/expat
 	core/gettext
 	core/glibc
-	core/libpcre2
+	core/pcre
 	core/openssh
 	core/openssl
 	core/perl
@@ -47,7 +47,7 @@ do_build() {
 		--with-shell="$(pkg_path_for bash)/bin/sh" \
 		--with-zlib="$(pkg_path_for zlib)" \
 		--with-openssl \
-		--with-libpcre2
+		--with-libpcre
 
 	make -j"$(nproc)"
 }

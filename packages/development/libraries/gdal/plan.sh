@@ -19,14 +19,14 @@ pkg_deps=(
 	core/libdeflate
 	core/libgeotiff
 	core/libjpeg-turbo
-	core/libpcre2
+	core/pcre
 	core/libpng
 	core/libtiff
 	core/libwebp
 	core/libxml2
 	core/openssl
 	core/lz4
-	core/proj8
+	core/proj
 	core/xz
 	core/zlib
 	core/zstd

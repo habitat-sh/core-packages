@@ -60,20 +60,19 @@ do_install() {
 	make install
 
 	# Many packages that use Ncurses will compile just fine against the widechar
-	# libraries, but won't know to look for them. Create linker scripts and
-	# symbolic links to allow older and non-widec compatible programs to build
-	# properly
-	for lib in ncurses form panel menu; do
+	# libraries, but won't know to look for them. Create symbolic links to
+	# allow older and non-widec compatible programs to build properly
+	for lib in ncurses form panel menu tinfo; do
 		rm -vf "${pkg_prefix}/lib/lib${lib}.so"
-		echo "INPUT(-l${lib}w)" >"${pkg_prefix}/lib/lib${lib}.a"
-		echo "INPUT(-l${lib}w)" >"${pkg_prefix}/lib/lib${lib}.so"
+		ln -sfv "lib${lib}w.a" "${pkg_prefix}/lib/lib${lib}.a"
+		ln -sfv "lib${lib}w.so" "${pkg_prefix}/lib/lib${lib}.so"
 		ln -sfv ${lib}w.pc "${pkg_prefix}/lib/pkgconfig/${lib}.pc"
 	done
 
-	# Add additional linker scripts so that any programs looking for curses
+	# Add additional symbolic links so that any programs looking for curses
 	# will find ncurses
-	echo "INPUT(-lncursesw)" >"${pkg_prefix}/lib/libcurses.so"
-	echo "INPUT(-lncursesw)" >"${pkg_prefix}/lib/libcurses.a"
+	ln -sfv "libncursesw.a" "${pkg_prefix}/lib/libcurses.a"
+	ln -sfv "libncursesw.so" "${pkg_prefix}/lib/libcurses.so"
 
 	# Packages depending on curses or ncurses may include headers
 	# in multiple ways:

@@ -16,7 +16,7 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
 	core/glibc
-	core/libpcre
+	core/pcre
 )
 pkg_build_deps=(
 	core/gcc

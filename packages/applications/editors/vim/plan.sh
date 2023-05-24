@@ -57,6 +57,6 @@ do_install() {
 
 	# Install license file
 	install -Dm644 runtime/doc/uganda.txt "${pkg_prefix}/share/licenses/license.txt"
-	# fix_interpreter "$pkg_prefix/share/vim/vim90/**/*" core/coreutils bin/env
-	# sed -e "s,/usr/bin/python,$(pkg_path_for core/coreutils)/bin/env python3,g" -i "$pkg_prefix/share/vim/vim90/tools/demoserver.py"
+	fix_interpreter "$pkg_prefix/share/vim/vim*/**/*" core/coreutils bin/env
+	sed -e "s,/usr/bin/python,$(pkg_path_for core/coreutils)/bin/env python3,g" -i "$pkg_prefix/share/vim/vim82/tools/demoserver.py"
 }

@@ -42,7 +42,7 @@ do_build() {
 }
 
 do_check() {
-	# Create a link to echo in coreutils to be used by the pcre2 test case
+	# Create a link to echo in coreutils to be used by the test case
 	ln -sv "$(pkg_path_for coreutils)"/bin/echo /bin/echo
 	make check
 }

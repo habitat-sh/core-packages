@@ -2,7 +2,7 @@
     "repos": [
         {
             "id": "core",
-            "source": "../core-packages",
+            "source": ".",
             "native_packages": [
                 "packages/bootstrap/build-support/**",
                 "packages/bootstrap/build-tools/cross-compiler/**",

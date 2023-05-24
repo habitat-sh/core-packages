@@ -19,7 +19,6 @@ pkg_deps=(
 	core/bzip2
 	core/zlib
 	core/readline
-	core/ncurses
 )
 pkg_build_deps=(
 	core/gcc

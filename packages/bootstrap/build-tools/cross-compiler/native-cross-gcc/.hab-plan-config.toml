@@ -1,3 +1,5 @@
+docker-image = "hab-bootstrap:20230523"
+
 [rules]
 host-script-interpreter = "off"
 # This package combines multiple packages into a single package 

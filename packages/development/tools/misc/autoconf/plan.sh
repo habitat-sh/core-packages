@@ -35,7 +35,7 @@ do_check() {
 	# Some of the packages are included to enable test cases:
 	# * core/zlib
 	# * core/libtool
-	# Create a link to echo in coreutils to be used by the pcre2 test case
+	# Create a link to echo in coreutils to be used by the test case
 	ln -sv "$(pkg_path_for coreutils)"/bin/echo /bin/echo
 
 	TESTSUITEFLAGS="-j$(nproc)" make check

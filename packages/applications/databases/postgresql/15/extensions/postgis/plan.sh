@@ -17,7 +17,7 @@ pkg_deps=(
 	core/geos
 	core/glibc
 	core/json-c
-	core/libpcre2
+	core/pcre
 	core/libxml2
 	core/icu
 	core/perl

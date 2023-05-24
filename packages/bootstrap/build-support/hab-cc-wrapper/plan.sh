@@ -10,9 +10,11 @@ pkg_license=('Apache-2.0')
 pkg_source="https://github.com/habitat-sh/hab-pkg-wrappers/archive/${commit_hash}.tar.gz"
 pkg_shasum="c62127bdd4e60916c5556b8be2ee0f10a54450ebda6cd30e71a1add59b78a59b"
 pkg_dirname="hab-pkg-wrappers-${commit_hash}"
+pkg_build_deps=(
+	core/native-rust
+)
 
 # We don't specify 'pkg_bin_dirs' as we always use the wrapper via it's full path
-
 bin="hab-cc-wrapper"
 
 do_prepare() {
