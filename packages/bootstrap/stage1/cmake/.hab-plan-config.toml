@@ -1,6 +1,6 @@
 [rules]
-missing-license = { level = "off", source-shasum = "1c511d09516af493694ed9baf13c55947a36389674d657a2d5e0ccedc6b291d8" }
-license-not-found = { level = "off", source-shasum = "1c511d09516af493694ed9baf13c55947a36389674d657a2d5e0ccedc6b291d8" }
+missing-license = { level = "off", source-shasum = "d9570a95c215f4c9886dd0f0564ca4ef8d18c30750f157238ea12669c2985978" }
+license-not-found = { level = "off", source-shasum = "d9570a95c215f4c9886dd0f0564ca4ef8d18c30750f157238ea12669c2985978" }
 # ignore interpreters in the cmake modules, not sure if this is ok
-env-script-interpreter-not-found = { ignored_files = ["share/cmake-3.25/Modules/*"] }
-script-interpreter-not-found = { ignored_files = ["share/cmake-3.25/Modules/*"] }
+env-script-interpreter-not-found = { ignored_files = ["share/cmake-*/Modules/*"] }
+script-interpreter-not-found = { ignored_files = ["share/cmake-*/Modules/*"] }

@@ -6,7 +6,7 @@ pkg_description="Libxslt is the XSLT C library developed for the GNOME project"
 pkg_upstream_url="http://xmlsoft.org/XSLT/"
 pkg_license=('MIT')
 pkg_source="http://xmlsoft.org/sources/libxslt-${pkg_version}.tar.gz"
-pkg_shasum=98b1bd46d6792925ad2dfe9a87452ea2adebf69dcb9919ffd55bf926a7f93f7f
+pkg_shasum="98b1bd46d6792925ad2dfe9a87452ea2adebf69dcb9919ffd55bf926a7f93f7f"
 
 pkg_deps=(
 	core/glibc

@@ -10,7 +10,7 @@ and external string representation (a traditional encoding) when they \
 are doing I/O.  GNU libiconv is a conversion library for both kinds of \
 applications."
 pkg_upstream_url="https://www.gnu.org/software/libiconv/"
-pkg_license=('GPL-3.0-or-later' 'LGPL-2.1')
+pkg_license=('GPL-3.0-or-later' 'LGPL-2.0-or-later')
 pkg_source="https://ftp.gnu.org/pub/gnu/libiconv/libiconv-${pkg_version}.tar.gz"
 pkg_shasum="e6a1b1b589654277ee790cce3734f07876ac4ccfaecbee8afa0b649cf529cc04"
 

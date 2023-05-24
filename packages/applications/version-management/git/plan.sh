@@ -17,7 +17,6 @@ pkg_deps=(
 	core/expat
 	core/gettext
 	core/glibc
-	core/pcre
 	core/openssh
 	core/openssl
 	core/perl

@@ -1,6 +1,6 @@
 [rules]
-missing-license = { level = "off", source-shasum = "ae8d3427e4ccd677abc931f16183c0ec953e3bfcd866493601351e04a2b97398" }
-license-not-found = { level = "off", source-shasum = "ae8d3427e4ccd677abc931f16183c0ec953e3bfcd866493601351e04a2b97398" }
+missing-license = { level = "off", source-shasum = "02047f8dc8934d57ff5e02aadd8a2fe8e0bcf94a7158da375e48086cc46fce1d" }
+license-not-found = { level = "off", source-shasum = "02047f8dc8934d57ff5e02aadd8a2fe8e0bcf94a7158da375e48086cc46fce1d" }
 # These packages are needed are runtime
 unused-dependency = { ignored_packages = ["core/{gettext,sed,cacerts,openssh}"] }
 # Ignore sample scripts

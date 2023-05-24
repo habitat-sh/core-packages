@@ -18,7 +18,6 @@ pkg_deps=(
 	core/libyaml
 	core/libffi
 	core/readline
-	core/ncurses
 	core/nss-myhostname
 	core/openssl
 	core/zlib
