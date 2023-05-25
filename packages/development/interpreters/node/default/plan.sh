@@ -10,15 +10,13 @@ pkg_shasum="89d22d34fd4ba3715252dcd2dd94d1699338436463b277163ed950040c7b621a"
 pkg_deps=(
 	core/glibc
 	core/gcc-libs
-	core/python
+	core/python2
 	core/bash
 	core/zlib
 
 )
 pkg_build_deps=(
 	core/gcc
-	core/grep
-	core/make
 	core/which
 	core/zlib
 )
@@ -30,7 +28,9 @@ pkg_dirname="node-v${pkg_version}"
 
 do_prepare() {
 	# ./configure has a shebang of #!/usr/bin/env python. Fix it.
-	sed -e "s#/usr/bin/env python#$(pkg_path_for python)/bin/python#" -i configure
+	sed -e "s#/usr/bin/env python#$(pkg_path_for python2)/bin/python#" -i configure
+	# Ensure python2 is picked up by the configure script
+	export FORCE_PYTHON2=1
 }
 
 do_build() {
@@ -51,7 +51,7 @@ do_install() {
 		sed -e "s#\#\!/usr/bin/env node#\#\!${pkg_prefix}/bin/node#" -i "$target"
 		sed -e "s#\#\!/usr/bin/env sh#\#\!$(pkg_path_for bash)/bin/sh#" -i "$target"
 		sed -e "s#\#\!/usr/bin/env bash#\#\!$(pkg_path_for bash)/bin/bash#" -i "$target"
-		sed -e "s#\#\!/usr/bin/env python#\#\!$(pkg_path_for python)/bin/python#" -i "$target"
+		sed -e "s#\#\!/usr/bin/env python#\#\!$(pkg_path_for python2)/bin/python#" -i "$target"
 	done
 
 	# This script has a hardcoded bare `node` command

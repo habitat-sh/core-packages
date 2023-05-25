@@ -32,11 +32,10 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
-	core/pkg-config
-	core/diffutils
 	core/gcc
 	core/linux-headers
-	core/make
+	core/pkg-config
+	core/util-linux
 )
 
 do_prepare() {

@@ -11,7 +11,7 @@ Sockets Layer (SSL) protocols. It is also a general-purpose cryptography \
 library.\
 "
 pkg_upstream_url="https://www.openssl.org"
-pkg_license=('Apache-2.0')
+pkg_license=('OpenSSL')
 pkg_source="https://www.openssl.org/source/${program}-${pkg_version}.tar.gz"
 pkg_shasum="83049d042a260e696f62406ac5c08bf706fd84383f945cf21bd61e9ed95c396e"
 pkg_dirname="${program}-${pkg_version}"
