@@ -35,7 +35,7 @@ do_prepare() {
 do_build() {
 	# We add the '-Wl,-rpath' flag to ensure that the bzip-shared binary contains the final location
 	# of the libbz2 shared library
-	make -f Makefile-libbz2_so CFLAGS="-Wl,-rpath=${pkg_prefix}/lib" PREFIX="$pkg_prefix" CC="gcc"
+	make -f Makefile-libbz2_so CFLAGS="-fPIC -DPIC -Wl,-rpath=${pkg_prefix}/lib" PREFIX="$pkg_prefix" CC="gcc"
 	make CC="gcc"
 }
 

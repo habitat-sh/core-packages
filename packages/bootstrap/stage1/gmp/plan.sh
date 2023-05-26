@@ -1,4 +1,5 @@
 program="gmp"
+arch="${pkg_target%%-*}"
 
 pkg_name="gmp-stage1"
 pkg_origin="core"
@@ -38,7 +39,7 @@ do_build() {
 		--prefix="$pkg_prefix" \
 		--enable-cxx \
 		--docdir="$pkg_prefix/share/doc/gmp-6.2.1" \
-		--build="aarch64-unknown-linux-gnu" \
+		--build="${arch}-unknown-linux-gnu" \
 		--disable-shared
 
 	make
