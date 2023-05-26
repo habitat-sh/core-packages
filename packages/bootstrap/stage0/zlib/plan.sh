@@ -21,6 +21,13 @@ pkg_build_deps=(
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
+do_prepare() {
+	# The "-fPIC" flag is essential for the generation of libz.a archive.
+	# Without it, the generated archive cannot be linked into shared libraries
+	# on certain platforms.
+	export CFLAGS="-fPIC"
+}
+
 do_install() {
 	make install
 

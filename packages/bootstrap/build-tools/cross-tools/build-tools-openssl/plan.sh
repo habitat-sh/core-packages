@@ -47,8 +47,10 @@ do_build() {
 
 	./Configure \
 		--cross-compile-prefix="${native_target}-" \
+		--libdir=lib \
 		--prefix="${pkg_prefix}" \
 		--openssldir=ssl \
+		shared \
 		fips \
 		$openssl_arch
 

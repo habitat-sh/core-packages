@@ -1,5 +1,4 @@
 program="make"
-native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="make"
 pkg_origin="core"

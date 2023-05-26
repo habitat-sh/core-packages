@@ -1,5 +1,4 @@
 program="gcc"
-native_target="${pkg_target%%-*}-unknown-linux-gnu"
 
 pkg_name="gcc-stage1"
 pkg_origin="core"
@@ -160,16 +159,20 @@ do_build() {
 }
 
 do_install() {
+	# Determine the target prefix
+	local target_prefix
+	target_prefix=$(./config.guess)
+	
 	pushd build || exit 1
 	make install
-
+	
 	# Many packages use the name cc to call the C compiler
 	ln -sv gcc "$pkg_prefix/bin/cc"
 
-	wrap_binary "${native_target}-c++"
-	wrap_binary "${native_target}-g++"
-	wrap_binary "${native_target}-gcc"
-	wrap_binary "${native_target}-gcc-${pkg_version}"
+	wrap_binary "${target_prefix}-c++"
+	wrap_binary "${target_prefix}-g++"
+	wrap_binary "${target_prefix}-gcc"
+	wrap_binary "${target_prefix}-gcc-${pkg_version}"
 
 	wrap_binary "c++"
 	wrap_binary "gcc"
@@ -198,11 +201,11 @@ wrap_binary() {
 	wrapper_binary="$pkg_prefix/bin/$binary"
 	actual_binary="$pkg_prefix/bin/$binary.real"
 
-	case $native_target in
-	aarch64-hab-linux-gnu)
+	case $pkg_target in
+	aarch64-linux)
 		dynamic_linker="$libc/lib/ld-linux-aarch64.so.1"
 		;;
-	x86_64-hab-linux-gnu)
+	x86_64-linux)
 		dynamic_linker="$libc/lib/ld-linux-x86-64.so.2"
 		;;
 	esac
