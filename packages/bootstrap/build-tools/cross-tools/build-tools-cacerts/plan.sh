@@ -33,7 +33,11 @@ do_unpack() {
 }
 
 do_prepare() {
+	# Tells the core/build-tools-openssl habitat package where to find the SSL certs
 	set_runtime_env "HAB_SSL_CERT_FILE" "${pkg_prefix}/ssl/certs/cacert.pem"
+	# Compatibility with non-habitat openssl libraries built which check this
+	# environment variable by default for SSL certs
+	set_runtime_env "SSL_CERT_FILE" "${pkg_prefix}/ssl/certs/cacert.pem"
 }
 
 do_build() {
