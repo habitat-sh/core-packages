@@ -16,6 +16,16 @@ pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_interpreters=(bin/python bin/python3 bin/python3.10)
 
+# Select the correct openssl dep
+case $pkg_target in
+aarch64-*)
+	openssl_dep="core/openssl"
+	;;
+x86_64-*)
+	openssl_dep="core/openssl11"
+	;;
+esac
+
 pkg_deps=(
 	core/bzip2
 	core/coreutils
@@ -24,7 +34,7 @@ pkg_deps=(
 	core/glibc
 	core/libffi
 	core/ncurses
-	core/openssl
+	"$openssl_dep"
 	core/readline
 	core/sqlite
 	core/xz
@@ -38,17 +48,13 @@ pkg_build_deps=(
 	core/util-linux
 )
 
-do_prepare() {
-	LDFLAGS="${LDFLAGS} -Wl,-rpath=${pkg_prefix}/lib"
-}
-
 do_build() {
 	./configure --prefix="$pkg_prefix" \
 		--enable-loadable-sqlite-extensions \
 		--enable-shared \
 		--with-system-expat \
 		--with-ensurepip \
-		--with-openssl="$(pkg_path_for openssl)" \
+		--with-openssl="$(pkg_path_for "$openssl_dep")" \
 		--enable-optimizations
 	make
 }
@@ -59,6 +65,37 @@ do_check() {
 
 do_install() {
 	make install
+
+	# link pythonx.x to python for pkg_interpreters
+	local minor=${pkg_version%.*}
+	local major=${minor%.*}
+	ln -rs "$pkg_prefix/bin/pip$minor" "$pkg_prefix/bin/pip"
+	ln -rs "$pkg_prefix/bin/pydoc$minor" "$pkg_prefix/bin/pydoc"
+	ln -rs "$pkg_prefix/bin/python$minor" "$pkg_prefix/bin/python"
+	ln -rs "$pkg_prefix/bin/python$minor-config" "$pkg_prefix/bin/python-config"
+
+	# Remove idle as we are not building with Tk/x11 support so it is useless
+	rm -vf "$pkg_prefix/bin/idle$major"
+	rm -vf "$pkg_prefix/bin/idle$minor"
+
+	# Get the path of the platform-specific library.
+	platlib=$(python -c "import sysconfig;print(sysconfig.get_path('platlib'))")
+
+	# Create a _manylinux.py file in the platform-specific library path.
+	# Disable binary manylinux1(CentOS 5) wheel support.
+	# This is done to prevent potential issues with installing Python binary packages (wheels)
+	# that were built for compatibility with CentOS 5 and other older Linux distributions.
+	# Since such binary packages might contain shared libraries linked against older system
+	# libraries, there could be compatibility issues when they're installed on newer Linux
+	# distributions. By setting `manylinux1_compatible` to `False`, pip will not install
+	# manylinux1 wheels on this system, so packages will be built from source code instead.
+	# For more information on manylinux1 compatibility see PEP 513:
+	# https://www.python.org/dev/peps/pep-0513/
+	cat <<EOF >"$platlib/_manylinux.py"
+manylinux1_compatible = False
+EOF
+
+	# Fix /usr/bin/env interpreters to use our coreutils
 	grep -lr '/usr/bin/env' "$pkg_prefix" | while read -r f; do
 		sed -e "s,/usr/bin/env,$(pkg_interpreter_for coreutils bin/env),g" -i "$f"
 	done
