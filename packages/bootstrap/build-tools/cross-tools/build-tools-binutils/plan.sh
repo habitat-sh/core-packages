@@ -71,6 +71,7 @@ do_prepare() {
 }
 
 do_build() {
+	patch -p0 < "$PLAN_CONTEXT/malformarchive-linking-fix.patch"
 	./configure \
 		--prefix=$pkg_prefix \
 		--build="$(./config.guess)" \

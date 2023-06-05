@@ -14,7 +14,7 @@ pkg_dirname="rust-${pkg_version}-aarch64-unknown-linux-musl"
 pkg_deps=(
 	core/musl
 	core/gcc-libs
-	core/cacerts
+#	core/cacerts
 )
 pkg_build_deps=(
 	core/build-tools-patchelf
@@ -22,7 +22,7 @@ pkg_build_deps=(
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
-pkg_include_dirs=(include)
+#pkg_include_dirs=(include)
 
 do_build() {
 	return 0

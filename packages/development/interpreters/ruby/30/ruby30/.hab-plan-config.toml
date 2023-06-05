@@ -1,0 +1,5 @@
+[rules]
+missing-license = { level = "off", source-shasum = "3586861cb2df56970287f0fd83f274bd92058872d830d15570b36def7f1a92ac" }
+license-not-found = { level = "off", source-shasum = "3586861cb2df56970287f0fd83f274bd92058872d830d15570b36def7f1a92ac" }
+script-interpreter-not-found = { ignored_files = ["lib/*"]}
+

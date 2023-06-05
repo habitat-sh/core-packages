@@ -11,13 +11,13 @@ pkg_source="https://ftp.postgresql.org/pub/source/v${pkg_version}/${pkg_dirname}
 pkg_shasum="64fdf23d734afad0dfe4077daca96ac51dcd697e68ae2d3d4ca6c45cb14e21ae"
 
 pkg_deps=(
-	core/bash
-	core/gawk
+#	core/bash
+#	core/gawk
 	core/glibc
-	core/grep
+#	core/grep
 	core/libossp-uuid
 	core/openssl
-	core/perl
+#	core/perl
 	core/readline
 	core/zlib
 )

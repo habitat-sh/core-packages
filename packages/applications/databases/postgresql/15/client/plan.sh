@@ -13,7 +13,7 @@ pkg_deps=(
 	core/glibc
 	core/libossp-uuid
 	core/openssl
-	core/perl
+#	core/perl
 	core/readline
 	core/zlib
 )

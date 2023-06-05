@@ -16,7 +16,7 @@ pkg_deps=(
 	core/glibc
 	core/readline
 	core/ncurses
-	core/libidn2
+#	core/libidn2
 )
 pkg_build_deps=(
 	core/iana-etc
@@ -47,7 +47,7 @@ do_build() {
 		--disable-servers \
 		--with-idn \
 		--enable-threads
-	make
+	make LDFLAGS="$LDFLAGS -Wl,--copy-dt-needed-entries"
 }
 
 do_check() {

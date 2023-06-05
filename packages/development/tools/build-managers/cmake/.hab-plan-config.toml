@@ -4,3 +4,4 @@ license-not-found = { level = "off", source-shasum = "d9570a95c215f4c9886dd0f056
 # ignore interpreters in the cmake modules, not sure if this is ok
 env-script-interpreter-not-found = { ignored_files = ["share/cmake-*/Modules/*"] }
 script-interpreter-not-found = { ignored_files = ["share/cmake-*/Modules/*"] }
+host-script-interpreter = { ignored_files = ["share/cmake-3.21/Modules/Compiler/XL-Fortran/cpp"] }

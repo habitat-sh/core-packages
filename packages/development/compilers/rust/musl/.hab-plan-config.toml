@@ -1,0 +1,9 @@
+[rules]
+missing-license = { level = "off", source-shasum = "4b701dc3cbac04ebf0e336cff2f4ce5fc1a1984c183226863c9ed911eb00b07e" }
+license-not-found = { level = "off", source-shasum = "4b701dc3cbac04ebf0e336cff2f4ce5fc1a1984c183226863c9ed911eb00b07e" }
+library-dependency-not-found = { ignored_files = ["lib/*", "bin/*", "libexec/*"] }
+unused-rpath-entry = { ignored_files = ["lib/*", "bin/*", "libexec/*"] }
+host-elf-interpreter = { ignored_files = ["lib/*", "bin/*", "libexec/*"] }
+unused-runpath-entry = { ignored_files = ["lib/*", "bin/*"] }
+bad-rpath-entry = { ignored_files = ["lib/*"] }
+host-script-interpreter = { ignored_files = ["lib/*"] }

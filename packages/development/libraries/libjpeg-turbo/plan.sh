@@ -14,7 +14,7 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/cmake
+	core/make
 	core/gcc
 )
 pkg_bin_dirs=(bin)
