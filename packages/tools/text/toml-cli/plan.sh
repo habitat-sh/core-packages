@@ -28,9 +28,7 @@ do_prepare() {
 }
 
 do_build() {
-	cargo build \
-		--release \
-		--target="${TARGET_ARCH:-${pkg_target%%-*}}-unknown-linux-gnu"
+	return 0
 }
 
 do_install() {

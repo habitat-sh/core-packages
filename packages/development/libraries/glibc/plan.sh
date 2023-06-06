@@ -80,6 +80,7 @@ do_build() {
 		--sysconfdir="$pkg_prefix/etc" \
 		--enable-kernel=3.2 \
 		--enable-stack-protector=strong \
+		--enable-static-pie \
 		--disable-werror \
 		libc_cv_slibdir="$pkg_prefix"/lib \
 		libc_cv_rootsbindir="$pkg_prefix"/bin

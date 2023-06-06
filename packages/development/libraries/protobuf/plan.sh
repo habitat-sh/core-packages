@@ -18,7 +18,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc
-	core/python
 )
 
 pkg_bin_dirs=(bin)
