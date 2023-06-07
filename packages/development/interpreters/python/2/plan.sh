@@ -78,10 +78,27 @@ do_install() {
 	# Remove idle as we are not building with Tk/x11 support so it is useless
 	rm -vf "$pkg_prefix/bin/idle"
 
+	# Get the path of the platform-specific library.
+	platlib=$(python -c "import sysconfig;print(sysconfig.get_path('platlib'))")
+
+	# Create a _manylinux.py file in the platform-specific library path.
+	# Disable binary manylinux1(CentOS 5) wheel support.
+	# This is done to prevent potential issues with installing Python binary packages (wheels)
+	# that were built for compatibility with CentOS 5 and other older Linux distributions.
+	# Since such binary packages might contain shared libraries linked against older system
+	# libraries, there could be compatibility issues when they're installed on newer Linux
+	# distributions. By setting `manylinux1_compatible` to `False`, pip will not install
+	# manylinux1 wheels on this system, so packages will be built from source code instead.
+	# For more information on manylinux1 compatibility see PEP 513:
+	# https://www.python.org/dev/peps/pep-0513/
+	cat <<EOF >"$platlib/_manylinux.py"
+manylinux1_compatible = False
+EOF
+
+	# Fix /usr/bin/env interpreters to use our coreutils
 	grep -lr '/usr/bin/env' "$pkg_prefix" | while read -r f; do
 		sed -e "s,/usr/bin/env,$(pkg_interpreter_for coreutils bin/env),g" -i "$f"
 	done
-
 	# Explicity point to this python version, this interpreter line is used by the cgi.py script
 	grep -lr '/usr/local/bin/python' "$pkg_prefix" | while read -r f; do
 		sed -e "s,/usr/local/bin/python,$pkg_prefix/bin/python,g" -i "$f"

@@ -47,7 +47,15 @@ do_build() {
 		--disable-servers \
 		--with-idn \
 		--enable-threads
-	make
+
+	# The talk program within inetutils requires the function 'cbreak', which resides
+	# in libtinfo.so, not libcurses.so. This is due to the core/ncurses package being
+	# built with the `--with-termlib` option, which separates some functionalities
+	# into libtinfo. Therefore, when linking, both -lcurses and -ltinfo are required.
+	# It's important that -lcurses is listed before -ltinfo, as the linker resolves
+	# symbols in the order they are listed. Hence, the make command is modified to
+	# include both, in the right order.
+	make LIBCURSES=" -lcurses -ltinfo"
 }
 
 do_check() {

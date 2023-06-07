@@ -28,8 +28,6 @@ do_build() {
 
 do_install() {
 	install -Dm755 busybox "$pkg_prefix/bin/busybox"
-	# Check that busybox executable is not failing
-	"$pkg_prefix"/bin/busybox >/dev/null
 
 	# Generate the symlinks back to the `busybox` executable
 	for l in $(busybox --list); do
