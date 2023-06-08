@@ -10,7 +10,7 @@ pkg_shasum="26d98ee9bf18a6eba0d3f855ddec31dbe857667d269bc0b6017335572f85bbcb"
 pkg_deps=(
 	core/gcc-libs
 	core/protobuf-cpp
-	core/zlib
+#	core/zlib
 )
 pkg_build_deps=(
 	core/gcc
