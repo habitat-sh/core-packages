@@ -1,5 +1,6 @@
 [rules]
 missing-license = { level = "off", source-shasum = "c75acdac8b80e664666663d3429efe1eb25be7f13db0bd3697a2d2a78dd1bb66" }
 license-not-found = { level = "off", source-shasum = "c75acdac8b80e664666663d3429efe1eb25be7f13db0bd3697a2d2a78dd1bb66" }
-# Script for a use with UNIX that we don't care about
-host-script-interpreter = { ignored_files = ["share/vim/vim*/tools/vim132"] }
+# We ignore scripts in the share folder
+host-script-interpreter = { ignored_files = ["share/*"] }
+missing-script-interpreter-dependency = { level = "off", ignored_files = ["share/*"] }

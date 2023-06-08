@@ -8,9 +8,9 @@ segfaults, and guarantees thread safety.\
 "
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
-pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-aarch64-unknown-linux-gnu.tar.gz"
-pkg_shasum="1311fa8204f895d054c23a3481de3b158a5cd3b3a6338761fee9cdf4dbf075a5"
-pkg_dirname="${pkg_name}-${pkg_version}-aarch64-unknown-linux-gnu"
+pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
+pkg_shasum="dd7d82b8fa8eae59729e1c31fe59a9de6ee61d08ab40ce016185653beebe04d2"
+pkg_dirname="${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu"
 pkg_deps=(
 	core/binutils
 	core/cacerts
@@ -18,6 +18,7 @@ pkg_deps=(
 	core/gcc-base
 	core/iana-etc
 	core/tzdata
+	core/zlib
 )
 pkg_build_deps=(
 	core/build-tools-patchelf
@@ -40,6 +41,16 @@ do_strip() {
 }
 
 do_install() {
+	local libc
+	local gcc_base
+	local zlib
+	local dynamic_linker 
+
+	libc="$(pkg_path_for glibc)"
+	gcc_base="$(pkg_path_for gcc-base)"
+	zlib="$(pkg_path_for zlib)"
+	dynamic_linker="${libc}/lib/ld-linux-x86-64.so.2"
+
 	./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
 	# Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
@@ -47,8 +58,8 @@ do_install() {
 		case "$(file -bi "$binary")" in
 		*application/x-executable* | *application/x-pie-executable* | *application/x-sharedlib*)
 			patchelf \
-				--set-interpreter "$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1" \
-				--set-rpath "${pkg_prefix}/lib:$(pkg_path_for gcc-base)/lib64:$(pkg_path_for glibc)/lib" \
+				--set-interpreter "${dynamic_linker}" \
+				--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib:${zlib}/lib" \
 				"$binary"
 			patchelf --shrink-rpath "$binary"
 			;;
@@ -59,7 +70,7 @@ do_install() {
 	# Set `RUNPATH` for all shared libraries under `lib/`
 	find "$pkg_prefix/lib" -name "*.so" -print0 |
 		xargs -0 -I '%' patchelf \
-			--set-rpath "${pkg_prefix}/lib:$(pkg_path_for gcc-base)/lib64:$(pkg_path_for glibc)/lib" \
+			--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib:${zlib}/lib" \
 			%
 	find "$pkg_prefix/lib" -name "*.so" -print0 |
 		xargs -0 -I '%' patchelf \

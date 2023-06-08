@@ -22,6 +22,8 @@ pkg_build_deps=(
 
 do_prepare() {
 	export LDFLAGS="--static"
+
+	build_line "Setting LDFLAGS=${LDFLAGS}"
 }
 
 do_build() {
