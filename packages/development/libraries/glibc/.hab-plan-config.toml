@@ -1,9 +1,9 @@
 [rules]
-missing-license = { level = "off", source-shasum = "44d26a1fe20b8853a48f470ead01e4279e869ac149b195dda4e44a195d981ab2" }
-license-not-found = { level = "off", source-shasum = "44d26a1fe20b8853a48f470ead01e4279e869ac149b195dda4e44a195d981ab2" }
-# Certain glibc headers include the linux headers, making it a runtime dependency
-unused-dependency = { ignored_packages = ["core/linux-headers"] }
 # Glibc unfortunately uses bashisms in the ldd, tzselect scripts so it's interpreter
 # needs to be /bin/bash, but we haven't built bash yet. Since this package is
 # only intended to be used within a studio where /bin/bash will be binlinked we let this pass
-host-script-interpreter = { ignored_files = ["bin/tzselect", "bin/ldd"] }
+host-script-interpreter = {ignored_files = ["bin/tzselect", "bin/ldd"]}
+license-not-found = {level = "off", source-shasum = "44d26a1fe20b8853a48f470ead01e4279e869ac149b195dda4e44a195d981ab2"}
+missing-license = {level = "off", source-shasum = "44d26a1fe20b8853a48f470ead01e4279e869ac149b195dda4e44a195d981ab2"}
+# Certain glibc headers include the linux headers, making it a runtime dependency
+unused-dependency = {ignored_packages = ["core/linux-headers"]}

@@ -1,5 +1,5 @@
 [rules]
-missing-license = { level = "off", source-shasum="0d9ade222c64e912d6957b11c923e214e2e010a18f39bec102f572e693ba2867" }
-license-not-found = { level = "off", source-shasum="0d9ade222c64e912d6957b11c923e214e2e010a18f39bec102f572e693ba2867" }
+license-not-found = {level = "off", source-shasum = "0d9ade222c64e912d6957b11c923e214e2e010a18f39bec102f572e693ba2867"}
+missing-license = {level = "off", source-shasum = "0d9ade222c64e912d6957b11c923e214e2e010a18f39bec102f572e693ba2867"}
 # less and grep are used in script within the zstd package
-unused-dependency = { ignored_packages = ["core/{less,grep}"]}
+unused-dependency = {ignored_packages = ["core/{less,grep}"]}

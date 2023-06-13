@@ -31,7 +31,7 @@ do_prepare() {
 	# We eliminate extra default platform-specific RPATHs to OpenSSL crypto libraries
 	# from the internal Erlang libraries to prevent accidental usage of the host
 	# system's crypto library.
-#	patch -p1 <"$PLAN_CONTEXT/remove_ssl_rpaths.patch"
+	#	patch -p1 <"$PLAN_CONTEXT/remove_ssl_rpaths.patch"
 
 	# Replace all host system env interpreters with our packaged env
 	grep -lr '/usr/bin/env' . | while read -r f; do

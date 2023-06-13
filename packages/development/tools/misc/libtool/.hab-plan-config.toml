@@ -1,7 +1,7 @@
 [rules]
-missing-license = { level = "off", source-shasum = "e3bd4d5d3d025a36c21dd6af7ea818a2afcd4dfc1ea5a17b39d7854bcd0c06e3" }
-license-not-found = { level = "off", source-shasum = "e3bd4d5d3d025a36c21dd6af7ea818a2afcd4dfc1ea5a17b39d7854bcd0c06e3" }
-unused-dependency = { ignored_packages = [
-    "core/{coreutils,m4,binutils,sed,grep,file}",
-] }
-host-script-interpreter = { level = "off" }
+host-script-interpreter = {level = "off"}
+license-not-found = {level = "off", source-shasum = "e3bd4d5d3d025a36c21dd6af7ea818a2afcd4dfc1ea5a17b39d7854bcd0c06e3"}
+missing-license = {level = "off", source-shasum = "e3bd4d5d3d025a36c21dd6af7ea818a2afcd4dfc1ea5a17b39d7854bcd0c06e3"}
+unused-dependency = {ignored_packages = [
+    "core/{coreutils,m4,binutils,sed,grep,file}"
+]}

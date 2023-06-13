@@ -1,11 +1,11 @@
 docker-image = "hab-bootstrap:20230523"
 
 [rules]
-missing-license = { level = "off", source-shasum = "dd7d82b8fa8eae59729e1c31fe59a9de6ee61d08ab40ce016185653beebe04d2" }
+bad-rpath-entry = "off"
 # We allow all these violations as this rust compiler will always be run inside
 # the hab-bootstrap docker image.
 host-elf-interpreter = "off"
 library-dependency-not-found = "off"
+missing-license = {level = "off", source-shasum = "dd7d82b8fa8eae59729e1c31fe59a9de6ee61d08ab40ce016185653beebe04d2"}
 unused-rpath-entry = "off"
 unused-runpath-entry = "off"
-bad-rpath-entry = "off"

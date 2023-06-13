@@ -21,11 +21,11 @@ pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 do_install() {
-  do_default_install
+	do_default_install
 
-  build_line "Patching ELF binaries:"
-  find "${pkg_prefix}/lib" -type f -executable \
-    -exec sh -c 'file -i "$1" | grep -q "x-sharedlib; charset=binary"' _ {} \; \
-    -print \
-    -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
+	build_line "Patching ELF binaries:"
+	find "${pkg_prefix}/lib" -type f -executable \
+		-exec sh -c 'file -i "$1" | grep -q "x-sharedlib; charset=binary"' _ {} \; \
+		-print \
+		-exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
 }

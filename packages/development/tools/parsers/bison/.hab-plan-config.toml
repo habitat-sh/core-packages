@@ -1,7 +1,7 @@
 [rules]
-license-not-found = { level = "off", source-shasum = "9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2" }
-missing-license = { level = "off", source-shasum = "9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2" }
+license-not-found = {level = "off", source-shasum = "9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2"}
+missing-license = {level = "off", source-shasum = "9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2"}
 # Bison has a runtime dependency on m4: https://bugs.gentoo.org/379351
-unused-dependency = { ignored_packages = [
-    "core/m4",
-] }
+unused-dependency = {ignored_packages = [
+    "core/m4"
+]}

@@ -44,7 +44,7 @@ do_install() {
 	local libc
 	local gcc_base
 	local zlib
-	local dynamic_linker 
+	local dynamic_linker
 
 	libc="$(pkg_path_for glibc)"
 	gcc_base="$(pkg_path_for gcc-base)"

@@ -1,7 +1,7 @@
 [rules]
 # Extra run paths are added to the binaries and libraries
-missing-runpath-entry-dependency = { ignored_files = ["lib/libpcrecpp.*"] }
-unused-runpath-entry = { ignored_files = [
+missing-runpath-entry-dependency = {ignored_files = ["lib/libpcrecpp.*"]}
+unused-runpath-entry = {ignored_files = [
     "lib/libpcre*",
-    "bin/pcre{test,grep}",
-] }
+    "bin/pcre{test,grep}"
+]}

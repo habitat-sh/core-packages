@@ -1,9 +1,9 @@
 [rules]
 # We want the glibc-stage0 binaries to shadow the build-tools-glibc binaries
-duplicate-runtime-binary = { primary_packages = ["core/glibc-stage0"] }
+duplicate-runtime-binary = {primary_packages = ["core/glibc-stage0"]}
 # All packages are required at runtime for gcc to work properly
-unused-dependency = { ignored_packages = [
+unused-dependency = {ignored_packages = [
     "core/glibc-stage0",
     "core/build-tools-gcc",
-    "core/linux-headers",
-] }
+    "core/linux-headers"
+]}

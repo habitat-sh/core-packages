@@ -1,8 +1,8 @@
 [rules]
-missing-license = { level = "off", source-shasum = '8c0486668586672c5693d7d95817cb05a18c5ecca2f40e2836b9578064088258' }
-# The rpath is added by the build system
-unused-runpath-entry = { ignored_files = ["lib/libtcl*.so*"] }
-# The build system adds a rpath for the $pkg_prefix/lib folder, 
+missing-license = {level = "off", source-shasum = '8c0486668586672c5693d7d95817cb05a18c5ecca2f40e2836b9578064088258'}
+# The build system adds a rpath for the $pkg_prefix/lib folder,
 # unused-runpath-entry = { ignored_files = ["lib/libtcl*.so"] }
 # TZ data is used at runtime
-unused-dependency = { ignored_packages = ["core/tzdata" ]}
+unused-dependency = {ignored_packages = ["core/tzdata"]}
+# The rpath is added by the build system
+unused-runpath-entry = {ignored_files = ["lib/libtcl*.so*"]}

@@ -10,7 +10,7 @@ pkg_description="The AWS Command Line Interface (CLI) is a unified tool to \
 pkg_upstream_url="https://aws.amazon.com/cli/"
 
 pkg_deps=(
-#	core/groff
+	#	core/groff
 	core/python
 )
 

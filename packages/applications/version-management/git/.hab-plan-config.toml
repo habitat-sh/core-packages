@@ -1,9 +1,9 @@
 [rules]
-missing-license = { level = "off", source-shasum = "02047f8dc8934d57ff5e02aadd8a2fe8e0bcf94a7158da375e48086cc46fce1d" }
-license-not-found = { level = "off", source-shasum = "02047f8dc8934d57ff5e02aadd8a2fe8e0bcf94a7158da375e48086cc46fce1d" }
-# These packages are needed are runtime
-unused-dependency = { ignored_packages = ["core/{gettext,sed,cacerts,openssh}"] }
-# Ignore sample scripts
-host-script-interpreter = { ignored_files = ["share/**/*.sample"] }
 # TODO: Remove this once openssl11 and openssl are unified on all platforms to OpenSSL 3.0
-duplicate-runtime-binary = { primary_packages = ["core/openssl"] }
+duplicate-runtime-binary = {primary_packages = ["core/openssl"]}
+# Ignore sample scripts
+host-script-interpreter = {ignored_files = ["share/**/*.sample"]}
+license-not-found = {level = "off", source-shasum = "02047f8dc8934d57ff5e02aadd8a2fe8e0bcf94a7158da375e48086cc46fce1d"}
+missing-license = {level = "off", source-shasum = "02047f8dc8934d57ff5e02aadd8a2fe8e0bcf94a7158da375e48086cc46fce1d"}
+# These packages are needed are runtime
+unused-dependency = {ignored_packages = ["core/{gettext,sed,cacerts,openssh}"]}

@@ -1,4 +1,4 @@
 [rules]
-unused-runpath-entry = { ignored_files = ["lib/*"] }
-missing-license = { level = "off", source-shasum = "44a5a9be21d7d473436bf621c2ddcc3cf5a8bbe3c786e13229618a3b9d861297" }
-license-not-found = { level = "off", source-shasum = "44a5a9be21d7d473436bf621c2ddcc3cf5a8bbe3c786e13229618a3b9d861297" }
+license-not-found = {level = "off", source-shasum = "44a5a9be21d7d473436bf621c2ddcc3cf5a8bbe3c786e13229618a3b9d861297"}
+missing-license = {level = "off", source-shasum = "44a5a9be21d7d473436bf621c2ddcc3cf5a8bbe3c786e13229618a3b9d861297"}
+unused-runpath-entry = {ignored_files = ["lib/*"]}

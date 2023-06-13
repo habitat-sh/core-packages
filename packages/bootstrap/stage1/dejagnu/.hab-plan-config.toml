@@ -1,7 +1,7 @@
 [rules]
-missing-license = { level = "off", source-shasum = "87daefacd7958b4a69f88c6856dbd1634261963c414079d0c371f589cd66a2e3" }
-license-not-found = { level = "off", source-shasum = "87daefacd7958b4a69f88c6856dbd1634261963c414079d0c371f589cd66a2e3" }
 # We have multiple glibc packages due to the use of build-tools
-duplicate-runtime-binary = { primary_packages = ["core/glibc"] }
+duplicate-runtime-binary = {primary_packages = ["core/glibc"]}
+license-not-found = {level = "off", source-shasum = "87daefacd7958b4a69f88c6856dbd1634261963c414079d0c371f589cd66a2e3"}
+missing-license = {level = "off", source-shasum = "87daefacd7958b4a69f88c6856dbd1634261963c414079d0c371f589cd66a2e3"}
 # All these packages are used at runtime by scipts
-unused-dependency = { ignored_packages = ["core/build-tools-{gawk,grep,coreutils,sed}", "core/expect-stage1"] }
+unused-dependency = {ignored_packages = ["core/build-tools-{gawk,grep,coreutils,sed}", "core/expect-stage1"]}

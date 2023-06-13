@@ -1,4 +1,4 @@
 [rules]
-missing-license = { level = "off", source-shasum = "b7d8f8c895279caa651e7f3de9a7b87b8dd01a452ca3d9327f45a9ef31d0c518" }
+missing-license = {level = "off", source-shasum = "b7d8f8c895279caa651e7f3de9a7b87b8dd01a452ca3d9327f45a9ef31d0c518"}
 # TODO: Figure out why fips is unused
-unused-dependency = { level = "off" }
+unused-dependency = {level = "off"}

@@ -1,6 +1,7 @@
 docker-image = "hab-bootstrap:20230523"
+
 [rules]
 # This is a false postive, the built binary is static binary which is dynamically linked.
 # So it has the linker as a library dependency but it does not have any interpreter.
 # Read this to understand more: https://internals.rust-lang.org/t/static-compilation-fails-inexplicably/17183
-library-dependency-not-found = { level = "off", ignored_files = ["bin/toml"] }
+library-dependency-not-found = {level = "off", ignored_files = ["bin/toml"]}

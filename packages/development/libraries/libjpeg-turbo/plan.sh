@@ -23,11 +23,11 @@ pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
 do_prepare() {
-  # The configure script expects `file` binaries to be in `/usr/bin`
-  if [[ ! -r /usr/bin/file ]]; then
-    ln -sv "$(pkg_path_for file)/bin/file" /usr/bin/file
-    _clean_file=true
-  fi
+	# The configure script expects `file` binaries to be in `/usr/bin`
+	if [[ ! -r /usr/bin/file ]]; then
+		ln -sv "$(pkg_path_for file)/bin/file" /usr/bin/file
+		_clean_file=true
+	fi
 }
 #do_build() {
 #	mkdir build
@@ -40,15 +40,15 @@ do_prepare() {
 #}
 
 do_check() {
-#	pushd build || exit 1
+	#	pushd build || exit 1
 	make test
-#	popd || exit 1
+	#	popd || exit 1
 }
 do_end() {
-  # Clean up
-  if [[ -n "$_clean_file" ]]; then
-    rm -fv /usr/bin/file
-  fi
+	# Clean up
+	if [[ -n $_clean_file ]]; then
+		rm -fv /usr/bin/file
+	fi
 }
 #do_install() {
 #	pushd build || exit 1

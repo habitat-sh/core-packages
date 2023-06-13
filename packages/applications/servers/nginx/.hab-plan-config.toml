@@ -1,2 +1,2 @@
 [rules]
-unused-dependency = { ignored_packages = ["core/{libedit,ncurses,bzip2}"] }
+unused-dependency = {ignored_packages = ["core/{libedit,ncurses,bzip2}"]}

@@ -162,10 +162,10 @@ do_install() {
 	# Determine the target prefix
 	local target_prefix
 	target_prefix=$(./config.guess)
-	
+
 	pushd build || exit 1
 	make install
-	
+
 	# Many packages use the name cc to call the C compiler
 	ln -sv gcc "$pkg_prefix/bin/cc"
 

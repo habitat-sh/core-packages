@@ -1,2 +1,2 @@
 [rules]
-unused-runpath-entry = { ignored_files = ["bin/xmlwf"] }
+unused-runpath-entry = {ignored_files = ["bin/xmlwf"]}

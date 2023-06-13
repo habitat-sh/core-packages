@@ -1,8 +1,8 @@
 [rules]
-missing-license = { level = "off", source-shasum = "c4e0cbad57c90690cb813fb4663ef670b4d0f587d8171e2c42bd4c9245bd2758" }
-unused-runpath-entry = { level = "off" }
 # Ignore test scripts that intentionally use python instead of python3.
 # This is because python must always invoke python2 on debian based systems
-env-script-interpreter-not-found = { ignored_files = ["lib/*", ] }
+env-script-interpreter-not-found = {ignored_files = ["lib/*"]}
 # These scripts are only used for tests and can be ignored
-host-script-interpreter = { ignored_files = ["lib/python*/test/*"] }
+host-script-interpreter = {ignored_files = ["lib/python*/test/*"]}
+missing-license = {level = "off", source-shasum = "c4e0cbad57c90690cb813fb4663ef670b4d0f587d8171e2c42bd4c9245bd2758"}
+unused-runpath-entry = {level = "off"}

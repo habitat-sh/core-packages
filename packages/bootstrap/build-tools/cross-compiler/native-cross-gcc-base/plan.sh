@@ -43,7 +43,7 @@ do_build() {
 	mkdir -v build
 	pushd build || exit 1
 	# IMPORATNT: The --enable-initfini-array configuration option is very important for the built
-	# cross compiler to behave correctly and will cause build failures later down the line if it 
+	# cross compiler to behave correctly and will cause build failures later down the line if it
 	# is absent: https://unix.stackexchange.com/questions/648979/lfs-gcc-10-2-0-pass-2-fails-with-source-code-error-in-crtstuff-c
 	../configure \
 		--prefix="$pkg_prefix" \

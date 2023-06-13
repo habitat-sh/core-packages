@@ -1,5 +1,5 @@
 [rules]
-missing-license = { level = "off", source-shasum = "24ce6d7c1899cf4dbc360354bd5420dab9927a2a30e533af5357c719b0f50672" }
-license-not-found = { level = "off", source-shasum = "24ce6d7c1899cf4dbc360354bd5420dab9927a2a30e533af5357c719b0f50672" }
-missing-runpath-entry-dependency = { ignored_files=["lib/*"]}
-unused-runpath-entry = { ignored_files=["lib/*"]}
+license-not-found = {level = "off", source-shasum = "24ce6d7c1899cf4dbc360354bd5420dab9927a2a30e533af5357c719b0f50672"}
+missing-license = {level = "off", source-shasum = "24ce6d7c1899cf4dbc360354bd5420dab9927a2a30e533af5357c719b0f50672"}
+missing-runpath-entry-dependency = {ignored_files = ["lib/*"]}
+unused-runpath-entry = {ignored_files = ["lib/*"]}

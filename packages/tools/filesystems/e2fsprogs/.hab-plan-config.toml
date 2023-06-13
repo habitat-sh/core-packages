@@ -1,5 +1,5 @@
 [rules]
-missing-license = { level = "off", source-shasum = "c011bf3bf4ae5efe9fa2b0e9b0da0c14ef4b79c6143c1ae6d9f027931ec7abe1" }
-license-not-found = { level = "off", source-shasum = "c011bf3bf4ae5efe9fa2b0e9b0da0c14ef4b79c6143c1ae6d9f027931ec7abe1" }
+license-not-found = {level = "off", source-shasum = "c011bf3bf4ae5efe9fa2b0e9b0da0c14ef4b79c6143c1ae6d9f027931ec7abe1"}
+missing-license = {level = "off", source-shasum = "c011bf3bf4ae5efe9fa2b0e9b0da0c14ef4b79c6143c1ae6d9f027931ec7abe1"}
 # Ignore lib folder runpath entry added by the build system
-unused-runpath-entry = { ignored_files = ["lib/*", "sbin/*"] }
+unused-runpath-entry = {ignored_files = ["lib/*", "sbin/*"]}

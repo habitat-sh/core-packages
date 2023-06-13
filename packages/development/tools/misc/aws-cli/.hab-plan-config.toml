@@ -1,4 +1,4 @@
 [rules]
-host-script-interpreter = {ignored_files=["lib/*"]}
-duplicate-runtime-binary = {level="off"}
-empty-top-level-directory= {level="off"}
+duplicate-runtime-binary = {level = "off"}
+empty-top-level-directory = {level = "off"}
+host-script-interpreter = {ignored_files = ["lib/*"]}

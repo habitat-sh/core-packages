@@ -1,3 +1,3 @@
 [rules]
 # This all deps are required by hab-backline
-unused-dependency = { level = "off" }
+unused-dependency = {level = "off"}

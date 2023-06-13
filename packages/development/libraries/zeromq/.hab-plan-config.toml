@@ -1,6 +1,6 @@
 [rules]
-missing-license = { level = "off", source-shasum = "c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5" }
-license-not-found = { level = "off", source-shasum = "c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5" }
+license-not-found = {level = "off", source-shasum = "c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5"}
+missing-license = {level = "off", source-shasum = "c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5"}
 # The build system adds unnecessary runpath entries for the gcc-base lib directory
-missing-runpath-entry-dependency = { ignored_files = ["lib/libzmq.so*"] }
-unused-runpath-entry = { ignored_files = ["lib/libzmq.so*"] }
+missing-runpath-entry-dependency = {ignored_files = ["lib/libzmq.so*"]}
+unused-runpath-entry = {ignored_files = ["lib/libzmq.so*"]}
