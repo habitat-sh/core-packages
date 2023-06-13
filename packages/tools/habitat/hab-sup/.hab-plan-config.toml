@@ -1,0 +1,6 @@
+[rules]
+missing-license = { level = "off", source-shasum = "ba63a6638fb181c6a7f24d8efb5f5750a648d85fa9456a4a3a9be71471f098f1" }
+license-not-found = { level = "off", source-shasum = "ba63a6638fb181c6a7f24d8efb5f5750a648d85fa9456a4a3a9be71471f098f1" }
+#missing-runpath-entry-dependency={ignored_files=["bin/*"]}
+#library-dependency-not-found={ignored_files=["bin/*"]}
+#unused-runpath-entry={ignored_files=["bin/*"]}

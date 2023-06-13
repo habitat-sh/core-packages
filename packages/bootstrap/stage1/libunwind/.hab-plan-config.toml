@@ -1,0 +1,6 @@
+[rules]
+missing-license = { level = "off", source-shasum = "7194c20dda841b26917c0579e6467b53f7ad2e3f9452e5c77f3c3829c4656b70" }
+license-not-found = { level = "off", source-shasum = "7194c20dda841b26917c0579e6467b53f7ad2e3f9452e5c77f3c3829c4656b70" }
+unused-runpath-entry = {  ignored_files=["lib/*"]}
+duplicate-runtime-binary= { level="off"}
+

@@ -1,0 +1,8 @@
+[rules]
+missing-license = { level = "off", source-shasum = "aeb7a196be3ebed1a7476ef565f39722187c108dd47da7489be9c4fcae982ace" }
+license-not-found = { level = "off", source-shasum = "aeb7a196be3ebed1a7476ef565f39722187c108dd47da7489be9c4fcae982ace" }
+unused-runpath-entry = {ignored_files=["bin/*", "lib/*"]}
+unused-dependency = { ignored_packages = ["core/bash", "core/perl"] }
+script-interpreter-not-found = {ignored_files = ["hooks/*"]}
+missing-runpath-entry-dependency={ignored_files=["bin/*"]}
+host-script-interpreter={ignored_files=["share/contrib/*"]}
