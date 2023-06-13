@@ -12,8 +12,7 @@ pkg_dirname="habitat-${commit_hash}"
 
 pkg_deps=(
 	core/glibc
-#	core/gcc-libs
-	core/gcc-base
+	core/gcc-libs
 )
 pkg_build_deps=(
 	core/coreutils

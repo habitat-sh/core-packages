@@ -12,13 +12,13 @@ pkg_upstream_url=https://www.ruby-lang.org/en/
 pkg_shasum="3586861cb2df56970287f0fd83f274bd92058872d830d15570b36def7f1a92ac"
 pkg_deps=(
 	core/glibc
-#	core/ncurses
+	core/ncurses
 	core/zlib
 	core/openssl11
 	core/libyaml
 	core/libffi
 	core/readline
-#	core/nss-myhostname
+	core/nss-myhostname
 )
 pkg_build_deps=(
 	core/coreutils

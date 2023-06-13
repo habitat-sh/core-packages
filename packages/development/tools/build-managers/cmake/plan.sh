@@ -11,7 +11,7 @@ pkg_source="https://github.com/Kitware/CMake/releases/download/v${pkg_version}/c
 pkg_shasum="d9570a95c215f4c9886dd0f0564ca4ef8d18c30750f157238ea12669c2985978"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
-#	core/bzip2
+	core/bzip2
 	core/curl
 	core/expat
 	core/glibc
@@ -19,13 +19,13 @@ pkg_deps=(
 	core/jsoncpp
 	core/libarchive
 	core/libuv
-#	core/nghttp2
+	core/nghttp2
 	core/librhash
 	core/ncurses
-#	core/openssl
-#	core/xz
+	core/openssl
+	core/xz
 	core/zlib
-#	core/zstd
+	core/zstd
 
 )
 pkg_build_deps=(

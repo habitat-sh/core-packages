@@ -12,14 +12,19 @@ pkg_shasum="92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb"
 pkg_dirname=${pkg_name}-${pkg_version}-stable
 pkg_deps=(
 	core/glibc
-#	core/zlib
+	core/zlib
 	core/openssl
+	core/coreutils
+	core/python
 )
 pkg_build_deps=(
 	core/cacerts
 	core/gcc
-#	core/openssl
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+do_install() {
+	do_default_install
+	fix_interpreter "${pkg_prefix}/bin/event_rpcgen.py" core/coreutils bin/env
+}

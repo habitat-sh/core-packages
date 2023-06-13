@@ -19,7 +19,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc
-	#core/zlib
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

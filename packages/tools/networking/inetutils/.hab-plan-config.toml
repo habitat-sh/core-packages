@@ -1,0 +1,2 @@
+[rules]
+unused-dependency = { ignored_packages = ["core/libidn2"]}

@@ -10,8 +10,10 @@ pkg_source="https://github.com/google/${pkg_distname}/releases/download/v${pkg_v
 pkg_shasum="24ce6d7c1899cf4dbc360354bd5420dab9927a2a30e533af5357c719b0f50672"
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_deps=(
-core/gcc-base 
-core/zlib)
+	core/zlib
+	core/gcc-libs)
+pkg_build_deps=(
+	core/gcc)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

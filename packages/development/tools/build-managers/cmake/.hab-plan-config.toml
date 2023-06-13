@@ -1,6 +1,7 @@
 [rules]
 missing-license = { level = "off", source-shasum = "d9570a95c215f4c9886dd0f0564ca4ef8d18c30750f157238ea12669c2985978" }
 license-not-found = { level = "off", source-shasum = "d9570a95c215f4c9886dd0f0564ca4ef8d18c30750f157238ea12669c2985978" }
+unused-dependency = { ignored_packages = ["core/nghttp2", "core/bzip2", "core/openssl", "core/zstd", "core/xz"] }
 # ignore interpreters in the cmake modules, not sure if this is ok
 env-script-interpreter-not-found = { ignored_files = ["share/cmake-*/Modules/*"] }
 script-interpreter-not-found = { ignored_files = ["share/cmake-*/Modules/*"] }

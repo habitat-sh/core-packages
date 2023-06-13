@@ -1,2 +1,2 @@
 [rules]
-host-script-interpreter = {ignored_files=["node_modules/*"]}
+#host-script-interpreter = {ignored_files=["node_modules/*"]}

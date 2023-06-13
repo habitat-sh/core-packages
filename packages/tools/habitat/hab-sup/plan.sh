@@ -12,7 +12,7 @@ pkg_dirname="habitat-${commit_hash}"
 
 pkg_deps=(
 	core/glibc
-#	core/gcc-libs
+	core/gcc-libs
 	core/zeromq
 )
 pkg_build_deps=(

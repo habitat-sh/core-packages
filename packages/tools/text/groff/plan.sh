@@ -47,5 +47,6 @@ do_check() {
 
 do_install() {
 	make install
-	fix_interpreter "$pkg_prefix/**/*" core/coreutils bin/env
+	fix_interpreter "${pkg_prefix}/bin/*" core/coreutils bin/env
+	fix_interpreter "${pkg_prefix}/lib/groff/**/**" core/coreutils bin/env
 }

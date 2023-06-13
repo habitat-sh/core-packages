@@ -12,6 +12,9 @@ pkg_deps=(
 	core/zlib
 	core/openssl
 	core/pcre
+	core/libedit
+	core/ncurses
+	core/bzip2
 )
 pkg_build_deps=(
 	core/gcc

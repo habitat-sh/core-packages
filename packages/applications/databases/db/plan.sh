@@ -7,7 +7,7 @@ Berkeley DB is a family of embedded key-value database libraries providing \
 scalable high-performance data management services to applications.\
 "
 pkg_upstream_url="http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html"
-pkg_license=('AGPL-3.0-only')
+pkg_license=('Sleepycat')
 # Oracle's official download link for Berkeley DB is now behind a login screen
 # Pull from LFS mirrors for now
 pkg_source="https://download.oracle.com/berkeley-db/${pkg_name}-${pkg_version}.tar.gz"
@@ -15,7 +15,7 @@ pkg_shasum="e0a992d740709892e81f9d93f06daf305cf73fb81b545afe72478043172c3628"
 
 pkg_deps=(
 	core/glibc
-	core/gcc-base
+	core/gcc-libs
 )
 pkg_build_deps=(
 	core/gcc
