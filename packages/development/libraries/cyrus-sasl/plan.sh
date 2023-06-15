@@ -14,7 +14,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc
-	#	core/gdbm
 )
 pkg_bin_dirs=(sbin)
 pkg_include_dirs=(include)

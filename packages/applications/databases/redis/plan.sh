@@ -23,10 +23,12 @@ pkg_build_deps=(
 pkg_deps=(
 	core/glibc
 )
-
 pkg_bin_dirs=(bin)
-#pkg_include_dirs=(include)
-#pkg_lib_dirs=(lib)
+pkg_svc_run="redis-server ${pkg_svc_config_path}/redis.config"
+pkg_exports=(
+	[port]=port
+)
+pkg_exposes=(port)
 
 do_build() {
 	make distclean
@@ -40,9 +42,3 @@ do_check() {
 
 	make test
 }
-
-pkg_svc_run="redis-server ${pkg_svc_config_path}/redis.config"
-pkg_exports=(
-	[port]=port
-)
-pkg_exposes=(port)

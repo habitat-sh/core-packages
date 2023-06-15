@@ -1,4 +1,0 @@
-[rules]
-duplicate-runtime-binary = {level = "off"}
-license-not-found = {level = "off", source-shasum = "92d720a666855e9f1c6a11512fd6e99674a82bbfe1442557815f2ce8e1293338"}
-missing-license = {level = "off", source-shasum = "92d720a666855e9f1c6a11512fd6e99674a82bbfe1442557815f2ce8e1293338"}

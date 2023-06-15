@@ -62,6 +62,13 @@ do_prepare() {
 		sed -i "$f" -e 's|ln |ln -s |'
 	done
 
+	# We need to patch binutils 2.37 because of a known issue that causes a "malformed archive"
+	# error when linking certain Node.js object files. The patch fixes this issue by modifying
+	# the way `ld` processes archive files.
+	# This patch should be removed once we upgrade binutils to a later version.
+	# Bug Report: https://sourceware.org/bugzilla/show_bug.cgi?id=28138
+	patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
+
 	build_line "Setting HAB_LD_RUN_PATH=${HAB_LD_RUN_PATH}"
 	build_line "Setting LDFLAGS_FOR_BUILD=${LDFLAGS_FOR_BUILD}"
 	build_line "Setting CFLAGS_FOR_BUILD=${CFLAGS_FOR_BUILD}"
@@ -71,12 +78,6 @@ do_prepare() {
 }
 
 do_build() {
-	# We need to patch binutils 2.37 because of a known issue that causes a "malformed archive"
-	# error when linking certain Node.js object files. The patch fixes this issue by modifying
-	# the way `ld` processes archive files.
-	# This patch should be removed once we upgrade binutils to a later version.
-	# Bug Report: https://sourceware.org/bugzilla/show_bug.cgi?id=28138
-	patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
 	./configure \
 		--prefix=$pkg_prefix \
 		--build="$(./config.guess)" \

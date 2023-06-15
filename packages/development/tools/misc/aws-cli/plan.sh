@@ -10,7 +10,6 @@ pkg_description="The AWS Command Line Interface (CLI) is a unified tool to \
 pkg_upstream_url="https://aws.amazon.com/cli/"
 
 pkg_deps=(
-	#	core/groff
 	core/python
 )
 
@@ -30,6 +29,13 @@ do_install() {
 	pip install "awscli==$pkg_version"
 	# Write out versions of all pip packages to package
 	pip freeze >"$pkg_prefix/requirements.txt"
+	# Fix script interpreters to use our python
+	grep -nrlI '^\#\! */usr/bin/env python' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#! */usr/bin/env python|#!$(pkg_path_for python)/bin/python|" -i "$target"
+	done
+	grep -nrlI '^\#\!/usr/bin/python' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!/usr/bin/python|#!$(pkg_path_for python)/bin/python|" -i "$target"
+	done
 }
 
 do_strip() {

@@ -1,4 +1,6 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "11a615225baa5f8bb686824423f50e4427acd3f70d394765bdff32801f0fd5b0"}
 missing-license = {level = "off", source-shasum = "11a615225baa5f8bb686824423f50e4427acd3f70d394765bdff32801f0fd5b0"}
+# The core/gcc-base lib directory is added to the runpath by the build system
+missing-runpath-entry-dependency = {ignored_files = ["lib/libtiffxx.so*"]}
 unused-runpath-entry = {ignored_files = ["lib/*", "bin/*"]}

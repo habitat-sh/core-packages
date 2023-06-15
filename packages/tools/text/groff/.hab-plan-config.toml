@@ -1,6 +1,3 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "e78e7b4cb7dec310849004fa88847c44701e8d133b5d4c13057d876c1bad0293"}
 missing-license = {level = "off", source-shasum = "e78e7b4cb7dec310849004fa88847c44701e8d133b5d4c13057d876c1bad0293"}
-
-# host-script-interpreter = {ignored_files=["lib/*"]}
-# missing-script-interpreter-dependency = {ignored_files=["bin/*"]}

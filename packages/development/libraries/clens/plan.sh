@@ -13,9 +13,6 @@ pkg_license=('ISC')
 pkg_source="https://downloads.sourceforge.net/project/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="064ac9954d38633e2cff6b696fd049dedc3e90b79acffbee1a87754bcf604267"
 
-pkg_deps=(
-	#core/glibc
-)
 pkg_build_deps=(
 	core/gcc
 	core/libbsd

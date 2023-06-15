@@ -28,13 +28,6 @@ pkg_build_deps=(
 	core/build-tools-python
 )
 
-do_prepare() {
-	# Add the lib folder to the rpath because several libraries
-	# look for deps in the same folder
-	LDFLAGS="${LDFLAGS} -Wl,-rpath=${pkg_prefix}/lib"
-	build_line "Updating LDFLAGS=${LDFLAGS}"
-}
-
 do_build() {
 	./configure --prefix="${pkg_prefix}"
 	make -j"$(nproc)"

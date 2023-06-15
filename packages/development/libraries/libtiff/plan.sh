@@ -9,14 +9,13 @@ pkg_source="http://download.osgeo.org/libtiff/tiff-${pkg_version}.tar.gz"
 pkg_shasum="0e46e5acb087ce7d1ac53cf4f56a09b221537fc86dfc5daaad1c2e89e1b37ac8"
 pkg_deps=(
 	core/glibc
-	#core/gcc-libs
+	core/gcc-libs
 	core/lerc
 	core/libdeflate
 	core/libjpeg-turbo
 	core/xz
 	core/zlib
 	core/zstd
-	core/gcc-base
 )
 pkg_build_deps=(
 	core/gcc

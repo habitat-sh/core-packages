@@ -22,6 +22,7 @@ pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
+
 do_prepare() {
 	# The configure script expects `file` binaries to be in `/usr/bin`
 	if [[ ! -r /usr/bin/file ]]; then
@@ -29,29 +30,14 @@ do_prepare() {
 		_clean_file=true
 	fi
 }
-#do_build() {
-#	mkdir build
-#	pushd build || exit 1
-#	cmake .. \
-#		--install-prefix="${pkg_prefix}" \
-#		-DCMAKE_INSTALL_DEFAULT_LIBDIR="lib"
-#	cmake --build . --parallel "$(nproc)"
-#	popd || exit 1
-#}
 
 do_check() {
-	#	pushd build || exit 1
 	make test
-	#	popd || exit 1
 }
+
 do_end() {
 	# Clean up
 	if [[ -n $_clean_file ]]; then
 		rm -fv /usr/bin/file
 	fi
 }
-#do_install() {
-#	pushd build || exit 1
-#	cmake --install .
-#	popd || exit 1
-#}

@@ -16,31 +16,37 @@ pkg_build_deps=(
 	core/patch
 	core/perl
 	core/m4
+	core/coreutils
 )
 pkg_deps=(
 	core/gcc-libs
 	core/glibc
 	core/zlib
 	core/ncurses
-	core/openssl
+	core/openssl11
+	core/sed
+	core/gawk
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
+pkg_interpreters=(
+	bin/escript
+)
 
 do_prepare() {
 	# We eliminate extra default platform-specific RPATHs to OpenSSL crypto libraries
 	# from the internal Erlang libraries to prevent accidental usage of the host
 	# system's crypto library.
-	#	patch -p1 <"$PLAN_CONTEXT/remove_ssl_rpaths.patch"
+	awk '!f && /std_ssl_locations=/ { print "std_ssl_locations=\"\""; f=1; next } /"/ && f == 1 { f=2; next } f == 1 { next } !f || f == 2' lib/crypto/configure >lib/crypto/configure.new
+	mv lib/crypto/configure.new lib/crypto/configure && chmod +x lib/crypto/configure
 
 	# Replace all host system env interpreters with our packaged env
 	grep -lr '/usr/bin/env' . | while read -r f; do
-		sed -e "s,/usr/bin/env,$(pkg_interpreter_for coreutils bin/env),g" -i "$f"
+		sed -e "s,/usr/bin/env,$(pkg_path_for coreutils)/bin/env,g" -i "$f"
 	done
 }
 
 do_build() {
-	sed -i 's/std_ssl_locations=.*/std_ssl_locations=""/' erts/configure
 	CFLAGS="${CFLAGS} -O2" ./configure \
 		--prefix="${pkg_prefix}" \
 		--enable-threads \
@@ -49,12 +55,20 @@ do_build() {
 		--enable-dynamic-ssl-lib \
 		--enable-shared-zlib \
 		--enable-hipe \
-		--with-ssl="$(pkg_path_for openssl)" \
-		--with-ssl-include="$(pkg_path_for openssl)/include" \
+		--with-ssl="$(pkg_path_for openssl11)" \
 		--without-javac
-	make
+	make -j"$(nproc)"
 }
 
 do_check() {
 	make test
+}
+
+do_install() {
+	make install
+
+	# Fix all the script interpreters
+	grep -nrlI '^\#\! escript' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#! escript|#!${pkg_prefix}/bin/escript|" -i "$target"
+	done
 }

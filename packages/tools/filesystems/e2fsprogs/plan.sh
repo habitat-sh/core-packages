@@ -26,10 +26,6 @@ pkg_bin_dirs=(
 	sbin
 )
 
-do_prepare() {
-	LDFLAGS="${LDFLAGS} -Wl,-rpath=${pkg_prefix}/lib"
-}
-
 do_build() {
 	mkdir -v build
 	pushd build || exit 1

@@ -16,7 +16,7 @@ pkg_deps=(
 	core/glibc
 	core/readline
 	core/ncurses
-	core/libidn2
+	core/libidn
 )
 pkg_build_deps=(
 	core/iana-etc
