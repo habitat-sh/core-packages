@@ -12,6 +12,7 @@ pkg_deps=(
 	core/gmp
 )
 pkg_build_deps=(
+	core/m4
 	core/gcc
 	core/pkg-config
 	core/valgrind

@@ -17,6 +17,7 @@ pkg_build_deps=(
 	core/make
 	core/gcc
 	core/file
+	core/nasm
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)

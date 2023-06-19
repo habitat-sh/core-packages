@@ -25,6 +25,29 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin)
 
+do_prepare() {
+	# This patch resolves a type conflict error with GCC 9 and GLIBC 2.34 when compiling Berkeley DB.
+	# The issue arises due to a mismatch between the expected and actual signatures of the built-in
+	# function `__atomic_compare_exchange`. Berkeley DB was using this function in a way that's
+	# incompatible with these newer compiler and library versions.
+	#
+	# To resolve this, the patch changes the function name from `__atomic_compare_exchange` to
+	# `__atomic_compare_exchange_db` in two locations within `atomic.h`.
+	#
+	# The first change is made in the `#define` macro for `atomic_compare_exchange`, which alters
+	# the macro to call the newly-named `__atomic_compare_exchange_db` function.
+	#
+	# The second change is made in the function declaration itself, renaming
+	# `__atomic_compare_exchange` to `__atomic_compare_exchange_db`.
+	#
+	# As a result, the built-in `__atomic_compare_exchange` function and the function within
+	# Berkeley DB no longer conflict, allowing the code to compile successfully with GCC 9
+	# and GLIBC 2.34.
+
+	# https://git.archlinux.org/svntogit/packages.git/plain/trunk/atomic.patch?h=packages/db
+	patch -p0 <"$PLAN_CONTEXT"/patches/atomic.patch
+}
+
 do_build() {
 	pushd build_unix >/dev/null
 	../dist/configure \
