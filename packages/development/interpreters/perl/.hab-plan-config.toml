@@ -3,11 +3,11 @@ license-not-found = {level = "off", source-shasum = "551efc818b968b05216024fb0b7
 missing-license = {level = "off", source-shasum = "551efc818b968b05216024fb0b727ef2ad4c100f8cb6b43fab615fa78ae5be9a"}
 # Perl handles the shebangs itself in certain scripts. So `#!perl` and `#!./perl` are considered valid.
 # https://stackoverflow.com/questions/45949339/how-does-perl-handle-the-shebang-line
-script-interpreter-not-found = {ignored_files = ["lib/perl5/5.34.0/*"]}
+script-interpreter-not-found = {ignored_files = ["lib/perl5/5.*.*/*"]}
 # These are required at runtime by certain scripts
 unused-dependency = {ignored_packages = ["core/{coreutils,less}"]}
 # The lib folder is added as a runpath by the ld wrapper because libperl.so is in the build
 # folder. However when the install is done, the final libperl.so is installed in the rpath
 # specified by the build system: lib/perl5/5.34.0/aarch64-linux-thread-multi/CORE.
 # Hence the 'lib' folder becomes an unused runpath entry.
-unused-runpath-entry = {ignored_files = ["bin/perl"]}
+unused-runpath-entry = {ignored_files = ["bin/perl*"]}
