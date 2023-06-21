@@ -27,7 +27,11 @@ pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
+	# We eliminate extra default platform-specific RPATHs to OpenSSL crypto libraries
+	# from the internal Erlang libraries to prevent accidental usage of the host
+	# system's crypto library.
 	sed -i 's/std_ssl_locations=.*/std_ssl_locations=""/' lib/crypto/configure
+
 	# The `/bin/pwd` path is hardcoded, so we'll add a symlink if needed.
 	if [[ ! -r /bin/pwd ]]; then
 		ln -sv "$(pkg_path_for coreutils)/bin/pwd" /bin/pwd
@@ -49,8 +53,8 @@ do_build() {
 		--enable-dynamic-ssl-lib \
 		--enable-shared-zlib \
 		--enable-hipe \
-		--with-ssl="$(pkg_path_for openssl)" \
-		--with-ssl-include="$(pkg_path_for openssl)/include" \
+		--with-ssl="$(pkg_path_for openssl11)" \
+		--with-ssl-include="$(pkg_path_for openssl11)/include" \
 		--without-javac
 	make
 }

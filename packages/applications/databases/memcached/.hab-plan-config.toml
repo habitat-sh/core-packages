@@ -1,2 +1,2 @@
 [rules]
-duplicate-runtime-binary = { level = "off" }
+duplicate-runtime-binary = {level = "off"}
