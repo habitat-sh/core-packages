@@ -1,12 +1,12 @@
 pkg_name="rsync"
-pkg_version="3.2.7"
+pkg_version="3.2.3"
 pkg_origin="core"
 pkg_license=('GPL-3.0')
 pkg_description="An open source utility that provides fast incremental file transfer"
 pkg_upstream_url="https://rsync.samba.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://download.samba.org/pub/${pkg_name}/src/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="4e7d9d3f6ed10878c58c5fb724a67dacf4b6aac7340b13e488fb2dc41346f2bb"
+pkg_shasum="becc3c504ceea499f4167a260040ccf4d9f2ef9499ad5683c179a697146ce50e"
 
 pkg_deps=(
 	core/acl
@@ -20,12 +20,9 @@ pkg_deps=(
 	core/zstd
 )
 pkg_build_deps=(
-	core/make
 	core/gcc
-	core/grep
 	core/perl
 	core/python
-	core/diffutils
 )
 pkg_bin_dirs=(bin)
 

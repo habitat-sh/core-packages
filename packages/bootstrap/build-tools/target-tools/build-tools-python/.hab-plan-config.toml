@@ -1,0 +1,7 @@
+[rules]
+# Ignore test scripts that intentionally use python instead of python3.
+# This is because python must always invoke python2 on debian based systems
+env-script-interpreter-not-found = {ignored_files = ["lib/python3.10/lib2to3/*"]}
+# Ignore bash usage in test scripts
+host-script-interpreter = {ignored_files = ["lib/python3.10/test/*"]}
+missing-license = {level = "off", source-shasum = "c4e0cbad57c90690cb813fb4663ef670b4d0f587d8171e2c42bd4c9245bd2758"}

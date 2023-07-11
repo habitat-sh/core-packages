@@ -1,0 +1,17 @@
+log_level = 'ERROR'
+log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d,client=%h %r (%x:%e)'
+logging_collector = 'on'
+max_connections = 100
+max_locks_per_transaction = 64
+port = 5432
+
+# options for hot standby
+[replication]
+enable = false
+lag_health_threshold = 1048576
+name = 'replication'
+password = 'replication'
+
+[superuser]
+name = 'admin'
+password = 'admin'

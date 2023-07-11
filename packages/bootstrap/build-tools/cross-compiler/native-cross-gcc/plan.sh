@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="native-cross-gcc"
 pkg_origin="core"
-pkg_version="12.2.0"
+pkg_version="9.4.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \
@@ -12,14 +12,15 @@ the GNU toolchain and the standard compiler for most Unix-like operating \
 systems.This package is a wrapper around the native-cross-gcc-base package.\
 "
 pkg_upstream_url="https://gcc.gnu.org/"
-pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
+pkg_license=('GPL-3.0-or-later WITH GCC-exception-3.1' 'LGPL-3.0-or-later')
 
 pkg_deps=(
 	core/native-cross-binutils
 	core/native-cross-gcc-base
 	core/build-tools-glibc
-	core/build-tools-libstdcpp
+	core/build-tools-libstdcxx
 	core/build-tools-linux-headers
+	core/hab-cc-wrapper
 )
 
 pkg_bin_dirs=(bin)
@@ -38,35 +39,60 @@ do_install() {
 	wrap_binary "${native_target}-cpp"
 	wrap_binary "${native_target}-gcc"
 	wrap_binary "${native_target}-gcc-${pkg_version}"
-	
+
 	# Many packages use the name cc to call the C compiler
 	ln -sv "${native_target}-gcc" "$pkg_prefix/bin/cc"
 }
 
 wrap_binary() {
-	local wrapper_bin="$1"
-	local real_bin
-	real_bin="$(pkg_path_for native-cross-gcc-base)/bin/$wrapper_bin"
+	local binary
+	local env_prefix
+	local hab_cc_wrapper
+	local binutils
+	local gcc_base
+	local linux_headers
+	local libc
+	local libcxx
+	local wrapper_binary
+	local actual_binary
+
+	binary="$1"
+	env_prefix="NATIVE_CROSS_GCC"
+	hab_cc_wrapper="$(pkg_path_for hab-cc-wrapper)"
+	binutils="$(pkg_path_for native-cross-binutils)"
+	gcc_base="$(pkg_path_for native-cross-gcc-base)"
+	linux_headers="$(pkg_path_for build-tools-linux-headers)"
+	libc="$(pkg_path_for build-tools-glibc)"
+	libcxx="$(pkg_path_for build-tools-libstdcxx)"
+	wrapper_binary="$pkg_prefix/bin/$binary"
+	actual_binary="$gcc_base/bin/$binary"
+
 	case $native_target in
 	aarch64-hab-linux-gnu)
-		dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-aarch64.so.1"
+		dynamic_linker="$libc/lib/ld-linux-aarch64.so.1"
 		;;
 	x86_64-hab-linux-gnu)
-		dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-x86-64.so.2"
+		dynamic_linker="$libc/lib/ld-linux-x86-64.so.2"
 		;;
 	esac
 
-	build_line "Adding wrapper $pkg_prefix/bin/$wrapper_bin for $real_bin"
-	rm -v "$pkg_prefix/bin/$wrapper_bin"
-	sed "$PLAN_CONTEXT/cc-wrapper.sh" \
-		-e "s^@glibc@^$(pkg_path_for build-tools-glibc)^g" \
-		-e "s^@linux_headers@^$(pkg_path_for build-tools-linux-headers)^g" \
-		-e "s^@binutils@^$(pkg_path_for native-cross-binutils)^g" \
-		-e "s^@libstdcpp@^$(pkg_path_for build-tools-libstdcpp)^g" \
-		-e "s^@native_target@^${native_target}^g" \
-		-e "s^@dynamic_linker@^${dynamic_linker}^g" \
-		-e "s^@program@^${real_bin}^g" \
-		>"$pkg_prefix/bin/$wrapper_bin"
+	build_line "Adding wrapper for $binary"
+	# remove symbolic link first
+	rm -v "$wrapper_binary"
 
-	chmod 755 "$pkg_prefix/bin/$wrapper_bin"
+	sed "$PLAN_CONTEXT/cc-wrapper.sh" \
+		-e "s^@env_prefix@^${env_prefix}^g" \
+		-e "s^@executable_name@^${binary}^g" \
+		-e "s^@wrapper@^${hab_cc_wrapper}/bin/hab-cc-wrapper^g" \
+		-e "s^@program@^${actual_binary}^g" \
+		-e "s^@ld_bin@^${binutils}/${native_target}/bin^g" \
+		-e "s^@dynamic_linker@^${dynamic_linker}^g" \
+		-e "s^@c_start_files@^${libc}/lib^g" \
+		-e "s^@c_std_libs@^${libc}/lib^g" \
+		-e "s^@c_std_headers@^${libc}/include:${linux_headers}/include^g" \
+		-e "s^@cxx_std_libs@^${libcxx}/lib^g" \
+		-e "s^@cxx_std_headers@^${libcxx}/include/c++/${pkg_version}:${libcxx}/include/c++/${pkg_version}/${native_target}:${libcxx}/include/c++/${pkg_version}/backward^g" \
+		>"$wrapper_binary"
+
+	chmod 755 "$wrapper_binary"
 }

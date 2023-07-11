@@ -1,0 +1,14 @@
+docker-image = "hab-bootstrap:20230523"
+
+[rules]
+library-dependency-not-found = "off"
+license-not-found = {level = "off", source-shasum = "fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"}
+missing-license = {level = "off", source-shasum = "fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"}
+# Most host system linkers utilize the LD_RUN_PATH environment variable to set
+# the runpath for linked binaries. This is a standard practice and can be
+# disregarded safely. The hab-plan-build script automatically includes the current
+# package's lib directory (if present) in the LD_RUN_PATH variable.
+# It's important to note that this behavior is distinct from the ld-wrapper.sh script
+# used with binutils linkers in later stages. The ld-wrapper.sh script only adds an
+# entry if a necessary library is located within the folder and is also part of the LD_RUN_PATH.
+unused-runpath-entry = "off"

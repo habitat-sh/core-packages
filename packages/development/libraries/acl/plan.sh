@@ -8,7 +8,7 @@ pkg_description="\
 Commands for Manipulating POSIX Access Control Lists.
 "
 pkg_upstream_url="https://savannah.nongnu.org/projects/acl/"
-pkg_license=('LGPL-3.0-or-later')
+pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="http://download.savannah.gnu.org/releases/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="760c61c68901b37fdd5eefeeaf4c0c7a26bdfdd8ac747a1edff1ce0e243c11af"
 pkg_dirname="${program}-${pkg_version}"
@@ -20,13 +20,9 @@ pkg_deps=(
 
 pkg_build_deps=(
 	core/gcc
-	core/bash-static
 	core/coreutils-stage1
-	core/build-tools-make
-	core/build-tools-grep
-	core/build-tools-patchelf
+	core/build-tools-bash-static
 	core/build-tools-perl
-	core/build-tools-sed
 )
 
 pkg_bin_dirs=(bin)
@@ -42,18 +38,13 @@ do_build() {
 }
 
 do_check() {
-	sed -e "s^#\!.*bin/sh^#\!$(pkg_path_for bash-static)/bin/sh^" -i "test/make-tree"
+	sed -e "s^#\!.*bin/sh^#\!$(pkg_path_for build-tools-bash-static)/bin/sh^" -i "test/make-tree"
 	sed -e "s^#\!.*bin/perl^#\!$(pkg_path_for build-tools-perl)/bin/perl^" -i "test/run"
 	sed -e "s^#\!.*bin/perl^#\!$(pkg_path_for build-tools-perl)/bin/perl^" -i "test/sort-getfacl-output"
-	sed -e "s^#\!.*bin/bash^#\!$(pkg_path_for bash-static)/bin/bash^" -i "test/runwrapper"
+	sed -e "s^#\!.*bin/bash^#\!$(pkg_path_for build-tools-bash-static)/bin/bash^" -i "test/runwrapper"
 	make check
 }
 
 do_install() {
 	make install
-
-	patchelf --shrink-rpath "${pkg_prefix}/bin/chacl"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/getfacl"
-	patchelf --shrink-rpath "${pkg_prefix}/bin/setfacl"
-	patchelf --shrink-rpath "${pkg_prefix}/lib/libacl.so.1.1.2301"
 }

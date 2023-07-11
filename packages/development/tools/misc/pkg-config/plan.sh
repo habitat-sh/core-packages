@@ -16,10 +16,6 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/build-tools-coreutils
-	core/build-tools-diffutils
-	core/build-tools-patch
-	core/build-tools-make
 	core/gcc
 )
 pkg_bin_dirs=(bin)

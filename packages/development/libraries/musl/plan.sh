@@ -1,6 +1,6 @@
 pkg_name="musl"
 pkg_origin="core"
-pkg_version="1.2.3"
+pkg_version="1.2.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 musl is a new standard library to power a new generation of Linux-based \
@@ -10,15 +10,10 @@ in the sense of standards-conformance and safety.\
 pkg_upstream_url="https://musl.libc.org"
 pkg_license=('MIT')
 pkg_source="https://musl.libc.org/releases/musl-${pkg_version}.tar.gz"
-pkg_shasum="7d5b0b6062521e4627e099e4c9dc8248d32a30285e959b7eecaa780cf8cfd4a4"
+pkg_shasum="9b969322012d796dc23dda27a35866034fa67d8fb67e0e2c45c913c3d43219dd"
 
 pkg_build_deps=(
 	core/gcc
-	core/build-tools-gawk
-	core/build-tools-coreutils
-	core/build-tools-grep
-	core/build-tools-make
-	core/build-tools-sed
 )
 
 pkg_bin_dirs=(bin)

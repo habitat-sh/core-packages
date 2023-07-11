@@ -2,25 +2,21 @@ program="nghttp2"
 
 pkg_name="nghttp2"
 pkg_origin="core"
-pkg_version="1.51.0"
+pkg_version="1.46.0"
 pkg_description="nghttp2 is an open source HTTP/2 C Library."
 pkg_upstream_url="https://nghttp2.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source="https://github.com/${program}/${program}/releases/download/v${pkg_version}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="2a0bef286f65b35c24250432e7ec042441a8157a5b93519412d9055169d9ce54"
+pkg_shasum="4b6d11c85f2638531d1327fe1ed28c1e386144e8841176c04153ed32a4878208"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/coreutils
 	core/cunit
-	core/gawk
 	core/gcc
-	core/grep
 	core/make
-	core/sed
 	core/python
 	core/pkg-config
 )
@@ -43,6 +39,7 @@ do_check() {
 do_install() {
 	make install
 
-	# Remove unnecessary folder
-	rm -rf "${pkg_prefix}/bin"
+	# Remove unnecessary folders
+	rm -rf "${pkg_prefix:?}"/bin
+	rm -rf "${pkg_prefix:?}"/share/nghttp2
 }

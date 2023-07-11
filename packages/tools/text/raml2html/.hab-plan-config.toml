@@ -1,0 +1,3 @@
+[rules]
+
+# host-script-interpreter = {ignored_files=["node_modules/*"]}

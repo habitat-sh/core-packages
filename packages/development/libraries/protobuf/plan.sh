@@ -1,6 +1,6 @@
 pkg_name="protobuf"
 pkg_origin="core"
-pkg_version="21.12"
+pkg_version="3.19.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Protocol buffers are a language-neutral, platform-neutral extensible mechanism \
@@ -9,7 +9,7 @@ for serializing structured data. \
 pkg_upstream_url="https://developers.google.com/protocol-buffers/"
 pkg_license=('BSD-3-Clause')
 pkg_source="https://github.com/google/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-all-${pkg_version}.tar.gz"
-pkg_shasum="2c6a36c7b5a55accae063667ef3c55f2642e67476d96d355ff0acb13dbb47f09"
+pkg_shasum="7b8d3ac3d6591ce9d25f90faba80da78d0ef620fda711702367f61a40ba98429"
 
 pkg_deps=(
 	core/glibc
@@ -17,13 +17,7 @@ pkg_deps=(
 	core/zlib
 )
 pkg_build_deps=(
-	core/coreutils
-	core/gawk
 	core/gcc
-	core/grep
-	core/make
-	core/python
-	core/sed
 )
 
 pkg_bin_dirs=(bin)

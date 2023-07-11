@@ -19,11 +19,7 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 )
 
 pkg_include_dirs=(include)
@@ -35,7 +31,7 @@ do_build() {
 		--prefix="$pkg_prefix" \
 		--docdir="$pkg_prefix/share/doc/isl-0.25"
 
-	make
+	make V=1
 }
 
 do_check() {

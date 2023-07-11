@@ -10,7 +10,7 @@ GMP is a free library for arbitrary precision arithmetic, operating on signed \
 integers, rational numbers, and floating-point numbers.\
 "
 pkg_upstream_url="https://gmplib.org"
-pkg_license=('GPL-3.0-or-later')
+pkg_license=('LGPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"
 pkg_dirname="${program}-${pkg_version}"

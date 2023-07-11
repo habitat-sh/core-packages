@@ -6,7 +6,7 @@ pkg_version="1.0.8"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="bzip2 is a free and open-source file compression program that uses the Burrows–Wheeler algorithm. It only compresses single files and is not a file archiver."
 pkg_upstream_url="https://www.sourceware.org/bzip2"
-pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
+pkg_license=('bzip2-1.0.6')
 pkg_source="https://fossies.org/linux/misc/${program}-${pkg_version}.tar.gz"
 pkg_shasum="ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269"
 pkg_dirname="${program}-${pkg_version}"
@@ -17,8 +17,6 @@ pkg_deps=(
 
 pkg_build_deps=(
 	core/gcc
-	core/make
-	core/coreutils
 )
 
 pkg_bin_dirs=(bin)
@@ -35,9 +33,7 @@ do_prepare() {
 }
 
 do_build() {
-	# We add the '-Wl,-rpath' flag to ensure that the bzip-shared binary contains the final location
-	# of the libbz2 shared library
-	make -f Makefile-libbz2_so CFLAGS="-Wl,-rpath=${pkg_prefix}/lib" PREFIX="$pkg_prefix" CC="gcc"
+	make -f Makefile-libbz2_so CFLAGS="-fPIC -DPIC" PREFIX="$pkg_prefix" CC="gcc"
 	make CC="gcc"
 }
 

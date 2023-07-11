@@ -31,7 +31,7 @@ pkg_lib_dirs=(lib)
 do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \
-		--build="$(./config.guess)" \
+		--build="$(./build-aux/config.guess)" \
 		--host="$native_target" \
 		--disable-static
 	make

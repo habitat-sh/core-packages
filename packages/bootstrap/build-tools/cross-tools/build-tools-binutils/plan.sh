@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-binutils"
 pkg_origin="core"
-pkg_version="2.39"
+pkg_version="2.37"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Binary Utilities, or binutils, are a set of programming tools for \
@@ -11,9 +11,9 @@ creating and managing binary programs, object files, libraries, profile data, \
 and assembly source code.\
 "
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
-pkg_license=('GPL-2.0-or-later')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.bz2"
-pkg_shasum="da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148"
+pkg_shasum="67fc1a4030d08ee877a4867d3dcab35828148f87e1fd05da6db585ed5a166bd4"
 pkg_dirname="${program}-${pkg_version}"
 pkg_bin_dirs=(
 	bin
@@ -24,7 +24,7 @@ pkg_lib_dirs=(
 
 pkg_deps=(
 	core/build-tools-glibc
-	core/build-tools-bash-static
+	core/hab-ld-wrapper
 )
 pkg_build_deps=(
 	core/native-cross-gcc
@@ -37,9 +37,11 @@ pkg_build_deps=(
 )
 
 do_prepare() {
-	# We move the LD_RUN_PATH into the LDFLAGS and unset LD_RUN_PATH
-	# so that the build compiler and linker doesn't pick it up.
-	export LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
+	# The build process uses the host system's compiler (the build compiler)
+	# to compile certain components.
+	# To prevent the build compiler/linker from being affected by LD_RUN_PATH,
+	# we transfer its value to HAB_LD_RUN_PATH and unset LD_RUN_PATH.
+	export HAB_LD_RUN_PATH="${LD_RUN_PATH}"
 	unset LD_RUN_PATH
 
 	# By default LDFLAGS, CFLAGS, CPPFLAGS and CXXFLAGS get used by the
@@ -59,12 +61,26 @@ do_prepare() {
 	for f in binutils/Makefile.in gas/Makefile.in ld/Makefile.in gold/Makefile.in; do
 		sed -i "$f" -e 's|ln |ln -s |'
 	done
+
+	# We need to patch binutils 2.37 because of a known issue that causes a "malformed archive"
+	# error when linking certain Node.js object files. The patch fixes this issue by modifying
+	# the way `ld` processes archive files.
+	# This patch should be removed once we upgrade binutils to a later version.
+	# Bug Report: https://sourceware.org/bugzilla/show_bug.cgi?id=28138
+	patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
+
+	build_line "Setting HAB_LD_RUN_PATH=${HAB_LD_RUN_PATH}"
+	build_line "Setting LDFLAGS_FOR_BUILD=${LDFLAGS_FOR_BUILD}"
+	build_line "Setting CFLAGS_FOR_BUILD=${CFLAGS_FOR_BUILD}"
+	build_line "Setting CPPFLAGS_FOR_BUILD=${CPPFLAGS_FOR_BUILD}"
+	build_line "Setting CXXFLAGS_FOR_BUILD=${CXXFLAGS_FOR_BUILD}"
+	build_line "Unsetting LD_RUN_PATH"
 }
 
 do_build() {
 	./configure \
 		--prefix=$pkg_prefix \
-		--build="$(../config.guess)" \
+		--build="$(./config.guess)" \
 		--host="$native_target" \
 		--target="$native_target" \
 		--disable-nls \
@@ -73,7 +89,7 @@ do_build() {
 		--disable-werror \
 		--enable-new-dtags \
 		--enable-64-bit-bfd
-	make
+	make V=1
 }
 
 do_check() {
@@ -94,12 +110,26 @@ do_install() {
 }
 
 wrap_binary() {
-	local bin="$pkg_prefix/bin/$1"
-	build_line "Adding wrapper $bin to ${bin}.real"
-	mv -v "$bin" "${bin}.real"
+	local binary
+	local env_prefix
+	local hab_ld_wrapper
+	local wrapper_binary
+	local actual_binary
+
+	binary="$1"
+	env_prefix="BUILD_TOOLS_BINUTILS"
+	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+	wrapper_binary="$pkg_prefix/bin/$binary"
+	actual_binary="$pkg_prefix/bin/$binary.real"
+
+	build_line "Adding wrapper for $binary"
+	mv -v "$wrapper_binary" "$actual_binary"
+
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
-		-e "s^@bash@^$(pkg_path_for build-tools-bash-static)/bin/bash^g" \
-		-e "s^@program@^${bin}.real^g" \
-		>"$bin"
-	chmod 755 "$bin"
+		-e "s^@env_prefix@^${env_prefix}^g" \
+		-e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
+		-e "s^@program@^${actual_binary}^g" \
+		>"$wrapper_binary"
+
+	chmod 755 "$wrapper_binary"
 }

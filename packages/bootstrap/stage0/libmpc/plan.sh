@@ -18,8 +18,6 @@ pkg_build_deps=(
 	core/gcc-stage0
 	core/gmp-stage0
 	core/mpfr-stage0
-	core/build-tools-coreutils
-	core/build-tools-make
 )
 
 pkg_include_dirs=(include)

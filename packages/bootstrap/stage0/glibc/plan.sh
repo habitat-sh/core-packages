@@ -2,7 +2,7 @@ program="glibc"
 
 pkg_name="glibc-stage0"
 pkg_origin="core"
-pkg_version="2.36"
+pkg_version="2.34"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU C Library project provides the core libraries for the GNU system and \
@@ -15,7 +15,7 @@ dlopen, pthread_create, crypt, login, exit and more.\
 pkg_upstream_url="https://www.gnu.org/software/libc"
 pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
-pkg_shasum="1c959fea240906226062cb4b1e7ebce71a9f0e3c0836c09e7e3423d434fcfe75"
+pkg_shasum="44d26a1fe20b8853a48f470ead01e4279e869ac149b195dda4e44a195d981ab2"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
@@ -24,6 +24,7 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
+	core/build-tools-glibc
 	core/build-tools-gcc
 	core/build-tools-bison
 	core/build-tools-python
@@ -44,6 +45,11 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
+	unset LDFLAGS
+	unset CFLAGS
+	unset CXXFLAGS
+	unset CPPFLAGS
+
 	# Don't use the system's `/etc/ld.so.cache` and `/etc/ld.so.preload`, but
 	# rather the version under `$pkg_prefix/etc`.
 	#
@@ -62,13 +68,10 @@ do_prepare() {
 	# of glibc. Thanks to https://github.com/NixOS/nixpkgs/pull/137601 for the solution.
 	patch -p1 <"$PLAN_CONTEXT/hab-nss-open-files.patch"
 
-	# We cannot have RPATH set in the glibc binaries
-	unset LD_RUN_PATH
-	unset LDFLAGS
-	unset CFLAGS
-	unset CXXFLAGS
-	unset CPPFLAGS
-	build_line "Unset CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS and LD_RUN_PATH"
+	build_line "Unsetting LDFLAGS"
+	build_line "Unsetting CFLAGS"
+	build_line "Unsetting CXXFLAGS"
+	build_line "Unsetting CPPFLAGS"
 }
 
 do_build() {
@@ -79,7 +82,7 @@ do_build() {
 		--prefix="$pkg_prefix" \
 		--with-headers="$(pkg_path_for linux-headers)/include" \
 		--sysconfdir="$pkg_prefix/etc" \
-		--enable-kernel=5.4 \
+		--enable-kernel=3.2 \
 		--enable-stack-protector=strong \
 		--disable-werror \
 		libc_cv_slibdir="$pkg_prefix"/lib \
@@ -166,7 +169,7 @@ rpc: files
 EOF
 
 	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
+	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/bash
 
 	popd || exit 1
 }

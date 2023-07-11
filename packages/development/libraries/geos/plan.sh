@@ -1,12 +1,12 @@
 pkg_name="geos"
 pkg_origin="core"
-pkg_version="3.11.1"
+pkg_version="3.9.2"
 pkg_description="GEOS (Geometry Engine - Open Source) is a C++ port of the ​Java Topology Suite (JTS)."
 pkg_upstream_url="https://libgeos.org/"
-pkg_license=('LGPL')
+pkg_license=('LGPL-2.1-only')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://download.osgeo.org/geos/geos-${pkg_version}.tar.bz2"
-pkg_shasum="6d0eb3cfa9f92d947731cc75f1750356b3bdfc07ea020553daf6af1c768e0be2"
+pkg_shasum="44a5a9be21d7d473436bf621c2ddcc3cf5a8bbe3c786e13229618a3b9d861297"
 
 pkg_deps=(
 	core/glibc

@@ -1,6 +1,6 @@
 pkg_name="vim"
 pkg_origin="core"
-pkg_version="9.0.0984"
+pkg_version="8.2.2825"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Vim is a highly configurable text editor built to make creating and changing \
@@ -10,30 +10,21 @@ systems and with Apple OS X.\
 pkg_upstream_url="http://www.vim.org/"
 pkg_license=("Vim")
 pkg_source="http://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum="bbfc59e1862db862e3f641b0871cd1162dc1d2a58330588c6e517dbdf54b133c"
+pkg_shasum="c75acdac8b80e664666663d3429efe1eb25be7f13db0bd3697a2d2a78dd1bb66"
 pkg_deps=(
 	core/acl
-	core/attr
 	core/glibc
 	core/ncurses
+	core/gawk
 )
 pkg_build_deps=(
 	core/autoconf
-	core/coreutils
-	core/gawk
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/shadow
 )
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-	pushd src >/dev/null
-	autoconf
-	popd >/dev/null
-
 	export CFLAGS="${CFLAGS} -O2"
 	build_line "Setting CFLAGS=${CFLAGS}"
 }
@@ -52,7 +43,7 @@ do_build() {
 
 do_check() {
 	chown -R hab .
-	su hab -c "PATH=$PATH LANG=en_US.UTF-8 make -j1 test &>vim-test.log" 
+	su hab -c "PATH=$PATH LANG=en_US.UTF-8 make -j1 test &>vim-test.log"
 }
 
 do_install() {

@@ -12,7 +12,7 @@ POSIX regular expression API. The PCRE library is free, even for building \
 proprietary software.\
 "
 pkg_upstream_url="http://www.pcre.org/"
-pkg_license=('bsd')
+pkg_license=('BSD-3-Clause')
 pkg_source="https://github.com/PCRE2Project/${program}/releases/download/${program}-${pkg_version}/${program}-${pkg_version}.tar.bz2"
 pkg_shasum="14e4b83c4783933dc17e964318e6324f7cae1bc75d8f3c79bc6969f00c159d68"
 pkg_dirname="${program}-${pkg_version}"
@@ -21,13 +21,8 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/coreutils
-	core/diffutils
 	core/gcc
-	core/make
-	core/patch
-	core/sed
 	core/bzip2
-	core/build-tools-grep
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -52,7 +47,7 @@ do_check() {
 
 do_install() {
 	make install
-	
+
 	# Remove binaries and man
 	rm -rf "${pkg_prefix:?}"/{bin,share}
 	# Install license file

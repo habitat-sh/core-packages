@@ -2,52 +2,30 @@ program="zlib"
 
 pkg_name="zlib-stage1"
 pkg_origin="core"
-pkg_version="1.2.13"
+pkg_version="1.2.11"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Compression library implementing the deflate compression method found in gzip \
 and PKZIP.\
 "
 pkg_upstream_url="http://www.zlib.net/"
-pkg_license=('zlib')
-pkg_source="http://zlib.net/${program}-${pkg_version}.tar.gz"
-pkg_shasum="b3a24de97a8fdbc835b9833169501030b8977031bcb54b3b3ac13740f846ab30"
+pkg_license=('Zlib')
+pkg_source="http://github.com/madler/${program}/archive/refs/tags/v${pkg_version}.tar.gz"
+pkg_shasum="629380c90a77b964d896ed37163f5c3a34f6e6d897311f1df2a7016355c45eff"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
-	core/glibc
-	core/gcc-stage1
-	core/build-tools-coreutils
-	core/build-tools-make
+	core/gcc-stage1-with-glibc
 )
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-	unset LD_RUN_PATH
-	unset LDFLAGS
-	unset CFLAGS
-	unset CXXFLAGS
-	unset CPPFLAGS
-	build_line "Unset CFLAGS, CXXFLAGS, CPPFLAGS, LDFLAGS and LD_RUN_PATH"
-
-	# Change the dynamic linker and glibc library to link against core/glibc
-	case $pkg_target in
-	aarch64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1"
-		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
-		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
-		;;
-	x86_64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
-		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
-		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
-		;;
-	esac
-	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc)"
-	export HAB_GCC_STAGE1_GLIBC_PKG_PATH
-	build_line "Setting HAB_GCC_STAGE1_GLIBC_PKG_PATH=${HAB_GCC_STAGE1_GLIBC_PKG_PATH}"
+	# The "-fPIC" flag is essential for the generation of libz.a archive.
+	# Without it, the generated archive cannot be linked into shared libraries
+	# on certain platforms.
+	export CFLAGS="-fPIC"
 }
 
 do_install() {

@@ -18,7 +18,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc
-	core/make
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

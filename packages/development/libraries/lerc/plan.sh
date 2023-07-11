@@ -17,13 +17,12 @@ pkg_build_deps=(
 	core/cmake
 	core/gcc
 )
-pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
-	# A folder called `build` already exists so we 
+	# A folder called `build` already exists so we
 	# use a different build folder
 	mkdir local-build
 	pushd local-build || exit 1

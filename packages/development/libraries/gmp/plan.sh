@@ -1,4 +1,5 @@
 program="gmp"
+arch="${pkg_target%%-*}"
 
 pkg_name="gmp"
 pkg_origin="core"
@@ -9,7 +10,7 @@ GMP is a free library for arbitrary precision arithmetic, operating on signed \
 integers, rational numbers, and floating-point numbers.\
 "
 pkg_upstream_url="https://gmplib.org"
-pkg_license=('GPL-3.0-or-later')
+pkg_license=('LGPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"
 pkg_dirname="${program}-${pkg_version}"
@@ -20,12 +21,8 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/grep
 	core/m4
-	core/make
-	core/sed
 )
 
 pkg_include_dirs=(include)
@@ -44,7 +41,7 @@ do_build() {
 		--prefix="$pkg_prefix" \
 		--enable-cxx \
 		--docdir="$pkg_prefix/share/doc/gmp-6.2.1" \
-		--build="aarch64-unknown-linux-gnu"
+		--build="${arch}-unknown-linux-gnu"
 
 	make
 }

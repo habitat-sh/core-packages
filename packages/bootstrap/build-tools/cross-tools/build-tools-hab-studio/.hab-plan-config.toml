@@ -1,0 +1,8 @@
+docker-image = "hab-bootstrap:20230523"
+
+[rules]
+# The 'hab-studio-profile.sh' script is used only inside a studio which will
+# always have a binlinked /bin/bash available
+host-script-interpreter = {ignored_files = ["libexec/hab-studio-profile.sh"]}
+# The backline is used at runtime by users inside a studio
+unused-dependency = {ignored_packages = ["core/build-tools-hab-backline"]}

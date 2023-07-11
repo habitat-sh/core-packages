@@ -9,8 +9,6 @@ pkg_license=('MPL-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://curl.se/ca/cacert-${pkg_version}.pem"
 pkg_shasum="2cff03f9efdaf52626bd1b451d700605dc1ea000c5da56bd0fc59f8f43071040"
-pkg_deps=()
-pkg_build_deps=()
 
 pkg_version() {
 	local build_date
@@ -35,7 +33,11 @@ do_unpack() {
 }
 
 do_prepare() {
+	# Tells the core/build-tools-openssl habitat package where to find the SSL certs
 	set_runtime_env "HAB_SSL_CERT_FILE" "${pkg_prefix}/ssl/certs/cacert.pem"
+	# Compatibility with non-habitat openssl libraries built which check this
+	# environment variable by default for SSL certs
+	set_runtime_env "SSL_CERT_FILE" "${pkg_prefix}/ssl/certs/cacert.pem"
 }
 
 do_build() {

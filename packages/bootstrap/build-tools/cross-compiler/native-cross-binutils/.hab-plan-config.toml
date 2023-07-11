@@ -1,0 +1,13 @@
+docker-image = "hab-bootstrap:20230523"
+
+[rules]
+host-elf-interpreter = "off"
+# The wrapper script requires bash, which must be provided by the host system
+host-script-interpreter = {ignored_files = [
+    "bin/aarch64-hab-linux-gnu-ld.bfd"
+]}
+library-dependency-not-found = "off"
+license-not-found = {level = "off", source-shasum = "67fc1a4030d08ee877a4867d3dcab35828148f87e1fd05da6db585ed5a166bd4"}
+missing-license = {level = "off", source-shasum = "67fc1a4030d08ee877a4867d3dcab35828148f87e1fd05da6db585ed5a166bd4"}
+# The hab-ld-wrapper binary is used at runtime to process arguments
+unused-dependency = {ignored_packages = ["core/hab-ld-wrapper"]}

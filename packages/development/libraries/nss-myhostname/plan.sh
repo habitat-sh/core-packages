@@ -12,16 +12,15 @@ pkg_upstream_url="http://0pointer.de/lennart/projects/nss-myhostname/"
 pkg_source="http://0pointer.de/lennart/projects/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="2ba744ea8d578d1c57c85884e94a3042ee17843a5294434d3a7f6c4d67e7caf2"
 pkg_deps=(
-  core/glibc
+	core/glibc
 )
 pkg_build_deps=(
-  core/gcc
-  core/make
+	core/gcc
 )
 pkg_lib_dirs=(lib)
 
 do_build() {
-  ./configure \
-    --prefix="$pkg_prefix" \
-    --build="aarch64-unknown-linux-gnu"
+	./configure \
+		--prefix="$pkg_prefix" \
+		--build="aarch64-unknown-linux-gnu"
 }

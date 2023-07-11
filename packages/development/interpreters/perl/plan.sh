@@ -1,15 +1,15 @@
 pkg_name="perl"
 pkg_origin="core"
-pkg_version="5.36.0"
+pkg_version="5.34.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Perl 5 is a highly capable, feature-rich programming language with over 29 \
 years of development.\
 "
 pkg_upstream_url="http://www.perl.org/"
-pkg_license=('GPL-1.0-or-later' 'Artistic-1.0-Perl')
+pkg_license=('Artistic-1.0 OR GPL-1.0-or-later')
 pkg_source="http://www.cpan.org/src/5.0/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="e26085af8ac396f62add8a533c3a0ea8c8497d836f0689347ac5abd7b7a4e00a"
+pkg_shasum="551efc818b968b05216024fb0b727ef2ad4c100f8cb6b43fab615fa78ae5be9a"
 pkg_deps=(
 	core/glibc
 	core/zlib
@@ -20,13 +20,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/iana-etc
-	core/diffutils
-	core/gawk
-	core/patch
-	core/make
 	core/gcc
-	core/grep
-	core/sed
 	core/procps-ng
 )
 pkg_bin_dirs=(bin)
@@ -35,11 +29,11 @@ pkg_interpreters=(bin/perl)
 
 do_prepare() {
 	# Fix a spurious test failure due to a long PATH environment
-	# variable (> 1000 characters). This can be removed once the 
+	# variable (> 1000 characters). This can be removed once the
 	# original PR gets merged and released in a new version of perl
 	# Patch source: https://github.com/Perl/perl5/pull/20497
 	patch -p1 <"$PLAN_CONTEXT/perlbug-test-failure.patch"
-	
+
 	#  Make Cwd work with the `pwd` command from `coreutils` (we cannot rely
 	#  on `/bin/pwd` exisiting in an environment)
 	sed -i "s,'/bin/pwd','$(pkg_path_for coreutils)/bin/pwd',g" \
@@ -74,7 +68,7 @@ do_prepare() {
 	# build directory, which will contain the build shared Perl library.
 	#
 	# Thanks to: http://perl5.git.perl.org/perl.git/blob/c52cb8175c7c08890821789b4c7177b1e0e92558:/INSTALL#l478
-	LD_LIBRARY_PATH="$(pwd):$LD_RUN_PATH"
+	LD_LIBRARY_PATH="${SRC_PATH}:$LD_RUN_PATH"
 	export LD_LIBRARY_PATH
 	build_line "Setting LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 }
@@ -126,13 +120,13 @@ do_check() {
 
 	# If the `/etc/services` or `/etc/protocols` files were added for the
 	# purposes of this test suite, clean them up. Otherwise leave them be.
-	if [[ -n "$clean_services" ]]; then
+	if [[ -n $clean_services ]]; then
 		rm -fv /etc/services
 	fi
-	if [[ -n "$clean_protocols" ]]; then
+	if [[ -n $clean_protocols ]]; then
 		rm -fv /etc/protocols
 	fi
-	if [[ -n "$clean_diff" ]]; then
+	if [[ -n $clean_diff ]]; then
 		rm -fv /bin/diff
 	fi
 }

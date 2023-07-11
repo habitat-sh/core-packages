@@ -1,5 +1,4 @@
 program="make"
-native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="make"
 pkg_origin="core"
@@ -20,8 +19,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc
-	core/bash-static
-	core/coreutils
+	core/bash
 	core/build-tools-perl
 )
 pkg_bin_dirs=(bin)
@@ -34,5 +32,5 @@ do_build() {
 }
 
 do_check() {
-	SHELL="$(pkg_path_for bash-static)"/bin/bash make check
+	SHELL="$(pkg_path_for bash)"/bin/bash make check
 }

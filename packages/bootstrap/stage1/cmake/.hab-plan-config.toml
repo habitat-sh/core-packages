@@ -1,0 +1,6 @@
+[rules]
+# ignore interpreters in the cmake modules, not sure if this is ok
+env-script-interpreter-not-found = {ignored_files = ["share/cmake-*/Modules/*"]}
+license-not-found = {level = "off", source-shasum = "d9570a95c215f4c9886dd0f0564ca4ef8d18c30750f157238ea12669c2985978"}
+missing-license = {level = "off", source-shasum = "d9570a95c215f4c9886dd0f0564ca4ef8d18c30750f157238ea12669c2985978"}
+script-interpreter-not-found = {ignored_files = ["share/cmake-*/Modules/*"]}

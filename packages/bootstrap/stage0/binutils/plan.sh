@@ -2,7 +2,7 @@ program="binutils"
 
 pkg_name="binutils-stage0"
 pkg_origin="core"
-pkg_version="2.39"
+pkg_version="2.37"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Binary Utilities, or binutils, are a set of programming tools for \
@@ -10,9 +10,9 @@ creating and managing binary programs, object files, libraries, profile data, \
 and assembly source code.\
 "
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
-pkg_license=('GPL-2.0-or-later')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.bz2"
-pkg_shasum="da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148"
+pkg_shasum="67fc1a4030d08ee877a4867d3dcab35828148f87e1fd05da6db585ed5a166bd4"
 pkg_dirname="${program}-${pkg_version}"
 pkg_bin_dirs=(
 	bin
@@ -23,7 +23,7 @@ pkg_lib_dirs=(
 
 pkg_deps=(
 	core/glibc-stage0
-	core/build-tools-bash-static
+	core/hab-ld-wrapper
 )
 pkg_build_deps=(
 	core/gcc-stage0
@@ -31,8 +31,6 @@ pkg_build_deps=(
 	core/bzip2-stage0
 	core/build-tools-texinfo
 	core/build-tools-perl
-	core/build-tools-make
-	core/build-tools-coreutils
 	core/build-tools-bison
 )
 
@@ -46,13 +44,20 @@ do_prepare() {
 	for f in binutils/Makefile.in gas/Makefile.in ld/Makefile.in gold/Makefile.in; do
 		sed -i "$f" -e 's|ln |ln -s |'
 	done
+
+	# We need to patch binutils 2.37 because of a known issue that causes a "malformed archive"
+	# error when linking certain Node.js object files. The patch fixes this issue by modifying
+	# the way `ld` processes archive files.
+	# This patch should be removed once we upgrade binutils to a later version.
+	# Bug Report: https://sourceware.org/bugzilla/show_bug.cgi?id=28138
+	patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
 }
 
 do_build() {
 	./configure \
 		--prefix=$pkg_prefix \
-		--enable-gold \
 		--enable-ld=default \
+		--enable-gprofng=no \
 		--enable-shared \
 		--enable-plugins \
 		--enable-deterministic-archives \
@@ -62,7 +67,7 @@ do_build() {
 		--enable-64-bit-bfd \
 		--with-system-zlib
 
-	make tooldir="${pkg_prefix}"
+	make tooldir="${pkg_prefix}" V=1
 }
 
 do_check() {
@@ -83,12 +88,26 @@ do_install() {
 }
 
 wrap_binary() {
-	local bin="$pkg_prefix/bin/$1"
-	build_line "Adding wrapper $bin to ${bin}.real"
-	mv -v "$bin" "${bin}.real"
+	local binary
+	local env_prefix
+	local hab_ld_wrapper
+	local wrapper_binary
+	local actual_binary
+
+	binary="$1"
+	env_prefix="BINUTILS_STAGE0"
+	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+	wrapper_binary="$pkg_prefix/bin/$binary"
+	actual_binary="$pkg_prefix/bin/$binary.real"
+
+	build_line "Adding wrapper for $binary"
+	mv -v "$wrapper_binary" "$actual_binary"
+
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
-		-e "s^@bash@^$(pkg_path_for build-tools-bash-static)/bin/bash^g" \
-		-e "s^@program@^${bin}.real^g" \
-		>"$bin"
-	chmod 755 "$bin"
+		-e "s^@env_prefix@^${env_prefix}^g" \
+		-e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
+		-e "s^@program@^${actual_binary}^g" \
+		>"$wrapper_binary"
+
+	chmod 755 "$wrapper_binary"
 }

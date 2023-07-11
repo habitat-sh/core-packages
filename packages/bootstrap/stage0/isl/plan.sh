@@ -16,8 +16,6 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_build_deps=(
 	core/gcc-stage0
 	core/gmp-stage0
-	core/build-tools-coreutils
-	core/build-tools-make
 )
 
 pkg_include_dirs=(include)
@@ -32,7 +30,7 @@ do_build() {
 		--docdir="$pkg_prefix/share/doc/isl-0.25" \
 		--disable-shared
 
-	make
+	make V=1
 }
 
 do_check() {

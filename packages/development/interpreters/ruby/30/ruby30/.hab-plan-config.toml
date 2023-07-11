@@ -1,0 +1,9 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "3586861cb2df56970287f0fd83f274bd92058872d830d15570b36def7f1a92ac"}
+missing-license = {level = "off", source-shasum = "3586861cb2df56970287f0fd83f274bd92058872d830d15570b36def7f1a92ac"}
+script-interpreter-not-found = {ignored_files = ["lib/ruby/*/bundler/templates/**/*"]}
+# core/ncurses: The paths for these packages get written into 'lib/ruby/<version>/<arch>/rbconfig.rb' and
+# potentially affects further building of gems with the mkmf gem.
+# core/nss-myhostname: This is apparently required at runtime, for some DNS lookup behaviour?
+# https://github.com/habitat-sh/core-plans/commit/7761ccef724292640d14143ccb0cd5466e877fa5
+unused-dependency = {ignored_packages = ["core/{nss-myhostname,ncurses}"]}

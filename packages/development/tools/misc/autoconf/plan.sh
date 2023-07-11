@@ -8,7 +8,7 @@ Autoconf is an extensible package of M4 macros that produce shell scripts to \
 automatically configure software source code packages.\
 "
 pkg_upstream_url="https://www.gnu.org/software/autoconf/autoconf.html"
-pkg_license=('GPL-2.0-or-later')
+pkg_license=('GPL-3.0-or-later WITH Autoconf-exception-3.0')
 pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="f14c83cfebcc9427f2c3cea7258bd90df972d92eb26752da4ddad81c87a0faa4"
 
@@ -17,13 +17,7 @@ pkg_deps=(
 	core/perl
 )
 pkg_build_deps=(
-	core/coreutils
-	core/diffutils
 	core/gcc
-	core/grep
-	core/make
-	core/patch
-	core/sed
 	core/zlib
 	core/libtool
 )
@@ -41,7 +35,7 @@ do_check() {
 	# Some of the packages are included to enable test cases:
 	# * core/zlib
 	# * core/libtool
-	# Create a link to echo in coreutils to be used by the pcre2 test case
+	# Create a link to echo in coreutils to be used by the test case
 	ln -sv "$(pkg_path_for coreutils)"/bin/echo /bin/echo
 
 	TESTSUITEFLAGS="-j$(nproc)" make check

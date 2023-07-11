@@ -1,0 +1,5 @@
+docker-image = "hab-bootstrap:20230523"
+
+[rules]
+# All the runtime dependencies are used by the hab-plan-build script
+unused-dependency = {level = "off"}

@@ -1,0 +1,6 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "2a2a6538c25736bda659af647ea2aac10eeeabc26c889e051487507045a24581"}
+missing-license = {level = "off", source-shasum = "2a2a6538c25736bda659af647ea2aac10eeeabc26c889e051487507045a24581"}
+# sed and gawk are used by scripts at runtime
+# - lib/erlang/erts-<version>/bin/start_erl.src
+unused-dependency = {ignored_packages = ["core/{sed,gawk}"]}

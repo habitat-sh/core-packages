@@ -1,0 +1,8 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "623f04b921827a041f42d52495a6f8eee6565a9b7557051ac68e099123ff28dc"}
+missing-license = {level = "off", source-shasum = "623f04b921827a041f42d52495a6f8eee6565a9b7557051ac68e099123ff28dc"}
+# The $pkg_prefix/lib runpath is added by the build system
+unused-runpath-entry = {ignored_files = [
+    "lib/libicudata.so*",
+    "sbin/escapesrc"
+]}
