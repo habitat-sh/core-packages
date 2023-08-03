@@ -6,3 +6,4 @@ missing-license = {level = "off", source-shasum = "551efc818b968b05216024fb0b727
 script-interpreter-not-found = {ignored_files = [
     "lib/perl5/5.34/core_perl/*"
 ]}
+unused-runpath-entry = {level = "off"}

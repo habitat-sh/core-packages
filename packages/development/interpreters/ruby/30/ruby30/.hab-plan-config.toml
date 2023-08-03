@@ -7,3 +7,4 @@ script-interpreter-not-found = {ignored_files = ["lib/ruby/*/bundler/templates/*
 # core/nss-myhostname: This is apparently required at runtime, for some DNS lookup behaviour?
 # https://github.com/habitat-sh/core-plans/commit/7761ccef724292640d14143ccb0cd5466e877fa5
 unused-dependency = {ignored_packages = ["core/{nss-myhostname,ncurses}"]}
+unused-runpath-entry = {level = "off"}

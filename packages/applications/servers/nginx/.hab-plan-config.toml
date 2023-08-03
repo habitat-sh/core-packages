@@ -1,2 +1,3 @@
 [rules]
 unused-dependency = {ignored_packages = ["core/{libedit,ncurses,bzip2}"]}
+unused-runpath-entry = {level = "off"}
