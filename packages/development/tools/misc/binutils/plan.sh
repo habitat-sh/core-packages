@@ -25,6 +25,7 @@ pkg_deps=(
 	core/glibc
 	core/gcc-libs
 	core/hab-ld-wrapper
+	core/libhab
 )
 
 pkg_build_deps=(
@@ -101,14 +102,19 @@ do_install() {
 }
 
 wrap_binary() {
-	local binary="$1"
-	local env_prefix="BINUTILS"
-
+	local binary
+	local env_prefix
 	local hab_ld_wrapper
-	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+	local libhab
+	local wrapper_binary
+	local actual_binary
 
-	local wrapper_binary="$pkg_prefix/bin/$binary"
-	local actual_binary="$pkg_prefix/bin/$binary.real"
+	binary="$1"
+	env_prefix="BINUTILS"
+	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+	libhab="$(pkg_path_for libhab)"
+	wrapper_binary="$pkg_prefix/bin/$binary"
+	actual_binary="$pkg_prefix/bin/$binary.real"
 
 	build_line "Adding wrapper for $binary"
 	mv -v "$wrapper_binary" "$actual_binary"
@@ -116,6 +122,7 @@ wrap_binary() {
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
 		-e "s^@env_prefix@^${env_prefix}^g" \
 		-e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
+		-e "s^@libhab@^${libhab}/lib^g" \
 		-e "s^@program@^${actual_binary}^g" \
 		>"$wrapper_binary"
 

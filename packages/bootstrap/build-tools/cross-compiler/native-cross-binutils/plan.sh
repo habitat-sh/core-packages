@@ -18,6 +18,7 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
 	core/hab-ld-wrapper
+	core/libhab
 )
 
 pkg_bin_dirs=(
@@ -37,6 +38,9 @@ do_prepare() {
 	# This patch should be removed once we upgrade binutils to a later version.
 	# Bug Report: https://sourceware.org/bugzilla/show_bug.cgi?id=28138
 	patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
+
+	# We don't want the core/libhab path getting added to the RUNPATH by the system linker
+	unset LD_RUN_PATH
 }
 
 do_build() {
@@ -63,12 +67,14 @@ wrap_binary() {
 	local binary
 	local env_prefix
 	local hab_ld_wrapper
+	local libhab
 	local wrapper_binary
 	local actual_binary
 
 	binary="$1"
 	env_prefix="NATIVE_CROSS_BINUTILS"
 	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+	libhab="$(pkg_path_for libhab)"
 	wrapper_binary="$pkg_prefix/bin/$binary"
 	actual_binary="$pkg_prefix/bin/$binary.real"
 
@@ -78,6 +84,7 @@ wrap_binary() {
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
 		-e "s^@env_prefix@^${env_prefix}^g" \
 		-e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
+		-e "s^@libhab@^${libhab}/lib^g" \
 		-e "s^@program@^${actual_binary}^g" \
 		>"$wrapper_binary"
 

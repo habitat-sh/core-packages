@@ -1,7 +1,7 @@
 # shellcheck disable=2034
 git_url="https://github.com/habitat-sh/habitat.git"
-commit_hash="94d6d50138d1fe005e59f4a7117974ce1b977ae2"
-pkg_shasum="ba63a6638fb181c6a7f24d8efb5f5750a648d85fa9456a4a3a9be71471f098f1"
+commit_hash="91fa6e13562e3f8da6e0740c3e3e863a309ab473"
+pkg_shasum="626b7c6c37fc87a3fc3d43f1e03d58d83b5e9e09be1b3cd70908928145fa463b"
 
 pkg_name="hab-launcher"
 pkg_origin="core"
@@ -22,7 +22,7 @@ pkg_build_deps=(
 	core/grep
 	core/make
 	core/protobuf
-	core/rust/1.62.1
+	core/rust/1.68.2
 	core/sed
 )
 pkg_bin_dirs=(bin)

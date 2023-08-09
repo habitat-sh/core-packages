@@ -1,5 +1,5 @@
 # shellcheck disable=2154
-commit_hash="5d4f4bc90870dc0bcabe509badb0350ba0ee920b"
+commit_hash="d38eb37ce7f9be2b6d2340f12674ea6eea6e0d5c"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="hab-cc-wrapper"
@@ -8,7 +8,7 @@ pkg_version="1.0.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/habitat-sh/hab-pkg-wrappers/archive/${commit_hash}.tar.gz"
-pkg_shasum="4a59ae8c5dba6fff24937b38dde80d01e516afbe6c094f31d6c61d6265e44441"
+pkg_shasum="9c142c25f73dd79d949d9aa0b530ea88bcbd6bc1285657cb07725647369a33c7"
 pkg_dirname="hab-pkg-wrappers-${commit_hash}"
 pkg_build_deps=(
 	core/native-rust

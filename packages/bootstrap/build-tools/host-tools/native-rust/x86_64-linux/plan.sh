@@ -2,7 +2,7 @@ program="rust"
 arch=${pkg_target%%-*}
 pkg_name="native-rust"
 pkg_origin="core"
-pkg_version="1.62.1"
+pkg_version="1.68.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Rust is a systems programming language that runs blazingly fast, prevents \
@@ -11,7 +11,7 @@ segfaults, and guarantees thread safety.\
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
 pkg_source="https://static.rust-lang.org/dist/${program}-${pkg_version}-${arch}-unknown-linux-gnu.tar.gz"
-pkg_shasum="dd7d82b8fa8eae59729e1c31fe59a9de6ee61d08ab40ce016185653beebe04d2"
+pkg_shasum="b24d0df852490d80791a228f18c2b75f24b1e6437e6e745f85364edab245f7fa"
 pkg_dirname="${program}-${pkg_version}-${arch}-unknown-linux-gnu"
 
 pkg_bin_dirs=(bin)

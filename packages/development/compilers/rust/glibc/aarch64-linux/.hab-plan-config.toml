@@ -1,5 +1,6 @@
 [rules]
-missing-license = {level = "off", source-shasum = "1311fa8204f895d054c23a3481de3b158a5cd3b3a6338761fee9cdf4dbf075a5"}
+missing-license = {level = "off", source-shasum = "b24d0df852490d80791a228f18c2b75f24b1e6437e6e745f85364edab245f7fa"}
+script-interpreter-not-found = {ignored_files = ["share/**/*"]}
 # The following dependencies are needed at runtime by Cargo for the associated reasons:
 # 1. core/cacerts - Provides SSL certificates necessary for secure connections.
 # 2. core/binutils - Supplies the 'ld' linker, utilized indirectly by Rust through gcc.
