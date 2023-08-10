@@ -32,19 +32,16 @@ The linker must be able to:
 
 -   Add RUNPATH entries to a binary/shared library for all required shared libraries
 -   Add a custom dynamic linker if it is compiling a dynamically linked binary
+-   Wrap / Interpose `dlopen` calls to ensure [dynamic loaded libraries can be found](https://github.com/habitat-sh/core-packages/issues/56)
 
-All these requirements can be met by wrapping the compiler and linker with shell scripts that parse and modify the arguments passed to them. This critical step ensures that the compiler works in any environment.
+All these requirements can be met by wrapping the compiler and linker to parse and modify the arguments passed to them. This critical step ensures that the compiler works in any environment.
 
-The plan files for binutils packages, such as 'native-cross-binutils', 'build-tools-binutils', 'binutils-stage0', 'binutils-stage1', and 'binutils-base', include the linker wrapper script 'ld-wrapper.sh'.
-
-Similarly, the plan files for gcc packages, such as 'native-cross-gcc-base', 'build-tools-gcc', 'gcc-stage1', and 'gcc', contain the compiler wrapper script 'cc-wrapper.sh'.
-
-In Habitat we use a rust based ld and cc wrapper for a few reasons:
-- The logic for determining the arguments that have to be modified, added or removed for the compiler and linker can get 
-  quite complex. A few example scenarios:
+In Habitat we use a [rust based ld and cc wrapper](https://github.com/habitat-sh/hab-pkg-wrappers/) for a few reasons:
+- The logic for determining the arguments that have to be modified, added or removed for the compiler and linker can get quite complex. A few example scenarios:
     - Determining if a library which is linked with the `--as-needed` flag should be added to the runpath
     - Determining if the current plan's lib folder should be added to the runpath due to dependencies on just built libraries
     - Correctly determining the dynamic linker to be used when building the C library
+    - Determining if `libhab` (a wrapper / interposer around dlopen calls for dynamic loading) needs to be linked
 - By moving most of the complexity to a rust binary we can have a very simple POSIX compliant shell script wrapper. Since almost 
   all POSIX / UNIX-like environments must have a /bin/sh available, this greatly simplifies the bootstrapping path since we don't
   need to build bash before building our compiler and linker.
@@ -57,14 +54,41 @@ However that approach is far to extreme and we settle for something more managea
 
 It is pseudo cross compiling in the sense that we will use a \`aarch64-unknown-linux-gnu\` tool-chain to create an \`aarch64-hab-linux-gnu\` tool-chain.  Even though both tool-chains are actually for \`aarch64-linux\`, the GCC build system will consider them to be separate systems and do a cross build. To learn more about GCC cross compilation check out section 4 of the Appendix.
 
-The broad steps involved in this are as follows assuming an ARM based platform, specifically \`aarch64-linux\`.
+### Phase 1: Building a Habitat-Compatible GCC Cross Compiler
 
-1.  Build a cross binutils, ie: aarch64-hab-linux-gnu prefixed 'ld', 'as', etc.
-2.  Build a cross gcc which uses the cross binutils for linking, ie: aarch64-hab-linux-gnu prefixed 'gcc', 'g++', etc.
-3.  Use the cross-binutils and cross-gcc to create a minimal glibc and libstdc++
-4.  Combine all these into a single package that can be used to cross compile more tools like bash, grep, hab, hab-studio etc for the new platform. Critically, these tools will depend on the minimal glibc and libstdc++ that we created in step 3 and hence be portable to any environment.
+1. Construct a cross assembler for the build machine: `native-cross-binutils`.
+2. Construct a cross compiler for the build machine: `native-cross-gcc-base`.
+3. Cross compile a minimal C Standard Library for the new platform: `build-tools-glibc`.
+4. Utilize the minimal cross compiler, assembler, and C Library to compile a C++ Standard Library: `build-tools-libstdcxx`.
+5. Integrate the cross assembler, compiler, and C/C++ standard libraries into a comprehensive cross compiler package: `native-cross-gcc`.
 
-The tools created in step 4 along with the libraries in step 3 are called the \`build-tools\`. These \`build-tools\` are fully portable and can be used to create a packages within a hab studio.
+The `native-cross-gcc` created during this phase will compile C/C++ applications compatible with a habitat environment. This is possible due to [wrappers around the compiler and linker](https://github.com/habitat-sh/hab-pkg-wrappers) that ensure appropriate adjustments for libraries, headers, and binaries in a Habitat setting.
+
+### Phase 2: Building a Bootstrapped Habitat Studio
+
+1. Cross compile a build toolchain encompassing tools required by the habitat studio: `build-tools-bash`, `build-tools-grep`, `build-tools-tar`, etc.
+2. Cross compile GCC for the target platform: `build-tools-gcc`.
+3. Implement a native plan to adapt a pre-existing rust compiler for building habitat binaries: `native-rust`.
+4. Employ the native rust compiler to create a habitat for the bootstrap studio: `build-tools-hab`.
+5. Compile the supplementary Habitat studio packages: `build-tools-hab-plan-build`, `build-tools-hab-backline`, `build-tools-hab-studio`.
+
+The constructed `build-tools-hab-studio` is capable of performing package builds within an isolated studio environment. All packages built up to this point were built natively on the build machine, with potential risks stemming from build machine differences. To curtail the odds of native package build failures, `hab-auto-build` runs these builds inside a [docker image](https://github.com/habitat-sh/core-packages/blob/main/docker/hab-bootstrap/Dockerfile).
+
+### Phase 3: Constructing a Habitat-Compatible Desired Version of GCC
+
+1. Build the targeted version of the glibc library with `build-tools-gcc`: `glibc-stage0`.
+2. Reconfigure the `build-tools-gcc` compiler to compile programs with the new glibc version: `gcc-stage0`.
+3. Use the `gcc-stage0` compiler to compile all gcc dependencies against the updated glibc version: `gmp-stage0`, `libmpc-stage0`, etc.
+4. Utilize the `gcc-stage0` compiler to create the desired version of gcc: `gcc-stage1`.
+
+It's important to understand that the plan building the `gcc-stage1` compiler should use the compiler's full bootstrap build configuration. This guarantees that the built `gcc-stage1` compiler is thoroughly optimized.
+
+### Phase 4: Crafting the Final Habitat-Compatible Desired Version of GCC
+
+1. Use the `gcc-stage1` compiler to build the final, completely optimized version of glibc: `glibc`.
+2. Use the `gcc-stage1` compiler to build the final optimized gcc aligned with the final optimized glibc: `gcc`.
+
+Upon completion of this procedure, you should have a fully optimized GCC and glibc, ready for additional package builds.
 
 ## Compiling Build Tools with Complex Dependencies
 
@@ -139,3 +163,8 @@ For example, the cross-compiler for an AArch64 target may have the name aarch64-
 1.  Run the binary on the target system: Finally, after the build process is complete, you can transfer the cross-compiled binary to the target system and execute it. The binary is specifically built for the target architecture and should run as expected on the target machine.
 
 To sum up, the cross-compilation process involves obtaining the appropriate toolchain, configuring the build environment with the target prefix, and using the cross-compiler and linker to produce a binary that can run on the target system. This allows developers to create software for different platforms using a single development environment.
+
+## 5. Useful Links
+
+- A quick overview of linking and all it's many pitfalls: https://rosshemsley.co.uk/posts/linking/
+- Understanding Mac OS rpaths and loading behaviour: https://itwenty.me/posts/01-understanding-rpath/
