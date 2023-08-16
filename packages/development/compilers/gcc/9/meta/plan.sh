@@ -23,7 +23,7 @@ pkg_deps=(
 
 do_prepare() {
 	# Set gcc to use the newly built binutils
-	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for binutils-base)/bin"
+	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for binutils)/bin"
 }
 
 do_build() {

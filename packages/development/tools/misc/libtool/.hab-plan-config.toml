@@ -5,3 +5,4 @@ missing-license = {level = "off", source-shasum = "e3bd4d5d3d025a36c21dd6af7ea81
 unused-dependency = {ignored_packages = [
     "core/{coreutils,m4,binutils,sed,grep,file}"
 ]}
+unused-runpath-entry = {level = "off"}

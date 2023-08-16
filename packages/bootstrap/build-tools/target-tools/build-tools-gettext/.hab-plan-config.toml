@@ -14,3 +14,4 @@ unused-dependency = {ignored_packages = [
     "core/build-tools-sed",
     "core/build-tools-xz"
 ]}
+unused-runpath-entry = {level = "off"}

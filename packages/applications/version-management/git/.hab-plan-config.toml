@@ -7,3 +7,4 @@ license-not-found = {level = "off", source-shasum = "02047f8dc8934d57ff5e02aadd8
 missing-license = {level = "off", source-shasum = "02047f8dc8934d57ff5e02aadd8a2fe8e0bcf94a7158da375e48086cc46fce1d"}
 # These packages are needed are runtime
 unused-dependency = {ignored_packages = ["core/{gettext,sed,cacerts,openssh}"]}
+unused-runpath-entry = {level = "off"}

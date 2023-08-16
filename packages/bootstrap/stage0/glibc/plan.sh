@@ -68,10 +68,18 @@ do_prepare() {
 	# of glibc. Thanks to https://github.com/NixOS/nixpkgs/pull/137601 for the solution.
 	patch -p1 <"$PLAN_CONTEXT/hab-nss-open-files.patch"
 
+	# 'HAB_LD_LINK_MODE' is used to control the way the habitat linker wrapper adds rpath entries.
+	# By setting it to '', we instruct the linker wrapper to add an rpath entry only if a library
+	# is going to be linked into the resulting binary or library.
+	# This setting is crucial when dealing with certain glibc ELF binaries/libraries. These are expected
+	# not to have a DT_RUNPATH entry, and using the '' mode ensures this expectation is met.
+	export HAB_LD_LINK_MODE="minimal"
+
 	build_line "Unsetting LDFLAGS"
 	build_line "Unsetting CFLAGS"
 	build_line "Unsetting CXXFLAGS"
 	build_line "Unsetting CPPFLAGS"
+	build_line "Setting HAB_LD_LINK_MODE=${HAB_LD_LINK_MODE}"
 }
 
 do_build() {

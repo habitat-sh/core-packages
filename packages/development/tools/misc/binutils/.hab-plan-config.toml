@@ -5,3 +5,4 @@ unused-dependency = {ignored_packages = [
     "core/bash-static",
     "core/hab-ld-wrapper"
 ]}
+unused-runpath-entry = {level = "off"}

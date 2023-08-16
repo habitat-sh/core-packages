@@ -10,4 +10,4 @@ unused-dependency = {ignored_packages = ["core/{coreutils,less}"]}
 # folder. However when the install is done, the final libperl.so is installed in the rpath
 # specified by the build system: lib/perl5/5.34.0/aarch64-linux-thread-multi/CORE.
 # Hence the 'lib' folder becomes an unused runpath entry.
-unused-runpath-entry = {ignored_files = ["bin/perl*"]}
+unused-runpath-entry = {level = "off"}

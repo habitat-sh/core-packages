@@ -59,8 +59,16 @@ do_prepare() {
 
 	patch -p1 <"$PLAN_CONTEXT/dont-use-system-ld-so-cache.patch"
 
+	# 'HAB_LD_LINK_MODE' is used to control the way the habitat linker wrapper adds rpath entries.
+	# By setting it to 'minimal', we instruct the linker wrapper to add an rpath entry only if a library
+	# is going to be linked into the resulting binary or library.
+	# This setting is crucial when dealing with certain glibc ELF binaries/libraries. These are expected
+	# not to have a DT_RUNPATH entry, and using the 'minimal' mode ensures this expectation is met.
+	export HAB_LD_LINK_MODE="minimal"
+
 	build_line "Setting PATH=${PATH}"
 	build_line "Setting CPPFLAGS=${CPPFLAGS}"
+	build_line "Setting HAB_LD_LINK_MODE=${HAB_LD_LINK_MODE}"
 }
 
 do_build() {

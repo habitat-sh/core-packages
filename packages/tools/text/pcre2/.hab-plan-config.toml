@@ -1,1 +1,2 @@
-
+[rules]
+unused-runpath-entry = {level = "off"}

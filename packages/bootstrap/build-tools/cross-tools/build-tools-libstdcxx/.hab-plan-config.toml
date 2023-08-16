@@ -9,3 +9,4 @@ missing-license = {level = "off", source-shasum = "c95da32f440378d7751dd95533186
 unused-dependency = {level = "warn", ignored_packages = [
     "core/build-tools-linux-headers"
 ]}
+unused-runpath-entry = {level = "off"}

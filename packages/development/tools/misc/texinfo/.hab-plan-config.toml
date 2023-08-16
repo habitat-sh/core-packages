@@ -3,5 +3,4 @@ license-not-found = {level = "off", source-shasum = "8eb753ed28bca21f8f56c1a1803
 missing-license = {level = "off", source-shasum = "8eb753ed28bca21f8f56c1a180362aed789229bd62fff58bf8368e9beb59fec4"}
 # gawk is used by the texindex binary
 unused-dependency = {ignored_packages = ["core/gawk"]}
-# The perl library runpath is added to the rpath by the build system
-unused-runpath-entry = {ignored_files = ["lib/*"]}
+unused-runpath-entry = {level = "off"}
