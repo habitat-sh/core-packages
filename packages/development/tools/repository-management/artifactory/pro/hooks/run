@@ -1,0 +1,9 @@
+#!{{pkgPathFor "core/bash"}}/bin/bash
+
+exec 2>&1
+
+echo "Starting Artifactory Pro"
+
+export JFROG_HOME={{pkg.svc_var_path}}
+
+exec {{pkg.svc_var_path}}/artifactory/app/bin/artifactory.sh
