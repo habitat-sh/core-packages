@@ -1,0 +1,14 @@
+pkg_name=dosfstools
+pkg_origin=core
+pkg_version="4.2"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_license=('GPL-3.0-or-later')
+pkg_source="https://github.com/${pkg_name}/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum=64926eebf90092dca21b14259a5301b7b98e7b1943e8a201c7d726084809b527
+pkg_description="dosfstools consists of the programs mkfs.fat, fsck.fat and fatlabel to create, check and label file systems of the FAT family."
+pkg_upstream_url="https://github.com/dosfstools/dosfstools"
+pkg_deps=(core/glibc)
+pkg_build_deps=(core/make core/gcc)
+pkg_lib_dirs=(lib)
+pkg_include_dirs=(include)
+pkg_bin_dirs=(bin)
