@@ -1,0 +1,36 @@
+# Host
+etcd-name: {{cfg.etcd-name}}
+etcd-data-dir: {{pkg.svc_data_path}}
+
+etcd-host-ip: {{sys.ip}}
+
+etcd-client-end: {{cfg.etcd-client-end}}
+etcd-server-end: {{cfg.etcd-server-end}}
+
+etcd-auto-tls: {{cfg.etcd-auto-tls}}
+
+etcd-http-proto: {{cfg.etcd-http-proto}}
+
+etcd-client-cert-auth: {{cfg.etcd-client-cert-auth}}
+etcd-cert-file: {{cfg.etcd-cert-file}}
+etcd-key-file: {{cfg.etcd-key-file}}
+etcd-trusted-ca-file: {{cfg.etcd-trusted-ca-file}}
+
+etcd-peer-client-cert-auth: {{cfg.etcd-peer-client-cert-auth}}
+etcd-peer-cert-file: {{cfg.etcd-peer-cert-file}}
+etcd-peer-key-file: {{cfg.etcd-peer-key-file}}
+etcd-peer-trusted-ca-file: {{cfg.etcd-peer-key-file}}
+
+etcd-listen-client-urls: {{cfg.etcd-listen-client-urls}}
+etcd-listen-peer-urls: {{cfg.etcd-listen-peer-urls}}
+etcd-advertise-client-urls: {{cfg.etcd-advertise-client-urls}}
+etcd-initial-advertise-peer-urls: {{cfg.etcd-initial-advertise-peer-urls}}
+
+etcd-discovery: {{cfg.etcd-discovery}}
+etcd-initial-cluster-state: {{cfg.etcd-initial-cluster-state}}
+etcd-initial-cluster-token: {{cfg.etcd-initial-cluster-token}}
+etcd-initial-cluster: {{cfg.etcd-initial-cluster}}
+
+etcd-listen-host-ip: {{cfg.etcd-listen-host-ip}}
+
+etcd-env-vars-file: {{cfg.etcd-env-vars-file}}
