@@ -1,35 +1,21 @@
 pkg_name=glibc
 pkg_origin=core
-pkg_version=2.34
+pkg_version=2.23
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_description="\
-The GNU C Library project provides the core libraries for the GNU system and \
-GNU/Linux systems, as well as many other systems that use Linux as the \
-kernel. These libraries provide critical APIs including ISO C11, \
-POSIX.1-2008, BSD, OS-specific APIs and more. These APIs include such \
-foundational facilities as open, read, write, malloc, printf, getaddrinfo, \
-dlopen, pthread_create, crypt, login, exit and more.\
-"
-pkg_upstream_url="https://www.gnu.org/software/libc"
-pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum=44d26a1fe20b8853a48f470ead01e4279e869ac149b195dda4e44a195d981ab2
-pkg_deps=(
-  core/linux-headers
-)
-pkg_build_deps=(
-  core/coreutils
-  core/bison
-  core/diffutils
-  core/patch
-  core/make
-  core/gcc
-  core/sed
-  core/perl
-  core/m4
-  core/python-minimal
-  core/tzdata
-)
+pkg_license=('GPL-2.0' 'LGPL-2.0')
+pkg_description="$(cat << EOF
+  The GNU C Library project provides the core libraries for the GNU system and GNU/Linux systems,
+  as well as many other systems that use Linux as the kernel. These libraries provide critical
+  APIs including ISO C11, POSIX.1-2008, BSD, OS-specific APIs and more. These APIs include such
+  foundational facilities as open, read, write, malloc, printf, getaddrinfo, dlopen,
+  pthread_create, crypt, login, exit and more.
+EOF
+)"
+pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
+pkg_shasum=94efeb00e4603c8546209cefb3e1a50a5315c86fa9b078b6fad758e187ce13e9
+pkg_upstream_url=https://www.gnu.org/software/libc
+pkg_deps=(core/linux-headers)
+pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/perl)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -37,16 +23,7 @@ pkg_lib_dirs=(lib)
 do_prepare() {
   # The `/bin/pwd` path is hardcoded, so we'll add a symlink if needed.
   if [[ ! -r /bin/pwd ]]; then
-    # We can't use the `command -v pwd` trick here, as `pwd` is a shell
-    # builtin, and therefore returns the string of "pwd" (i.e. not the full
-    # path to the executable on `$PATH`). In a stage1 Studio, the coreutils
-    # package isn't built yet so we can't rely on using the `pkg_path_for`
-    # helper either.  Sweet twist, no?
-    if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-      ln -sv /tools/bin/pwd /bin/pwd
-    else
-      ln -sv "$(pkg_path_for coreutils)/bin/pwd" /bin/pwd
-    fi
+    ln -sv "$(pkg_path_for coreutils)/bin/pwd" /bin/pwd
     _clean_pwd=true
   fi
 
@@ -70,9 +47,9 @@ do_prepare() {
   # depending on any bootstrapped version.
   echo "LDFLAGS-nscd += -static-libgcc" >> nscd/Makefile
 
-	# This is patch to fix compile error with linker diagnostics featue in v2.34
-	# It can be removed in future upgrades as feature matures.
-	sed -i '/SYSCONFDIR/d' elf/dl-diagnostics.c
+  # Have `rpcgen(1)` look for `cpp(1)` in `$PATH`.
+  # Thanks to https://github.com/NixOS/nixpkgs/blob/1b55b07/pkgs/development/libraries/glibc/rpcgen-path.patch
+  patch -p1 < "$PLAN_CONTEXT/rpcgen-path.patch"
 
   # Don't use the system's `/etc/ld.so.cache` and `/etc/ld.so.preload`, but
   # rather the version under `$pkg_prefix/etc`.
@@ -83,6 +60,39 @@ do_prepare() {
   cat "$PLAN_CONTEXT/dont-use-system-ld-so.patch" \
     | sed "s,@prefix@,$pkg_prefix,g" \
     | patch -p1
+
+  # Fix for the scanf15 and scanf17 tests for arches that need
+  # misc/bits/syscall.h. This problem is present once a custom location is used
+  # for the Linux Kernel headers.
+  #
+  # Source: https://lists.debian.org/debian-glibc/2013/11/msg00116.html
+  patch -p1 < "$PLAN_CONTEXT/testsuite-fix.patch"
+
+  # Fix for CVE-2016-3075 and more
+  #
+  # Source: http://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.23-upstream_fixes-1.patch
+  patch -p1 < "$PLAN_CONTEXT/glibc-2.23-upstream_fixes-1.patch"
+
+  # Patch for symver issues.
+  #
+  # Source: https://patchwork.ozlabs.org/patch/797471/
+  patch -p1 < "$PLAN_CONTEXT/0005-fix-binutils-2-29-build.patch"
+
+  # Patch for GCC error that use to be a warning.
+  #
+  # Source: https://patchwork.ozlabs.org/patch/680578/
+  patch -p1 < "$PLAN_CONTEXT/gcc-implicit-boolean.patch"
+
+  # Removing sunrpc in 2.23 caused a bug
+  #
+  # Source https://lists.crux.nu/pipermail/crux-commits/2017-October/022800.html
+  patch -p1 < "$PLAN_CONTEXT/remove-sun-rpm-bug.patch"
+
+  # Fix error for GCC7 error
+  #
+  # Source: https://patches.linaro.org/patch/100439/
+  patch -p1 < "$PLAN_CONTEXT/nss-nisplus-gcc7.patch"
+
 
   # Adjust `scripts/test-installation.pl` to use our new dynamic linker
   sed -i "s|libs -o|libs -L${pkg_prefix}/lib -Wl,-dynamic-linker=${dynamic_linker} -o|" \
@@ -95,6 +105,7 @@ do_build() {
   pushd ../${pkg_name}-build > /dev/null
     # Configure Glibc to install its libraries into `$pkg_prefix/lib`
     echo "libc_cv_slibdir=$pkg_prefix/lib" >> config.cache
+    echo "libc_cv_ssp=no" >> config.cache
 
     "../$pkg_dirname/configure" \
       --prefix="$pkg_prefix" \
@@ -105,9 +116,8 @@ do_build() {
       --sysconfdir="$pkg_prefix/etc" \
       --enable-obsolete-rpc \
       --disable-profile \
-      --enable-kernel=3.2 \
-      --enable-stack-protector=strong \
-      --enable-cet \
+      --disable-werror \
+      --enable-kernel=2.6.32 \
       --cache-file=config.cache
 
     make
@@ -135,8 +145,7 @@ do_build() {
 # corresponds to your prefix, i.e. `(length of prefix path + 1)` to ensure that
 # you haven't really broken abi with your change."
 #
-# Source:
-# https://sourceware.org/glibc/wiki/Testing/Testsuite#Known_testsuite_failures
+# Source: https://sourceware.org/glibc/wiki/Testing/Testsuite#Known_testsuite_failures
 #
 # ## FAIL: posix/tst-getaddrinfo4
 #
@@ -149,25 +158,14 @@ do_check() {
   pushd ../${pkg_name}-build > /dev/null
     # One of the tests uses the hardcoded `bin/cat` path, so we'll add it, if
     # it doesn't exist.
-    # Checking for the binary on `$PATH` will work in both stage1 and default
-    # Studios.
     if [[ ! -r /bin/cat ]]; then
-      ln -sv "$(command -v cat)" /bin/cat
+      ln -sv "$(pkg_path_for coreutils)/bin/cat" /bin/cat
       _clean_cat=true
     fi
     # One of the tests uses the hardcoded `bin/echo` path, so we'll add it, if
     # it doesn't exist.
     if [[ ! -r /bin/echo ]]; then
-      # We can't use the `command -v echo` trick here, as `echo` is a shell
-      # builtin, and therefore returns the string of "echo" (i.e. not the full
-      # path to the executable on `$PATH`). In a stage1 Studio, the coreutils
-      # package isn't built yet so we can't rely on using the `pkg_path_for`
-      # helper either. Sweet twist, no?
-      if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-        ln -sv /tools/bin/echo /bin/echo
-      else
-        ln -sv "$(pkg_path_for coreutils)/bin/echo" /bin/echo
-      fi
+      ln -sv "$(pkg_path_for coreutils)/bin/echo" /bin/echo
       _clean_echo=true
     fi
 
@@ -214,7 +212,7 @@ do_install() {
     # a multilib installation is assumed (i.e. 32-bit and 64-bit). We will
     # fool this check by symlinking a "32-bit" file to the real loader.
     mkdir -p "$pkg_prefix/lib"
-    ln -sv ld-${pkg_version}.so "$pkg_prefix/lib/ld-linux.so.2"
+    ln -sv ld-2.23.so "$pkg_prefix/lib/ld-linux.so.2"
 
     # Add a `lib64` -> `lib` symlink for `bin/ldd` to work correctly.
     #
@@ -301,38 +299,22 @@ ethers: files
 rpc: files
 EOF
 
-
-    # Install timezone data.
-    # We set --sysconfdir=$pkg_prefix/etc during our build, so we need to
-    # embed timezone data in this package.
-    # Please see core/tzdata for more information.
-
-    cp -r "$(pkg_path_for tzdata)/share/zoneinfo" "$pkg_prefix/share/"
-    cp -v "$(pkg_path_for tzdata)/share/zoneinfo/UTC" "$pkg_prefix/etc/localtime"
-}
-
-do_strip() {
-  build_line "Stripping unneeded symbols from binaries and libraries"
-  find "$pkg_prefix" -type f -perm -u+w -print0 2> /dev/null \
-    | while read -rd '' f; do
-      case "$(basename "$f")" in
-        "ld-${pkg_version}.so"|\
-        "libc-${pkg_version}.so"|\
-        "libpthread-${pkg_version}.so"|\
-        libpthread_db-1.0.so)
-          build_line "Skipping strip for $f"
-          continue
-          ;;
-      esac
-
-      case "$(file -bi "$f")" in
-        *application/x-executable*) strip --strip-all "$f";;
-        *application/x-pie-executable*) strip --strip-all "$f";;
-        *application/x-sharedlib*) strip --strip-unneeded "$f";;
-        *application/x-archive*) strip --strip-debug "$f";;
-        *) continue;;
-      esac
-    done
+    extract_src tzdata
+    pushd ./tzdata > /dev/null
+      ZONEINFO="$pkg_prefix/share/zoneinfo"
+      mkdir -p "$ZONEINFO"/{posix,right}
+      for tz in etcetera southamerica northamerica europe africa antarctica \
+          asia australasia backward factory; do
+        zic -L /dev/null -d "$ZONEINFO" -y "sh yearistype.sh" ${tz}
+        zic -L /dev/null -d "$ZONEINFO/posix" -y "sh yearistype.sh" ${tz}
+        zic -L leapseconds -d "$ZONEINFO/right" -y "sh yearistype.sh" ${tz}
+      done
+      cp -v zone.tab zone1970.tab iso3166.tab "$ZONEINFO"
+      zic -d "$ZONEINFO" -p America/New_York
+      unset ZONEINFO
+    popd > /dev/null
+    cp -v "$pkg_prefix/share/zoneinfo/UTC" "$pkg_prefix/etc/localtime"
+  popd > /dev/null
 }
 
 do_end() {
@@ -340,6 +322,28 @@ do_end() {
   if [[ -n "$_clean_pwd" ]]; then
     rm -fv /bin/pwd
   fi
+}
+
+extract_src() {
+  build_dirname=$pkg_dirname/../${pkg_name}-build
+  plan=$1
+
+  (source "$PLAN_CONTEXT/../../$plan/plan.sh"
+    # Re-override the defaults as this plan is sourced externally
+    pkg_filename="$(basename $pkg_source)"
+    pkg_dirname="${pkg_name}-${pkg_version}"
+    CACHE_PATH="$HAB_CACHE_SRC_PATH/$pkg_dirname"
+
+    build_line "Downloading $pkg_source"
+    do_download
+    build_line "Verifying $pkg_filename"
+    do_verify
+    build_line "Clean the cache"
+    do_clean
+    build_line "Unpacking $pkg_filename"
+    do_unpack
+    mv -v "$HAB_CACHE_SRC_PATH/$pkg_dirname" "$HAB_CACHE_SRC_PATH/$build_dirname/$plan"
+  )
 }
 
 
