@@ -1,6 +1,6 @@
 HAB_BOOTSTRAP_IMAGE_VERSION = "20230523"
 HAB_AUTO_BUILD_GIT_REPO = "https://github.com/habitat-sh/hab-auto-build.git"
-HAB_AUTO_BUILD_BRANCH = "v2"
+HAB_AUTO_BUILD_BRANCH = "main"
 PACKAGE = "*/*"
 
 check-docker:
