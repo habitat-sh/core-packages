@@ -1,0 +1,7 @@
+[["journalbeat.inputs"]]
+paths = []
+
+["output.elasticsearch"]
+hosts = [
+  "localhost:9200"
+]
