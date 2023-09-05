@@ -1,0 +1,8 @@
+#!{{pkgPathFor "core/bash"}}/bin/bash
+
+mkdir -p {{pkg.svc_data_path}}/htdocs
+mkdir -p {{pkg.svc_data_path}}/cgi-bin
+mkdir -p {{pkg.svc_var_path}}/logs
+
+# We need to change permissions on reconfigure, but also on init.
+source "{{pkg.svc_path}}/hooks/reconfigure"

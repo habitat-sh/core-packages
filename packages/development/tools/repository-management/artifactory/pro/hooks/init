@@ -1,0 +1,23 @@
+#!{{pkgPathFor "core/bash"}}/bin/bash
+
+exec 2>&1
+
+echo "Preparing ARTIFACTORY_HOME..."
+
+rm -rf {{pkg.svc_var_path}}/artifactory/app
+cp -R {{pkg.path}}/artifactory/app {{pkg.svc_var_path}}/artifactory/
+
+# Move in var if it doesn't exist
+if [ ! -d "{{pkg.svc_var_path}}/artifactory/var" ]; then
+  cp -R {{pkg.path}}/artifactory/var {{pkg.svc_var_path}}/artifactory/
+fi
+
+# Create required ephemeral directories
+for dir in backup data log
+do
+  mkdir -p {{pkg.svc_var_path}}/artifactory/var/$dir
+done
+
+ln -sf {{pkg.svc_config_path}}/system.yaml {{pkg.svc_var_path}}/artifactory/var/etc/system.yaml
+ln -sf {{pkg.svc_config_path}}/binarystore.xml {{pkg.svc_var_path}}/artifactory/var/etc/artifactory/binarystore.xml
+ln -sf {{pkg.svc_config_path}}/artifactory.lic {{pkg.svc_var_path}}/artifactory/var/etc/artifactory/artifactory.lic

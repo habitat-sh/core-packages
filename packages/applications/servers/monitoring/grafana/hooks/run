@@ -1,0 +1,8 @@
+#!/bin/bash
+
+exec 2>&1
+
+exec grafana-server \
+  --homepath={{pkg.path}} \
+  --config={{pkg.svc_config_path}}/grafana.ini \
+  --pidfile={{pkg.svc_var_path}}/grafana-server.pid
