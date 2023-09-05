@@ -1,0 +1,32 @@
+# This file is an example configuration file highlighting only the most common
+# options. You can find the full configuration reference here:
+# https://www.elastic.co/guide/en/beats/filebeat/index.html
+
+filebeat.inputs:
+- type: log
+  paths:
+    - /var/log/*.log
+  enabled: false
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+setup.template.settings:
+  index.number_of_shards: 3
+
+{{#if cfg.kibana.enabled ~}}
+setup.kibana:
+  {{#if bind.kibana ~}}
+  host: "{{bind.kibana.first.sys.ip}}:{{bind.kibana.first.cfg.port}}"
+  {{else ~}}
+  host: "{{cfg.kibana.host}}"
+  {{/if ~}}
+{{/if ~}}
+
+output.elasticsearch:
+  {{#if bind.elasticsearch ~}}
+  hosts: [{{#each bind.elasticsearch.members ~}} "{{sys.ip}}"{{~#unless @last}},{{/unless}} {{/each ~}}]
+  {{else}}
+  hosts: [{{#each cfg.elasticsearch.members as |member| ~}} "{{member.host}}:{{member.port}}"{{~#unless @last}},{{/unless}} {{/each ~}}]
+  {{/if}}
