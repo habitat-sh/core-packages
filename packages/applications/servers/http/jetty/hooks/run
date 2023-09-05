@@ -1,0 +1,8 @@
+#!/bin/bash
+
+exec 2>&1
+
+export JETTY_HOME="{{pkg.svc_var_path}}/jetty"
+export JAVA_HOME="{{pkgPathFor "core/openjdk11"}}"
+
+exec ${JETTY_HOME}/bin/jetty.sh run
