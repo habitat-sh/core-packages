@@ -1,5 +1,5 @@
-pkg_name=goreplay
-pkg_origin=core
+pkg_name="goreplay"
+pkg_origin="core"
 pkg_version="0.16.1"
 pkg_license=('LGPL-3.0')
 pkg_description="GoReplay is an open-source tool for capturing and replaying live HTTP traffic into a test environment in order to continuously test your system with real data."
@@ -12,15 +12,15 @@ pkg_bin_dirs=(bin)
 
 # The pkg_filename does not extract into a folder. We need to force it.
 do_unpack() {
-  cd "${HAB_CACHE_SRC_PATH}" || exit
-  mkdir "${pkg_name}-${pkg_version}"
-  tar -xvf ${pkg_filename} --directory "${pkg_name}-${pkg_version}"
+	cd "${HAB_CACHE_SRC_PATH}" || exit
+	mkdir "${pkg_name}-${pkg_version}"
+	tar -xvf ${pkg_filename} --directory "${pkg_name}-${pkg_version}"
 }
 
 do_build() {
-  return 0
+	return 0
 }
 
 do_install() {
-  install -D goreplay "${pkg_prefix}/bin/goreplay"
+	install -D goreplay "${pkg_prefix}/bin/goreplay"
 }

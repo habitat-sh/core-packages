@@ -1,5 +1,5 @@
-pkg_name=gocd-server
-pkg_origin=core
+pkg_name="gocd-server"
+pkg_origin="core"
 pkg_version="18.12.0"
 pkg_buildnumber="8222"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -11,22 +11,22 @@ pkg_upstream_url="https://www.gocd.org"
 pkg_filename="go-server-${pkg_version}-${pkg_buildnumber}.zip"
 pkg_dirname="go-server-${pkg_version}"
 pkg_deps=(
-  core/git
-  core/corretto8
+	core/git
+	core/corretto8
 )
 pkg_bin_dirs=(bin)
 pkg_exports=(
-  [port]=port
-  [ssl-port]=ssl-port
+	[port]=port
+	[ssl - port]=ssl-port
 )
 pkg_exposes=(port ssl-port)
 
 do_build() {
-  return 0
+	return 0
 }
 
 do_install() {
-  mkdir -p "${pkg_prefix}/bin"
-  cp ./* "${pkg_prefix}/bin"
-  mv "${pkg_prefix}/bin/LICENSE" "${pkg_prefix}/"
+	mkdir -p "${pkg_prefix}/bin"
+	cp ./* "${pkg_prefix}/bin"
+	mv "${pkg_prefix}/bin/LICENSE" "${pkg_prefix}/"
 }
