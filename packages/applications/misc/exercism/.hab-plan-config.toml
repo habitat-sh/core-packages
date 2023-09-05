@@ -1,0 +1,8 @@
+[rules]
+# We ignore scripts in the share folder
+# host-script-interpreter = {ignored_files = ["share/*"]}
+license-not-found = {level = "off", source-shasum = "8abcd78d9fbf9c580381e86e611f50a0d5efd88aed06100cd1e4d12ee41440d2"}
+missing-license = {level = "off", source-shasum = "8abcd78d9fbf9c580381e86e611f50a0d5efd88aed06100cd1e4d12ee41440d2"}
+
+# missing-script-interpreter-dependency = {level = "off", ignored_files = ["share/*"]}
+# unused-runpath-entry = {level = "off"}
