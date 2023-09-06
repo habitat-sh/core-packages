@@ -1,3 +1,4 @@
+exclude: '.patch$'
 repos:
   - repo: https://github.com/scop/pre-commit-shfmt
     rev: v3.6.0-1
@@ -7,9 +8,17 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0  # Use the ref you want to point at
     hooks:
-    -   id: check-toml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-yaml
+        exclude: config/.*$
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        exclude: .*\.patch
   - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
     rev: d2425a62376c2197448cce2f825d5a0c3926b862
     hooks:
-    - id: pretty-format-toml
-      args: [--autofix, --indent, "4"]
+      - id: pretty-format-toml
+        args: [--autofix, --indent, "4"]
