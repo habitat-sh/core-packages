@@ -1,0 +1,3 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "75faaaa025a154ec0aef8b3b6ed9e78113efb543a92b8f4b2b971a0b0e898108"}
+missing-license = {level = "off", source-shasum = "75faaaa025a154ec0aef8b3b6ed9e78113efb543a92b8f4b2b971a0b0e898108"}
