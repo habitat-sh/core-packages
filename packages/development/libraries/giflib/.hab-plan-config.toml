@@ -1,2 +1,3 @@
 [rules]
-unused-runpath-entry = {level = "off"}
+license-not-found = {level = "off", source-shasum = "31da5562f44c5f15d63340a09a4fd62b48c45620cd302f77a6d9acf0077879bd"}
+missing-license = {level = "off", source-shasum = "31da5562f44c5f15d63340a09a4fd62b48c45620cd302f77a6d9acf0077879bd"}
