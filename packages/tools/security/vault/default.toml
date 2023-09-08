@@ -1,0 +1,18 @@
+# switch this to false you want to start in DEVMODE
+# https://www.vaultproject.io/intro/getting-started/dev-server.html
+
+[backend]
+path = "vault"
+storage = "file"
+
+[dev]
+mode = true
+
+[listener]
+location = "127.0.0.1"
+port = "8200"
+tls_disable = "1"
+type = "tcp"
+
+[server]
+ui = true

@@ -1,0 +1,15 @@
+[backend]
+host = "127.0.0.1"
+max_connections = 300
+port = 3000
+
+[files]
+vcl = "varnish.default.vcl"
+
+[frontend]
+host = "0.0.0.0"
+port = 80
+
+[system]
+malloc = '256m'
+thread_pool_min = 400
