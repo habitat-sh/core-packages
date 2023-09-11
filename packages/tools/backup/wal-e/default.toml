@@ -1,0 +1,10 @@
+aws_access_key_id = ''
+aws_region = ''
+aws_secret_access_key = ''
+backup_interval = 86400
+wale_s3_prefix = ''
+
+[pg]
+data_dir = ''
+superuser_name = 'admin'
+superuser_password = 'admin'
