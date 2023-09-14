@@ -1,0 +1,117 @@
+# Progress Output looks strange emited by the supervisor
+# so we will turn it off because some of the clustering
+# commands print to the progress stream
+$ProgressPreference="SilentlyContinue"
+
+# instance name will be the same for all nodes. We use 'first' because
+# we need to choose one and the first is just as good as any
+$instance="{{bind.database.first.cfg.instance}}"
+
+# It will be usefull to pick a "primary" and list of all secondary members
+# We will just choose 'bind.database.first' as primary since that will
+# be the same on all instances
+$secondary = @()
+$primary = '{{bind.database.first.sys.hostname}}'
+{{~#eachAlive bind.database.members as |member|}}
+if($primary -ne '{{member.sys.hostname}}') {
+    $secondary += '{{member.sys.hostname}}'
+}
+{{~/eachAlive}}
+
+Import-Module "{{pkgPathFor "core/dsc-core"}}/Modules/DscCore"
+
+# Open ports on firewall only if Windows Firewall service is running
+if($(Get-Service 'MpsSvc').Status -eq "Running") {
+    Start-DscCore (Join-Path {{pkg.svc_config_path}} firewall.ps1) NewFirewallRule
+}
+
+# We are about to configure all of the always on availability group
+# plumbning. We will drive this from the primary node so all other
+# nodes do nothing from this point forward
+if($env:ComputerName -eq $primary) {
+    $domain = (Get-ciminstance win32_computersystem).Domain.Split(".")[0]
+    $login = "$domain\${env:ComputerName}`$"
+
+    Invoke-Command -ComputerName localhost -EnableNetworkAccess -ArgumentList $login, $secondary, $instance {
+        param ($login, $secondary, $instance)
+        $ProgressPreference="SilentlyContinue"
+        Import-Module SqlServer -DisableNameChecking
+
+        # we already know we have enabled HADR for ourselves (primary)
+        # but we cant proceed to join everyone to the availability group
+        # until it has been enabled for everyone
+        foreach($s in $secondary) {
+            Write-Host "Waiting for HADR to be enabled on $s"
+            $hadrEnabled = $false
+            while(!$hadrEnabled) {
+                Start-Sleep -Seconds 1
+                $svr = New-Object ('Microsoft.SqlServer.Management.Smo.Server') "$s\$instance"
+                $hadrEnabled = $svr.IsHadrEnabled
+            }
+        }
+
+        # The DSC will run under the machine account so we need to add
+        # that login as a sysadmin to the secondary replicas
+        foreach($s in $secondary) {
+            if(!(Get-SqlLogin -LoginName $login -ServerInstance "$s\$instance" -ErrorAction SilentlyContinue)) {
+                Write-Host "Adding machine account login to $s"
+                Add-SqlLogin -LoginName $login -LoginType WindowsUser -ServerInstance "$s\$instance" -Enable
+
+                $svr = New-Object ('Microsoft.SqlServer.Management.Smo.Server') "$s\$instance"
+                $svrole = $svr.Roles | where {$_.Name -eq 'sysadmin'}
+                $svrole.AddMember($login)
+            }
+        }
+
+        # Create an empty database for each db if it does not already exist
+        $svr = New-Object ('Microsoft.SqlServer.Management.Smo.Server') "{{bind.database.first.sys.hostname}}\$instance"
+        $databases = @({{cfg.databases}})
+        foreach($db in $databases) {
+            if($db.Length -gt 0 -and (!$svr.Databases[$db])) {
+                Write-Host "Creating empty database for $db"
+                (New-Object -TypeName Microsoft.SqlServer.Management.Smo.Database -argumentlist $svr, $db).Create()
+            }
+        }
+    }
+
+    # This DSC configuration sets up all the always on plumbing and also
+    # backs up the db and restores it to the secondary DBs
+    Start-DscCore (Join-Path {{pkg.svc_config_path}} group.ps1) NewAvailabilityGroup
+}
+
+Write-Host "All DSC Completed"
+
+# dsc does not configure the probe port so we do that here
+if($env:ComputerName -eq $primary -and ('{{cfg.availability_group_ip}}' -ne '')) {
+    Invoke-Command -Computer localhost {
+        $ProgressPreference="SilentlyContinue"
+        $p = Get-ClusterResource '{{cfg.availability_group_name}}_{{cfg.availability_group_ip}}' | Get-ClusterParameter -Name ProbePort
+        if($p.Value -ne '{{cfg.probe_port}}') {
+            Write-Host "Adding probe port {{cfg.probe_port}} to {{cfg.availability_group_name}}_{{cfg.availability_group_ip}}"
+            Get-ClusterResource '{{cfg.availability_group_name}}_{{cfg.availability_group_ip}}' | Set-ClusterParameter -Name ProbePort -Value {{cfg.probe_port}}
+            Write-Host "Stopping IP Resource"
+            Stop-ClusterResource '{{cfg.availability_group_name}}_{{cfg.availability_group_ip}}' | Out-Null
+            Write-Host "Starting IP Resource"
+            Start-ClusterResource '{{cfg.availability_group_name}}_{{cfg.availability_group_ip}}' | Out-Null
+            Write-Host "Starting Cluster Group"
+            Start-ClusterGroup '{{cfg.availability_group_name}}' | Out-Null
+        }
+    }
+}
+
+# adjust failover threshold if needed
+if($env:ComputerName -eq $primary) {
+    Invoke-Command -Computer localhost {
+        $group = Get-ClusterGroup -Name {{cfg.availability_group_name}}
+        if('{{cfg.availability_group_failover_threshold}}' -ne $group.FailoverThreshold) {
+            Write-Host "Changing failover threshold to {{cfg.availability_group_failover_threshold}}"
+            $group.FailoverThreshold = {{cfg.availability_group_failover_threshold}}
+        }
+    }
+}
+
+Write-Host "Availability group configuration complete!"
+
+while($true) {
+    Start-Sleep -Seconds 1
+}
