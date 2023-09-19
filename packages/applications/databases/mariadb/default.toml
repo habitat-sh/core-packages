@@ -1,0 +1,4 @@
+bind_address = "127.0.0.1"
+general_log = true
+port = 3306
+root_password = ""
