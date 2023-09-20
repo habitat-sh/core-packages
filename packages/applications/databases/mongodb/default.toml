@@ -1,0 +1,17 @@
+[mongod]
+
+[mongod.net]
+bind_ip = "0.0.0.0"
+port = 27017
+
+[mongod.security]
+authorization = "disabled"
+
+[mongod.storage]
+
+[mongod.storage.journal]
+enabled = true
+
+[mongod.system_log]
+quiet = false
+verbosity = 0

@@ -1,0 +1,19 @@
+alert_recipients = []
+check_interval = 30
+log = 'syslog'
+
+[eventqueue]
+enabled = false
+slots = 100
+
+[httpd]
+allow = ['localhost', 'admin:monit']
+enabled = true
+listen_only = ''
+port = 2812
+
+[mmonit]
+collector_url = 'http://monit:monit@192.168.1.10:8080/collector'
+enabled = false
+timeout = 5
+without_credentials = false
