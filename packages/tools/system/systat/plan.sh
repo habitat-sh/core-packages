@@ -1,0 +1,14 @@
+pkg_name=sysstat
+pkg_origin=core
+pkg_version=11.7.4
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="Sysstat and the utilities it provides: iostat, mpstat, pidstat, sar, sa1, sa2 and sadf"
+pkg_upstream_url="http://sebastien.godard.pagesperso-orange.fr/"
+pkg_license=('GPL-2.0')
+pkg_source=http://pagesperso-orange.fr/sebastien.godard/${pkg_name}-${pkg_version}.tar.xz
+pkg_shasum=a96265a22784c29888669f961a0896841d177853f8f057efe063e891962b9090
+pkg_deps=(core/glibc)
+pkg_build_deps=(core/make core/gcc)
+pkg_bin_dirs=(bin)
+pkg_include_dirs=(include)
+pkg_lib_dirs=(lib)
