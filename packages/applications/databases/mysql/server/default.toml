@@ -1,0 +1,9 @@
+app_password = false
+app_username = false
+bind = "127.0.0.1"
+binlog-format = "ROW"
+language = "english"
+password_column_name = "authentication_string"
+port = 3306
+root_password = ""
+server_id = 1
