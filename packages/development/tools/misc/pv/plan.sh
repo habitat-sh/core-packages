@@ -1,0 +1,12 @@
+pkg_name=pv
+pkg_origin=core
+pkg_license=('ARTISTIC 2.0')
+pkg_version="1.6.20"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="Pipe Viewer - is a terminal-based tool for monitoring the progress of data through a pipeline."
+pkg_upstream_url="http://www.ivarch.com/programs/pv.shtml"
+pkg_source="https://www.ivarch.com/programs/sources/pv-${pkg_version}.tar.bz2"
+pkg_shasum="e831951eff0718fba9b1ef286128773b9d0e723e1fbfae88d5a3188814fdc603"
+pkg_deps=(core/glibc)
+pkg_build_deps=(core/make core/gcc)
+pkg_bin_dirs=(bin)
