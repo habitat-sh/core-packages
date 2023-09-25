@@ -1,0 +1,12 @@
+diff --git a/SConstruct b/SConstruct
+index 211a1e3..e2cf623 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -176,6 +176,7 @@ if sys.platform == 'win32':
+ env = Environment(variables=opts,
+                   tools=('default', 'textfile',),
+                   CPPPATH=['.', ],
++                  ENV=os.environ
+                   )
+ 
+ gen_def_script = env.File('build/gen_def.py').rstr()
