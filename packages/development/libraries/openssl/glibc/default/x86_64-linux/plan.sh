@@ -1,7 +1,7 @@
 program="openssl"
 pkg_name="openssl"
 pkg_origin=core
-pkg_version="1.0.2zb"
+pkg_version="1.0.2zf"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 OpenSSL is an open source project that provides a robust, commercial-grade, \
@@ -12,7 +12,7 @@ library.\
 pkg_upstream_url="https://www.openssl.org"
 pkg_license=('OpenSSL')
 pkg_source="https://s3.amazonaws.com/chef-releng/${program}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="b7d8f8c895279caa651e7f3de9a7b87b8dd01a452ca3d9327f45a9ef31d0c518"
+pkg_shasum="85d2242b7d11a33d5f239f1f34a1ff7eb37431a554b7df99c52c646b70b14b2e"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
@@ -80,7 +80,7 @@ do_build() {
 do_check() {
 	# Flip back to the original sources to satisfy the test suite, but keep the
 	# final version for packaging.
-	for f in apps/CA.pl.in apps/CA.sh apps/openssl.cnf; do
+	for f in apps/CA.pl.in apps/CA.sh apps/openssl.cnf crypto/cryptlib.h; do
 		cp -fv $f ${f}.final
 		cp -fv ${f}.orig $f
 	done
@@ -88,7 +88,7 @@ do_check() {
 	make test
 
 	# Finally, restore the final sources to their original locations.
-	for f in apps/CA.pl.in apps/CA.sh apps/openssl.cnf; do
+	for f in apps/CA.pl.in apps/CA.sh apps/openssl.cnf crypto/cryptlib.h; do
 		cp -fv ${f}.final $f
 	done
 }
