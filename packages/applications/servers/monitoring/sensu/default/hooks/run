@@ -1,0 +1,15 @@
+#!/bin/bash
+
+exec 2>&1
+
+export GEM_HOME="{{pkg.path}}/vendor/bundle/ruby/2.5.0"
+export GEM_PATH="{{pkgPathFor "core/ruby"}}/lib/ruby/gems/2.5.0:{{pkgPathFor "core/bundler"}}:$GEM_HOME"
+export CONFIG_DIR="{{pkg.svc_config_path}}"
+
+if [ "{{cfg.mode}}" == "client" ]; then
+  echo "Running Sensu Client"
+  exec sensu-client -d "{{pkg.svc_config_path}}" -L {{cfg.log_level}}
+else
+  echo "Running Sensu Server"
+  exec sensu-server -d "{{pkg.svc_config_path}}" -L {{cfg.log_level}}
+fi
