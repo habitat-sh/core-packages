@@ -1,0 +1,6 @@
+[log]
+format = "text"  # text, json
+level = "info"  # debug, info, error
+
+[service]
+address = "127.0.0.1:8181"
