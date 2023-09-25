@@ -1,0 +1,17 @@
+port = 10389
+# DN for administrative user
+rootdn = "cn=Manager,dc=my-domain,dc=com"
+# Password for administrative user
+rootpw = "secret"
+# Location of CA certificate
+ssl_ca = ""
+# Location of SSL certificate file
+ssl_cert = ""
+# Which SSL Cipher suite to use
+ssl_cipher_suite = ""
+# Location of SSL key file
+ssl_key = ""
+# Base DN for your LDAP server
+suffix = "dc=my-domain,dc=com"
+# List of URLs to serve
+url_list = "ldap://0.0.0.0:10389"

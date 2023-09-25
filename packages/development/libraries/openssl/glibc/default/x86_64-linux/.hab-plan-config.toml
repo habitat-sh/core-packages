@@ -1,0 +1,4 @@
+[rules]
+missing-license = {level = "off", source-shasum = "85d2242b7d11a33d5f239f1f34a1ff7eb37431a554b7df99c52c646b70b14b2e"}
+# TODO: Figure out why fips is unused
+unused-dependency = {level = "off"}
