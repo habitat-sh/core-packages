@@ -1,0 +1,52 @@
+{
+  "rabbitmq": {
+    {{#if bind.rabbitmq ~}}
+    "host": "{{bind.rabbitmq.first.sys.ip}}",
+    "port": {{bind.rabbitmq.first.cfg.port}},
+    "user": "{{cfg.rabbitmq.user}}",
+    "password": "{{cfg.rabbitmq.password}}",
+    "vhost": "{{cfg.rabbitmq.vhost}}"
+    {{else ~}}
+    "host": "{{cfg.rabbitmq.host}}",
+    "port": {{cfg.rabbitmq.port}},
+    "user": "{{cfg.rabbitmq.user}}",
+    "password": "{{cfg.rabbitmq.password}}",
+    "vhost": "{{cfg.rabbitmq.vhost}}"
+    {{/if ~}}
+  },
+  "redis": {
+    {{#if bind.redis ~}}
+    "host": "{{bind.redis.first.sys.ip}}",
+    "port": {{bind.redis.first.cfg.port}}
+    {{else ~}}
+    "host": "{{cfg.redis.host}}",
+    "port": {{cfg.redis.port}}
+    {{/if}}
+  },
+  "api": {
+    "host": "{{cfg.api.host}}",
+    "bind": "{{cfg.api.bind}}",
+    "port": {{cfg.api.port}}
+  },
+  "handlers": {
+    "default": {
+      "type": "set",
+      "handlers": [
+        "stdout"
+      ]
+    },
+    "stdout": {
+      "type": "pipe",
+      "command": "cat"
+    }
+  },
+  "checks": {
+    "test": {
+      "command": "echo -n OK",
+      "subscribers": [
+        "test"
+      ],
+      "interval": 60
+    }
+  }
+}
