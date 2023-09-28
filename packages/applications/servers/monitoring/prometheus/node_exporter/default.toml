@@ -1,0 +1,5 @@
+[web]
+listen_address = ""
+listen_port = 9100
+max_requests = 40
+telemetry_path = "/metrics"
