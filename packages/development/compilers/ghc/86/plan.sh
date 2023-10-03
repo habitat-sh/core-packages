@@ -1,6 +1,6 @@
 source "$(dirname "${BASH_SOURCE[0]}")/../ghc/plan.sh"
 
-pkg_name=:"ghc86"
+pkg_name="ghc86"
 pkg_origin="core"
 pkg_version="8.6.5"
 pkg_license=('BSD-3-Clause')

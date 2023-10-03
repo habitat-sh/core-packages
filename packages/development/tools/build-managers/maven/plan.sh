@@ -13,7 +13,7 @@ pkg_deps=(
 	core/corretto8
 	core/which
 )
-pkg_build_deps=(core/maven)
+pkg_build_deps=()
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 

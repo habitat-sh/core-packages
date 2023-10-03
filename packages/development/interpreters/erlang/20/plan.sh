@@ -16,7 +16,7 @@ pkg_build_deps=(
 	core/openssl
 	core/perl
 	core/m4
-	core/autoconf/2.69
+	core/autoconf
 )
 pkg_deps=(
 	core/glibc

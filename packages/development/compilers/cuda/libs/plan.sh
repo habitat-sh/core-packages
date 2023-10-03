@@ -1,4 +1,4 @@
-source ../cuda/plan.sh
+source ../core/plan.sh
 
 pkg_name=cuda-libs
 pkg_origin=core
@@ -123,5 +123,4 @@ do_strip() {
 	return 0
 }
 
-# We will rely on tests from `cuda`, so skip them here
-unset -f do_check
+unset -f do_test

@@ -19,7 +19,6 @@ pkg_build_deps=(
 	core/binutils
 	core/diffutils
 	core/ghc86
-	core/happy
 	core/make
 	core/patch
 	core/sed
