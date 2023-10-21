@@ -34,6 +34,8 @@ do_prepare() {
 	# We create generic libraries that are more suitable for a wide range of CPUs
 	cp -v configfsf.guess config.guess
 	cp -v configfsf.sub config.sub
+
+	export HAB_LD_LINK_MODE="minimal"
 }
 
 do_build() {

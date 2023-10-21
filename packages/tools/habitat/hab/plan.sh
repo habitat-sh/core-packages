@@ -57,6 +57,8 @@ do_prepare() {
 	# We can do this by linking in the C runtime statically into
 	# the generated rust binary.
 	export RUSTFLAGS='-C target-feature=+crt-static'
+	
+	export HAB_LD_LINK_MODE="minimal"
 
 	build_line "Building for target $rustc_target"
 	build_line "Setting CARGO_HOME=$CARGO_HOME"
@@ -66,6 +68,7 @@ do_prepare() {
 	build_line "Setting PROTOC=$PROTOC"
 	build_line "Setting PROTOC_INCLUDE=$PROTOC_INCLUDE"
 	build_line "Setting RUSTFLAGS=$RUSTFLAGS"
+	build_line "Setting HAB_LD_LINK_MODE=${HAB_LD_LINK_MODE}"
 }
 
 do_build() {

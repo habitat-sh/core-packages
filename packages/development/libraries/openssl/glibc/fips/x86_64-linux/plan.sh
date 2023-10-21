@@ -26,6 +26,11 @@ pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
+do_configure() {
+	export HAB_LD_LINK_MODE="minimal"
+	build_line "Setting HAB_LD_LINK_MODE=${HAB_LD_LINK_MODE}"
+}
+
 do_build() {
 	pushd "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}" || exit 1
 	./config

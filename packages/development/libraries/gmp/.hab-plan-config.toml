@@ -1,3 +1,7 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"}
 missing-license = {level = "off", source-shasum = "fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"}
+# The gcc-base runpath dependency is not required as gcc-libs is present
+missing-runpath-entry-dependency = {ignored_files = ["lib/libgmpxx.so*"]}
+# These entries are added by the build system
+unused-runpath-entry = {ignored_files = ["lib/lib{gmp,gmpxx}.so*"]}

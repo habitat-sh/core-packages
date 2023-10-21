@@ -21,10 +21,12 @@ do_prepare() {
 	export RUSTFLAGS='-C target-feature=+crt-static'
 	export CARGO_HOME="$HAB_CACHE_SRC_PATH/$pkg_dirname/.cargo"
 	export CARGO_TARGET_DIR="$HAB_CACHE_SRC_PATH/$pkg_dirname/target"
+	export HAB_LD_LINK_MODE="minimal"
 
 	build_line "Setting RUSTFLAGS=${RUSTFLAGS}"
 	build_line "Setting CARGO_HOME=${CARGO_HOME}"
 	build_line "Setting CARGO_TARGET_DIR=${CARGO_TARGET_DIR}"
+	build_line "Setting HAB_LD_LINK_MODE=${HAB_LD_LINK_MODE}"
 }
 
 do_build() {
