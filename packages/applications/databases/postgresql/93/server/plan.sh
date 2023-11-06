@@ -13,6 +13,7 @@ pkg_shasum="e4953e80415d039ccd33d34be74526a090fd585cf93f296cd9c593972504b6db"
 pkg_deps=(
   core/bash
   core/glibc
+  core/gcc-libs
   core/openssl
   core/perl
   core/readline
@@ -27,13 +28,7 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
-  core/coreutils
   core/gcc
-  core/make
-
-  # for postgis
-  core/perl
-  core/diffutils
 )
 
 pkg_bin_dirs=(bin)
@@ -83,7 +78,7 @@ do_build() {
     ./configure --disable-rpath \
               --with-openssl \
               --prefix="$pkg_prefix" \
-              --with-uuid=ossp \
+              --with-ossp-uuid \
               --with-includes="$LD_INCLUDE_PATH" \
               --with-libraries="$LD_LIBRARY_PATH" \
               --sysconfdir="$pkg_svc_config_path" \

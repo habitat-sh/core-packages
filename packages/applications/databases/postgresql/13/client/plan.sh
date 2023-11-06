@@ -11,9 +11,7 @@ pkg_shasum="9b81067a55edbaabc418aacef457dd8477642827499560b00615a6ea6c13f6b3"
 
 pkg_deps=(
   core/bash
-  core/gawk
   core/glibc
-  core/grep
   core/libossp-uuid
   core/openssl
   core/perl

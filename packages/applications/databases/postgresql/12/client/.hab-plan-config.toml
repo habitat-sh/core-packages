@@ -1,4 +1,5 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "df7dd98d5ccaf1f693c7e1d0d084e9fed7017ee248bba5be0167c42ad2d70a09"}
 missing-license = {level = "off", source-shasum = "df7dd98d5ccaf1f693c7e1d0d084e9fed7017ee248bba5be0167c42ad2d70a09"}
-
+unused-runpath-entry = {level = "off"}
+unused-dependency = {ignored_packages = ["core/{libxml2,geos,proj,bash,gdal,perl,libossp-uuid}"]}

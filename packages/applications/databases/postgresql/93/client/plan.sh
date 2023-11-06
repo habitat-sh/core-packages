@@ -26,13 +26,7 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
-  core/coreutils
   core/gcc
-  core/make
-
-  # for postgis
-  core/perl
-  core/diffutils
 )
 
 pkg_bin_dirs=(bin)

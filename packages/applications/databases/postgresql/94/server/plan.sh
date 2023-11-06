@@ -13,6 +13,7 @@ pkg_shasum="f5c014fc4a5c94e8cf11314cbadcade4d84213cfcc82081c9123e1b8847a20b9"
 pkg_deps=(
   core/bash
   core/glibc
+  core/gcc-libs
   core/openssl
   core/perl
   core/readline
@@ -27,13 +28,7 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
-  core/coreutils
   core/gcc
-  core/make
-
-  # for postgis
-  core/perl
-  core/diffutils
 )
 
 pkg_bin_dirs=(bin)
