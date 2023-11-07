@@ -15,7 +15,6 @@ pkg_deps=(
 	core/expat
 	core/fontconfig
 	core/freetype
-	core/gcc-libs
 	core/glib
 	core/glibc
 	core/libffi

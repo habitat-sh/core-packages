@@ -16,10 +16,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc
-	core/glibc
 	core/m4
-	core/make
-	core/zlib
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)

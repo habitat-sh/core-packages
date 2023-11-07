@@ -35,6 +35,7 @@ pkg_deps=(
   core/util-linux
   core/xlib
   core/zlib
+  core/libtiff
 )
 pkg_build_deps=(
   core/gcc
@@ -46,13 +47,14 @@ pkg_build_deps=(
   core/shared-mime-info
   core/xextproto
   core/xproto
+  core/file
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-  do_default_prepare
+  hab pkg binlink core/file file -d /usr/bin
 
   XDG_DATA_DIRS="$XDG_DATA_DIRS:$(pkg_path_for core/shared-mime-info)/share"
   export XDG_DATA_DIRS

@@ -18,7 +18,6 @@ pkg_deps=(
 	core/coreutils
 	core/elfutils
 	core/glibc
-	core/gcc-libs
 	core/libffi
 	core/libiconv
 	core/pcre
@@ -36,13 +35,21 @@ pkg_build_deps=(
 	core/meson
 	core/perl
 	core/pkg-config
-	core/patchelf
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
-pkg_interpreters=(core/coreutils)
+
+do_prepare() {
+	# This is needed to prevent meson and ninja from stripping the rpath entries
+	# when installing compiled binaries to the final location
+	export LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
+	# Fix all interpreters in the source code
+	grep -lr '/usr/bin/env' . | while read -r f; do
+		sed -e "s,/usr/bin/env,$(pkg_interpreter_for coreutils bin/env),g" -i "$f"
+	done
+}
 
 do_build() {
 	meson _build --prefix="$pkg_prefix" \
@@ -58,16 +65,4 @@ do_install() {
 
 do_after() {
 	fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
-
-	# https://github.com/mesonbuild/meson/issues/6541
-	# Is meson stripping rpath here?
-	find "$pkg_prefix"/bin -type f -executable \
-		-exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {} \; \
-		-exec patchelf --force-rpath --set-rpath "${LD_RUN_PATH}" {} \;
-
-	for lib in "${pkg_lib_dirs[@]}"; do
-		find "${pkg_prefix}/${lib}" -type f -executable \
-			-exec sh -c 'file -i "$1" | grep -q "x-sharedlib; charset=binary"' _ {} \; \
-			-exec patchelf --force-rpath --set-rpath "${LD_RUN_PATH}" {} \;
-	done
 }

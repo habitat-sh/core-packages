@@ -1,3 +1,7 @@
 [rules]
-license-not-found = {level = "off", source-shasum = "8078f5c25e34ab907ce06905d969dc8ef0ccbec367e1e1707c7ecf8460f4254e"}
 missing-license = {level = "off", source-shasum = "8078f5c25e34ab907ce06905d969dc8ef0ccbec367e1e1707c7ecf8460f4254e"}
+unused-runpath-entry = {level = "off"}
+# var directory 
+empty-top-level-directory = {level = "off"}
+# ignore interpreters in examples
+host-script-interpreter = {ignored_files = ["share/doc/dbus/examples/*"]}

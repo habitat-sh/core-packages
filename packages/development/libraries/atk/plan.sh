@@ -10,11 +10,12 @@ pkg_shasum=cd3a1ea6ecc268a2497f0cd018e970860de24a6d42086919d6bf6c8e8d53f4fc
 pkg_deps=(
 	core/glib
 	core/glibc
+)
+pkg_build_deps=(
 	core/libffi
 	core/libiconv
 	core/pcre
-)
-pkg_build_deps=(
+	core/file
 	core/diffutils
 	core/gcc
 	core/gettext
@@ -25,3 +26,16 @@ pkg_build_deps=(
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
+
+do_prepare() {
+    if [[ ! -r /usr/bin/file ]]; then
+        ln -sv "$(pkg_path_for file)/bin/file" /usr/bin/file
+        _clean_file=true
+    fi
+}
+
+do_end() {
+    if [[ -n "$_clean_file" ]]; then
+        rm -fv /usr/bin/file
+    fi
+}

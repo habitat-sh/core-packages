@@ -13,7 +13,6 @@ pkg_deps=(core/glibc core/libice)
 pkg_build_deps=(core/gcc core/make core/pkg-config core/xproto core/xtrans)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-pkg_bin_dirs=(bin)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_check() {

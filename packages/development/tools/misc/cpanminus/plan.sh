@@ -13,13 +13,10 @@ pkg_build_deps=(
 	core/coreutils
 	core/curl
 	core/gcc
-	core/local-lib
 	core/make
-	core/perl
+	core/local-lib
 )
 pkg_deps=(
-	core/glibc
-	core/local-lib
 	core/perl
 )
 pkg_lib_dirs=(lib)

@@ -2,7 +2,7 @@ pkg_name=pango
 pkg_origin=core
 pkg_version="1.41.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('LGPL')
+pkg_license=('LGPL-2.0')
 pkg_source="https://download.gnome.org/sources/${pkg_name}/${pkg_version%.*}/${pkg_name}-${pkg_version}.tar.xz"
 pkg_filename=${pkg_name}-${pkg_version}.tar.xz
 pkg_shasum="1353a4cf5227299294955d0c6232326b346b087ebac6496241d54ca5d2e2abc3"
@@ -28,6 +28,7 @@ pkg_deps=(
 	core/expat
 	core/util-linux
 	core/harfbuzz
+	core/fribidi
 )
 pkg_build_deps=(
 	core/file
@@ -36,7 +37,6 @@ pkg_build_deps=(
 	core/pkg-config
 	core/cacerts
 	core/curl
-	core/fribidi
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)

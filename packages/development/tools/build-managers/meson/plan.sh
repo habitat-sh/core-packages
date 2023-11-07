@@ -12,6 +12,7 @@ pkg_deps=(
 	# Doesn't seem to work against 3.9
 	core/python37
 	core/ninja
+	core/coreutils
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
@@ -41,4 +42,7 @@ do_build() {
 
 do_install() {
 	python setup.py install --prefix="$pkg_prefix" --optimize=1 --skip-build
+	grep -lr '/usr/bin/env' "$pkg_prefix" | while read -r f; do
+		sed -e "s,/usr/bin/env,$(pkg_interpreter_for coreutils bin/env),g" -i "$f"
+	done
 }

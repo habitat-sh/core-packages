@@ -29,17 +29,25 @@ pkg_build_deps=(
 	core/perl
 	core/pkg-config
 	core/meson
-
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
+do_prepare() {
+	# This is needed to prevent meson and ninja from stripping the rpath entries
+	# when installing compiled binaries to the final location
+	export LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
+	# Fix all interpreters in the source code
+	grep -lr '/usr/bin/env' . | while read -r f; do
+		sed -e "s,/usr/bin/env,$(pkg_interpreter_for coreutils bin/env),g" -i "$f"
+	done
+}
+
 do_build() {
 	local meson_opts=(
 		"--prefix=${pkg_prefix}"
-		"-Dpng=false"
 	)
 	meson setup _build . "${meson_opts[@]}"
 	meson compile -C _build

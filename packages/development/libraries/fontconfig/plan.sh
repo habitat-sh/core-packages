@@ -1,7 +1,7 @@
 pkg_name="fontconfig"
 pkg_version="2.13.94"
 pkg_origin="core"
-pkg_license=('fontconfig')
+pkg_license=('MIT' 'LicenseRef-Fontconfig')
 pkg_description="Fontconfig is a library for configuring and customizing font access."
 pkg_upstream_url="https://www.freedesktop.org/wiki/Software/fontconfig/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -14,7 +14,6 @@ pkg_deps=(
 	core/freetype
 	core/libpng
 	core/expat
-	core/gcc-libs
 )
 pkg_build_deps=(
 	core/gcc
