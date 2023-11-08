@@ -13,6 +13,7 @@ pkg_deps=(
   core/atk
   core/bzip2
   core/cairo
+  core/coreutils
   core/expat
   core/fontconfig
   core/freetype
@@ -65,4 +66,10 @@ do_build() {
     --disable-glibtest \
     --disable-xinerama
   make
+}
+
+do_install() {
+  make install
+
+  fix_interpreter "${pkg_prefix}/bin/gtk-builder-convert" core/coreutils bin/env
 }

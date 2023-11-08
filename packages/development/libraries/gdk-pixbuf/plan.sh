@@ -48,6 +48,9 @@ do_prepare() {
 do_build() {
 	local meson_opts=(
 		"--prefix=${pkg_prefix}"
+		"-Dbuildtype=release"
+		"-Dbuiltin_loaders=none"
+		"-Dgio_sniffing=false"
 	)
 	meson setup _build . "${meson_opts[@]}"
 	meson compile -C _build
