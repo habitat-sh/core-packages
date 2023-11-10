@@ -13,9 +13,9 @@ pkg_upstream_url="https://www.drupal.org"
 pkg_maintainers="The Habitat Maintainers <humans@habitat.sh>"
 
 do_build() {
-	drush dl drupal-8.3.2 --destination="$CACHE_PATH" --drupal-project-rename=drupal
+	return 0
 }
 
 do_install() {
-	cp -r "$CACHE_PATH/drupal" "$pkg_prefix/drupal"
+	drush dl drupal-$pkg_version --destination="$pkg_prefix" --drupal-project-rename=drupal
 }

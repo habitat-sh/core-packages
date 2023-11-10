@@ -9,7 +9,7 @@ Burrows–Wheeler algorithm. It only compresses single files and is not a file \
 archiver.\
 "
 pkg_upstream_url="http://www.bzip.org/"
-pkg_license=('bzip2')
+pkg_license=('bzip2-1.0.6')
 pkg_source="https://fossies.org/linux/misc/${download_pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269"
 pkg_dirname="${download_pkg_name}-${pkg_version}"
@@ -17,10 +17,6 @@ pkg_deps=(
 	core/musl
 )
 pkg_build_deps=(
-	core/coreutils
-	core/diffutils
-	core/patch
-	core/make
 	core/gcc
 )
 pkg_bin_dirs=(bin)
@@ -43,7 +39,8 @@ do_prepare() {
 }
 
 do_build() {
-	make -f Makefile-libbz2_so PREFIX="$pkg_prefix" CC="$CC"
+	export HAB_DEBUG=1
+	make -f Makefile-libbz2_so PREFIX="$pkg_prefix" CC="$CC" LDFLAGS="$LDFLAGS"
 	make bzip2 bzip2recover CC="$CC" LDFLAGS="$LDFLAGS"
 }
 
@@ -71,15 +68,3 @@ do_install() {
 	ln -sv "libbz2.so.$pkg_version" "$pkg_prefix/lib/libbz2.so.$maj_min"
 }
 
-# ----------------------------------------------------------------------------
-# **NOTICE:** What follows are implementation details required for building a
-# first-pass, "stage1" toolchain and environment. It is only used when running
-# in a "stage1" Studio and can be safely ignored by almost everyone. Having
-# said that, it performs a vital bootstrapping process and cannot be removed or
-# significantly altered. Thank you!
-# ----------------------------------------------------------------------------
-if [[ $STUDIO_TYPE == "stage1" ]]; then
-	pkg_build_deps=(
-		core/gcc
-	)
-fi

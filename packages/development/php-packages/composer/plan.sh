@@ -29,6 +29,8 @@ do_check() {
 do_install() {
 	install -vDm755 "../${pkg_filename}" "${pkg_prefix}/bin/${pkg_filename}"
 
+	# We need to create a wrapper around composer.phar because modifying it causes
+	# later tools to fail, as they verify if the composer.phar has been modified in any way
 	cat <<EOF >"${pkg_prefix}/bin/composer"
 #!/bin/sh
 "$(pkg_path_for core/php)"/bin/php "${pkg_prefix}/bin/${pkg_filename}" "\$@"

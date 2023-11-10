@@ -14,6 +14,7 @@ pkg_deps=(
   core/coreutils
   core/curl
   core/glibc
+  core/gcc-libs
   core/icu
   core/libjpeg-turbo
   core/libpng
@@ -23,7 +24,6 @@ pkg_deps=(
   core/readline
   core/zip
   core/zlib
-  core/gcc-libs
   core/oniguruma
   core/sqlite
 )
@@ -74,6 +74,8 @@ do_install() {
   # PHP-FPM application you would want to supply your own config with
   # --fpm-config <file>.
   mv "${pkg_prefix}/etc/php-fpm.conf.default" "${pkg_prefix}/etc/php-fpm.conf"
+  
+  fix_interpreter "${pkg_prefix}/lib/php/build/run-tests.php" core/coreutils bin/env
 }
 
 do_check() {

@@ -41,4 +41,11 @@ do_install() {
 
 	# Install license
 	install -Dm0644 COPYRIGHT "$pkg_prefix/share/licenses/COPYRIGHT"
+	
+	# Overwrite musl-gcc to work correctly with our wrapped gcc
+	build_line "Overwriting musl-gcc script"
+	sed "$PLAN_CONTEXT/musl-gcc-wrapper.sh" \
+		-e "s^@prefix@^${pkg_prefix}^g" \
+		>"$pkg_prefix/bin/musl-gcc"
+	chmod 755 "$pkg_prefix/bin/musl-gcc"
 }

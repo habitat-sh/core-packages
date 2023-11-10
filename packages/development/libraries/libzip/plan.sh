@@ -8,49 +8,29 @@ pkg_license=('BSD-3-Clause')
 pkg_source="https://github.com/nih-at/libzip/releases/download/v${pkg_version}/libzip-${pkg_version}.tar.gz"
 pkg_shasum=30ee55868c0a698d3c600492f2bea4eb62c53849bcf696d21af5eb65f3f3839e
 pkg_deps=(
-  core/bzip2-musl
+  core/bzip2
   core/openssl
   core/zlib
+  core/xz
+  core/zstd
 )
 pkg_build_deps=(
-  core/bzip2-musl
   core/cmake
   core/gcc
-  core/gcc-libs
-  core/make
-  core/openssl
-  core/zlib
+  core/pkg-config
+  core/perl
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin)
 
-do_setup_environment() {
-  set_buildtime_env BUILD_DIR "build"
-}
-
-do_prepare() {
-  mkdir -p "${BUILD_DIR}"
-}
-
 do_build() {
-  pushd "${BUILD_DIR}" > /dev/null
-
-  cmake \
+  # We set CMAKE_SKIP_RPATH=TRUE so that cmake doesn't add empty rpaths to the built
+  # binaries. Our wrapped gcc automatically takes care of rpath handling as well, so cmake's
+  # additional rpath handling is unnecessary
+  cmake . \
     -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" \
-    -DCMAKE_INSTALL_LIBDIR="${pkg_prefix}/lib/" \
-    -DCMAKE_PREFIX_PATH="$(pkg_path_for zlib)" \
-    -DZLIB_INCLUDE_DIR="$(pkg_path_for zlib)/include" \
-    -DOPENSSL_INCLUDE_DIR="$(pkg_path_for openssl)/include" \
-    -DOPENSSL_ROOT_DIR="$(pkg_path_for openssl)" \
-    ..
-
+    -DCMAKE_SKIP_RPATH=TRUE \
+    -DCMAKE_PREFIX_PATH="$(pkg_path_for zlib);$(pkg_path_for bzip2);$(pkg_path_for xz);$(pkg_path_for zstd)"
   make -j "$(nproc)"
-  popd > /dev/null
-}
-
-do_install() {
-  pushd "${BUILD_DIR}" > /dev/null
-  do_default_install
-  popd > /dev/null
 }
