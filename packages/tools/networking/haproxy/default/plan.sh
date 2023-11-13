@@ -22,21 +22,14 @@ pkg_deps=(
   core/zlib
   core/pcre
   core/openssl
-  core/gcc-libs
 )
 pkg_build_deps=(
-  core/coreutils
   core/gcc
-  core/pcre
-  core/make
-  core/openssl
-  core/zlib
-  core/diffutils
 )
 pkg_bin_dirs=(bin)
 
 do_build() {
-  make \
+  make -j"$(nproc)" \
     USE_PCRE=1 \
     USE_PCRE_JIT=1 \
     TARGET=linux-glibc \
