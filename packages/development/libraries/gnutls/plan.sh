@@ -19,9 +19,9 @@ pkg_deps=(
 	core/nettle
 	core/p11-kit
 	core/zlib
+	core/autogen
 )
 pkg_build_deps=(
-	core/autogen
 	core/bison
 	core/diffutils
 	core/file

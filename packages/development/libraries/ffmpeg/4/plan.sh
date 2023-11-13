@@ -1,4 +1,4 @@
-source "$(dirname "${BASH_SOURCE[0]}")/../ffmpeg/plan.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../default/plan.sh"
 
 pkg_name=ffmpeg4
 pkg_origin=core

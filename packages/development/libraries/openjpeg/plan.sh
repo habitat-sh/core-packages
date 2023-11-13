@@ -27,8 +27,12 @@ do_prepare() {
 }
 
 do_build() {
+	# We set CMAKE_SKIP_RPATH=TRUE so that cmake doesn't add empty rpaths to the built
+	# binaries. Our wrapped gcc automatically takes care of rpath handling as well, so cmake's
+	# additional rpath handling is unnecessary
 	pushd build >/dev/null
 	cmake .. \
+		-DCMAKE_SKIP_RPATH=TRUE \
 		-DLCMS2_INCLUDE_DIR="$(pkg_path_for core/lcms2)/include" \
 		-DLCMS2_LIBRARY="$(pkg_path_for core/lcms2)/lib/liblcms2.so" \
 		-DPNG_PNG_INCLUDE_DIR="$(pkg_path_for core/libpng)/include" \

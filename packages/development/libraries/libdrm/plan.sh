@@ -25,6 +25,9 @@ pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
+  # This is needed to prevent meson and ninja from stripping the rpath entries
+	# when installing compiled binaries to the final location
+	export LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
   meson build
   meson configure build -Dprefix="$pkg_prefix"
 }

@@ -8,19 +8,19 @@ pkg_upstream_url=https://www.gnu.org/software/autogen/
 pkg_source="https://ftp.gnu.org/gnu/autogen/rel${pkg_version}/autogen-${pkg_version}.tar.gz"
 pkg_shasum=e23c5bbd0ac83079ae2ef6eb3fd1948fecce718ac853025607a3ab0395538406
 pkg_deps=(
+	core/bash
 	core/glibc
 	core/gcc-libs
 	core/guile
 	core/libxml2
 	core/zlib
+	core/perl
 )
 pkg_build_deps=(
 	core/gcc
-	core/make
 	core/pkg-config
-	core/diffutils
 	core/which
-	core/perl
+	core/patchelf
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -36,4 +36,14 @@ do_build() {
 
 do_check() {
 	make check
+}
+
+do_install() {
+	make install
+
+	# We remove unwanted build directories that get set in the binaries
+	for bin in autogen columns getdefs xml2ag; do
+		build_line "Patching $bin"
+		patchelf --shrink-rpath --allowed-rpath-prefixes /hab/pkgs "${pkg_prefix}"/bin/$bin
+	done
 }

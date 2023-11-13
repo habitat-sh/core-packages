@@ -12,7 +12,6 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/diffutils
 	core/gcc
 	core/make
 )
@@ -21,9 +20,13 @@ pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
 
 do_build() {
-	make
+	make PREFIX="$pkg_prefix"
 }
 
 do_check() {
 	make check
+}
+
+do_install() {
+	make install PREFIX="$pkg_prefix"
 }

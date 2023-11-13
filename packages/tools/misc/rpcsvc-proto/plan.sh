@@ -11,12 +11,14 @@ pkg_shasum=678851b9f7ddf4410d2859c12016b65a6dd1a0728d478f18aeb54d165352f17c
 pkg_upstream_url=https://github.com/thkukuk/rpcsvc-proto
 
 pkg_deps=(
+  core/glibc
+)
+pkg_build_deps=(
   core/gcc
 )
 
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
-pkg_lib_dirs=(lib)
 
 do_build() {
   ./configure \
