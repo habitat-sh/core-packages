@@ -18,11 +18,9 @@ pkg_deps=(
 	core/zlib
 )
 pkg_build_deps=(
-	core/diffutils
 	core/file
 	core/gcc
 	core/gettext
-	core/make
 	core/meson
 	core/ninja
 	core/perl
@@ -37,6 +35,11 @@ do_prepare() {
 		ln -sv "$(pkg_path_for file)/bin/file" /usr/bin/file
 		_clean_file=true
 	fi
+
+	# This is needed to prevent meson and ninja from stripping the rpath entries
+	# when installing compiled binaries to the final location
+	export LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}"
+	build_line "Setting LDFLAGS=${LDFLAGS}"
 }
 
 do_build() {

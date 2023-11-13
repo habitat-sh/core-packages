@@ -10,13 +10,8 @@ pkg_shasum=414872549eec4e221b576693fdc9c9bce44ff794d0f1f06f2515b56a7f6ec9c9
 pkg_dirname="c-ares-cares-${pkg_version//\./_}"
 pkg_deps=(
 	core/glibc
-	core/gcc-libs
 )
 pkg_build_deps=(
-	core/coreutils
-	core/busybox-static
-	core/diffutils
-	core/file
 	core/gcc
 	core/cmake
 	core/ninja
@@ -44,6 +39,7 @@ do_prepare() {
 do_build() {
 	pushd "${BUILDDIR}" || exit 1
 	cmake \
+		-DCMAKE_SKIP_RPATH=TRUE \
 		-DCMAKE_INSTALL_PREFIX="${PREFIX}" \
 		-DCARES_STATIC="ON" \
 		-DCARES_INSTALL="ON" \

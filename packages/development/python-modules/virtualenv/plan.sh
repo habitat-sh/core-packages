@@ -9,6 +9,7 @@ pkg_source=https://pypi.io/packages/source/v/$pkg_name/$pkg_name-$pkg_version.ta
 pkg_shasum=1d7e241b431e7afce47e77f8843a276f652699d1fa4f93b9d8ce0076fd7b0b54
 pkg_deps=(
 	core/python2
+	core/coreutils
 )
 pkg_bin_dirs=(bin)
 
@@ -23,4 +24,6 @@ do_install() {
 
 	# Modify the command to have the correct PYTHONPATH
 	sed -i "2iimport sys; sys.path.append(\"$PYTHONPATH\")" "$pkg_prefix/bin/virtualenv"
+
+	fix_interpreter "$pkg_prefix"/lib/python2.7/site-packages/virtualenv-15.2.0-py2.7.egg/virtualenv.py core/coreutils bin/env
 }
