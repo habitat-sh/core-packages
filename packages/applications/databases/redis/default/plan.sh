@@ -7,7 +7,7 @@ Persistent key-value database, with built-in net interface.
 "
 pkg_upstream_url="http://redis.io/"
 pkg_license=("BSD-3-Clause")
-pkg_source="http://download.redis.io/releases/${pkg_name}-${pkg_version}.tar.gz"
+pkg_source="https://download.redis.io/releases/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="1e1e18420a86cfb285933123b04a82e1ebda20bfb0a289472745a087587e93a7"
 pkg_dirname="${pkg_name}-${pkg_version}"
 
