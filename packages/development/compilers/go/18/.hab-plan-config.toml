@@ -1,3 +1,9 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "0012386ddcbb5f3350e407c679923811dbd283fcdc421724931614a842ecbc2d"}
 missing-license = {level = "off", source-shasum = "0012386ddcbb5f3350e407c679923811dbd283fcdc421724931614a842ecbc2d"}
+# These are warnings in source code that ideally would not be executed
+host-script-interpreter = {ignored_files = ["src/*", "misc/*", "doc/*", "lib/*", "pkg/*"]}
+host-elf-interpreter = {ignored_files = ["src/*", "pkg/*", "lib/*"]}
+unexpected-elf-interpreter = {ignored_files = ["src/*"]}
+library-dependency-not-found = {ignored_files = ["src/*"]}
+unused-dependency = {level = "off"}

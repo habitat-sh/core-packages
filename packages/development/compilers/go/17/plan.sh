@@ -4,7 +4,7 @@ pkg_version="1.7.6"
 pkg_description="Go is an open source programming language that makes it easy to
   build simple, reliable, and efficient software."
 pkg_upstream_url="https://golang.org/"
-pkg_license=('BSD')
+pkg_license=('BSD-3-Clause')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://storage.googleapis.com/golang/go${pkg_version}.src.tar.gz"
 pkg_shasum="1a67a4e688673fdff7ba41e73482b0e59ac5bd0f7acf703bc6d50cc775c5baba"
