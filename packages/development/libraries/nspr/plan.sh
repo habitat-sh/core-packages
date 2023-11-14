@@ -7,7 +7,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url=https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSPR
 pkg_source=https://ftp.mozilla.org/pub/nspr/releases/v${pkg_version}/src/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=bb6bf4f534b9559cf123dcdc6f9cd8167de950314a90a88b2a329c16836e7f6c
-pkg_deps=(core/glibc)
+pkg_deps=(core/glibc core/perl)
 pkg_build_deps=(core/gcc core/make)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include/nspr)
@@ -19,4 +19,9 @@ do_build() {
 		--disable-debug \
 		--enable-64bit
 	make
+}
+
+do_install() {
+	make install
+	fix_interpreter "${pkg_prefix}/bin/compile-et.pl" core/perl bin/perl
 }

@@ -24,8 +24,6 @@ pkg_bin_dirs=(
 	bin
 	sbin
 )
-pkg_include_dirs=(include)
-pkg_lib_dirs=(lib)
 pkg_svc_user="root"
 pkg_svc_group="root"
 
