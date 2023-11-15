@@ -26,8 +26,6 @@ pkg_deps=(
   core/ncurses
 )
 pkg_bin_dirs=(bin)
-pkg_lib_dirs=(lib)
-pkg_include_dirs=(include)
 pkg_exports=(
   [http-port]=http-port
   [driver-port]=driver-port

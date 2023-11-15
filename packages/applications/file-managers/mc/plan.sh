@@ -12,15 +12,15 @@ pkg_deps=(
 	core/glibc
 	core/ncurses
 	core/pcre
+	core/perl
+	core/coreutils
 )
 pkg_build_deps=(
 	core/check
-	core/coreutils
 	core/diffutils
 	core/gcc
 	core/gettext
 	core/make
-	core/perl
 	core/pkg-config
 )
 pkg_bin_dirs=(bin)
@@ -34,4 +34,9 @@ do_build() {
 		--without-x \
 		--without-gpm-mouse
 	make
+}
+
+do_install() {
+	make install 
+	fix_interpreter "$pkg_prefix"/libexec/mc/extfs.d/uc1541 core/coreutils bin/env
 }

@@ -14,20 +14,16 @@ pkg_deps=(
 	core/tar
 	core/zlib
 	core/xz
-	core/gcc-libs
+	core/perl
 )
 pkg_build_deps=(
 	core/autoconf
 	core/automake
-	core/bzip2
 	core/gcc
 	core/gettext
 	core/libtool
 	core/patch
-	core/perl
 	core/pkg-config
-	core/xz
-	core/zlib
 	core/diffutils
 )
 pkg_bin_dirs=(bin sbin)
