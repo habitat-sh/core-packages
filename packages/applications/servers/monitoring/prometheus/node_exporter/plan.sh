@@ -8,6 +8,9 @@ pkg_license=('Apache-2.0')
 pkg_bin_dirs=(bin)
 pkg_source="https://github.com/prometheus/node_exporter/archive/v${pkg_version}.tar.gz"
 pkg_shasum=9ddf187c462f2681ab4516410ada0e6f0f03097db6986686795559ea71a07694
+pkg_deps=(
+	core/glibc
+)
 pkg_build_deps=(
 	core/go
 	core/git
@@ -15,7 +18,7 @@ pkg_build_deps=(
 	core/gcc
 )
 pkg_exports=(
-	[metric - http - port]=web.listen_port
+	[metric-http-port]=web.listen_port
 )
 pkg_exposes=(metric-http-port)
 

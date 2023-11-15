@@ -12,6 +12,7 @@ pkg_deps=(
   core/gcc-libs
   core/python2
   core/bash
+  core/coreutils
 )
 pkg_build_deps=(
   core/gcc
@@ -41,14 +42,19 @@ do_build() {
 do_install() {
   do_default_install
 
-  # Node produces a lot of scripts that hardcode `/usr/bin/env`, so we need to
-  # fix that everywhere to point directly at the env binary in core/coreutils.
-  grep -nrlI '^\#\!/usr/bin/env' "$pkg_prefix" | while read -r target; do
-    sed -e "s#\#\!/usr/bin/env node#\#\!${pkg_prefix}/bin/node#" -i "$target"
-    sed -e "s#\#\!/usr/bin/env sh#\#\!$(pkg_path_for bash)/bin/sh#" -i "$target"
-    sed -e "s#\#\!/usr/bin/env bash#\#\!$(pkg_path_for bash)/bin/bash#" -i "$target"
-    sed -e "s#\#\!/usr/bin/env python#\#\!$(pkg_path_for python2)/bin/python2#" -i "$target"
-  done
+  # Node produces a lot of scripts, we need to fix all their interpreters
+	grep -nrlI '^\#\!.*bin/env' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/env|#!$(pkg_path_for coreutils)/bin/env|" -i "$target"
+	done
+	grep -nrlI '^\#\!.*bin/python' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/python|#!$(pkg_path_for python2)/bin/python|" -i "$target"
+	done
+	grep -nrlI '^\#\!.*bin/bash' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/bash|#!$(pkg_path_for bash)/bin/bash|" -i "$target"
+	done
+	grep -nrlI '^\#\!.*bin/node' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/node|#!${pkg_prefix}/bin/env|" -i "$target"
+	done
 
   # This script has a hardcoded bare `node` command
   sed -e "s#^\([[:space:]]\)\+node\([[:space:]]\)#\1${pkg_prefix}/bin/node\2#" -i "${pkg_prefix}/lib/node_modules/npm/bin/node-gyp-bin/node-gyp"
