@@ -15,9 +15,10 @@ pkg_build_deps=(
 	core/make
 	core/git
 	core/go
+	core/gcc
 )
 pkg_deps=(
-	core/gcc
+	core/gcc-libs
 )
 pkg_shasum=99799081fb227ef79255c04b8c49d299bfd57c277105092e406d7be3331c1581
 

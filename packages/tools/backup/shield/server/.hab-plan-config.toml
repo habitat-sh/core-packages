@@ -1,0 +1,6 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "dbea689596bc496e2f16f8a4bf2aaade8fb693b3934f11b5b7e956573ebbc599"}
+missing-license = {level = "off", source-shasum = "dbea689596bc496e2f16f8a4bf2aaade8fb693b3934f11b5b7e956573ebbc599"}
+script-interpreter-not-found = { ignored_files = ["hooks/*", "config/*"] }
+unused-dependency = {level = "off"}
+unused-runpath-entry = {level = "off"}

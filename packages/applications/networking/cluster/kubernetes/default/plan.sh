@@ -17,7 +17,6 @@ pkg_build_deps=(
   core/diffutils
   core/which
   core/rsync
-  core/coreutils
 )
 
 pkg_deps=(

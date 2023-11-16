@@ -22,10 +22,6 @@ pkg_build_deps=(
   core/coreutils
 )
 
-pkg_deps=(
-  core/glibc
-)
-
 do_prepare() {
   if [[ ! -r /usr/bin/env ]]; then
     ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env

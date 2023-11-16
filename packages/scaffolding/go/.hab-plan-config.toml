@@ -1,0 +1,3 @@
+[rules]
+duplicate-runtime-binary = { primary_packages = ["core/openssl"]}
+unused-dependency = { level = "off" }

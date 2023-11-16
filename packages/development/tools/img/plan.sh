@@ -14,7 +14,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
   core/go
-  core/git
   core/dep
   core/make
   core/gcc

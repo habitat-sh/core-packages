@@ -1,4 +1,4 @@
-#!/bin/bash
+#!{{pkgPathFor "core/bash"}}/bin/bash
 
 if hab sup status | grep shield-proxy; then
   hab svc unload core/shield-proxy

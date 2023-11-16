@@ -1,4 +1,4 @@
-#!/bin/bash
+#!{{pkgPathFor "core/bash"}}/bin/bash
 {{ #with bind.database.first }}
 PGPORT="{{cfg.port}}"
 PGHOST="{{sys.ip}}"

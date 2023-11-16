@@ -1,0 +1,3 @@
+[rules]
+unused-dependency = {level = "off"}
+script-interpreter-not-found = { ignored_files = ["hooks/*"] }

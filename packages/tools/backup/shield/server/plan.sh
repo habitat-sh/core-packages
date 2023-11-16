@@ -79,4 +79,5 @@ do_install() {
   ln -s "${pkg_prefix}"/cli/shield "${pkg_prefix}"/bin/shield
   ln -s "${pkg_prefix}"/daemon/shieldd "${pkg_prefix}"/bin/shieldd
   ln -s "${pkg_prefix}"/daemon/shield-schema "${pkg_prefix}"/bin/shield-schema
+  fix_interpreter "${pkg_prefix}"/daemon/shield-pipe core/bash bin/bash
 }
