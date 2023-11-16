@@ -15,6 +15,7 @@ pkg_build_deps=(
 pkg_deps=(
 	core/glibc
 	core/libaio
+	core/bash
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
@@ -24,4 +25,11 @@ pkg_pconfig_dirs=(lib/pkgconfig)
 do_build() {
 	./configure --prefix="$pkg_prefix" --enable-pkgconfig
 	make
+}
+
+do_install() {
+	make install
+	for prog in fsadm lvmdump blkdeactivate lvm_import_vdo; do
+		fix_interpreter "$pkg_prefix"/sbin/$prog core/bash bin/bash
+	done
 }

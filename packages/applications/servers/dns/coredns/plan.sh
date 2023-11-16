@@ -8,7 +8,6 @@ pkg_upstream_url=https://coredns.io/
 pkg_source="https://github.com/coredns/coredns/archive/v${pkg_version}.tar.gz"
 pkg_shasum=cbe3764afe2148b8047ea7e5cbba5108c298dee3a9a0391028e2980e35beaa2b
 pkg_deps=(
-	core/glibc
 	core/coreutils
 )
 pkg_build_deps=(
