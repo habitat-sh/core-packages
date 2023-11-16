@@ -7,15 +7,11 @@ Google C++ Testing Framework helps you write better C++ tests.
 EOF
 )"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('bsd-3-clause')
+pkg_license=('BSD-3-Clause')
 pkg_source="https://github.com/google/${pkg_name}/archive/release-${pkg_version}.tar.gz"
 pkg_shasum="b4870bf121ff7795ba20d20bcdd8627b8e088f2d1dab299a031c1034eddc93d5"
 pkg_upstream_url="https://github.com/google/googletest"
 pkg_dirname="${pkg_name}-release-${pkg_version}"
-pkg_deps=(
-	core/gcc-libs
-	core/glibc
-)
 pkg_build_deps=(
 	core/cmake
 	core/gcc
@@ -23,8 +19,8 @@ pkg_build_deps=(
 	core/python2
 )
 pkg_include_dirs=(include)
-pkg_lib_dirs=(lib64)
-pkg_pconfig_dirs=(lib64/pkgconfig)
+pkg_lib_dirs=(lib)
+pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_begin() {
 	export HAB_ENV_CMAKE_FIND_ROOT_PATH_SEPARATOR=";"

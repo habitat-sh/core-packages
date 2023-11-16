@@ -1,4 +1,4 @@
-#!/bin/bash
+#!{{pkgPathFor "core/bash"}}/bin/bash
 
 {{ #if bind.daemon.first }}
 {{ #with bind.daemon.first }}
