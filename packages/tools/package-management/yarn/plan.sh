@@ -36,4 +36,7 @@ do_install() {
   find lib LICENSE package.json -type f | while read -r f; do
     install -D -m 0644 "${f}" "${pkg_prefix}/${f}"
   done
+  fix_interpreter "$pkg_prefix"/bin/yarnpkg core/coreutils bin/env
+  fix_interpreter "$pkg_prefix"/bin/yarn.js core/coreutils bin/env
+  fix_interpreter "$pkg_prefix"/lib/cli.js core/coreutils bin/env
 }

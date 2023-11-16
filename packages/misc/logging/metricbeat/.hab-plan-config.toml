@@ -1,0 +1,3 @@
+[rules]
+unused-runpath-entry = {level = "off"}
+unused-dependency = {level = "off"}

@@ -22,11 +22,12 @@ pkg_deps=(
   core/lz4
   core/util-linux
   core/xz
+  core/coreutils
+  core/bash
 )
 pkg_svc_user=root
 pkg_svc_group=root
 pkg_build_deps=(
-  core/coreutils
   core/dbus
   core/gcc
   core/gettext
@@ -36,7 +37,6 @@ pkg_build_deps=(
   core/ninja
   core/pkg-config
   core/patch
-  core/patchelf
 )
 
 do_prepare() {
@@ -47,18 +47,24 @@ do_prepare() {
 
   export LANG=en_US.utf8
   export LC_ALL=en_US.utf8
+  
   # Systemd needs itself in rpath
-  export LD_RUN_PATH="${LD_RUN_PATH}:${pkg_prefix}/lib:${pkg_prefix}/lib/systemd"
-  build_line "Setting LD_RUN_PATH=${LD_RUN_PATH}"
-  LD_LIBRARY_PATH="${LD_RUN_PATH}"
-  export LD_LIBRARY_PATH
-  build_line "Setting LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
   pip install jinja2
 
   # https://github.com/systemd/systemd/commit/442bc2afee6c5f731c7b3e76ccab7301703a45a7
   # Bug with 247
 #  patch -p1 < "${PLAN_CONTEXT}"/patches/0001-meson-set-cxx-variable-before-using-it.patch
   patch -p0 < "${PLAN_CONTEXT}/patches/build_fix_meson.patch"
+
+  # This is needed to prevent meson and ninja from stripping the rpath entries
+	# when installing compiled binaries to the final location
+	export LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH}:${pkg_prefix}/lib:${pkg_prefix}/lib/systemd"
+  build_line "Setting LDFLAGS=${LDFLAGS}"
+
+
+  LD_LIBRARY_PATH="${LD_RUN_PATH}"
+  export LD_LIBRARY_PATH
+  build_line "Setting LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
 }
 
 do_build() {
@@ -80,22 +86,11 @@ do_build() {
 
 do_install() {
   ninja -C build install
-}
 
-do_after() {
-  unset LD_LIBRARY_PATH
-
-  # https://github.com/mesonbuild/meson/issues/6541
-  # Is meson stripping rpath here?
-  find "$pkg_prefix"/bin -type f -executable \
-    -exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {} \; \
-    -exec patchelf --force-rpath --set-rpath "${LD_RUN_PATH}" {} \;
-
-  for lib in "${pkg_lib_dirs[@]}"; do
-    find "${pkg_prefix}/${lib}" -type f -executable \
-      -exec sh -c 'file -i "$1" | grep -q "x-pie-executable; charset=binary"' _ {} \; \
-      -exec patchelf --force-rpath --set-rpath "${LD_RUN_PATH}" {} \;
-  done
+  # Fix all script interpreters
+	grep -nrlI '^\#\!.*bin/env' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/env|#!$(pkg_path_for coreutils)/bin/env|" -i "$target"
+	done
 }
 
 do_end() {
