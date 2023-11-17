@@ -13,7 +13,6 @@ pkg_deps=(core/glibc core/libxt core/libxext core/xlib core/libxcb core/libxau c
 pkg_build_deps=(core/gcc core/make core/pkg-config core/xextproto core/xproto core/kbproto core/libpthread-stubs)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-pkg_bin_dirs=(bin)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_check() {
