@@ -1,3 +1,6 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "499c3adca699199981cd46e1267dccdd4c34bbc111fc9166dc555cbf9ca91918"}
 missing-license = {level = "off", source-shasum = "499c3adca699199981cd46e1267dccdd4c34bbc111fc9166dc555cbf9ca91918"}
+script-interpreter-not-found = {ignored_files = ["hooks/*"]}
+empty-top-level-directory = {level = "off"}
+unused-dependency = {level = "off"}

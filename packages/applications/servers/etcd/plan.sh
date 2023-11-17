@@ -7,7 +7,7 @@ pkg_license=('Apache-2.0')
 pkg_source="https://github.com/etcd-io/${pkg_name}/archive/refs/tags/v${pkg_version}.tar.gz"
 pkg_upstream_url=https://github.com/coreos/etcd/
 pkg_shasum=499c3adca699199981cd46e1267dccdd4c34bbc111fc9166dc555cbf9ca91918
-pkg_deps=(core/curl)
+pkg_deps=(core/curl core/bash)
 pkg_build_deps=(
 	core/gnupg
 	core/coreutils
@@ -16,8 +16,8 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(/usr/bin)
 pkg_exports=(
-	[client - port]=etcd-client-end
-	[server - port]=etcd-server-end
+	[client-port]=etcd-client-end
+	[server-port]=etcd-server-end
 )
 pkg_exposes=(client-port server-port)
 pkg_svc_user="root"
