@@ -9,6 +9,5 @@ pkg_source="http://dist.schmorp.de/libev/Attic/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=507eb7b8d1015fbec5b935f34ebed15bf346bed04a11ab82b8eee848c4205aea
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/cacerts core/gcc core/make)
-pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

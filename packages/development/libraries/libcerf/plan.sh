@@ -7,18 +7,13 @@ pkg_source="https://jugit.fz-juelich.de/mlz/$pkg_name/-/archive/v$pkg_version/$p
 pkg_shasum="b1916b292cb37f2d0d0b699fbcf0fe260cca97ec7266ea20ff0c5cd8ef2eaab4"
 pkg_dirname=${pkg_name}-v${pkg_version}
 pkg_deps=(
-  core/bzip2
-  core/expat
-  core/gcc-libs
   core/glibc
-  core/jbigkit
-  core/xz
 )
 pkg_build_deps=(
-  core/diffutils
-  core/file
+  core/bzip2
+  core/expat
+  core/jbigkit
   core/gcc
-  core/make
   core/cmake
   core/perl
 )
