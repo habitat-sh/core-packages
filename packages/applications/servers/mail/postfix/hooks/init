@@ -1,4 +1,4 @@
-#!/bin/bash
+#!{{pkgPathFor "core/bash"}}/bin/bash
 
 # setup user/group
 id -u {{cfg.mail_owner}} &>/dev/null || useradd {{cfg.mail_owner}}

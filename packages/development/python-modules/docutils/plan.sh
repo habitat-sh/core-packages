@@ -6,7 +6,7 @@ pkg_license=(
 	'GPL-3.0'
 	'BSD-2-Clause-FreeBSD'
 	'Python-2.0'
-	'Docutils Public Domain Dedication'
+	'LicenseRef-docutils'
 )
 pkg_source=https://downloads.sourceforge.net/project/${pkg_name}/${pkg_name}/${pkg_version}/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=679987caf361a7539d76e584cbeddc311e3aee937877c87346f31debc63e9d06
@@ -15,6 +15,7 @@ pkg_upstream_url="http://docutils.sourceforge.net"
 pkg_deps=(
 	core/bash
 	core/python2
+	core/coreutils
 )
 pkg_build_deps=(
 	core/make
@@ -52,5 +53,12 @@ exec ${file}.real "\$@"
 EOF
 		# set the execute bit
 		chmod a+x "${file}"
+	done
+
+	grep -nrlI '^\#\!.*bin/env' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/env|#!$(pkg_path_for coreutils)/bin/env|" -i "$target"
+	done
+	grep -nrlI '^\#\!.*bin/python' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/python|#!$(pkg_path_for python2)/bin/python|" -i "$target"
 	done
 }

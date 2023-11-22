@@ -5,7 +5,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Postfix is a free and open-source mail transfer agent that routes and delivers electronic mail."
 pkg_upstream_url="http://www.postfix.org/"
 pkg_license=('IPL-1.0')
-pkg_source="http://cdn.postfix.johnriley.me/mirrors/${pkg_name}-release/official/${pkg_name}-${pkg_version}.tar.gz"
+pkg_source="http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${pkg_version}.tar.gz"
 pkg_shasum="0f1241d456a0158e0c418abf62c52c2ff83f8f1dcf2fbdd4c40765b67789b1bc"
 pkg_build_deps=(
   core/make
@@ -28,6 +28,7 @@ pkg_deps=(
   # plan/hook deps
   core/shadow
   core/iana-etc
+  core/bash
 )
 pkg_bin_dirs=(bin sbin)
 pkg_svc_user=root

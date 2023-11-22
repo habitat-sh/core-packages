@@ -24,13 +24,11 @@ pkg_build_deps=(
 	core/gcc
 	core/make
 )
-pkg_lib_dirs=(lib)
 pkg_bin_dirs=(
 	bin
 	nginx/sbin
 	luajit/bin
 )
-pkg_include_dirs=(include)
 pkg_svc_user="root"
 pkg_exports=(
 	[port]=http.listen.port
