@@ -10,10 +10,13 @@ pkg_shasum="fa641abe2f673cef304cee6ef0a8ddb69db7919e0b69752f89762a341a87fabc"
 
 pkg_deps=(
 	core/glibc
+	core/python
+	core/coreutils
+	core/bash
 )
 pkg_build_deps=(
 	core/make
-       	core/gcc
+	core/gcc
 )
 
 pkg_lib_dirs=(lib)
@@ -34,4 +37,12 @@ do_check() {
 
 do_install() {
 	make install
+
+	grep -nrlI '^\#\!.*bin/env' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/env|#!$(pkg_path_for coreutils)/bin/env|" -i "$target"
+	done
+	grep -nrlI '^\#\!.*bin/bash' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/bash|#!$(pkg_path_for bash)/bin/bash|" -i "$target"
+	done
+
 }

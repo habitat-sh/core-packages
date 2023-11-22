@@ -9,7 +9,6 @@ pkg_source=$pkg_upstream_url/files/$pkg_name/$pkg_name-$pkg_version.tar.bz2
 pkg_shasum="54e4c933679cf6a07971dc5861ce57fc4876ab740ab612407b30b5fc85371750"
 pkg_deps=(
 	core/coreutils
-	core/gcc-libs
 	core/glibc
 	core/numactl
 	core/python2

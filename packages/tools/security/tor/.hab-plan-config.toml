@@ -1,3 +1,5 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "7a159a822ad9c8a7bfff6ade0a314598465dd055083d066a22cdd3036b250393"}
 missing-license = {level = "off", source-shasum = "7a159a822ad9c8a7bfff6ade0a314598465dd055083d066a22cdd3036b250393"}
+duplicate-runtime-binary = { primary_packages = ["core/openssl"]}
+unused-runpath-entry = {level = "off"}

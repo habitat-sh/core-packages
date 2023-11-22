@@ -2,7 +2,7 @@ pkg_name=mono5
 pkg_origin=core
 pkg_version="5.20.1.34"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('Microsoft-Patent-Promise-for-Mono')
+pkg_license=('LicenseRef-mono5')
 pkg_description="Mono 5.x open source ECMA CLI, C# and .NET implementation."
 pkg_upstream_url="https://www.mono-project.com"
 pkg_dirname="mono-${pkg_version}"
@@ -14,6 +14,9 @@ pkg_deps=(
 	core/glibc
 	core/tzdata
 	core/zlib
+	core/bash
+	core/coreutils
+	core/python
 )
 pkg_build_deps=(
 	core/cmake
@@ -25,8 +28,6 @@ pkg_build_deps=(
 	core/ncurses
 	core/perl
 	core/pkg-config
-	core/python
-	core/tzdata
 	core/which
 )
 pkg_lib_dirs=(lib)
@@ -43,4 +44,16 @@ do_build() {
 		--prefix="$pkg_prefix" \
 		--enable-minimal=aot
 	make
+}
+
+do_install() {
+	make install
+
+	# Node produces a lot of scripts, we need to fix all their interpreters
+	grep -nrlI '^\#\!.*bin/env' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/env|#!$(pkg_path_for coreutils)/bin/env|" -i "$target"
+	done
+	grep -nrlI '^\#\!.*bin/bash' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/bash|#!$(pkg_path_for bash)/bin/bash|" -i "$target"
+	done
 }

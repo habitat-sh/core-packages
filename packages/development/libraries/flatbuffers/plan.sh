@@ -24,7 +24,7 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
-pkg_lib_dirs=(lib64)
+pkg_lib_dirs=(lib)
 
 do_prepare() {
 	export LD_LIBRARY_PATH
