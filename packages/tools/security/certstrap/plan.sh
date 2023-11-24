@@ -12,6 +12,7 @@ pkg_svc_group="root"
 pkg_scaffolding=core/scaffolding-go
 scaffolding_go_base_path=github.com/square
 scaffolding_go_build_deps=()
+pkg_deps=(core/glibc)
 
 do_prepare() {
 	build_line 'adding $GOPATH/bin to $PATH'

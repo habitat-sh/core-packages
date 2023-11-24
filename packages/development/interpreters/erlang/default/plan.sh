@@ -27,11 +27,6 @@ pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-	# We eliminate extra default platform-specific RPATHs to OpenSSL crypto libraries
-	# from the internal Erlang libraries to prevent accidental usage of the host
-	# system's crypto library.
-	sed -i 's/std_ssl_locations=.*/std_ssl_locations=""/' lib/crypto/configure
-
 	# The `/bin/pwd` path is hardcoded, so we'll add a symlink if needed.
 	if [[ ! -r /bin/pwd ]]; then
 		ln -sv "$(pkg_path_for coreutils)/bin/pwd" /bin/pwd
@@ -42,6 +37,12 @@ do_prepare() {
 		ln -sv "$(pkg_path_for coreutils)/bin/rm" /bin/rm
 		_clean_rm=true
 	fi
+
+	# We eliminate extra default platform-specific RPATHs to OpenSSL crypto libraries
+	# from the internal Erlang libraries to prevent accidental usage of the host
+	# system's crypto library.
+	sed -i 's/std_ssl_locations=.*/std_ssl_locations=""/' lib/crypto/configure
+
 }
 
 do_build() {

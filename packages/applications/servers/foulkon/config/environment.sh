@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 {{#if bind.database}}
 {{~#eachAlive bind.database.members as |member|}}

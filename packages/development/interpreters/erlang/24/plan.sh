@@ -10,23 +10,22 @@ pkg_filename="otp_src_${pkg_version}.tar.gz"
 pkg_shasum=0376d50f867a29426d47600056e8cc49c95b51ef172b6b9030628e35aecd46af
 pkg_dirname="otp_src_${pkg_version}"
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
 	core/make
-	core/openssl
 	core/perl
 	core/m4
 )
 pkg_deps=(
+	core/coreutils
 	core/gcc-libs
 	core/glibc
 	core/zlib
 	core/ncurses
 	core/openssl
 	core/sed
+	core/gawk
 )
 pkg_bin_dirs=(bin)
-pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
@@ -40,11 +39,14 @@ do_prepare() {
 		ln -sv "$(pkg_path_for coreutils)/bin/rm" /bin/rm
 		_clean_rm=true
 	fi
+
+	# We eliminate extra default platform-specific RPATHs to OpenSSL crypto libraries
+	# from the internal Erlang libraries to prevent accidental usage of the host
+	# system's crypto library.
+	sed -i 's/std_ssl_locations=.*/std_ssl_locations=""/' lib/crypto/configure
 }
 
 do_build() {
-	sed -i 's/std_ssl_locations=.*/std_ssl_locations=""/' erts/configure.in
-	sed -i 's/std_ssl_locations=.*/std_ssl_locations=""/' erts/configure
 	CFLAGS="${CFLAGS} -O2" ./configure \
 		--prefix="${pkg_prefix}" \
 		--enable-threads \
@@ -58,7 +60,12 @@ do_build() {
 		--without-javac
 	make
 }
-
+do_install() {
+	make install
+	grep -nrlI '^\#\!.*bin/env' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/env|#!$(pkg_path_for coreutils)/bin/env|" -i "$target"
+	done
+}
 do_end() {
 	# Clean up the `pwd` link, if we set it up.
 	if [[ -n $_clean_pwd ]]; then

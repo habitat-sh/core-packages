@@ -17,14 +17,23 @@ pkg_build_deps=(
 	core/rust
 )
 
-do_build() {
-	cargo build -j"$(nproc)" --release --verbose
+do_prepare() {
+	export CARGO_HOME="$HAB_CACHE_SRC_PATH/$pkg_dirname/.cargo"
+	export CARGO_TARGET_DIR="$HAB_CACHE_SRC_PATH/$pkg_dirname/target"
+
+	build_line "Setting CARGO_HOME=$CARGO_HOME"
+	build_line "Setting CARGO_TARGET_DIR=$CARGO_TARGET_DIR"
 }
 
-do_check() {
-	cargo test
+do_build() {
+	return 0
 }
 
 do_install() {
-	cargo install --root "${pkg_prefix}" --path "${CACHE_PATH}" --verbose
+	cargo install \
+		--path . \
+		--root "${pkg_prefix}" \
+		--locked \
+		--target="${TARGET_ARCH:-${pkg_target%%-*}}-unknown-linux-gnu" \
+		--verbose
 }

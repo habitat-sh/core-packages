@@ -1,7 +1,7 @@
 pkg_name=swig
 pkg_origin=core
 pkg_version=3.0.12
-pkg_license=('GPL-3.0')
+pkg_license=('GPL-3.0-or-later')
 pkg_description="Generate scripting interfaces to C/C++ code"
 pkg_upstream_url="http://www.swig.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"

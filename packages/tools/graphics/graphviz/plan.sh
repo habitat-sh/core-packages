@@ -11,6 +11,8 @@ pkg_shasum=5801664769ab88c2fb8ccb6ab0957cceabe6d4632b193041440e97790f53a9df
 pkg_deps=(
   core/glibc
   core/libtool
+  core/gcc-libs
+  core/perl
 )
 pkg_build_deps=(
   core/autoconf

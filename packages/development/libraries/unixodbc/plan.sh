@@ -1,7 +1,7 @@
 pkg_name=unixodbc
 pkg_origin=core
 pkg_version=2.3.9
-pkg_license=('LGPL2.1')
+pkg_license=('LGPL-2.1')
 pkg_upstream_url="http://www.unixodbc.org/"
 pkg_description="ODBC driver manager for Unix"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"

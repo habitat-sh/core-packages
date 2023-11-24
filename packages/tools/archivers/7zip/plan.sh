@@ -1,7 +1,7 @@
 pkg_name=7zip
 pkg_origin=core
 pkg_version=16.02
-pkg_license=("LGPL-2.1" "unRAR restriction")
+pkg_license=("LGPL-2.1" "BSD-3-Clause" "LicenseRef-unRAR")
 pkg_upstream_url=https://sourceforge.net/projects/p7zip/
 pkg_description="7-Zip is a file archiver with a high compression ratio"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"

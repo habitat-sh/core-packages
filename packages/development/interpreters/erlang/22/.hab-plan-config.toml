@@ -4,5 +4,5 @@ missing-license = {level = "off", source-shasum = "7dc7129049cc7d61fef835381999c
 
 # sed and gawk are used by scripts at runtime
 # - lib/erlang/erts-<version>/bin/start_erl.src
-# unused-dependency = {ignored_packages = ["core/{sed,gawk}"]}
-# unused-runpath-entry = {level = "off"}
+unused-dependency = {ignored_packages = ["core/{sed,gawk}"]}
+unused-runpath-entry = {level = "off"}
