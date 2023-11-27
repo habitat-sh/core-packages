@@ -1,1 +1,4 @@
 [rules]
+empty-top-level-directory = {level = "off"}
+duplicate-runtime-binary = {level = "off"}
+env-script-interpreter-not-found = {ignored_files = ["gems/bundler-2.2.33/lib/bundler/templates/**"]}

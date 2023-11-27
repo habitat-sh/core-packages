@@ -9,6 +9,9 @@ pkg_source="https://$go_pkg"
 pkg_upstream_url="https://helm.sh"
 pkg_scaffolding="core/scaffolding-go"
 pkg_bin_dirs=(bin)
+pkg_deps=(
+  core/glibc
+)
 pkg_build_deps=(
   core/coreutils
   core/git

@@ -1,4 +1,8 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "c2cedb0b47666bea633b44d5b3a2ebf3c466e0506955fbc3012a5a9b078ca8b4"}
 missing-license = {level = "off", source-shasum = "c2cedb0b47666bea633b44d5b3a2ebf3c466e0506955fbc3012a5a9b078ca8b4"}
-
+script-interpreter-not-found = { ignored_files = ["hooks/**", "modules/**"]}
+unused-runpath-entry = {level = "off"}
+unused-dependency = {level = "off"}
+# Ignore the top level logs dir
+empty-top-level-directory = {level = "off"}

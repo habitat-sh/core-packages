@@ -1,6 +1,6 @@
 pkg_name=pv
 pkg_origin=core
-pkg_license=('ARTISTIC 2.0')
+pkg_license=('Artistic-2.0')
 pkg_version="1.6.20"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Pipe Viewer - is a terminal-based tool for monitoring the progress of data through a pipeline."

@@ -10,8 +10,8 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://cache.ruby-lang.org/pub/${pkg_name}/${pkg_major}/${pkg_name}-${pkg_version}.tar.gz
 pkg_upstream_url=https://www.ruby-lang.org/en/
 pkg_shasum=3586861cb2df56970287f0fd83f274bd92058872d830d15570b36def7f1a92ac
-pkg_deps=(core/glibc core/ncurses core/zlib core/openssl core/libyaml core/libffi core/readline core/nss-myhostname)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed)
+pkg_deps=(core/glibc core/ncurses core/zlib core/openssl core/libyaml core/libffi core/readline core/nss-myhostname core/coreutils core/bash)
+pkg_build_deps=(core/diffutils core/patch core/make core/gcc core/sed)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
@@ -40,4 +40,8 @@ do_check() {
 do_install() {
   do_default_install
   gem install rb-readline --no-document
+
+  grep -nrlI '^\#\!.*bin/env' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/env|#!$(pkg_path_for coreutils)/bin/env|" -i "$target"
+	done
 }

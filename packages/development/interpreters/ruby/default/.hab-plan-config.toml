@@ -1,4 +1,6 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "3586861cb2df56970287f0fd83f274bd92058872d830d15570b36def7f1a92ac"}
 missing-license = {level = "off", source-shasum = "3586861cb2df56970287f0fd83f274bd92058872d830d15570b36def7f1a92ac"}
-
+unused-runpath-entry = {level = "off"}
+unused-dependency = {level = "off"}
+env-script-interpreter-not-found = {ignored_files = ["lib/ruby/3.0.0/bundler/templates/**"]}

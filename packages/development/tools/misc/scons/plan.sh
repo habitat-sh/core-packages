@@ -19,7 +19,7 @@ do_build() {
 do_install() {
   python setup.py install --prefix="$pkg_prefix" --no-version-script --no-install-bat --no-install-man
 
-  for binary in scons scons-time sconsign
+  for binary in scons scons-time sconsign scons-configure-cache
   do
     fix_interpreter "$pkg_prefix/bin/$binary" core/coreutils bin/env
   done

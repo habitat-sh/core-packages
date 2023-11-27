@@ -5,7 +5,7 @@ pkg_origin=core
 pkg_license=('bundler')
 pkg_description="The Ruby language dependency manager"
 pkg_upstream_url=https://bundler.io/
-pkg_deps=(core/ruby core/busybox-static)
+pkg_deps=(core/ruby core/busybox-static core/coreutils)
 pkg_build_deps=()
 pkg_bin_dirs=(bin)
 
@@ -27,6 +27,9 @@ do_install() {
 	# is reused by other packages for speed.
 	wrap_ruby_bin "$pkg_prefix/bin/bundle"
 	wrap_ruby_bin "$pkg_prefix/bin/bundler"
+	grep -nrlI '^\#\!.*bin/env' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/env|#!$(pkg_path_for coreutils)/bin/env|" -i "$target"
+	done
 }
 
 wrap_ruby_bin() {

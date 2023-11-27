@@ -7,11 +7,11 @@ pkg_description="Fluentd is an open source data collector, which lets \
 pkg_license=('Apache-2.0')
 pkg_upstream_url=https://www.fluentd.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=nothing-downloaded-but-build-in-src-cache-anyway
 pkg_deps=(
 	core/ruby
 	core/coreutils
 	core/bundler
+	core/bash
 )
 pkg_build_deps=(
 	core/make
@@ -20,10 +20,14 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 pkg_exports=(
-	[forward - port]=input.forward.port
-	[http - port]=input.http.port
+	[forward-port]=input.forward.port
+	[http-port]=input.http.port
 )
 pkg_exposes=(forward-port http-port)
+
+do_begin() {
+	export SRC_PATH=$CACHE_PATH
+}
 
 do_download() {
 	return 0
@@ -54,5 +58,14 @@ do_build() {
 
 do_install() {
 	cp -R . "$pkg_prefix/"
-	fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
+	
+	grep -nrlI '^\#\!.*bin/env' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/env|#!$(pkg_path_for coreutils)/bin/env|" -i "$target"
+	done
+	grep -nrlI '^\#\!.*bin/bash' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/bash|#!$(pkg_path_for bash)/bin/bash|" -i "$target"
+	done
+	grep -nrlI '^\#\! ruby' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#! ruby|#!$(pkg_path_for ruby)/bin/ruby|" -i "$target"
+	done
 }

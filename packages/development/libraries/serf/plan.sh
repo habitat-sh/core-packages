@@ -22,7 +22,6 @@ pkg_build_deps=(
   core/python2
   core/scons
 )
-pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 

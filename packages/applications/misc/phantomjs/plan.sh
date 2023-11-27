@@ -1,7 +1,7 @@
 pkg_name=phantomjs
 pkg_version=2.1.1
 pkg_origin=core
-pkg_license=('bsd')
+pkg_license=('BSD-3-Clause')
 pkg_source=https://bitbucket.org/ariya/phantomjs/downloads/${pkg_name}-${pkg_version}-linux-x86_64.tar.bz2
 pkg_filename=${pkg_name}-${pkg_version}-linux-x86_64.tar.bz2
 pkg_dirname=${pkg_name}-${pkg_version}-linux-x86_64
@@ -13,7 +13,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 # Ensure we depend on all the libraries that the prebuilt phantomjs
 # links against here:
 pkg_deps=(core/glibc core/freetype core/fontconfig
-          core/zlib core/libpng core/expat core/gcc-libs)
+          core/zlib core/gcc-libs)
 
 # We need curl instead of wget because wget doesn't work for
 # downloading from bitbucket URLs. Sometimes.
