@@ -9,12 +9,13 @@ programming interface (API) that allows the programmer to write text-based \
 user interfaces in a terminal-independent manner.\
 "
 pkg_upstream_url="https://www.gnu.org/software/ncurses/"
-pkg_license=('ncurses')
+pkg_license=('LicenseRef-ncurses')
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_source="http://ftp.gnu.org/gnu/${pkg_distname}/${pkg_dirname}.tar.gz"
 pkg_shasum="30306e0c76e0f9f1f0de987cf1c82a5c21e1ce6568b9227f7da5b71cbea86c9d"
 pkg_deps=(
 	core/glibc
+	core/gcc-libs
 )
 pkg_build_deps=(
 	core/coreutils
@@ -72,16 +73,3 @@ do_install() {
 	# shellcheck disable=SC2016
 	grep -B 100 '$Id' README >"$pkg_prefix/share/licenses/LICENSE"
 }
-
-# ----------------------------------------------------------------------------
-# **NOTICE:** What follows are implementation details required for building a
-# first-pass, "stage1" toolchain and environment. It is only used when running
-# in a "stage1" Studio and can be safely ignored by almost everyone. Having
-# said that, it performs a vital bootstrapping process and cannot be removed or
-# significantly altered. Thank you!
-# ----------------------------------------------------------------------------
-if [[ $STUDIO_TYPE == "stage1" ]]; then
-	pkg_build_deps=(
-		core/gcc
-	)
-fi

@@ -9,15 +9,15 @@ pkg_bin_dirs=(bin)
 pkg_svc_user=root
 pkg_svc_group=${pkg_svc_user}
 pkg_build_deps=(
-  core/gcc-libs
-  core/libffi
-  core/make
-  core/openssl
+  core/gcc
+  core/bundler
 )
 pkg_deps=(
-  core/bundler
+  core/gcc-libs
   core/coreutils
-  core/gcc
+  core/libffi
+  core/openssl
+  core/bash
   core/ruby
 )
 pkg_binds_optional=(
@@ -36,23 +36,17 @@ do_setup_environment() {
   build_line "Setting BUNDLE_PATH=${BUNDLE_PATH}"
 }
 
-do_prepare() {
-  # Bundler/gem seems to set the rpath for compiled extensions using LD_RUN_PATH.
-  # Dynamic linking fails if this is not set
-  LD_RUN_PATH="$(pkg_path_for gcc-libs)/lib:$(pkg_path_for libffi)/lib:$(pkg_path_for openssl)/lib:${LD_RUN_PATH}"
-  export LD_RUN_PATH
-  build_line "Setting LD_RUN_PATH=${LD_RUN_PATH}"
-}
-
 do_build() {
   return 0
 }
 
 do_install() {
   pushd "${pkg_prefix}"
-    cp "${PLAN_CONTEXT}"/Gemfile .
-    bundle install --jobs 2 --retry 5
-    bundle binstubs --all
-    fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
+  cp "${PLAN_CONTEXT}"/Gemfile .
+  bundle install --jobs 2 --retry 5
+  bundle binstubs --all
+  grep -nrlI '^\#\!.*bin/env' "$pkg_prefix" | while read -r target; do
+    sed -e "s|#!.*bin/env|#!$(pkg_path_for coreutils)/bin/env|" -i "$target"
+  done
   popd
 }

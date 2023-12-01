@@ -8,8 +8,8 @@ pkg_upstream_url="https://www.freedesktop.org/wiki/Software/cppunit/"
 pkg_source="http://dev-www.libreoffice.org/src/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="89c5c6665337f56fd2db36bc3805a5619709d51fb136e51937072f63fcc717a7"
 pkg_deps=(
-	core/bash
 	core/gcc-libs
+	core/glibc
 )
 
 pkg_build_deps=(
@@ -30,7 +30,9 @@ pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
 	build_line "Fixing 'bin/env' interpreter for autogen.sh"
-	fix_interpreter "$HAB_CACHE_SRC_PATH/$pkg_dirname/autogen.sh" core/bash bin/sh
+	grep -nrlI '^\#\! bash' . | while read -r target; do
+		sed -e "s|#! bash|#!$(pkg_path_for bash)/bin/bash|" -i "$target"
+	done
 }
 
 do_build() {

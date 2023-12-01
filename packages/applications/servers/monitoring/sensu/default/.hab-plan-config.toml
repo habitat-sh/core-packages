@@ -1,0 +1,5 @@
+[rules]
+unused-runpath-entry = {level = "off"}
+duplicate-runtime-binary = {level = "off"}
+missing-runpath-entry-dependency = {level = "off"}
+script-interpreter-not-found = {ignored_files = ["hooks/**"]}

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!{{pkgPathFor "core/bash"}}/bin/bash
 
 exec 2>&1
 
