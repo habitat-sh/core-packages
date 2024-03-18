@@ -25,7 +25,6 @@ pkg_deps=(
 	core/build-tools-isl
 	core/build-tools-mpfr
 	core/build-tools-libmpc
-	core/build-tools-bash-static
 	core/hab-cc-wrapper
 )
 
@@ -47,6 +46,9 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib lib64)
 
 do_prepare() {
+	local dynamic_linker
+	local cleaned_path
+
 	case $native_target in
 	aarch64-hab-linux-gnu)
 		dynamic_linker="$(pkg_path_for build-tools-glibc)/lib/ld-linux-aarch64.so.1"
@@ -68,11 +70,18 @@ do_prepare() {
 	export CPPFLAGS_FOR_BUILD=""
 	export CXXFLAGS_FOR_BUILD=""
 
-	EXTRA_LDFLAGS_FOR_TARGET="${LDFLAGS} -Wl,-dynamic-linker=${dynamic_linker}"
-	export LDFLAGS_FOR_TARGET="-L$(pwd)/build/${native_target}/libgcc ${EXTRA_LDFLAGS_FOR_TARGET}"
-	export CPPFLAGS_FOR_TARGET="${CPPFLAGS} ${EXTRA_LDFLAGS_FOR_TARGET}"
-	export CFLAGS_FOR_TARGET="${CFLAGS} ${EXTRA_LDFLAGS_FOR_TARGET}"
-	export CXXFLAGS_FOR_TARGET="${CXXFLAGS} ${EXTRA_LDFLAGS_FOR_TARGET}"
+	# We transfer all the flags from the default variable to the target's variables
+	# so that they correctly configure the intermediate target compiler
+	export LDFLAGS_FOR_TARGET="-L${SRC_PATH}/build/${native_target}/libgcc ${LDFLAGS} -Wl,-dynamic-linker=${dynamic_linker}"
+	export CPPFLAGS_FOR_TARGET="${CPPFLAGS}"
+	export CFLAGS_FOR_TARGET="${CFLAGS}"
+	export CXXFLAGS_FOR_TARGET="${CXXFLAGS}"
+
+	# We unset all remaining flags that will interfere with the host compiler
+	unset LDFLAGS
+	unset CPPFLAGS
+	unset CFLAGS
+	unset CXXFLAGS
 
 	# To prevent the build compiler/linker from being affected by LD_RUN_PATH,
 	# we transfer its value to HAB_LD_RUN_PATH and unset LD_RUN_PATH.
@@ -81,18 +90,27 @@ do_prepare() {
 	export HAB_LD_RUN_PATH="${LD_RUN_PATH}"
 	unset LD_RUN_PATH
 
-	# We unset all remaining flags that will interfere with the host compiler
-	unset LDFLAGS
-	unset CPPFLAGS
-	unset CFLAGS
-	unset CXXFLAGS
-
 	# Remove the gcc and binutils binary directory from the PATH, otherwise the build process
 	# will begin to pick up the just built compilers and the built-tools-binutils linker for compilation
-	PATH=$(path_remove "${PATH}" "${pkg_prefix}/bin")
-	PATH=$(path_remove "${PATH}" "$(pkg_path_for build-tools-binutils)/bin")
-	build_line "Updated PATH=${PATH}"
+	cleaned_path=$(path_remove "${PATH}" "${pkg_prefix}/bin")
+	cleaned_path=$(path_remove "${cleaned_path}" "$(pkg_path_for build-tools-binutils)/bin")
+	export PATH="${cleaned_path}"
 
+	build_line "Setting LDFLAGS_FOR_BUILD=${LDFLAGS_FOR_BUILD}"
+	build_line "Setting CFLAGS_FOR_BUILD=${CFLAGS_FOR_BUILD}"
+	build_line "Setting CPPFLAGS_FOR_BUILD=${CPPFLAGS_FOR_BUILD}"
+	build_line "Setting CXXFLAGS_FOR_BUILD=${CXXFLAGS_FOR_BUILD}"
+	build_line "Setting LDFLAGS_FOR_TARGET=${LDFLAGS_FOR_TARGET}"
+	build_line "Setting CPPFLAGS_FOR_TARGET=${CPPFLAGS_FOR_TARGET}"
+	build_line "Setting CFLAGS_FOR_TARGET=${CFLAGS_FOR_TARGET}"
+	build_line "Setting CXXFLAGS_FOR_TARGET=${CXXFLAGS_FOR_TARGET}"
+	build_line "Setting HAB_LD_RUN_PATH=${HAB_LD_RUN_PATH}"
+	build_line "Unsetting LDFLAGS"
+	build_line "Unsetting CPPFLAGS"
+	build_line "Unsetting CFLAGS"
+	build_line "Unsetting CXXFLAGS"
+	build_line "Unsetting LD_RUN_PATH"
+	build_line "Updated PATH=${PATH}"
 	# Tell gcc not to look under the default `/lib/` and `/usr/lib/` directories
 	# for libraries
 	#
@@ -156,22 +174,23 @@ do_install() {
 }
 
 wrap_binary() {
-	local binary="$1"
-	local env_prefix="BUILD_TOOLS_GCC"
-
-	local shell
-	shell="$(pkg_path_for build-tools-bash-static)"
+	local binary
+	local env_prefix
 	local hab_cc_wrapper
-	hab_cc_wrapper="$(pkg_path_for hab-cc-wrapper)"
 	local binutils
-	binutils="$(pkg_path_for build-tools-binutils)"
 	local linux_headers
-	linux_headers="$(pkg_path_for build-tools-linux-headers)"
 	local libc
-	libc="$(pkg_path_for build-tools-glibc)"
+	local wrapper_binary
+	local actual_binary
 
-	local wrapper_binary="$pkg_prefix/bin/$binary"
-	local actual_binary="$pkg_prefix/bin/$binary.real"
+	binary="$1"
+	env_prefix="BUILD_TOOLS_GCC"
+	hab_cc_wrapper="$(pkg_path_for hab-cc-wrapper)"
+	binutils="$(pkg_path_for build-tools-binutils)"
+	linux_headers="$(pkg_path_for build-tools-linux-headers)"
+	libc="$(pkg_path_for build-tools-glibc)"
+	wrapper_binary="$pkg_prefix/bin/$binary"
+	actual_binary="$pkg_prefix/bin/$binary.real"
 
 	case $native_target in
 	aarch64-hab-linux-gnu)
@@ -186,7 +205,6 @@ wrap_binary() {
 	mv -v "$wrapper_binary" "$actual_binary"
 
 	sed "$PLAN_CONTEXT/cc-wrapper.sh" \
-		-e "s^@shell@^${shell}/bin/sh^g" \
 		-e "s^@env_prefix@^${env_prefix}^g" \
 		-e "s^@executable_name@^${binary}^g" \
 		-e "s^@wrapper@^${hab_cc_wrapper}/bin/hab-cc-wrapper^g" \
