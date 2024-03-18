@@ -15,7 +15,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/build-tools-gcc
-	core/build-tools-coreutils
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)

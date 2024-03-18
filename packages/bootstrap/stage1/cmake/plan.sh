@@ -14,12 +14,11 @@ pkg_deps=(
 	core/glibc
 	core/gcc-libs
 	core/openssl
+	core/coreutils
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/make
-	core/sed
+	core/bzip2
 )
 
 pkg_bin_dirs=(bin)
@@ -36,4 +35,9 @@ do_build() {
 		-- \
 		-DOPENSSL_ROOT_DIR:PATH="$(pkg_path_for openssl)"
 	make -j "$(nproc)"
+}
+
+do_install() {
+	make install
+	fix_interpreter "$pkg_prefix/share/cmake-3.25/Modules/Compiler/XL-Fortran/cpp" core/coreutils bin/env
 }

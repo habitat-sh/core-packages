@@ -16,12 +16,17 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
 	core/gcc-stage0
-	core/build-tools-coreutils
-	core/build-tools-make
 )
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+
+do_prepare() {
+	# The "-fPIC" flag is essential for the generation of libz.a archive.
+	# Without it, the generated archive cannot be linked into shared libraries
+	# on certain platforms.
+	export CFLAGS="-fPIC"
+}
 
 do_install() {
 	make install

@@ -15,15 +15,9 @@ pkg_source="https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/${pro
 pkg_shasum="20fbc13a2443881bf13f67eb4ec7f8d6b93843bf1ce7b3015ae1890ddfbd7324"
 pkg_dirname="${program}-${pkg_version}"
 
-pkg_deps=(
-	core/glibc
-	core/attr-stage1
-)
 pkg_build_deps=(
 	core/gcc
-	core/build-tools-grep
-	core/build-tools-make
-	core/build-tools-sed
+	core/build-tools-perl
 )
 
 pkg_include_dirs=(include)

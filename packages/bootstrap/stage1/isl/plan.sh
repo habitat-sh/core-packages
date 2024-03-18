@@ -14,11 +14,8 @@ pkg_shasum="be7b210647ccadf90a2f0b000fca11a4d40546374a850db67adb32fad4b230d9"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
-	core/glibc
-	core/gcc-stage1
+	core/gcc-stage1-with-glibc
 	core/gmp-stage1
-	core/build-tools-coreutils
-	core/build-tools-make
 )
 
 pkg_include_dirs=(include)

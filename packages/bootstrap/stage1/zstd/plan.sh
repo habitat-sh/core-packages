@@ -13,11 +13,7 @@ pkg_shasum="f7de13462f7a82c29ab865820149e778cbfe01087b3a55b5332707abf9db4a6e"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
-	core/glibc
-	core/gcc-stage1
-	core/build-tools-coreutils
-	core/build-tools-make
-	core/build-tools-patch
+	core/gcc-stage1-with-glibc
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

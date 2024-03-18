@@ -17,11 +17,7 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
 	core/glibc
-	core/linux-headers
-	core/gcc-stage1
-	core/build-tools-make
-	core/build-tools-bash-static
-	core/build-tools-coreutils
+	core/gcc-stage1-with-glibc
 )
 pkg_include_dirs=(
 	include

@@ -13,13 +13,8 @@ pkg_shasum="3feb7171f16a84ee82ca18a36d7b9be109a52c04f492a053331d7d1095007c35"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
-	core/glibc
-	core/linux-headers
-	core/gcc-stage1
+	core/gcc-stage1-with-glibc
 	core/ncurses-stage1
-	core/build-tools-make
-	core/build-tools-bash-static
-	core/build-tools-coreutils
 )
 
 pkg_include_dirs=(include)
@@ -61,6 +56,6 @@ do_install() {
 	make install
 
 	# remove unnecessary folder
-	rm -rf "${pkg_prefix}/bin"
-	rm -rf "${pkg_prefix}/lib/pkgconfig"
+	rm -rf "${pkg_prefix:?}/bin"
+	rm -rf "${pkg_prefix:?}/lib/pkgconfig"
 }

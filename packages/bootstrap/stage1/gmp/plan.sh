@@ -1,4 +1,5 @@
 program="gmp"
+arch="${pkg_target%%-*}"
 
 pkg_name="gmp-stage1"
 pkg_origin="core"
@@ -15,11 +16,8 @@ pkg_shasum="fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
-	core/glibc
-	core/gcc-stage1
+	core/gcc-stage1-with-glibc
 	core/m4-stage0
-	core/build-tools-coreutils
-	core/build-tools-make
 )
 
 pkg_include_dirs=(include)
@@ -58,7 +56,7 @@ do_build() {
 		--prefix="$pkg_prefix" \
 		--enable-cxx \
 		--docdir="$pkg_prefix/share/doc/gmp-6.2.1" \
-		--build="aarch64-unknown-linux-gnu" \
+		--build="${arch}-unknown-linux-gnu" \
 		--disable-shared
 
 	make
