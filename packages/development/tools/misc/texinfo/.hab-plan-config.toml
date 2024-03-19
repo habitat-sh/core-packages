@@ -1,0 +1,6 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "bcd221fdb2d807a8a09938a0f8d5e010ebd2b58fca16075483d6fcb78db2c6b2"}
+missing-license = {level = "off", source-shasum = "bcd221fdb2d807a8a09938a0f8d5e010ebd2b58fca16075483d6fcb78db2c6b2"}
+# gawk is used by the texindex binary
+unused-dependency = {ignored_packages = ["core/gawk"]}
+unused-runpath-entry = {level = "off"}
