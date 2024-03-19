@@ -3,6 +3,7 @@ program="bash"
 pkg_name="bash"
 pkg_origin="core"
 pkg_version="5.1"
+patch_version=".16"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
  Bash is the GNU Project's shell. Bash is the Bourne Again SHell. Bash is an \
@@ -14,7 +15,7 @@ most sh scripts can be run by Bash without modification.\
 "
 pkg_upstream_url="http://www.gnu.org/software/bash/bash.html"
 pkg_license=('GPL-3.0-or-later')
-pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
+pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}${patch_versoin}.tar.gz"
 pkg_shasum="cc012bc860406dcf42f64431bcd3d2fa7560c02915a601aba9cd597a39329baa"
 pkg_dirname="${program}-${pkg_version}"
 pkg_interpreters=(
@@ -28,11 +29,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/bison
-	core/coreutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/shadow
 	core/expect-stage1
 	core/build-tools-perl
@@ -43,7 +40,7 @@ do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \
 		--with-curses \
-		--enable-readline \
+		--with-installed-readline="$(pkg_path_for readline)/lib" \
 		--without-bash-malloc
 	make
 }
