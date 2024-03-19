@@ -15,10 +15,6 @@ pkg_deps=(
 	core/ncurses
 )
 pkg_build_deps=(
-	core/coreutils
-	core/diffutils
 	core/gcc
-	core/make
-	core/patch
 )
 pkg_bin_dirs=(bin)
