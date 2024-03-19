@@ -9,10 +9,6 @@ pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_bin_dirs=(bin)
 
-pkg_build_deps=(
-	core/coreutils
-)
-
 do_unpack() {
 	return 0
 }
