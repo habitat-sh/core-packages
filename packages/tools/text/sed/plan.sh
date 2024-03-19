@@ -18,10 +18,7 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/make
-	core/patch
 	core/shadow
 	core/build-tools-perl
 )
