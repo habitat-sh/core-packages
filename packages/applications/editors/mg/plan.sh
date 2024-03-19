@@ -6,8 +6,8 @@ pkg_description="\
 mg is Micro GNU/emacs, this is a portable version of the mg maintained by the \
 OpenBSD team.\
 "
-pkg_upstream_url="https://homepage.boetes.org/software/mg/"
-pkg_license=('publicdomain')
+pkg_upstream_url="https://github.com/hboetes/mg"
+pkg_license=('LicenseRef-Public-Domain')
 pkg_source="https://github.com/hboetes/$pkg_name/archive/$pkg_version.tar.gz"
 pkg_shasum="eeb4181fdb6f2bd3f9b5a3c8ccc5b71fbcf9c7f4a805a2f1858334359d44b545"
 
@@ -20,10 +20,7 @@ pkg_build_deps=(
 	core/binutils
 	core/coreutils
 	core/gcc
-	core/make
-	core/patch
 	core/pkg-config
-	core/sed
 )
 
 pkg_bin_dirs=(bin)

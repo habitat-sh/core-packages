@@ -19,9 +19,7 @@ pkg_deps=(
 	core/libpsl
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/make
 	core/perl
 	core/pkg-config
 )

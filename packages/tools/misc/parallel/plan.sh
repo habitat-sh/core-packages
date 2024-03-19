@@ -32,8 +32,6 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
-	core/gawk
-	core/make
 	core/texinfo
 )
 
