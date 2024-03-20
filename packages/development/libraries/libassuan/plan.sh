@@ -13,7 +13,6 @@ pkg_deps=(
 	core/libgpg-error
 )
 pkg_build_deps=(
-	core/make
 	core/gcc
 )
 

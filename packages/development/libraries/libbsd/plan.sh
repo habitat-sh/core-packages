@@ -7,7 +7,8 @@ This library provides useful functions commonly found on BSD systems, and \
 lacking on others like GNU systems\
 "
 pkg_upstream_url="https://libbsd.freedesktop.org/wiki/"
-pkg_license=('custom')
+# https://cgit.freedesktop.org/libbsd/tree/COPYING
+pkg_license=('BSD-3-Clause' 'BSD-4-Clause' 'BSD-2-Clause-NetBSD' 'ISC' 'Beerware' 'LicenseRef-Public-Domain')
 pkg_source="https://libbsd.freedesktop.org/releases/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="9baa186059ebbf25c06308e9f991fda31f7183c0f24931826d83aa6abd8a0261"
 
@@ -16,13 +17,7 @@ pkg_deps=(
 	core/libmd
 )
 pkg_build_deps=(
-	core/coreutils
-	core/file
-	core/gawk
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 )
 
 pkg_include_dirs=(include)
