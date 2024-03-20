@@ -1,6 +1,6 @@
 program="binutils"
 
-pkg_name="binutils-base"
+pkg_name="binutils"
 pkg_origin="core"
 pkg_version="2.39"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -23,12 +23,12 @@ pkg_lib_dirs=(
 
 pkg_deps=(
 	core/glibc
-	core/bash-static
+	core/gcc-libs
+	core/hab-ld-wrapper
 )
 
 pkg_build_deps=(
 	core/gcc-base
-	core/gcc-libs
 	core/binutils-stage1
 	core/dejagnu-stage1
 	core/flex-stage1
@@ -36,8 +36,6 @@ pkg_build_deps=(
 	core/bzip2-stage0
 	core/build-tools-texinfo
 	core/build-tools-perl
-	core/build-tools-make
-	core/build-tools-coreutils
 	core/build-tools-bison
 )
 
@@ -65,6 +63,7 @@ do_build() {
 	./configure \
 		--prefix=$pkg_prefix \
 		--enable-gold \
+		--enable-gprofng=no \
 		--enable-ld=default \
 		--enable-shared \
 		--enable-plugins \
@@ -90,17 +89,29 @@ do_strip() {
 do_install() {
 	make tooldir="${pkg_prefix}" install
 	wrap_binary "ld.bfd"
+	wrap_binary "ld.gold"
 	# Remove unnecessary binaries
 	rm -v "${pkg_prefix:?}"/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.{a,la}
 }
 
 wrap_binary() {
-	local bin="$pkg_prefix/bin/$1"
-	build_line "Adding wrapper $bin to ${bin}.real"
-	mv -v "$bin" "${bin}.real"
+	local binary="$1"
+	local env_prefix="BINUTILS"
+
+	local hab_ld_wrapper
+	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+
+	local wrapper_binary="$pkg_prefix/bin/$binary"
+	local actual_binary="$pkg_prefix/bin/$binary.real"
+
+	build_line "Adding wrapper for $binary"
+	mv -v "$wrapper_binary" "$actual_binary"
+
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
-		-e "s^@bash@^$(pkg_path_for bash-static)/bin/bash^g" \
-		-e "s^@program@^${bin}.real^g" \
-		>"$bin"
-	chmod 755 "$bin"
+		-e "s^@env_prefix@^${env_prefix}^g" \
+		-e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
+		-e "s^@program@^${actual_binary}^g" \
+		>"$wrapper_binary"
+
+	chmod 755 "$wrapper_binary"
 }

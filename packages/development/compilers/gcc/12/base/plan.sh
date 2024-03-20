@@ -48,6 +48,9 @@ do_prepare() {
 	local linux_headers
 	local dynamic_linker
 
+	libc="$(pkg_path_for glibc)"
+	linux_headers="$(pkg_path_for linux-headers)"
+
 	case $pkg_target in
 	aarch64-linux)
 		dynamic_linker="$libc/lib/ld-linux-aarch64.so.1"

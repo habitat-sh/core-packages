@@ -6,7 +6,7 @@ pkg_version="8.6.12"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Tool Command Language -- A dynamic programming language."
 pkg_upstream_url="http://tcl.sourceforge.net/"
-pkg_license=('custom')
+pkg_license=('TCL')
 pkg_source="http://downloads.sourceforge.net/sourceforge/${program}/${program}${pkg_version}-src.tar.gz"
 pkg_shasum="26c995dd0f167e48b11961d891ee555f680c175f7173ff8cb829f4ebcde4c1a6"
 pkg_dirname="${program}${pkg_version}"
@@ -52,8 +52,8 @@ do_build() {
 	local itclver
 
 	srcdir=$(abspath ..)
-	tdbcver="tdbc1.1.2"
-	itclver="itcl4.2.1"
+	tdbcver="tdbc1.1.3"
+	itclver="itcl4.2.2"
 
 	sed \
 		-e "s#$srcdir/unix#$pkg_prefix/lib#" \
