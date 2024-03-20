@@ -10,11 +10,9 @@ pkg_shasum=4cc4facd508172f3e0a4d3a8736225d472418aee35b4ad053384b137b220339f
 pkg_deps=(
 	core/gcc-libs
 	core/protobuf-cpp
-	core/zlib
 )
 pkg_build_deps=(
 	core/gcc
-	core/make
 	core/pkg-config
 )
 pkg_bin_dirs=(bin)

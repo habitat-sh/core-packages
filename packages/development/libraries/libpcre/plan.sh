@@ -1,8 +1,8 @@
-program="pcre2"
+program="pcre"
 
-pkg_name="libpcre2"
+pkg_name="libpcre"
 pkg_origin="core"
-pkg_version="10.40"
+pkg_version="8.45"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The PCRE library is a set of functions that implement regular expression \
@@ -13,11 +13,12 @@ proprietary software.\
 "
 pkg_upstream_url="http://www.pcre.org/"
 pkg_license=('BSD-3-Clause')
-pkg_source="https://github.com/PCRE2Project/${program}/releases/download/${program}-${pkg_version}/${program}-${pkg_version}.tar.bz2"
-pkg_shasum="14e4b83c4783933dc17e964318e6324f7cae1bc75d8f3c79bc6969f00c159d68"
+pkg_source="https://sourceforge.net/projects/${program}/files/${program}-${pkg_version}.tar.bz2"
+pkg_shasum="4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc
+	core/gcc-libs
 )
 pkg_build_deps=(
 	core/coreutils
@@ -32,15 +33,16 @@ pkg_pconfig_dirs=(lib/pkgconfig)
 do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \
-		--enable-unicode \
-		--enable-pcre2-16 \
-		--enable-pcre2-32 \
+		--enable-unicode-properties \
+		--enable-utf \
+		--enable-pcre16 \
+		--enable-pcre32 \
 		--enable-jit
 	make -j"$(nproc)"
 }
 
 do_check() {
-	# Create a link to echo in coreutils to be used by the pcre2 test case
+	# Create a link to echo in coreutils to be used by the test case
 	ln -sv "$(pkg_path_for coreutils)"/bin/echo /bin/echo
 	make check
 }

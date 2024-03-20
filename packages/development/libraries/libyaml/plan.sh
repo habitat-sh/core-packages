@@ -13,8 +13,6 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/coreutils
-	core/make
 	core/gcc
 )
 pkg_lib_dirs=(lib)

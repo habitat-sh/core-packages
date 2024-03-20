@@ -15,9 +15,6 @@ pkg_deps=(
 pkg_build_deps=(
 	core/coreutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)

@@ -11,8 +11,6 @@ pkg_shasum="b7e11a64246bbe5ef37748de43b245abd72cfcd53c9ae5e7fc5ca59f1c81268d"
 
 pkg_build_deps=(
 	core/gcc
-	core/make
-	core/gawk
 	core/readline
 )
 pkg_deps=(
