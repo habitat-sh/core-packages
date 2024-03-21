@@ -53,3 +53,7 @@ do_build() {
 do_check() {
 	make check TESTSUITEFLAGS=-j"$(nproc)" to
 }
+do_install() {
+	make install
+	sed -e "s|^#!.*|#!/bin/sh|g" -i "$pkg_prefix"/bin/libtoolize
+}

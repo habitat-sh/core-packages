@@ -13,18 +13,13 @@ pkg_source="http://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.ta
 pkg_shasum="bbfc59e1862db862e3f641b0871cd1162dc1d2a58330588c6e517dbdf54b133c"
 pkg_deps=(
 	core/acl
-	core/attr
 	core/glibc
 	core/ncurses
+	core/gawk
 )
 pkg_build_deps=(
 	core/autoconf
-	core/coreutils
-	core/gawk
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/shadow
 )
 pkg_bin_dirs=(bin)

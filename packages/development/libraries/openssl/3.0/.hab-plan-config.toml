@@ -1,0 +1,7 @@
+[rules]
+missing-license = {level = "off", source-shasum = "83049d042a260e696f62406ac5c08bf706fd84383f945cf21bd61e9ed95c396e"}
+# TODO: Figure out why fips is unused
+unused-dependency = {level = "off"}
+unused-runpath-entry = {level = "off"}
+library-dependency-not-found = { level = "off" }
+empty-top-level-directory = {level = "off"}

@@ -16,7 +16,6 @@ pkg_deps=(
 	core/grep
 	core/glibc
 	core/less
-	core/bash-static
 )
 
 pkg_build_deps=(
@@ -48,7 +47,4 @@ do_check() {
 do_install() {
 	make install
 
-	# Fix interpreters
-	fix_interpreter "${pkg_prefix}/zstdgrep" core/bash-static bin/sh
-	fix_interpreter "${pkg_prefix}/zstdless" core/bash-static bin/sh
 }
