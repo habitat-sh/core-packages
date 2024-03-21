@@ -35,7 +35,4 @@ do_build() {
 
 do_install() {
 	make install
-
-	# Remove unnecessary binaries
-#	rm -v "${pkg_prefix}/bin/gawkbug"
 }
