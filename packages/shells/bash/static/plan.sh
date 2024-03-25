@@ -17,8 +17,8 @@ most sh scripts can be run by Bash without modification.\
 pkg_upstream_url="http://www.gnu.org/software/bash/bash.html"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="cc012bc860406dcf42f64431bcd3d2fa7560c02915a601aba9cd597a39329baa"
-pkg_dirname="${program}-${major_version}"
+pkg_shasum="5bac17218d3911834520dad13cd1f85ab944e1c09ae1aba55906be1f8192f558"
+pkg_dirname="${program}-${pkg_version}"
 pkg_interpreters=(
 	bin/sh
 	bin/bash

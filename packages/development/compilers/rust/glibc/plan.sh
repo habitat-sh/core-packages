@@ -29,7 +29,7 @@ pkg_lib_dirs=(lib)
 
 do_prepare() {
 	# Set gcc to use the correct binutils
-	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for binutils-base)/bin"
+	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for binutils)/bin"
 }
 
 do_build() {

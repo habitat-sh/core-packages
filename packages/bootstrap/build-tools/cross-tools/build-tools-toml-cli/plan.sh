@@ -31,5 +31,6 @@ do_install() {
 	cargo install \
 		--path . \
 		--root "${pkg_prefix}" \
+		--locked \
 		--target="${TARGET_ARCH:-${pkg_target%%-*}}-unknown-linux-gnu"
 }

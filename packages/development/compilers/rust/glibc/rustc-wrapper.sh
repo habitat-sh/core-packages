@@ -16,4 +16,9 @@ if [ -z "$LD_RUN_PATH" ]; then
 else
 	export LD_RUN_PATH="@gcc_libs@:$LD_RUN_PATH"
 fi
+# If the HAB_LD_LINK_MODE is not explicitly specified we set it to minimal
+# to avoid unnecessary rpaths
+if [ -z "$HAB_LD_LINK_MODE" ]; then
+	export HAB_LD_LINK_MODE="minimal"
+fi
 @program@ "$@"
