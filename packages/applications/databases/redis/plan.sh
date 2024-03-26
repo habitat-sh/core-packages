@@ -26,6 +26,11 @@ pkg_deps=(
 )
 
 pkg_bin_dirs=(bin)
+pkg_svc_run="redis-server ${pkg_svc_config_path}/redis.config"
+pkg_exports=(
+	[port]=port
+)
+pkg_exposes=(port)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
@@ -41,9 +46,3 @@ do_check() {
 
 	make test
 }
-
-pkg_svc_run="redis-server ${pkg_svc_config_path}/redis.config"
-pkg_exports=(
-	[port]=port
-)
-pkg_exposes=(port)

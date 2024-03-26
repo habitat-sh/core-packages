@@ -14,6 +14,7 @@ pkg_deps=(
 
 pkg_build_deps=(
 	core/build-tools-gcc/"${pkg_version}"
+	core/native-patchelf
 )
 
 do_install() {

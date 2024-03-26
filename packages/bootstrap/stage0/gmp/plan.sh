@@ -1,4 +1,5 @@
 program="gmp"
+arch="${pkg_target%%-*}"
 
 pkg_name="gmp-stage0"
 pkg_origin="core"
@@ -17,8 +18,6 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_build_deps=(
 	core/gcc-stage0
 	core/m4-stage0
-	core/build-tools-coreutils
-	core/build-tools-make
 )
 
 pkg_include_dirs=(include)
@@ -33,7 +32,6 @@ do_prepare() {
 }
 
 do_build() {
-	export HAB_DEBUG=1
 	# We disable shared libraries so that when this package is used as a dependency
 	# for core/gcc-stage1, it will get linked into gcc statically. Thus gcc won't have
 	# a runtime dependency back to this library.
@@ -41,7 +39,7 @@ do_build() {
 		--prefix="$pkg_prefix" \
 		--enable-cxx \
 		--docdir="$pkg_prefix/share/doc/gmp-6.2.1" \
-		--build="aarch64-unknown-linux-gnu" \
+		--build="${arch}-unknown-linux-gnu" \
 		--disable-shared
 
 	make

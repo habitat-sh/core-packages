@@ -18,7 +18,6 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
 	core/build-tools-glibc
-	core/build-tools-bash-static
 )
 pkg_build_deps=(
 	core/native-cross-gcc
@@ -42,8 +41,6 @@ do_build() {
 do_install() {
 	make install
 	rm -v "$pkg_prefix"/lib/liblzma.la
-	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/build-tools-bash-static bin/sh
 }
 do_check() {
 	make check

@@ -1,5 +1,4 @@
 program="gcc"
-native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="gcc-stage0"
 pkg_origin="core"

@@ -14,8 +14,6 @@ pkg_build_deps=(
 	core/autoconf
 	core/automake
 	core/libtool
-	core/coreutils
-	core/make
 	core/gcc
 )
 pkg_lib_dirs=(lib)

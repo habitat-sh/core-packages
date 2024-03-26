@@ -1,5 +1,7 @@
+docker-image = "hab-bootstrap:20230523"
 [rules]
 missing-license = { level = "off", source-shasum = "da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148" }
 license-not-found = { level = "off", source-shasum = "da24a84fef220102dd24042df06fdea851c2614a5377f86effa28f33b7b16148" }
 # The hab-ld-wrapper binary is used at runtime to process arguments
 unused-dependency = { ignored_packages = ["core/hab-ld-wrapper"] }
+unused-runpath-entry = {level = "off"}

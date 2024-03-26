@@ -4,7 +4,8 @@ pkg_version="1.0.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="BSD Mesage Digest library"
 pkg_upstream_url="https://www.hadrons.org/software/libmd"
-pkg_license=('BSD-3-clause' 'BSD-2-clause' 'ISC' 'Beerware' 'public-domain-md4' 'public-domain-md5' 'public-domain-sha1')
+# https://git.hadrons.org/cgit/libmd.git/tree/COPYING
+pkg_license=('BSD-3-Clause' 'BSD-2-Clause' 'BSD-2-Clause-NetBSD' 'ISC' 'Beerware' 'LicenseRef-Public-Domain')
 pkg_source="https://archive.hadrons.org/software/libmd/libmd-${pkg_version}.tar.xz"
 pkg_shasum="f51c921042e34beddeded4b75557656559cf5b1f2448033b4c1eec11c07e530f"
 
@@ -12,12 +13,7 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/coreutils
-	core/gawk
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 )
 
 pkg_include_dirs=(include)

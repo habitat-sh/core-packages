@@ -18,13 +18,8 @@ pkg_deps=(
 	core/zstd
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/jbigkit
-	core/file
 	core/python
 )
 pkg_dirname="tiff-${pkg_version}"

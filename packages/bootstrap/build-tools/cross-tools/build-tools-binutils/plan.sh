@@ -24,7 +24,6 @@ pkg_lib_dirs=(
 
 pkg_deps=(
 	core/build-tools-glibc
-	core/build-tools-bash-static
 	core/hab-ld-wrapper
 )
 pkg_build_deps=(
@@ -62,6 +61,12 @@ do_prepare() {
 	for f in binutils/Makefile.in gas/Makefile.in ld/Makefile.in gold/Makefile.in; do
 		sed -i "$f" -e 's|ln |ln -s |'
 	done
+	build_line "Setting HAB_LD_RUN_PATH=${HAB_LD_RUN_PATH}"
+	build_line "Setting LDFLAGS_FOR_BUILD=${LDFLAGS_FOR_BUILD}"
+	build_line "Setting CFLAGS_FOR_BUILD=${CFLAGS_FOR_BUILD}"
+	build_line "Setting CPPFLAGS_FOR_BUILD=${CPPFLAGS_FOR_BUILD}"
+	build_line "Setting CXXFLAGS_FOR_BUILD=${CXXFLAGS_FOR_BUILD}"
+	build_line "Unsetting LD_RUN_PATH"
 }
 
 do_build() {
@@ -97,22 +102,22 @@ do_install() {
 }
 
 wrap_binary() {
-	local binary="$1"
-	local env_prefix="BUILD_TOOLS_BINUTILS"
-
-	local shell
-	shell="$(pkg_path_for build-tools-bash-static)"
+ 	local binary
+	local env_prefix
 	local hab_ld_wrapper
-	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+	local wrapper_binary
+	local actual_binary
 
-	local wrapper_binary="$pkg_prefix/bin/$binary"
-	local actual_binary="$pkg_prefix/bin/$binary.real"
+	binary="$1"
+	env_prefix="BUILD_TOOLS_BINUTILS"
+	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+	wrapper_binary="$pkg_prefix/bin/$binary"
+	actual_binary="$pkg_prefix/bin/$binary.real"
 
 	build_line "Adding wrapper for $binary"
 	mv -v "$wrapper_binary" "$actual_binary"
 
 	sed "$PLAN_CONTEXT/ld-wrapper.sh" \
-		-e "s^@shell@^${shell}/bin/sh^g" \
 		-e "s^@env_prefix@^${env_prefix}^g" \
 		-e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
 		-e "s^@program@^${actual_binary}^g" \

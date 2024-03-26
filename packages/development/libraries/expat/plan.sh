@@ -12,15 +12,11 @@ pkg_source="https://downloads.sourceforge.net/project/${pkg_name}/${pkg_name}/${
 pkg_shasum="6b902ab103843592be5e99504f846ec109c1abb692e85347587f237a4ffa1033"
 pkg_deps=(
 	core/glibc
+	core/gcc-libs
 )
 pkg_build_deps=(
 	core/coreutils
-	core/file
-	core/gawk
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)

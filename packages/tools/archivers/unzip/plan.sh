@@ -7,7 +7,7 @@ UnZip is an extraction utility for archives compressed in .zip format (also \
 called 'zipfiles').\
 "
 pkg_upstream_url="https://sourceforge.net/projects/infozip/"
-pkg_license=('Zlib')
+pkg_license=('Info-ZIP')
 pkg_source="https://downloads.sourceforge.net/infozip/unzip60.tar.gz"
 pkg_shasum="036d96991646d0449ed0aa952e4fbe21b476ce994abc276e49d30e686708bd37"
 pkg_dirname="unzip60"
@@ -17,10 +17,7 @@ pkg_deps=(
 	core/bzip2
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/make
-	core/patch
 )
 
 pkg_bin_dirs=(bin)

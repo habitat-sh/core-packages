@@ -16,7 +16,7 @@ pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="97fc51ac2b085d4cde31ef4d2c3122c21abc217e9090a43a30fc5ec21684e059"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
-	core/build-tools-libstdcpp
+	core/build-tools-libstdcxx
 	core/build-tools-glibc
 )
 pkg_build_deps=(
@@ -37,7 +37,8 @@ do_prepare() {
 	# uses LD_RUN_PATH for the correct rpath, LD_RUN_PATH is assigned to HAB_LD_RUN_PATH.
 	export HAB_LD_RUN_PATH="${LD_RUN_PATH}"
 	unset LD_RUN_PATH
-	build_line "Unsetting LDFLAGS"
+	build_line "Setting HAB_LD_RUN_PATH=${HAB_LD_RUN_PATH}"
+	build_line "Unsetting LD_RUN_PATH"
 }
 
 do_build() {

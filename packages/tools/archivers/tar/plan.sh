@@ -26,12 +26,8 @@ pkg_deps=(
 	core/zstd
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gettext
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 	core/shadow
 	core/build-tools-util-linux
 )

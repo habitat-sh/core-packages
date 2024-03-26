@@ -13,13 +13,9 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/coreutils
-	core/diffutils
 	core/gcc
-	core/grep
-	core/make
 	core/python
-	core/sed
-	core/valgrind-stage1
+	core/valgrind
 )
 pkg_bin_dirs=(bin)
 

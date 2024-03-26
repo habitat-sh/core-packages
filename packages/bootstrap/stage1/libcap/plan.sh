@@ -10,20 +10,14 @@ available in Linux kernels. These capabilities are a partitioning of the all pow
 root privilege into a set of distinct privileges.
 "
 pkg_upstream_url="http://sites.google.com/site/fullycapable/"
-pkg_license=('GPL v2.0')
+pkg_license=('BSD-3-Clause OR GPL-2.0-only')
 pkg_source="https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/${program}-${pkg_version}.tar.gz"
 pkg_shasum="20fbc13a2443881bf13f67eb4ec7f8d6b93843bf1ce7b3015ae1890ddfbd7324"
 pkg_dirname="${program}-${pkg_version}"
 
-pkg_deps=(
-	core/glibc
-	core/attr-stage1
-)
 pkg_build_deps=(
 	core/gcc
-	core/build-tools-grep
-	core/build-tools-make
-	core/build-tools-sed
+	core/build-tools-perl
 )
 
 pkg_include_dirs=(include)

@@ -1,3 +1,4 @@
+docker-image = "hab-bootstrap:20230523"
 [rules]
 # The 'hab-studio-profile.sh' script is used only inside a studio which will 
 # always have a binlinked /bin/bash available

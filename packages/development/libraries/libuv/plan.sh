@@ -11,11 +11,8 @@ pkg_deps=(core/glibc)
 pkg_build_deps=(
 	core/autoconf
 	core/automake
-	core/coreutils
 	core/gcc
 	core/libtool
-	core/m4
-	core/make
 	core/shadow
 )
 pkg_lib_dirs=(lib)

@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-bash-static"
 pkg_origin="core"
-pkg_version="5.1"
+pkg_version="5.1.16"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
  Bash is the GNU Project's shell. Bash is the Bourne Again SHell. Bash is an \
@@ -16,7 +16,7 @@ most sh scripts can be run by Bash without modification.\
 pkg_upstream_url="http://www.gnu.org/software/bash/bash.html"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="cc012bc860406dcf42f64431bcd3d2fa7560c02915a601aba9cd597a39329baa"
+pkg_shasum="5bac17218d3911834520dad13cd1f85ab944e1c09ae1aba55906be1f8192f558"
 pkg_dirname="${program}-${pkg_version}"
 pkg_interpreters=(
 	bin/sh
@@ -30,11 +30,12 @@ pkg_bin_dirs=(bin)
 do_prepare() {
 	# Cross building bash still requires use of the host system's compiler to compile
 	# So we explicitly clear out all CFLAGS, CPPFLAGS and LDFLAGS for build.
-	CFLAGS_FOR_BUILD=""
+	export CFLAGS_FOR_BUILD=""
+	export CPPFLAGS_FOR_BUILD=""
+	export LDFLAGS_FOR_BUILD=""
+
 	build_line "Setting CFLAGS_FOR_BUILD=$CFLAGS_FOR_BUILD"
-	CPPFLAGS_FOR_BUILD=""
 	build_line "Setting CPPFLAGS_FOR_BUILD=$CPPFLAGS_FOR_BUILD"
-	LDFLAGS_FOR_BUILD=""
 	build_line "Setting LDFLAGS_FOR_BUILD=$LDFLAGS_FOR_BUILD"
 }
 
@@ -45,7 +46,6 @@ do_build() {
 		--host="$native_target" \
 		--without-bash-malloc \
 		--enable-static-link
-	HAB_DEBUG=1
 	make
 }
 

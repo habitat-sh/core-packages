@@ -12,11 +12,19 @@ pkg_dirname="linux-$pkg_version"
 pkg_include_dirs=(include)
 pkg_build_deps=(
 	core/build-tools-gcc
-	core/build-tools-make
-	core/build-tools-findutils
 )
 
 do_build() {
+	local arch
+	arch="$(uname -m)"
+	case ${arch} in
+	x86_64)
+		arch="x86"
+		;;
+	aarch64)
+		arch="arm64"
+		;;
+	esac
 	make headers
 }
 

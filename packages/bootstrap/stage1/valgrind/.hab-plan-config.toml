@@ -1,0 +1,6 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "dd5e34486f1a483ff7be7300cc16b4d6b24690987877c3278d797534d6738f02"}
+missing-license = {level = "off", source-shasum = "dd5e34486f1a483ff7be7300cc16b4d6b24690987877c3278d797534d6738f02"}
+unused-runpath-entry = {level = "off"}
+host-script-interpreter = {ignored_files = ["bin/callgrind_*"]}
+missing-script-interpreter-dependency = {level = "off", ignored_files = ["bin/cg_diff" , "bin/cg_annotate", "bin/ms_print"]}

@@ -5,5 +5,5 @@ duplicate-runtime-binary = { primary_packages = ["core/glibc-stage0"] }
 unused-dependency = { ignored_packages = [
     "core/glibc-stage0",
     "core/build-tools-gcc",
-    "core/linux-headers",
-] }
+    "core/linux-headers"
+]}

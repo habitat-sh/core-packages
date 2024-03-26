@@ -19,14 +19,11 @@ pkg_deps=(
 	core/libffi
 	core/readline
 	core/nss-myhostname
+	core/bash
 )
 pkg_build_deps=(
 	core/coreutils
-	core/diffutils
-	core/patch
-	core/make
 	core/gcc
-	core/sed
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
@@ -62,4 +59,10 @@ do_check() {
 do_install() {
 	do_default_install
 	gem install rb-readline --no-document
+	grep -nrlI '^\#\! ruby' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#! ruby|#!${pkg_prefix}/bin/ruby|" -i "$target"
+	done
+	grep -nrlI '^\#\! bash' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#! bash|#!$(pkg_path_for bash)/bin/bash|" -i "$target"
+	done
 }

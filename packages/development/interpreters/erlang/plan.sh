@@ -13,21 +13,24 @@ pkg_build_deps=(
 	core/bison
 	core/gcc
 	core/make
-	core/openssl
 	core/patch
 	core/perl
 	core/m4
+	core/coreutils
 )
 pkg_deps=(
-	core/coreutils
 	core/gcc-libs
 	core/glibc
 	core/zlib
 	core/ncurses
 	core/openssl
+	core/sed
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
+pkg_interpreters=(
+	bin/escript
+)
 
 do_prepare() {
 	# We eliminate extra default platform-specific RPATHs to OpenSSL crypto libraries
@@ -37,7 +40,7 @@ do_prepare() {
 
 	# Replace all host system env interpreters with our packaged env
 	grep -lr '/usr/bin/env' . | while read -r f; do
-		sed -e "s,/usr/bin/env,$(pkg_interpreter_for coreutils bin/env),g" -i "$f"
+		sed -e "s,/usr/bin/env,$(pkg_path_for coreutils)/bin/env,g" -i "$f"
 	done
 }
 
@@ -54,9 +57,18 @@ do_build() {
 		--with-ssl="$(pkg_path_for openssl)" \
 		--with-ssl-include="$(pkg_path_for openssl)/include" \
 		--without-javac
-	make
+	make -j"$(nproc)"
 }
 
 do_check() {
 	make test
+}
+
+do_install() {
+	make install
+
+	# Fix all the script interpreters
+	grep -nrlI '^\#\! escript' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#! escript|#!${pkg_prefix}/bin/escript|" -i "$target"
+	done
 }

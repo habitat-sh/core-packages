@@ -16,11 +16,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc
-	core/coreutils
-	core/make
-	core/bison
-	core/sed
-	core/grep
 	core/m4
 	core/build-tools-texinfo
 )

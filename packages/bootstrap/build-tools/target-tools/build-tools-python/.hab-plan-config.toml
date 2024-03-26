@@ -5,3 +5,4 @@ missing-license = { level = "off", source-shasum = "1b2e4e2df697c52d36731666979e
 env-script-interpreter-not-found = { ignored_files = ["lib/python3.10/lib2to3/*"] }
 # Ignore bash usage in test scripts
 host-script-interpreter = { ignored_files = ["lib/python3.10/test/*"] }
+unused-runpath-entry = {level = "off"}

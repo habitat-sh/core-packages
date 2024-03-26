@@ -43,6 +43,13 @@ do_prepare() {
 	export CFLAGS_FOR_BUILD=""
 	export CPPFLAGS_FOR_BUILD=""
 	export CXXFLAGS_FOR_BUILD=""
+	build_line "Setting LDFLAGS=${LDFLAGS}"
+	build_line "Setting HAB_LD_RUN_PATH=${HAB_LD_RUN_PATH}"
+	build_line "Setting LDFLAGS_FOR_BUILD=${LDFLAGS_FOR_BUILD}"
+	build_line "Setting CFLAGS_FOR_BUILD=${CFLAGS_FOR_BUILD}"
+	build_line "Setting CPPFLAGS_FOR_BUILD=${CPPFLAGS_FOR_BUILD}"
+	build_line "Setting CXXFLAGS_FOR_BUILD=${CXXFLAGS_FOR_BUILD}"
+	build_line "Unsetting LD_RUN_PATH"
 }
 
 do_build() {

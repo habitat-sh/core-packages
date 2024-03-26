@@ -11,18 +11,12 @@ pkg_shasum="1e40fa66966306920f043866cbe8612f4b939b033ba5e2708c3f41be257c8a3e"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc
-	core/openssl
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
-pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
 	./configure \
@@ -31,14 +25,12 @@ do_build() {
 		--enable-lib-shared
 	make \
 		CFLAGS="${CPPFLAGS}" \
-		LDFLAGS="${LDFLAGS} -Wl,-rpath=${pkg_prefix}/lib" \
 		-j"$(nproc)"
 }
 
 do_check() {
 	make \
 		CFLAGS="${CPPFLAGS}" \
-		LDFLAGS="${LDFLAGS} -Wl,-rpath=${pkg_prefix}/lib" \
 		test
 }
 

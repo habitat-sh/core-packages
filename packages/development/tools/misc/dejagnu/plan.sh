@@ -13,7 +13,6 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
 	core/expect
-	core/bash-static
 	core/coreutils
 	core/sed
 	core/grep
@@ -21,9 +20,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc
-	core/diffutils
-	core/patch
-	core/make
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -39,7 +35,4 @@ do_install() {
 	sed \
 		-e "s,expectbin=expect,expectbin=$(pkg_path_for expect)/bin/expect,g" \
 		-i "$pkg_prefix/bin/runtest"
-
-	# Fix scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/bash-static bin/sh
 }

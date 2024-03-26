@@ -42,6 +42,9 @@ do_prepare() {
 do_build() {
 	mkdir -v build
 	pushd build || exit 1
+	# IMPORATNT: The --enable-initfini-array configuration option is very important for the built
+	# cross compiler to behave correctly and will cause build failures later down the line if it
+	# is absent: https://unix.stackexchange.com/questions/648979/lfs-gcc-10-2-0-pass-2-fails-with-source-code-error-in-crtstuff-c
 	../configure \
 		--prefix="$pkg_prefix" \
 		--build="$(../config.guess)" \
@@ -68,6 +71,7 @@ do_build() {
 		--disable-libssp \
 		--disable-libvtv \
 		--disable-libstdcxx \
+		--enable-initfini-array \
 		--enable-languages=c,c++
 	make -j"$(nproc)"
 	popd || exit 1
@@ -94,7 +98,7 @@ do_install() {
 	cat ../gcc/limitx.h ../gcc/glimits.h ../gcc/limity.h >"$(dirname "$("$pkg_prefix"/bin/"$native_target"-gcc -print-libgcc-file-name)")"/install-tools/include/limits.h
 
 	# Install the full limits.h file
-	"$pkg_prefix"/libexec/gcc/"$native_target"/12.2.0/install-tools/mkheaders
+	"$pkg_prefix"/libexec/gcc/"$native_target"/$pkg_version/install-tools/mkheaders
 
 	# Remove unnecesary include folder created by 'make install'
 	rm -rf "$pkg_prefix/include"

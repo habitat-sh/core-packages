@@ -36,7 +36,7 @@ do_strip() {
 	# Patching the binary after stripping unneeded symbols because strip does not
 	# like the modifications patchelf makes
 	patchelf \
-		--interpreter "$(pkg_path_for core/glibc)/lib/ld-linux-aarch64.so.1" \
+		--interpreter "$(pkg_path_for core/glibc)/lib/ld-linux-x86-64.so.2" \
 		--set-rpath "${LD_RUN_PATH}" \
 		"${pkg_prefix}/bin/rq"
 }

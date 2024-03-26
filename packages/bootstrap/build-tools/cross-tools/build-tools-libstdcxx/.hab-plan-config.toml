@@ -1,3 +1,4 @@
+docker-image = "hab-bootstrap:20230523"
 [rules]
 missing-license = { level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff" }
 license-not-found = { level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff" }
@@ -7,3 +8,4 @@ license-not-found = { level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4
 unused-dependency = { level = "warn", ignored_packages = [
     "core/build-tools-linux-headers",
 ] }
+unused-runpath-entry = {level = "off"}

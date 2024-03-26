@@ -13,21 +13,16 @@ pkg_deps=(
 	core/zlib
 	core/glibc
 	core/readline
-	core/ncurses
+	
 	core/icu
 	core/xz
 )
 pkg_build_deps=(
-	core/bash
-	core/coreutils
 	core/gcc
-	core/m4
-	core/make
 	core/pkg-config
 	core/python
-	core/tar
 	core/wget
-	core/valgrind-stage1
+	core/valgrind
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

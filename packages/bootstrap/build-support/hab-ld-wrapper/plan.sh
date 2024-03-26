@@ -1,5 +1,5 @@
 # shellcheck disable=2154
-commit_hash="86f6b7dbaab201bdde29b54984b7a8fc6c90a403"
+commit_hash="f240ff4fe4dc687da7f51741640e513233ddebc6"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="hab-ld-wrapper"
@@ -8,11 +8,13 @@ pkg_version="1.0.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/habitat-sh/hab-pkg-wrappers/archive/${commit_hash}.tar.gz"
-pkg_shasum="745a80349e7024c586d038e568233985e21b2749c0a704e170196fe61a764b17"
+pkg_shasum="745ad24f2cce4f9a4727f77537110c477fd79fd41a092e6a0d1fec0318a68c19"
 pkg_dirname="hab-pkg-wrappers-${commit_hash}"
+pkg_build_deps=(
+	core/native-rust
+)
 
 # We don't specify 'pkg_bin_dirs' as we always use the wrapper via it's full path
-
 bin="hab-ld-wrapper"
 
 do_prepare() {
@@ -33,12 +35,12 @@ do_prepare() {
 
 do_build() {
 	pushd "$SRC_PATH" >/dev/null || exit
-	cargo build ${build_type#--debug} --target="$rustc_target" --verbose --bin $bin
+	cargo build "${build_type#--debug}" --locked --target="$rustc_target" --verbose --bin $bin
 	popd >/dev/null || exit
 }
 
 do_install() {
-	install -v -D "$CARGO_TARGET_DIR"/"$rustc_target"/${build_type#--}/$bin "$pkg_prefix"/bin/$bin
+	install -v -D "$CARGO_TARGET_DIR"/"$rustc_target"/"${build_type#--}"/$bin "$pkg_prefix"/bin/$bin
 }
 
 do_strip() {

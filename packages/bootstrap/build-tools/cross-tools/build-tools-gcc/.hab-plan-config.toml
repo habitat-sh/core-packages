@@ -1,3 +1,4 @@
+docker-image = "hab-bootstrap:20230523"
 [rules]
 missing-license = { level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff" }
 license-not-found = { level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff" }
@@ -7,3 +8,4 @@ license-not-found = { level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4
 library-dependency-not-found = { level = "off" }
 # GCC uses binutils at runtime for linking
 unused-dependency = { ignored_packages = ["core/build-tools-binutils", "core/hab-cc-wrapper"] }
+unused-runpath-entry = {level = "off"}

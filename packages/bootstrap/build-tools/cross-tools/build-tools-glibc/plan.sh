@@ -32,11 +32,20 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
+	local binutils
+	local gcc
+	local final_path
+
 	# We put the native-cross-binutils and native-cross-gcc-base bin directories first on our path to ensure
 	# that our wrapped linker gets picked up by the cross compiler as 'ld'. At this stage we cannot wrap the compiler
 	# as our cc-wrapper.sh script requires glibc's final path.
-	PATH="$(pkg_path_for native-cross-binutils)/$native_target/bin:$(pkg_path_for native-cross-gcc-base)/bin:${PATH}"
-	build_line "Updated PATH=${PATH}"
+	binutils="$(pkg_path_for native-cross-binutils)"
+	gcc="$(pkg_path_for native-cross-gcc-base)"
+	final_path="${binutils}/${native_target}/bin:${gcc}/bin:${PATH}"
+	export PATH="${final_path}"
+
+	# Add flags to ensure we pick up the partial limits.h created in the core/native-cross-gcc-base package
+	export CPPFLAGS="${CPPFLAGS} -isystem ${gcc}/bootstrap-include"
 
 	# Don't use the system's `/etc/ld.so.cache` and `/etc/ld.so.preload`, but
 	# rather the version under `$pkg_prefix/etc`.
@@ -50,10 +59,17 @@ do_prepare() {
 
 	patch -p1 <"$PLAN_CONTEXT/dont-use-system-ld-so-cache.patch"
 
-	# Add flags to ensure we pick up the partial limits.h created in the core/native-cross-gcc-base package
-	CPPFLAGS="${CPPFLAGS} -isystem $(pkg_path_for native-cross-gcc-base)/bootstrap-include"
-}
+	# 'HAB_LD_LINK_MODE' is used to control the way the habitat linker wrapper adds rpath entries.
+	# By setting it to 'minimal', we instruct the linker wrapper to add an rpath entry only if a library
+	# is going to be linked into the resulting binary or library.
+	# This setting is crucial when dealing with certain glibc ELF binaries/libraries. These are expected
+	# not to have a DT_RUNPATH entry, and using the 'minimal' mode ensures this expectation is met.
+	export HAB_LD_LINK_MODE="minimal"
 
+	build_line "Setting PATH=${PATH}"
+	build_line "Setting CPPFLAGS=${CPPFLAGS}"
+	build_line "Setting HAB_LD_LINK_MODE=${HAB_LD_LINK_MODE}"
+}
 do_build() {
 	mkdir -v build
 	pushd build || exit 1

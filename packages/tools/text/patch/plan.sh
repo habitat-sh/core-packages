@@ -18,11 +18,7 @@ pkg_deps=(
 	core/attr
 )
 pkg_build_deps=(
-	core/coreutils
-	core/make
 	core/gcc
-	core/build-tools-sed
-	core/build-tools-diffutils
 )
 pkg_bin_dirs=(bin)
 

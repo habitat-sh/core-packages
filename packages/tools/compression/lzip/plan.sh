@@ -12,14 +12,16 @@ pkg_deps=(
 	core/gcc-libs
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/grep
-	core/make
-	core/sed
 )
 pkg_bin_dirs=(bin)
 
+do_build() {
+	./configure \
+		--prefix="${pkg_prefix}" \
+		CPPFLAGS="${CPPFLAGS}" \
+		LDFLAGS="${LDFLAGS}"
+}
 do_check() {
 	make check
 }

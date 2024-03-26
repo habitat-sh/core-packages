@@ -1,0 +1,4 @@
+docker-image = "hab-bootstrap:20230523"
+
+[rules]
+unused-runpath-entry = {level = "off"}

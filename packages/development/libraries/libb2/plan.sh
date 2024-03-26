@@ -13,13 +13,9 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/automake
-	core/coreutils
 	core/gcc
-	core/grep
 	core/libtool
-	core/make
 	core/pkg-config
-	core/sed
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

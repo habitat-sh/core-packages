@@ -29,9 +29,7 @@ pkg_deps=(
 
 )
 pkg_build_deps=(
-	core/coreutils
 	core/gcc
-	core/sed
 	core/cmake-stage1
 )
 

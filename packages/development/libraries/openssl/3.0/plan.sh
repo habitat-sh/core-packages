@@ -29,8 +29,8 @@ pkg_build_deps=(
 
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
-pkg_lib_dirs=(lib)
-pkg_pconfig_dirs=(lib/pkgconfig)
+pkg_lib_dirs=(lib64)
+pkg_pconfig_dirs=(lib64/pkgconfig)
 
 do_prepare() {
 	patch -p1 <"$PLAN_CONTEXT/hab-ssl-cert-file.patch"

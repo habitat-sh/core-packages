@@ -16,11 +16,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc-stage0
-	core/build-tools-coreutils
-	core/build-tools-make
 	core/build-tools-bison
-	core/build-tools-sed
-	core/build-tools-grep
 	core/build-tools-texinfo
 	core/build-tools-m4
 )
@@ -30,7 +26,6 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_build() {
-	export HAB_DEBUG=1
 	./configure \
 		--prefix="${pkg_prefix}" \
 		--docdir="${pkg_prefix}"/share/doc/flex-2.6.4

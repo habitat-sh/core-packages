@@ -13,36 +13,12 @@ pkg_shasum="3feb7171f16a84ee82ca18a36d7b9be109a52c04f492a053331d7d1095007c35"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
-	core/glibc
-	core/linux-headers
-	core/gcc-stage1
+	core/gcc-stage1-with-glibc
 	core/ncurses-stage1
-	core/build-tools-make
-	core/build-tools-bash-static
-	core/build-tools-coreutils
 )
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-
-do_prepare() {
-	# Change the dynamic linker and glibc library to link against core/glibc
-	case $pkg_target in
-	aarch64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1"
-		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
-		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
-		;;
-	x86_64-linux)
-		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
-		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
-		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
-		;;
-	esac
-	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc)"
-	export HAB_GCC_STAGE1_GLIBC_PKG_PATH
-	build_line "Setting HAB_GCC_STAGE1_GLIBC_PKG_PATH=${HAB_GCC_STAGE1_GLIBC_PKG_PATH}"
-}
 
 do_build() {
 	./configure \
@@ -61,6 +37,6 @@ do_install() {
 	make install
 
 	# remove unnecessary folder
-	rm -rf "${pkg_prefix}/bin"
-	rm -rf "${pkg_prefix}/lib/pkgconfig"
+	rm -rf "${pkg_prefix:?}/bin"
+	rm -rf "${pkg_prefix:?}/lib/pkgconfig"
 }

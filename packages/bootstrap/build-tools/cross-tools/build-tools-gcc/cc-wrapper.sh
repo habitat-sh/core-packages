@@ -1,4 +1,4 @@
-#!@shell@
+#!/bin/sh
 HAB_DYNAMIC_LINKER=${HAB_DYNAMIC_LINKER:-${HAB_@env_prefix@_DYNAMIC_LINKER:-"@dynamic_linker@"}} \
 HAB_DEBUG=${HAB_DEBUG:-${HAB_GCC_DEBUG:-${HAB_@env_prefix@_DEBUG:-0}}} \
 HAB_CC_EXECUTABLE_NAME=${HAB_@env_prefix@_CC_EXECUTABLE_NAME:-"@executable_name@"} \
