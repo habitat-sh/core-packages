@@ -24,8 +24,6 @@ pkg_build_deps=(
 	core/build-tools-sed
 )
 pkg_bin_dirs=(bin)
-pkg_lib_dirs=(lib)
-pkg_include_dirs=(include)
 
 do_build() {
 	./configure \

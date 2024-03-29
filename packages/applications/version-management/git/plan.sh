@@ -33,7 +33,7 @@ pkg_build_deps=(
 	core/python
 	core/texinfo
 )
-pkg_lib_dirs=(lib)
+
 pkg_bin_dirs=(bin)
 
 do_prepare() {

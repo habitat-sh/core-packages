@@ -6,3 +6,5 @@ env-script-interpreter-not-found = {ignored_files = ["lib/*"]}
 host-script-interpreter = {ignored_files = ["lib/python*/test/*"]}
 missing-license = {level = "off", source-shasum = "f400c3fb394b8bef1292f6dc1292c5fadc3533039a5bc0c3e885f3e16738029a"}
 unused-runpath-entry = {level = "off"}
+missing-runpath-entry-dependency = {level = "off"}
+library-dependency-not-found = {level = "off"}

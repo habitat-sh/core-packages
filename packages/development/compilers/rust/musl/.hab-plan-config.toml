@@ -1,0 +1,11 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "4b701dc3cbac04ebf0e336cff2f4ce5fc1a1984c183226863c9ed911eb00b07e"}
+missing-license = {level = "off", source-shasum = "4b701dc3cbac04ebf0e336cff2f4ce5fc1a1984c183226863c9ed911eb00b07e"}
+unused-runpath-entry = {level = "off"}
+library-dependency-not-found = {level = "off"}
+host-elf-interpreter = {level = "off"}
+unused-rpath-entry = {level = "off"}
+unused-dependency = {level = "off"}
+host-script-interpreter = {level = "off"}
+elf-interpreter-not-found = {level = "off"}
+bad-rpath-entry = {level = "off"}

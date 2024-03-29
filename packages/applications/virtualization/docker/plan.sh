@@ -6,7 +6,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://download.docker.com/linux/static/stable/${pkg_target%%-*}/${pkg_name}-${pkg_version}.tgz"
 pkg_upstream_url="https://docs.docker.com/engine/installation/binaries/"
-pkg_shasum="2c75cd6c3dc9b81cb5bde664c882e4339a2054e09cf09606f9f7dd6970e7f078"
+pkg_shasum="945c3a3ddcb79ee7307496c2f39eb3d8372466e8654e63d60bbb462e4a3c1427"
 pkg_dirname="docker"
 pkg_bin_dirs=(bin)
 

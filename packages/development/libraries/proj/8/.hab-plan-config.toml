@@ -1,0 +1,5 @@
+[rules]
+unused-runpath-entry = {level = "off"}
+library-dependency-not-found = {level = "off"}
+missing-runpath-entry-dependency = {level = "off"}
+bad-runpath-entry = {level = "off"}

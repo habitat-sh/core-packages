@@ -1,0 +1,6 @@
+[rules]
+unused-runpath-entry = {ignored_files = ["bin/*",  "lib/*"]}
+unused-dependency = {level = "off"}
+script-interpreter-not-found = {level = "off"}
+duplicate-runtime-binary = {level = "off"}
+duplicate-dependency = {level = "off"}

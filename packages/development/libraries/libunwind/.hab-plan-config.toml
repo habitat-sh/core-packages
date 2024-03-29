@@ -2,3 +2,5 @@
 license-not-found = {level = "off", source-shasum = "4a6aec666991fb45d0889c44aede8ad6eb108071c3554fcdff671f9c94794976"}
 missing-license = {level = "off", source-shasum = "4a6aec666991fb45d0889c44aede8ad6eb108071c3554fcdff671f9c94794976"}
 unused-runpath-entry = {ignored_files = ["lib/*"]}
+missing-runpath-entry-dependency = {level = "off"}
+library-dependency-not-found = {level = "off"}

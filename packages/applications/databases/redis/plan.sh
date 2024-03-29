@@ -31,8 +31,7 @@ pkg_exports=(
 	[port]=port
 )
 pkg_exposes=(port)
-pkg_include_dirs=(include)
-pkg_lib_dirs=(lib)
+
 
 do_build() {
 	make distclean

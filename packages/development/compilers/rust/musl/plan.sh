@@ -23,7 +23,7 @@ pkg_build_deps=(
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
-pkg_include_dirs=(include)
+
 
 do_build() {
 	return 0
