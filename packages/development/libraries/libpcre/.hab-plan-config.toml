@@ -1,4 +1,0 @@
-[rules]
-# There are additional runtime paths due to gcc-libs and --as-needed links against libgcc_s
-missing-runpath-entry-dependency = {level = "off"}
-unused-runpath-entry = {level = "off"}

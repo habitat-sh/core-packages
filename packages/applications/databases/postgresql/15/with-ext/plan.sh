@@ -26,7 +26,7 @@ extension_pkgs=$(
 )
 
 all_pkgs=(${extension_pkgs[@]})
-all_pkgs+=("$core_pkg")
+
 
 # Set the pkg_deps to the pkg_deps of the core
 pkg_deps=($(
@@ -63,7 +63,8 @@ pkg_exports=(
 	[superuser_password]=superuser.password
 )
 pkg_exposes=(port)
-
+# Add core plan here to avoid duplicate dependency and use in the install function
+all_pkgs+=("$core_pkg")
 do_build() {
 	return 0
 }

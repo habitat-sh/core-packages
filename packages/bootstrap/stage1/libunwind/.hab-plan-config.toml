@@ -1,3 +1,0 @@
-[rules]
-unused-runpath-entry = {level = "off"}
-duplicate-runtime-binary = {level = "off"}

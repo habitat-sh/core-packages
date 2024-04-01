@@ -26,7 +26,7 @@ pkg_deps=(
 	core/libxml2
 	core/openssl
 	core/lz4
-	core/proj8
+	core/proj
 	core/xz
 	core/zlib
 	core/zstd

@@ -18,8 +18,8 @@ pkg_deps=(
 	core/glibc
 	core/openssl
 	core/libidn2
+	core/pcre2
 	core/libpsl
-	core/pcre
 	core/zlib
 )
 

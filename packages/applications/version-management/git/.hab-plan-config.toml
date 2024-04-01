@@ -1,6 +1,4 @@
 [rules]
-# TODO: Remove this once openssl11 and openssl are unified on all platforms to OpenSSL 3.0
-duplicate-runtime-binary = {primary_packages = ["core/openssl"]}
 # Ignore sample scripts
 host-script-interpreter = {ignored_files = ["share/**/*.sample"]}
 license-not-found = {level = "off", source-shasum = "ae8d3427e4ccd677abc931f16183c0ec953e3bfcd866493601351e04a2b97398"}

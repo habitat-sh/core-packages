@@ -13,7 +13,7 @@ pkg_deps=(
 	core/libjpeg-turbo
 	core/libtiff
 	core/jbigkit
-	core/proj8
+	core/proj
 )
 pkg_build_deps=(
 	core/coreutils

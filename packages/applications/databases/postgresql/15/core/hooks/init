@@ -1,4 +1,4 @@
-#!$(pkg_path_for bash)/bin/bash
+#!{{pkgPathFor "core/bash"}}/bin/bash
 #
 shopt -s extglob
 
