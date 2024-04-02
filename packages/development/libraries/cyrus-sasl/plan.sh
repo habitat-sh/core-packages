@@ -3,19 +3,17 @@ pkg_origin="core"
 pkg_version="2.1.28"
 pkg_description="Cyrus Simple Authentication Service Layer (SASL) library"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=("custom") # 4-Clause-BSD-like, see http://www.cyrusimap.org/mediawiki/index.php/Downloads#Licensing
+pkg_license=("BSD-3-Clause-Attribution") # 4-Clause-BSD-like, see http://www.cyrusimap.org/mediawiki/index.php/Downloads#Licensing
 pkg_upstream_url="http://www.cyrusimap.org/"
 pkg_source="https://ftp.osuosl.org/pub/blfs/conglomeration/cyrus-sasl/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="7ccfc6abd01ed67c1a0924b353e526f1b766b21f42d4562ee635a8ebfc5bb38c"
 pkg_deps=(
 	core/glibc
 	core/openssl
+	core/gdbm
 )
 pkg_build_deps=(
 	core/gcc
-	core/gdbm
-	core/make
-	core/patch
 )
 pkg_bin_dirs=(sbin)
 pkg_include_dirs=(include)

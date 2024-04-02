@@ -5,7 +5,7 @@ pkg_description="Git is a free and open source distributed version control
   system designed to handle everything from small to very large projects with
   speed and efficiency."
 pkg_upstream_url="https://git-scm.com/"
-pkg_license=('GPL-2.0')
+pkg_license=('GPL-2.0-only' 'LGPL-2.1-only')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://www.kernel.org/pub/software/scm/git/${pkg_name}-${pkg_version}.tar.gz"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
@@ -33,7 +33,7 @@ pkg_build_deps=(
 	core/python
 	core/texinfo
 )
-pkg_lib_dirs=(lib)
+
 pkg_bin_dirs=(bin)
 
 do_prepare() {

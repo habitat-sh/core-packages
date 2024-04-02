@@ -53,14 +53,19 @@ do_install() {
 }
 
 wrap_binary() {
-	local binary="$1"
-	local env_prefix="NATIVE_CROSS_BINUTILS"
+	local binary
+	local env_prefix
 
 	local hab_ld_wrapper
+	local wrapper_binary
+	local actual_binary
+
+	binary="$1"
+	env_prefix="NATIVE_CROSS_BINUTILS"
 	hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
 
-	local wrapper_binary="$pkg_prefix/bin/$binary"
-	local actual_binary="$pkg_prefix/bin/$binary.real"
+	wrapper_binary="$pkg_prefix/bin/$binary"
+	actual_binary="$pkg_prefix/bin/$binary.real"
 
 	build_line "Adding wrapper for $binary"
 	mv -v "$wrapper_binary" "$actual_binary"

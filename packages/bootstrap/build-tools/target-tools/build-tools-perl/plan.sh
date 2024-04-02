@@ -17,10 +17,19 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/build-tools-gcc
+	core/build-tools-coreutils
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_interpreters=(bin/perl bin/perl5.36.0)
+
+do_prepare() {
+
+	#  Make Cwd work with the `pwd` command from `coreutils` (we cannot rely
+	#  on `/bin/pwd` exisiting in an environment)
+	sed -i "s,'/bin/pwd','$(pkg_path_for build-tools-coreutils)/bin/pwd',g" \
+		dist/PathTools/Cwd.pm
+}
 
 do_build() {
 	sh Configure \

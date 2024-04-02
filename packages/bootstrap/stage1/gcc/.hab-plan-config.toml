@@ -1,0 +1,9 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff"}
+missing-license = {level = "off", source-shasum = "e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff"}
+# # core/binutils-stage0 and hab-cc-wrapper are used at runtime
+unused-dependency = {ignored_packages = [
+    "core/binutils-stage0",
+    "core/hab-cc-wrapper"
+]}
+unused-runpath-entry = {level = "off"}

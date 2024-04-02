@@ -1,0 +1,5 @@
+[rules]
+missing-license = {level = "off", source-shasum = '26c995dd0f167e48b11961d891ee555f680c175f7173ff8cb829f4ebcde4c1a6'}
+# TZ data is used at runtime
+unused-dependency = {ignored_packages = ["core/tzdata"]}
+unused-runpath-entry = {level = "off"}

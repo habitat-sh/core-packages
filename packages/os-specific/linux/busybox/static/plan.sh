@@ -5,7 +5,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-2.0")
 pkg_source="https://busybox.net/downloads/busybox-1.35.0.tar.bz2"
 pkg_shasum="faeeb244c35a348a334f4a59e44626ee870fb07b6884d68c10ae8bc19f83a694"
-pkg_dirname="busybox-1.35.0"
+pkg_dirname="busybox-${pkg_version}"
 pkg_bin_dirs=(bin)
 pkg_interpreters=(
 	bin/ash
@@ -17,13 +17,13 @@ pkg_interpreters=(
 
 pkg_build_deps=(
 	core/bzip2
-	core/coreutils
 	core/gcc
-	core/make
 )
 
 do_prepare() {
 	export LDFLAGS="--static"
+
+	build_line "Setting LDFLAGS=${LDFLAGS}"
 }
 
 do_build() {

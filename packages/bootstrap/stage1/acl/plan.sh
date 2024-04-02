@@ -16,10 +16,6 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_build_deps=(
 	core/gcc
 	core/attr-stage1
-	core/build-tools-make
-	core/build-tools-grep
-	core/build-tools-sed
-	core/build-tools-coreutils
 )
 
 pkg_include_dirs=(include)

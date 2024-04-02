@@ -6,7 +6,7 @@ pkg_version="8.6.12"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Tool Command Language -- A dynamic programming language."
 pkg_upstream_url="http://tcl.sourceforge.net/"
-pkg_license=('custom')
+pkg_license=('TCL')
 pkg_source="http://downloads.sourceforge.net/sourceforge/${program}/${program}${pkg_version}-src.tar.gz"
 pkg_shasum="26c995dd0f167e48b11961d891ee555f680c175f7173ff8cb829f4ebcde4c1a6"
 pkg_dirname="${program}${pkg_version}"
@@ -17,13 +17,7 @@ pkg_deps=(
 	core/tzdata
 )
 pkg_build_deps=(
-	core/coreutils
-	core/diffutils
 	core/gcc
-	core/grep
-	core/make
-	core/patch
-	core/sed
 	core/build-tools-util-linux
 )
 pkg_bin_dirs=(bin)
@@ -31,11 +25,15 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
-do_build() {
-	pushd unix >/dev/null || exit 1
-
+do_prepare() {
 	# Link libgcc_s so that libpthread works
 	export LDFLAGS="-lgcc_s ${LDFLAGS}"
+
+	build_line "Setting LDFLAGS=${LDFLAGS}"
+}
+
+do_build() {
+	pushd unix >/dev/null || exit 1
 
 	./configure \
 		--prefix="$pkg_prefix" \
@@ -50,6 +48,9 @@ do_build() {
 	#
 	# Thanks to: https://clfs.org/~kb0iic/lfs-systemd/chapter08/tcl.html
 	local srcdir
+	local tdbcver
+	local itclver
+
 	srcdir=$(abspath ..)
 	local tdbcver=tdbc1.1.3
 	local itclver=itcl4.2.2

@@ -16,14 +16,10 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
 	core/glibc
-	core/bash-static
-	core/libpcre2
+	core/pcre2
 )
 pkg_build_deps=(
-	core/coreutils
-	core/diffutils
 	core/gcc
-	core/make
 	core/pkg-config
 	core/build-tools-perl
 )
@@ -45,7 +41,4 @@ do_check() {
 
 do_install() {
 	make install
-	# Fix scripts
-	fix_interpreter "${pkg_prefix}"/bin/egrep core/bash-static bin/sh
-	fix_interpreter "${pkg_prefix}"/bin/fgrep core/bash-static bin/sh
 }

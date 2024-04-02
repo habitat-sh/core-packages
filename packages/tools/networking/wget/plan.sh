@@ -18,8 +18,8 @@ pkg_deps=(
 	core/glibc
 	core/openssl
 	core/libidn2
+	core/pcre2
 	core/libpsl
-	core/libpcre2
 	core/zlib
 )
 
@@ -27,10 +27,7 @@ pkg_build_deps=(
 	core/coreutils
 	core/gcc
 	core/gettext
-	core/grep
-	core/make
 	core/pkg-config
-	core/sed
 	core/build-tools-perl
 )
 

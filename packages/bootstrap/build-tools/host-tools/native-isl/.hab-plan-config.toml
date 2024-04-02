@@ -1,2 +1,3 @@
+docker-image = "hab-bootstrap:20230523"
 [rules]
 library-dependency-not-found = "off"

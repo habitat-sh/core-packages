@@ -1,6 +1,6 @@
-pkg_name=openssl-fips
-pkg_origin=core
-pkg_version=2.0.16
+pkg_name="openssl-fips"
+pkg_origin="core"
+pkg_version="2.0.16"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The OpenSSL FIPS Object Module v2.0 provide cryptographic services to \
@@ -10,7 +10,7 @@ designed for use in conjunction with standard OpenSSL 1.0.1 and 1.0.2 \
 distributions. \
 "
 pkg_upstream_url="https://www.openssl.org"
-pkg_license=('Apache-2.0')
+pkg_license=('OpenSSL')
 pkg_source="https://www.openssl.org/source/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="a3cd13d0521d22dd939063d3b4a0d4ce24494374b91408a05bdaca8b681c63d4"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
@@ -19,7 +19,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/make
-	core/build-tools-perl
+	core/perl
 	core/gcc
 )
 pkg_bin_dirs=(bin)
@@ -27,14 +27,14 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_build() {
-	pushd "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}"
+	pushd "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}" || exit 1
 	./config
 	make
-	popd
+	popd || exit 1
 }
 
 do_install() {
-	pushd "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}"
+	pushd "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}" || exit 1
 	make INSTALLTOP="$pkg_prefix" install
-	popd
+	popd || exit 1
 }

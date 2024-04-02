@@ -12,15 +12,11 @@ pkg_deps=(
 	core/gcc-libs
 	core/python
 	core/bash
-	core/zlib
+	core/coreutils
 
 )
 pkg_build_deps=(
 	core/gcc
-	core/grep
-	core/make
-	core/which
-	core/zlib
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -36,7 +32,7 @@ do_prepare() {
 do_build() {
 	./configure \
 		--prefix "${pkg_prefix}" \
-		--dest-cpu "arm64" \
+		--dest-cpu "x64" \
 		--dest-os "linux"
 
 	make -j"$(nproc)"
@@ -47,6 +43,12 @@ do_install() {
 
 	# Node produces a lot of scripts that hardcode `/usr/bin/env`, so we need to
 	# fix that everywhere to point directly at the env binary in core/coreutils.
+	grep -nrlI '^\#\!.*bin/env' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/env|#!$(pkg_path_for coreutils)/bin/env|" -i "$target"
+	done
+	grep -nrlI '^\#\!.*bin/bash' "$pkg_prefix" | while read -r target; do
+		sed -e "s|#!.*bin/bash|#!$(pkg_path_for bash)/bin/bash|" -i "$target"
+	done
 	grep -nrlI '^\#\!/usr/bin/env' "$pkg_prefix" | while read -r target; do
 		sed -e "s#\#\!/usr/bin/env node#\#\!${pkg_prefix}/bin/node#" -i "$target"
 		sed -e "s#\#\!/usr/bin/env sh#\#\!$(pkg_path_for bash)/bin/sh#" -i "$target"

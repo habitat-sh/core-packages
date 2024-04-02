@@ -15,12 +15,8 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/gcc-stage1
-	core/build-tools-coreutils
-	core/build-tools-make
+	core/gcc-stage1-with-glibc
 	core/build-tools-bison
-	core/build-tools-sed
-	core/build-tools-grep
 	core/build-tools-texinfo
 	core/build-tools-m4
 )

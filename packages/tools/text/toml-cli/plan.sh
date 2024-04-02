@@ -13,25 +13,28 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
 	core/rust
-	core/gcc
 )
 pkg_bin_dirs=(bin)
 
 do_prepare() {
 	# Add flags to build a static binary with the C runtime linked in
 	export RUSTFLAGS='-C target-feature=+crt-static'
+	export CARGO_HOME="$HAB_CACHE_SRC_PATH/$pkg_dirname/.cargo"
+	export CARGO_TARGET_DIR="$HAB_CACHE_SRC_PATH/$pkg_dirname/target"
+
 	build_line "Setting RUSTFLAGS=${RUSTFLAGS}"
+	build_line "Setting CARGO_HOME=${CARGO_HOME}"
+	build_line "Setting CARGO_TARGET_DIR=${CARGO_TARGET_DIR}"
 }
 
 do_build() {
-	cargo build \
-		--release \
-		--target="${TARGET_ARCH:-${pkg_target%%-*}}-unknown-linux-gnu"
+	return 0
 }
 
 do_install() {
 	cargo install \
 		--path . \
 		--root "${pkg_prefix}" \
+		--locked \
 		--target="${TARGET_ARCH:-${pkg_target%%-*}}-unknown-linux-gnu"
 }

@@ -10,18 +10,23 @@ and PKZIP.\
 "
 pkg_upstream_url="http://www.zlib.net/"
 pkg_license=('Zlib')
-pkg_source="http://zlib.net/${program}-${pkg_version}.tar.gz"
+pkg_source="https://github.com/madler/${program}/releases/download/v${pkg_version}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="b3a24de97a8fdbc835b9833169501030b8977031bcb54b3b3ac13740f846ab30"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
 	core/gcc-stage0
-	core/build-tools-coreutils
-	core/build-tools-make
 )
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+
+do_prepare() {
+	# The "-fPIC" flag is essential for the generation of libz.a archive.
+	# Without it, the generated archive cannot be linked into shared libraries
+	# on certain platforms.
+	export CFLAGS="-fPIC"
+}
 
 do_install() {
 	make install

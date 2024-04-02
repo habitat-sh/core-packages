@@ -4,7 +4,7 @@ pkg_origin="core"
 pkg_name="zstd"
 pkg_version="1.5.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('BSD-3-Clause')
+pkg_license=('BSD-3-Clause OR GPL-2.0-only')
 pkg_description="Zstandard is a real-time compression algorithm, providing high compression ratios. " \
 	"It offers a very wide range of compression / speed trade-off, while being backed by a very fast decoder"
 pkg_upstream_url="http://facebook.github.io/zstd/"
@@ -16,7 +16,6 @@ pkg_deps=(
 	core/grep
 	core/glibc
 	core/less
-	core/bash-static
 )
 
 pkg_build_deps=(
@@ -48,7 +47,4 @@ do_check() {
 do_install() {
 	make install
 
-	# Fix interpreters
-	fix_interpreter "${pkg_prefix}/zstdgrep" core/bash-static bin/sh
-	fix_interpreter "${pkg_prefix}/zstdless" core/bash-static bin/sh
 }

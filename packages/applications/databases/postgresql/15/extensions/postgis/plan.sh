@@ -25,6 +25,7 @@ pkg_deps=(
 	core/protobuf-c
 	core/xz
 	core/zlib
+	core/postgresql15
 )
 
 pkg_build_deps=(
@@ -34,7 +35,6 @@ pkg_build_deps=(
 	core/gcc
 	core/git
 	core/pkg-config
-	core/postgresql15
 	core/sed
 	core/which
 )

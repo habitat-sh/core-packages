@@ -1,18 +1,14 @@
 pkg_name="docker"
 pkg_description="The Docker Engine"
 pkg_origin="core"
-pkg_version="20.10.22"
+pkg_version="26.0.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('Apache-2')
+pkg_license=('Apache-2.0')
 pkg_source="https://download.docker.com/linux/static/stable/${pkg_target%%-*}/${pkg_name}-${pkg_version}.tgz"
 pkg_upstream_url="https://docs.docker.com/engine/installation/binaries/"
-pkg_shasum="2c75cd6c3dc9b81cb5bde664c882e4339a2054e09cf09606f9f7dd6970e7f078"
+pkg_shasum="d69e8eedc72d6d219933ab53b8e7f2dbd9e64695d5db68a2df17333db433c456"
 pkg_dirname="docker"
 pkg_bin_dirs=(bin)
-
-pkg_build_deps=(
-	core/coreutils
-)
 
 do_build() {
 	return 0

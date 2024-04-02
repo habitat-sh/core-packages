@@ -20,12 +20,9 @@ pkg_deps=(
 	core/zstd
 )
 pkg_build_deps=(
-	core/make
 	core/gcc
-	core/grep
 	core/perl
 	core/python
-	core/diffutils
 )
 pkg_bin_dirs=(bin)
 

@@ -4,3 +4,4 @@ license-not-found = { level = "off", source-shasum = "da24a84fef220102dd24042df0
 # The hab-ld-wrapper binary is used at runtime to process arguments
 # Bash is needed as a runtime interpreter for the ld-wrapper.sh script
 unused-dependency = { ignored_packages = ["core/hab-ld-wrapper", "core/build-tools-bash-static"] }
+unused-runpath-entry = {level = "off"}

@@ -12,6 +12,16 @@ pkg_dirname="linux-$pkg_version"
 pkg_include_dirs=(include)
 
 do_build() {
+	local arch
+	arch="$(uname -m)"
+	case ${arch} in
+	x86_64)
+		arch="x86"
+		;;
+	aarch64)
+		arch="arm64"
+		;;
+	esac
 	make headers
 }
 

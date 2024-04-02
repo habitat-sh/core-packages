@@ -13,7 +13,6 @@ pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="bcd221fdb2d807a8a09938a0f8d5e010ebd2b58fca16075483d6fcb78db2c6b2"
 pkg_deps=(
-	core/bash-static
 	core/gawk
 	core/glibc
 	core/ncurses
@@ -52,7 +51,4 @@ do_check() {
 
 do_install() {
 	make install
-
-	# Fix shell scripts
-	fix_interpreter "${pkg_prefix}/bin/*" core/bash-static bin/sh
 }
