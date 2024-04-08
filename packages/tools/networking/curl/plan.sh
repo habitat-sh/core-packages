@@ -27,7 +27,6 @@ pkg_build_deps=(
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-#pkg_interpreters=(bin/env bin/coreutils)
 
 do_prepare() {
 	# Patch the zsh-generating program to use our perl at build time
