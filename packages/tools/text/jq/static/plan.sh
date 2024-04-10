@@ -29,7 +29,7 @@ do_unpack() {
 
 do_prepare() {
 	export ACLOCAL_PATH="$(pkg_path_for libtool)/share/aclocal"
-	#LDFLAGS="-all-static"
+	LDFLAGS="--static"
 }
 
 do_build() {
