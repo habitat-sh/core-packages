@@ -26,7 +26,7 @@ pkg_build_deps=(
 	core/gcc
 )
 pkg_bin_dirs=(bin)
-#pkg_interpreters=(bin/awk bin/gawk)
+pkg_interpreters=(bin/awk bin/gawk)
 
 do_build() {
 	./configure --prefix="$pkg_prefix"
