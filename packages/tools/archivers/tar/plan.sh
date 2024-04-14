@@ -45,3 +45,10 @@ do_check() {
 	chown -R hab .
 	su hab -c "PATH=$PATH FULL_TEST=1 make check"
 }
+
+do_install() {
+	do_default_install
+
+	# copy license files to package
+	install -Dm644 ${CACHE_PATH}/COPYING ${pkg_prefix}
+}
