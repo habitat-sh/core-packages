@@ -47,3 +47,10 @@ do_prepare() {
 do_check() {
 	make check
 }
+
+do_install() {
+	do_default_install
+
+	# add license files to package
+	cp ${CACHE_PATH}/COPYING ${pkg_prefix}
+}
