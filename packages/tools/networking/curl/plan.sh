@@ -1,13 +1,13 @@
 pkg_name="curl"
 pkg_origin="core"
-pkg_version="7.87.0"
+pkg_version="8.6.0"
 pkg_description="curl is an open source command line tool and library for
   transferring data with URL syntax."
 pkg_upstream_url="https://curl.haxx.se/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('curl')
 pkg_source="https://curl.haxx.se/download/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="8a063d664d1c23d35526b87a2bf15514962ffdd8ef7fd40519191b3c23e39548"
+pkg_shasum="9c6db808160015f30f3c656c0dec125feb9dc00753596bf858a272b5dd8dc398"
 pkg_deps=(
 	core/cacerts
 	core/glibc
@@ -17,6 +17,7 @@ pkg_deps=(
 	core/nghttp2
 	core/libidn2
 	core/libpsl
+	core/coreutils
 )
 pkg_build_deps=(
 	core/gcc
@@ -30,6 +31,11 @@ pkg_lib_dirs=(lib)
 do_prepare() {
 	# Patch the zsh-generating program to use our perl at build time
 	sed -i "s,/usr/bin/env/perl,$(pkg_path_for perl)/bin/perl,g" scripts/completion.pl
+
+	# Replace /usr/bin/env with our coreutils env in scripts prior to build
+    grep -lr '/usr/bin/env' . | while read -r f; do
+		fix_interpreter "$f" core/coreutils bin/env
+	done
 
 	# Stop configuration warnings due to incorrect use of CFLAGS and CXXFLAGS
 	unset CFLAGS
@@ -52,4 +58,11 @@ do_build() {
 		--without-gnutls \
 		--without-librtmp
 	make
+}
+
+do_install () {
+	do_default_install
+
+	# copy license files to package
+	install -Dm644 ${CACHE_PATH}/COPYING ${pkg_prefix}
 }
