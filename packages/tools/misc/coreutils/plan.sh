@@ -2,7 +2,7 @@ program="coreutils"
 
 pkg_name="coreutils"
 pkg_origin="core"
-pkg_version="9.1"
+pkg_version="9.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Core Utilities are the basic file, shell and text manipulation \
@@ -12,7 +12,7 @@ expected to exist on every operating system.\
 pkg_upstream_url="https://www.gnu.org/software/coreutils/"
 pkg_license=("GPL-3.0-or-later")
 pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}.tar.xz"
-pkg_shasum="61a1f410d78ba7e7f37a5a4f50e6d1320aca33375484a3255eddf17a38580423"
+pkg_shasum="ea613a4cf44612326e917201bbbcdfbd301de21ffc3b59b6e5c07e040b275e52"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
@@ -56,4 +56,10 @@ do_check() {
 
 	# Compile and run the expensive tests as the hab user
 	su hab -c "PATH=$PATH make RUN_EXPENSIVE_TESTS=yes check"
+}
+
+do_install() {
+	do_default_install
+
+	install -Dm644 ${CACHE_PATH}/COPYING ${pkg_prefix}
 }
