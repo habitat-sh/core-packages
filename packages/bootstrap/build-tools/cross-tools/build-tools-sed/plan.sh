@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-sed"
 pkg_origin="core"
-pkg_version="4.8"
+pkg_version="4.9"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 sed (stream editor) is a non-interactive command-line text editor. sed is \
@@ -13,9 +13,9 @@ typically used for extracting part of a file using pattern matching or \
 substituting multiple occurrences of a string within a file.\
 "
 pkg_upstream_url="https://www.gnu.org/software/sed/"
-pkg_license=("GPL-3.0-or-later")
+pkg_license=('GPL-3.0-only')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
-pkg_shasum="f79b0cfea71b37a8eeec8490db6c5f7ae7719c35587f21edb0617f370eeff633"
+pkg_shasum="6e226b732e1cd739464ad6862bd1a1aba42d7982922da7a53519631d24975181"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
@@ -37,4 +37,11 @@ do_build() {
 
 do_check() {
 	make check
+}
+
+do_install() {
+	do_default_install
+
+	# copy license files to package
+	install -Dm644 ${CACHE_PATH}/COPYING ${pkg_prefix}
 }
