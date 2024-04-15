@@ -2,7 +2,7 @@ pkg_name="aws-cli"
 pkg_origin="core"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
-pkg_version="1.31.4"
+pkg_version="2.15.38"
 pkg_description="The AWS Command Line Interface (CLI) is a unified tool to \
   manage your AWS services. With just one tool to download and configure, you \
   can control multiple AWS services from the command line and automate them \
@@ -24,6 +24,8 @@ do_prepare() {
 	python -m venv "$pkg_prefix"
 	# shellcheck source=/dev/null
 	source "$pkg_prefix/bin/activate"
+	# remove include directory
+	rm -rf ${pkg_prefix}/include
 }
 
 do_build() {
@@ -31,9 +33,9 @@ do_build() {
 }
 
 do_install() {
-	pip install "awscli==$pkg_version"
+	python -m pip install awscli
 	# Write out versions of all pip packages to package
-	pip freeze >"$pkg_prefix/requirements.txt"
+	python -m pip freeze >"$pkg_prefix/requirements.txt"
 }
 
 do_strip() {
