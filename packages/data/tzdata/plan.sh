@@ -36,7 +36,7 @@ do_install() {
 		zic -L /dev/null -d "${pkg_prefix}"/share/zoneinfo/posix ${tz}
 		zic -L leapseconds -d "${pkg_prefix}"/share/zoneinfo/right ${tz}
 	done
-
+	cp ${CACHE_PATH}/LICENSE "${pkg_prefix}"
 	cp -v zone.tab zone1970.tab iso3166.tab "${pkg_prefix}"/share/zoneinfo
 	zic -d "${pkg_prefix}"/share/zoneinfo -p America/New_York
 }
