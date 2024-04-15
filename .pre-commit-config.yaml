@@ -1,6 +1,19 @@
+exclude: '.patch$'
 repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-yaml
+        exclude: config/.*$
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        exclude: .*\.patch
   - repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.6.0-1
+    rev: v3.8.0-1
     hooks:
       - id: shfmt-docker
         exclude: (ld|cc)-wrapper.sh$
