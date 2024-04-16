@@ -2,7 +2,7 @@ program="openssl"
 
 pkg_name="openssl"
 pkg_origin="core"
-pkg_version="3.0.7"
+pkg_version="3.0.9"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 OpenSSL is an open source project that provides a robust, commercial-grade, \
@@ -13,7 +13,7 @@ library.\
 pkg_upstream_url="https://www.openssl.org"
 pkg_license=('Apache-2.0')
 pkg_source="https://www.openssl.org/source/${program}-${pkg_version}.tar.gz"
-pkg_shasum="83049d042a260e696f62406ac5c08bf706fd84383f945cf21bd61e9ed95c396e"
+pkg_shasum="eb1ab04781474360f77c318ab89d8c5a03abc38e63d65a603cabbf1b00a1dc90"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc
@@ -34,10 +34,6 @@ pkg_pconfig_dirs=(lib64/pkgconfig)
 
 do_prepare() {
 	patch -p1 <"$PLAN_CONTEXT/hab-ssl-cert-file.patch"
-
-	# Apply all reported CVE patches for OpenSSL version 3.0.7
-	# https://www.openssl.org/news/vulnerabilities-3.0.html
-	patch -p1 <"$PLAN_CONTEXT/CVE-2022-3996.patch"
 
 	export CROSS_SSL_ARCH="${native_target}"
 	PERL=$(pkg_path_for core/build-tools-perl)/bin/perl
