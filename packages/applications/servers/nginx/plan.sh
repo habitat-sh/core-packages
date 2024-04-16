@@ -9,14 +9,12 @@ pkg_upstream_url=https://nginx.org/
 pkg_shasum="64c5b975ca287939e828303fa857d22f142b251f17808dfe41733512d9cded86"
 pkg_deps=(
 	core/glibc
-    core/zlib 
-    core/openssl 
-    core/pcre2 
+	core/zlib
+	core/openssl
+	core/pcre2
 	core/libedit
 	core/ncurses
-	core/bzip2
-	
-	
+	core/bzip2	
 )
 pkg_build_deps=(
 	core/gcc
