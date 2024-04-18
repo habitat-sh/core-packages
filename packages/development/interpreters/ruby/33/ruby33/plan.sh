@@ -41,7 +41,6 @@ do_prepare() {
 	grep -lr '/usr/bin/env' . | while read -r f; do
 		sed -e "s,/usr/bin/env,$(pkg_interpreter_for coreutils bin/env),g" -i "$f"
 	done
-	patch -p1 <"$PLAN_CONTEXT/dont-refer-to-build-dir.patch"
 	build_line "Setting CFLAGS='$CFLAGS'"
 }
 
