@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-ncurses"
 pkg_origin="core"
-pkg_version="6.3"
+pkg_version="6.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 ncurses (new curses) is a programming library providing an application \
@@ -13,7 +13,7 @@ user interfaces in a terminal-independent manner.\
 pkg_upstream_url="https://www.gnu.org/software/ncurses/"
 pkg_license=('LicenseRef-ncurses')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="97fc51ac2b085d4cde31ef4d2c3122c21abc217e9090a43a30fc5ec21684e059"
+pkg_shasum="6931283d9ac87c5073f30b6290c4c75f21632bb4fc3603ac8100812bed248159"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/build-tools-libstdcxx
