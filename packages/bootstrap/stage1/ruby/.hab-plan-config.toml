@@ -1,0 +1,13 @@
+[rules]
+# ignore template's interpreters
+env-script-interpreter-not-found = {ignored_files = [
+    "lib/ruby/*/bundler/templates/*", "lib/ruby/gems/3.2.0/gems/prime-0.1.2/bin/setup"
+]}
+license-not-found = {level = "off", source-shasum = "13d67901660ee3217dbd9dd56059346bd4212ce64a69c306ef52df64935f8dbd"}
+missing-license = {level = "off", source-shasum = "13d67901660ee3217dbd9dd56059346bd4212ce64a69c306ef52df64935f8dbd"}
+# core/ncurses: The paths for these packages get written into 'lib/ruby/<version>/<arch>/rbconfig.rb' and
+# potentially affects further building of gems with the mkmf gem.
+# core/nss-myhostname: This is apparently required at runtime, for some DNS lookup behaviour?
+# https://github.com/habitat-sh/core-plans/commit/7761ccef724292640d14143ccb0cd5466e877fa5
+unused-dependency = {ignored_packages = ["core/{ncurses,nss-myhostname}"]}
+unused-runpath-entry = {level = "off"}
