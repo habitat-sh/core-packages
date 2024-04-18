@@ -11,7 +11,7 @@ and PKZIP.\
 pkg_upstream_url="http://www.zlib.net/"
 pkg_license=('Zlib')
 pkg_source="http://zlib.net/${program}-${pkg_version}.tar.gz"
-pkg_shasum="6931283d9ac87c5073f30b6290c4c75f21632bb4fc3603ac8100812bed248159"
+pkg_shasum="9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
