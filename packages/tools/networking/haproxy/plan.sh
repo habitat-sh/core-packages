@@ -1,3 +1,5 @@
+program="haproxy"
+
 pkg_name=haproxy
 pkg_origin=core
 pkg_description="The Reliable, High Performance TCP/HTTP Load Balancer"
