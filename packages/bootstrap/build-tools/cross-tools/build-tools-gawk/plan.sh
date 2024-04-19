@@ -11,7 +11,7 @@ it possible to handle simple data-reformatting jobs with just a few lines of \
 code.\
 "
 pkg_upstream_url="http://www.gnu.org/software/gawk/"
-pkg_license=('GPL-3.0-only' 'LGPL-2.0-only')
+pkg_license=('GPL-3.0-or-later' 'LGPL-2.0-only')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="378f8864ec21cfceaa048f7e1869ac9b4597b449087caf1eb55e440d30273336"
 pkg_dirname="${program}-${pkg_version}"

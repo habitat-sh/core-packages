@@ -12,7 +12,7 @@ programs to provide modular and powerful directory search and file locating \
 capabilities to other commands.\
 "
 pkg_upstream_url="http://www.gnu.org/software/findutils"
-pkg_license=('GPL-3.0-or-later')
+pkg_license=('GPL-3.0-only')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
 pkg_shasum="a2bfb8c09d436770edc59f50fa483e785b161a3b7b9d547573cb08065fd462fe"
 pkg_dirname="${program}-${pkg_version}"

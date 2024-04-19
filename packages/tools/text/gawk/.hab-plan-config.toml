@@ -1,2 +1,2 @@
 [rules]
-unused-runpath-entry = {ignored_files = ["lib/gawk/{fork,rwarray,readfile,readdir,time,revoutput}.*", "libexec/awkpwcat"]}
+unused-runpath-entry = {ignored_files = ["lib/gawk/*.so", "libexec/{awk,gawk}/{pwcat,grcat}"]}
