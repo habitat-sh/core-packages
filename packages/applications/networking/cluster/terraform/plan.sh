@@ -1,3 +1,5 @@
+program="terraform"
+
 pkg_name=terraform
 pkg_origin=core
 pkg_version=1.7.3
