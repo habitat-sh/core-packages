@@ -1,6 +1,4 @@
 [rules]
-license-not-found = {level = "off", source-shasum = "64fdf23d734afad0dfe4077daca96ac51dcd697e68ae2d3d4ca6c45cb14e21ae"}
-missing-license = {level = "off", source-shasum = "64fdf23d734afad0dfe4077daca96ac51dcd697e68ae2d3d4ca6c45cb14e21ae"}
 unused-runpath-entry = {ignored_files = ["bin/*", "lib/*"]}
-unused-dependency = {level = "off"}
-script-interpreter-not-found = {level = "off"}
+unused-dependency = {ignored_packages = ["core/grep", "core/perl", "core/bash", "core/gawk"]}
+script-interpreter-not-found = {ignored_files = ["hooks/*"]}

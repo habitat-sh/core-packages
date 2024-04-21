@@ -1,6 +1,6 @@
 [rules]
 unused-runpath-entry = {ignored_files = ["bin/*",  "lib/*"]}
-unused-dependency = {level = "off"}
-script-interpreter-not-found = {level = "off"}
+script-interpreter-not-found = {ignored_files = ["hooks/*"]}
+unused-dependency = {ignored_packages = ["core/gawk", "core/grep", "core/bash", "core/postgresql15"]}
 # core/postgresql15 is required to create this package
 duplicate-runtime-binary = {primary_packages = ["core/postgresql-with-ext15"]}
