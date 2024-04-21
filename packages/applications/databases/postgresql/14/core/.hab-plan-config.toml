@@ -1,0 +1,4 @@
+[rules]
+unused-runpath-entry = {ignored_files = ["bin/*", "lib/*"]}
+unused-dependency = {ignored_packages = ["core/grep", "core/perl", "core/bash", "core/gawk"]}
+script-interpreter-not-found = {ignored_files = ["hooks/*"]}
