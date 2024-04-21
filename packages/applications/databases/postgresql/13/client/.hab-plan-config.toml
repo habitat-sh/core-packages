@@ -1,0 +1,4 @@
+[rules]
+unused-runpath-entry = {ignored_files = ["bin/*",  "lib/*"]}
+script-interpreter-not-found = {ignored_files = ["hooks/*"]}
+unused-dependency = {ignored_packages = ["core/perl", "core/libossp-uuid"]}
