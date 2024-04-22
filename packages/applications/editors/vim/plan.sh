@@ -8,7 +8,7 @@ any kind of text very efficient. It is included as "vi" with most UNIX \
 systems and with Apple OS X.\
 "
 pkg_upstream_url="http://www.vim.org/"
-pkg_license=("Vim")
+pkg_license=('Vim' 'BSD-2-Clause' 'LGPL-2.1-or-later' 'MIT' 'PSF-2.0' 'X11')
 pkg_source="http://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.tar.gz"
 pkg_shasum="ce650f829458af93a9e4e8cebea9d59e3d59132ade63c38decd6a10ecf3b5f97"
 pkg_deps=(

@@ -10,7 +10,7 @@ GNU Tar provides the ability to create tar archives, as well as various other \
 kinds of manipulation.\
 "
 pkg_upstream_url="https://www.gnu.org/software/tar/"
-pkg_license=('GPL-3.0-or-later')
+pkg_license=('GPL-3.0-only')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="14d55e32063ea9526e057fbf35fcabd53378e769787eff7919c3755b02d2b57e"
 pkg_dirname="${program}-${pkg_version}"
