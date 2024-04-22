@@ -1,6 +1,5 @@
 [rules]
 duplicate-runtime-binary = {level = "off"}
-empty-top-level-directory = {level = "off"}
 host-script-interpreter = {level = "off"}
-unused-dependency = {level = "off"}
+unused-dependency = {ignored_packages = ["core/groff"]}
 library-dependency-not-found = {level = "off"}
