@@ -6,3 +6,5 @@ unused-dependency = { ignored_packages = [
     "core/build-tools-coreutils",
     "core/build-tools-diffutils",
 ] }
+license-not-found = {level = "off", source-shasum = "7454eb6935db17c6655576c2e1b0fabefd38b4d0936e0f87f48cd062ce91a057"}
+missing-license = {level = "off", source-shasum = "7454eb6935db17c6655576c2e1b0fabefd38b4d0936e0f87f48cd062ce91a057"}

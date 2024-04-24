@@ -1,6 +1,6 @@
 pkg_name="rust"
 pkg_origin="core"
-pkg_version="1.68.2"
+pkg_version="1.68.2.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Rust is a systems programming language that runs blazingly fast, prevents \
@@ -9,7 +9,7 @@ segfaults, and guarantees thread safety.\
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
 pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
-pkg_shasum="df7c7466ef35556e855c0d35af7ff08e133040400452eb3427c53202b6731926"
+pkg_shasum="1311fa8204f895d054c23a3481de3b158a5cd3b3a6338761fee9cdf4dbf075a5"
 pkg_dirname="${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu"
 pkg_deps=(
 	core/binutils
@@ -29,7 +29,7 @@ pkg_lib_dirs=(lib)
 
 do_prepare() {
 	# Set gcc to use the correct binutils
-	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for binutils)/bin"
+	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for binutils-base)/bin"
 }
 
 do_build() {

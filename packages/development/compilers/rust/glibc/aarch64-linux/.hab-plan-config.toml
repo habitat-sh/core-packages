@@ -1,5 +1,5 @@
 [rules]
-missing-license = {level = "off", source-shasum = "df7c7466ef35556e855c0d35af7ff08e133040400452eb3427c53202b6731926"}
+missing-license = {level = "off", source-shasum = "b24d0df852490d80791a228f18c2b75f24b1e6437e6e745f85364edab245f7fa"}
 # Some rust files in the docs start with #![feature(...)] which is misinterpreted as a script
 script-interpreter-not-found = {ignored_files = ["*.rs"]}
 # The following dependencies are needed at runtime by Cargo for the associated reasons:

@@ -10,7 +10,7 @@ segfaults, and guarantees thread safety.\
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
 pkg_source="https://static.rust-lang.org/dist/${program}-${pkg_version}-aarch64-unknown-linux-gnu.tar.gz"
-pkg_shasum="1311fa8204f895d054c23a3481de3b158a5cd3b3a6338761fee9cdf4dbf075a5"
+pkg_shasum="b24d0df852490d80791a228f18c2b75f24b1e6437e6e745f85364edab245f7fa"
 pkg_dirname="${program}-${pkg_version}-aarch64-unknown-linux-gnu"
 
 pkg_bin_dirs=(bin)

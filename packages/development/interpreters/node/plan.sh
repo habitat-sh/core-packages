@@ -30,10 +30,22 @@ do_prepare() {
 }
 
 do_build() {
+	local dest_cpu
+	local dest_os
+	case $pkg_target in
+	aarch64-linux)
+		dest_cpu="arm64"
+		dest_os="linux"
+		;;
+	x86_64-linux)
+		dest_cpu="x64"
+		dest_os="linux"
+		;;
+	esac
 	./configure \
 		--prefix "${pkg_prefix}" \
-		--dest-cpu "x64" \
-		--dest-os "linux"
+		--dest-cpu "${dest_cpu}" \
+		--dest-os "${dest_os}"
 
 	make -j"$(nproc)"
 }

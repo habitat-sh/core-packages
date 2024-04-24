@@ -6,5 +6,5 @@ bad-rpath-entry = "off"
 # the hab-bootstrap docker image.
 host-elf-interpreter = "off"
 library-dependency-not-found = "off"
-missing-license = {level = "off", source-shasum = "1311fa8204f895d054c23a3481de3b158a5cd3b3a6338761fee9cdf4dbf075a5"}
+missing-license = {level = "off", source-shasum = "b24d0df852490d80791a228f18c2b75f24b1e6437e6e745f85364edab245f7fa"}
 unused-rpath-entry = "off"
