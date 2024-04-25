@@ -1,7 +1,7 @@
 program="texinfo"
 pkg_name="build-tools-texinfo"
 pkg_origin="core"
-pkg_version="6.8"
+pkg_version="7.0.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Texinfo is the official documentation format of the GNU project. It was \

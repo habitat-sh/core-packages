@@ -1,7 +1,7 @@
 program="gettext"
 pkg_name="build-tools-gettext"
 pkg_origin="core"
-pkg_version="0.21"
+pkg_version="0.22"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GNU internationalization library."
 pkg_upstream_url="http://www.gnu.org/software/gettext/"

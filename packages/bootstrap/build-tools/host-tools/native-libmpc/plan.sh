@@ -2,7 +2,7 @@ program="mpc"
 
 pkg_name="native-libmpc"
 pkg_origin="core"
-pkg_version="1.2.1"
+pkg_version="1.3.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU MPC is a C library for the arithmetic of complex numbers with arbitrarily \

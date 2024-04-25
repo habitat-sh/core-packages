@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-glibc"
 pkg_origin="core"
-pkg_version="2.34"
+pkg_version="2.38"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU C Library project provides the core libraries for the GNU system and \
@@ -81,7 +81,7 @@ do_build() {
 		--host="$native_target" \
 		--with-headers="$(pkg_path_for build-tools-linux-headers)/include" \
 		--sysconfdir="$pkg_prefix/etc" \
-		--enable-kernel=3.2 \
+		--enable-kernel=5.4 \
 		libc_cv_slibdir="$pkg_prefix"/lib \
 		libc_cv_rootsbindir="$pkg_prefix"/bin
 

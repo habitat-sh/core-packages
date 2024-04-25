@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-binutils"
 pkg_origin="core"
-pkg_version="2.37"
+pkg_version="2.41"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Binary Utilities, or binutils, are a set of programming tools for \
@@ -13,7 +13,7 @@ and assembly source code.\
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.bz2"
-pkg_shasum="67fc1a4030d08ee877a4867d3dcab35828148f87e1fd05da6db585ed5a166bd4"
+pkg_shasum="a4c4bec052f7b8370024e60389e194377f3f48b56618418ea51067f67aaab30b"
 pkg_dirname="${program}-${pkg_version}"
 pkg_bin_dirs=(
 	bin
@@ -67,7 +67,7 @@ do_prepare() {
 	# the way `ld` processes archive files.
 	# This patch should be removed once we upgrade binutils to a later version.
 	# Bug Report: https://sourceware.org/bugzilla/show_bug.cgi?id=28138
-	patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
+	# patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
 
 	build_line "Setting HAB_LD_RUN_PATH=${HAB_LD_RUN_PATH}"
 	build_line "Setting LDFLAGS_FOR_BUILD=${LDFLAGS_FOR_BUILD}"

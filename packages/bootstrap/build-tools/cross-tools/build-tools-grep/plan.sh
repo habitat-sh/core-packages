@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-grep"
 pkg_origin="core"
-pkg_version="3.7"
+pkg_version="3.11"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Grep searches one or more input files for lines containing a match to a \

@@ -1,10 +1,10 @@
 program="gcc"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
-glibc_version="2.34"
+glibc_version="2.38"
 
 pkg_name="build-tools-gcc"
 pkg_origin="core"
-pkg_version="9.4.0"
+pkg_version="13.2.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \
@@ -117,7 +117,7 @@ do_prepare() {
 	#
 	# Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/compilers/gcc/no-sys-dirs.patch
 	# shellcheck disable=SC2002
-	patch -p1 <"$PLAN_CONTEXT/no-sys-dirs.patch"
+	# patch -p1 <"$PLAN_CONTEXT/no-sys-dirs.patch"
 
 }
 

@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-python"
 pkg_distname="Python"
-pkg_version="3.10.0"
+pkg_version="3.11.4"
 pkg_origin="core"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Python-2.0.1')

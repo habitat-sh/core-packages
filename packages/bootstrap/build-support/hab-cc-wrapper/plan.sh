@@ -1,5 +1,5 @@
 # shellcheck disable=2154
-commit_hash="5d4f4bc90870dc0bcabe509badb0350ba0ee920b"
+commit_hash="f240ff4fe4dc687da7f51741640e513233ddebc6"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="hab-cc-wrapper"
@@ -8,7 +8,7 @@ pkg_version="1.0.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/habitat-sh/hab-pkg-wrappers/archive/${commit_hash}.tar.gz"
-pkg_shasum="4a59ae8c5dba6fff24937b38dde80d01e516afbe6c094f31d6c61d6265e44441"
+pkg_shasum="745ad24f2cce4f9a4727f77537110c477fd79fd41a092e6a0d1fec0318a68c19"
 pkg_dirname="hab-pkg-wrappers-${commit_hash}"
 pkg_build_deps=(
 	core/native-rust
@@ -35,12 +35,12 @@ do_prepare() {
 
 do_build() {
 	pushd "$SRC_PATH" >/dev/null || exit
-	cargo build ${build_type#--debug} --target="$rustc_target" --verbose --bin $bin
+	cargo build "${build_type#--debug}" --locked --target="$rustc_target" --verbose --bin $bin
 	popd >/dev/null || exit
 }
 
 do_install() {
-	install -v -D "$CARGO_TARGET_DIR"/"$rustc_target"/${build_type#--}/$bin "$pkg_prefix"/bin/$bin
+	install -v -D "$CARGO_TARGET_DIR"/"$rustc_target"/"${build_type#--}"/$bin "$pkg_prefix"/bin/$bin
 }
 
 do_strip() {

@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-gzip"
 pkg_origin="core"
-pkg_version="1.11"
+pkg_version="1.12"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU Gzip is a popular data compression program originally written by Jean-loup \

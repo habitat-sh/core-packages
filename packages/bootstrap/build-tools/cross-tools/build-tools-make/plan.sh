@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-make"
 pkg_origin="core"
-pkg_version="4.3"
+pkg_version="4.4.1"
 pkg_description="\
 Make is a tool which controls the generation of executables and other \
 non-source files of a program from the program's source files.\

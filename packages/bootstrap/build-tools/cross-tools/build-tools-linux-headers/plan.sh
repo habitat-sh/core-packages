@@ -1,6 +1,6 @@
 pkg_name="build-tools-linux-headers"
 pkg_origin="core"
-pkg_version="4.20.17"
+pkg_version="6.4.12"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The Linux kernel headers"
 pkg_upstream_url="https://kernel.org"

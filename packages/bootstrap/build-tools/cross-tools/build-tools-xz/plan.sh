@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-xz"
 pkg_origin="core"
-pkg_version="5.2.5"
+pkg_version="5.4.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 XZ Utils is free general-purpose data compression software with a high \

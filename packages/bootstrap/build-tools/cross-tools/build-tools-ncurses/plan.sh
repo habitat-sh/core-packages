@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-ncurses"
 pkg_origin="core"
-pkg_version="6.2"
+pkg_version="6.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 ncurses (new curses) is a programming library providing an application \

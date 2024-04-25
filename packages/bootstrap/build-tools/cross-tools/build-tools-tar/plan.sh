@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-tar"
 pkg_origin="core"
-pkg_version="1.34"
+pkg_version="1.35"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU Tar provides the ability to create tar archives, as well as various other \
