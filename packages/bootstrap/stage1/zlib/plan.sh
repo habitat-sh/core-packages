@@ -2,7 +2,7 @@ program="zlib"
 
 pkg_name="zlib-stage1"
 pkg_origin="core"
-pkg_version="1.2.11"
+pkg_version="1.2.13"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Compression library implementing the deflate compression method found in gzip \

@@ -2,7 +2,7 @@ program="xz"
 
 pkg_name="xz-stage0"
 pkg_origin="core"
-pkg_version="5.2.5"
+pkg_version="5.4.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="XZ Utils is free general-purpose data compression software with a high compression ratio. XZ Utils were written for POSIX-like systems, but also work on some not-so-POSIX systems. XZ Utils are the successor to LZMA Utils."
 pkg_upstream_url="http://tukaani.org/xz/"

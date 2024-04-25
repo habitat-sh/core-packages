@@ -1,8 +1,9 @@
 program="gcc"
+native_target="${pkg_target%%-*}-unknown-linux-gnu"
 
 pkg_name="gcc-stage1"
 pkg_origin="core"
-pkg_version="9.4.0"
+pkg_version="13.2.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \
@@ -74,14 +75,14 @@ do_prepare() {
 	# libstdc++, libgcc, libquadmath, libssp among other.
 	#
 	# Explanation of flags used
-	# * -B${libc}/lib
+	# * -B$(pkg_path_for glibc-stage0)/lib
 	#   Tells gcc where to find C runtime start files (crt{i,o,n}.o) These are
 	#   provided by glibc and are required to be linked into all executables.
-	# * -L${libc}/lib
+	# * -L$(pkg_path_for glibc-stage0)/lib
 	#   Tells gcc where to find the C library, usually libc and libm.
-	# * -idirafter ${libc}/include
+	# * -idirafter $(pkg_path_for glibc-stage0)/include
 	#   Tells gcc where to find the C library's header files
-	# * -idirafter ${linux_headers}/include
+	# * -idirafter $(pkg_path_for linux-headers)/include
 	#   Tells gcc where to find the linux header files.
 	#   The C library's header files requires the linux headers.
 	#   The linux headers folder must always come after the C library's headers

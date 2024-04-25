@@ -2,7 +2,7 @@ program="gcc"
 
 pkg_name="gcc-stage0"
 pkg_origin="core"
-pkg_version="9.4.0"
+pkg_version="13.2.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \
@@ -22,9 +22,8 @@ pkg_deps=(
 
 do_prepare() {
 	local libc
-	local linux_headers
-
 	libc="$(pkg_path_for glibc-stage0)"
+	local linux_headers
 	linux_headers="$(pkg_path_for linux-headers)"
 	case $pkg_target in
 	aarch64-linux)

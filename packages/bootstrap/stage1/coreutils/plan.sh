@@ -2,7 +2,7 @@ program="coreutils"
 
 pkg_name="coreutils-stage1"
 pkg_origin="core"
-pkg_version="8.32"
+pkg_version="9.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Core Utilities are the basic file, shell and text manipulation \

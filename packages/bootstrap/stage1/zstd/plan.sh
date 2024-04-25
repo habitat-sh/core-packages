@@ -2,7 +2,7 @@ program="zstd"
 
 pkg_origin="core"
 pkg_name="zstd-stage1"
-pkg_version="1.5.0"
+pkg_version="1.5.5"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-3-Clause OR GPL-2.0-only')
 pkg_description="Zstandard is a real-time compression algorithm, providing high compression ratios. " \

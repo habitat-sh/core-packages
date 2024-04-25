@@ -2,7 +2,7 @@ program="ncurses"
 
 pkg_name="ncurses-stage1"
 pkg_origin="core"
-pkg_version="6.2"
+pkg_version="6.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 ncurses (new curses) is a programming library providing an application \

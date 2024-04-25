@@ -2,7 +2,7 @@ program="tcl"
 
 pkg_name="tcl-stage1"
 pkg_origin="core"
-pkg_version="8.6.11"
+pkg_version="8.6.13"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Tool Command Language -- A dynamic programming language."
 pkg_upstream_url="http://tcl.sourceforge.net/"

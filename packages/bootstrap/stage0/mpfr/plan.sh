@@ -2,7 +2,7 @@ program="mpfr"
 
 pkg_name="mpfr-stage0"
 pkg_origin="core"
-pkg_version="4.1.0"
+pkg_version="4.2.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU MPFR (GNU Multiple Precision Floating-Point Reliably) is a GNU portable \

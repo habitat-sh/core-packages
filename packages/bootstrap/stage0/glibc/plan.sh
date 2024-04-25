@@ -2,7 +2,7 @@ program="glibc"
 
 pkg_name="glibc-stage0"
 pkg_origin="core"
-pkg_version="2.34"
+pkg_version="2.38"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU C Library project provides the core libraries for the GNU system and \

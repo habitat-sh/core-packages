@@ -3,7 +3,7 @@ arch="${pkg_target%%-*}"
 
 pkg_name="gmp-stage1"
 pkg_origin="core"
-pkg_version="6.2.1"
+pkg_version="6.3.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GMP is a free library for arbitrary precision arithmetic, operating on signed \

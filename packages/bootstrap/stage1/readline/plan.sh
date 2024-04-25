@@ -2,7 +2,7 @@ program="readline"
 
 pkg_name="readline-stage1"
 pkg_origin="core"
-pkg_version="8.1"
+pkg_version="8.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The GNU Readline library provides a set of functions for use by applications \
 that allow users to edit command lines as they are typed in."
