@@ -27,7 +27,7 @@ do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \
 		--disable-static \
-		--docdir="$pkg_prefix"/share/doc/xz-5.2.5
+		--docdir="$pkg_prefix"/share/doc/xz-5.4.4
 
 	make
 }

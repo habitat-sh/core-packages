@@ -13,7 +13,7 @@ user interfaces in a terminal-independent manner.\
 pkg_upstream_url="https://www.gnu.org/software/ncurses/"
 pkg_license=('LicenseRef-ncurses')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="30306e0c76e0f9f1f0de987cf1c82a5c21e1ce6568b9227f7da5b71cbea86c9d"
+pkg_shasum="6931283d9ac87c5073f30b6290c4c75f21632bb4fc3603ac8100812bed248159"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/build-tools-libstdcxx

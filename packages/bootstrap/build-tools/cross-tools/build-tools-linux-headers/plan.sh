@@ -22,9 +22,13 @@ do_build() {
 		arch="arm64"
 		;;
 	esac
-	make headers_install ARCH="${arch}" INSTALL_HDR_PATH="${pkg_prefix}"
+
+	# make headers_install ARCH="${arch}" INSTALL_HDR_PATH="${pkg_prefix}"
+	make headers
 }
 
 do_install() {
-	find $pkg_prefix/include -type f ! -name '*.h' -delete
+	# find $pkg_prefix/include -type f ! -name '*.h' -delete
+	find usr/include -type f ! -name '*.h' -delete
+	cp -rv usr/include "$pkg_prefix"
 }

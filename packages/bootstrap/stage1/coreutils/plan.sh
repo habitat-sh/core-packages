@@ -50,3 +50,9 @@ do_check() {
 	make NON_ROOT_USERNAME=nobody check-root
 	make RUN_EXPENSIVE_TESTS=yes check
 }
+
+do_install() {
+	do_default_install
+
+	install -Dm644 ${CACHE_PATH}/COPYING ${pkg_prefix}
+}

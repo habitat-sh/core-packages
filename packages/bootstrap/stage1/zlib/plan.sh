@@ -10,8 +10,8 @@ and PKZIP.\
 "
 pkg_upstream_url="http://www.zlib.net/"
 pkg_license=('Zlib')
-pkg_source="http://github.com/madler/${program}/archive/refs/tags/v${pkg_version}.tar.gz"
-pkg_shasum="629380c90a77b964d896ed37163f5c3a34f6e6d897311f1df2a7016355c45eff"
+pkg_source="http://github.com/madler/${program}/archive/refs/tags/v${pkg_version}.tar.xz"
+pkg_shasum="d14c38e313afc35a9a8760dadf26042f51ea0f5d154b0630a31da0540107fb98"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(

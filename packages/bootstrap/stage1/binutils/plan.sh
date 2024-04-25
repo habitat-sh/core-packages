@@ -37,6 +37,23 @@ pkg_build_deps=(
 )
 
 do_prepare() {
+	# Change the dynamic linker and glibc library to link against core/glibc
+	case $pkg_target in
+	aarch64-linux)
+		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-aarch64.so.1"
+		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
+		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
+		;;
+	x86_64-linux)
+		HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
+		export HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER
+		build_line "Setting HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER=${HAB_GCC_STAGE1_GLIBC_DYNAMIC_LINKER}"
+		;;
+	esac
+	HAB_GCC_STAGE1_GLIBC_PKG_PATH="$(pkg_path_for glibc)"
+	export HAB_GCC_STAGE1_GLIBC_PKG_PATH
+	build_line "Setting HAB_GCC_STAGE1_GLIBC_PKG_PATH=${HAB_GCC_STAGE1_GLIBC_PKG_PATH}"
+
 	# We don't want to search for libraries in system directories such as `/lib`,
 	# `/usr/local/lib`, etc. This prevents us breaking out of habitat.
 	echo 'NATIVE_LIB_DIRS=' >>ld/configure.tgt
@@ -58,7 +75,7 @@ do_prepare() {
 	# the way `ld` processes archive files.
 	# This patch should be removed once we upgrade binutils to a later version.
 	# Bug Report: https://sourceware.org/bugzilla/show_bug.cgi?id=28138
-	patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
+	# patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
 }
 
 do_build() {
@@ -75,6 +92,7 @@ do_build() {
 		--enable-new-dtags \
 		--enable-64-bit-bfd \
 		--with-system-zlib
+
 	make tooldir="${pkg_prefix}" V=1
 }
 

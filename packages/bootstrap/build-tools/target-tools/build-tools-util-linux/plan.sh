@@ -26,7 +26,7 @@ do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \
 		--sbindir="$pkg_prefix/bin" \
-		--docdir="$pkg_prefix/share/doc/util-linux-2.37" \
+		--docdir="$pkg_prefix/share/doc/util-linux-2.39.1" \
 		--localstatedir="$pkg_svc_var_path/run" \
 		--without-python \
 		--disable-chfn-chsh \

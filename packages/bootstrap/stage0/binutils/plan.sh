@@ -50,7 +50,7 @@ do_prepare() {
 	# the way `ld` processes archive files.
 	# This patch should be removed once we upgrade binutils to a later version.
 	# Bug Report: https://sourceware.org/bugzilla/show_bug.cgi?id=28138
-	patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
+	# patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
 }
 
 do_build() {

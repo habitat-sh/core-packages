@@ -52,8 +52,8 @@ do_build() {
 	local itclver
 
 	srcdir=$(abspath ..)
-	tdbcver="tdbc1.1.2"
-	itclver="itcl4.2.1"
+	tdbcver="tdbc1.1.3"
+	itclver="itcl4.2.2"
 
 	sed \
 		-e "s#$srcdir/unix#$pkg_prefix/lib#" \

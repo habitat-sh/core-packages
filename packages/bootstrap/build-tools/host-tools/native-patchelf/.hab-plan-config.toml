@@ -3,5 +3,5 @@ docker-image = "hab-bootstrap:20230523"
 [rules]
 host-elf-interpreter = "off"
 library-dependency-not-found = "off"
-license-not-found = {level = "off", source-shasum = "60c6aeadb673de9cc1838b630c81f61e31c501de324ef7f1e8094a2431197d09"}
-missing-license = {level = "off", source-shasum = "60c6aeadb673de9cc1838b630c81f61e31c501de324ef7f1e8094a2431197d09"}
+license-not-found = {level = "off", source-shasum = "1451d01ee3a21100340aed867d0b799f46f0b1749680028d38c3f5d0128fb8a7"}
+missing-license = {level = "off", source-shasum = "1451d01ee3a21100340aed867d0b799f46f0b1749680028d38c3f5d0128fb8a7"}

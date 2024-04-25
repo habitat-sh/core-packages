@@ -21,7 +21,7 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
-pkg_interpreters=(bin/perl bin/perl5.34.0)
+pkg_interpreters=(bin/perl bin/perl5.38.0)
 
 do_prepare() {
 
@@ -37,12 +37,12 @@ do_build() {
 		-Dprefix="$pkg_prefix" \
 		-Dcc=gcc \
 		-Dvendorprefix="$pkg_prefix" \
-		-Dprivlib="$pkg_prefix/lib/perl5/5.34/core_perl" \
-		-Darchlib="$pkg_prefix/lib/perl5/5.34/core_perl" \
-		-Dsitelib="$pkg_prefix/lib/perl5/5.34/site_perl" \
-		-Dsitearch="$pkg_prefix/lib/perl5/5.34/site_perl" \
-		-Dvendorlib="$pkg_prefix/lib/perl5/5.34/vendor_perl" \
-		-Dvendorarch="$pkg_prefix/lib/perl5/5.34/vendor_perl" \
+		-Dprivlib="$pkg_prefix/lib/perl5/5.38/core_perl" \
+		-Darchlib="$pkg_prefix/lib/perl5/5.38/core_perl" \
+		-Dsitelib="$pkg_prefix/lib/perl5/5.38/site_perl" \
+		-Dsitearch="$pkg_prefix/lib/perl5/5.38/site_perl" \
+		-Dvendorlib="$pkg_prefix/lib/perl5/5.38/vendor_perl" \
+		-Dvendorarch="$pkg_prefix/lib/perl5/5.38/vendor_perl" \
 		-Dlocincpth="$(pkg_path_for build-tools-glibc)/include" \
 		-Dloclibpth="$(pkg_path_for build-tools-glibc)/lib"
 	make -j"$(nproc)"
