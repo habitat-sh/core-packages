@@ -1,6 +1,6 @@
 pkg_name="rust"
 pkg_origin="core"
-pkg_version="1.62.1"
+pkg_version="1.68.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Rust is a systems programming language that runs blazingly fast, prevents \

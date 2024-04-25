@@ -2,7 +2,7 @@ program="less"
 
 pkg_name="less"
 pkg_origin="core"
-pkg_version="590"
+pkg_version="643"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 A terminal pager program used to view (but not change) the contents of a text \

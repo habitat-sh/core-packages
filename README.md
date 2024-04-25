@@ -4,7 +4,7 @@ This repository houses plan files designed to bootstrap a comprehensive suite of
 
 The repository leverages knowledge from various sources, including the Linux From Scratch (LFS) project and Nix, and tailors it to suit Habitat's packaging system.
 
-There exist numerous LFS project variants tailored for different platforms and versions. This repository primarily adheres to the instructions [found here](https://clfs.org/~kb0iic/lfs-systemd/index.html).
+There exist numerous LFS project variants tailored for different platforms and versions. This repository primarily adheres to the instructions [found here](https://www.linuxfromscratch.org/lfs/view/stable-systemd/). As this link continuously updates to reflect the most recent version, please refer to the [LFS](LFS) file for the version currently used by the package.
 
 ## Compilation Process
 
@@ -14,4 +14,4 @@ To compile all the packages contained within this repository, clone the reposito
 make build
 ```
 
-The Habitat Auto Build tool is utilized internally to build the packages. For more complex tasks, please refer to the Habitat Auto Build tool's [readme](https://github.com/habitat-sh/hab-auto-build/tree/v2).
+The Habitat Auto Build tool is utilized internally to build the packages. For more complex tasks, please refer to the Habitat Auto Build tool's [readme](https://github.com/habitat-sh/hab-auto-build/).

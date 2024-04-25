@@ -1,6 +1,6 @@
 pkg_name="e2fsprogs"
 pkg_origin="core"
-pkg_version="1.46.4"
+pkg_version="1.47.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Ext2/3/4 filesystem userspace utilities"
 # https://github.com/tytso/e2fsprogs/blob/v1.46.4/NOTICE

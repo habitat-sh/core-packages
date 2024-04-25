@@ -2,7 +2,7 @@ program="grep"
 
 pkg_name="grep"
 pkg_origin="core"
-pkg_version="3.7"
+pkg_version="3.11"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Grep searches one or more input files for lines containing a match to a \

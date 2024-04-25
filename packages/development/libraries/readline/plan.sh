@@ -2,7 +2,7 @@ program="readline"
 
 pkg_name="readline"
 pkg_origin="core"
-pkg_version="8.1"
+pkg_version="8.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The GNU Readline library provides a set of functions for use by applications \
 that allow users to edit command lines as they are typed in."
@@ -23,6 +23,10 @@ pkg_build_deps=(
 
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+
+do_prepare() {
+	patch -p1 <"$PLAN_CONTEXT/readline-8.2-upstream_fix-1.patch"
+}
 
 do_build() {
 	./configure \

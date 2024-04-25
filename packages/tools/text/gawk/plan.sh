@@ -2,7 +2,7 @@ program="gawk"
 
 pkg_name="gawk"
 pkg_origin="core"
-pkg_version="5.1.0"
+pkg_version="5.2.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The awk utility interprets a special-purpose programming language that makes \

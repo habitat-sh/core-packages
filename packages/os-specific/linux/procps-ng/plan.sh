@@ -1,6 +1,6 @@
 pkg_name="procps-ng"
 pkg_origin="core"
-pkg_version="3.3.17"
+pkg_version="4.0.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Command line and full screen utilities for browsing procfs, a pseudo file \

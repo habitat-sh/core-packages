@@ -2,7 +2,7 @@ program="gzip"
 
 pkg_name="gzip"
 pkg_origin="core"
-pkg_version="1.11"
+pkg_version="1.12"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU Gzip is a popular data compression program originally written by Jean-loup \
@@ -40,4 +40,6 @@ do_check() {
 
 do_install() {
 	make install
+
+	install -Dm644 ${CACHE_PATH}/COPYING ${pkg_prefix}
 }

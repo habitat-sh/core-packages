@@ -1,6 +1,6 @@
 pkg_name="gdbm"
 pkg_origin="core"
-pkg_version="1.22"
+pkg_version="1.23"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU dbm is a set of database routines that use extensible hashing. It works \

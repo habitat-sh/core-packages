@@ -1,7 +1,7 @@
 program="inetutils"
 pkg_name="inetutils"
 pkg_origin="core"
-pkg_version="1.9.4"
+pkg_version="2.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Inetutils is a collection of common network programs. It includes: an ftp \

@@ -1,6 +1,6 @@
 pkg_name="util-linux"
 pkg_origin="core"
-pkg_version="2.37"
+pkg_version="2.39.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Miscellaneous system utilities for Linux"
 pkg_upstream_url="https://www.kernel.org/pub/linux/utils/util-linux"

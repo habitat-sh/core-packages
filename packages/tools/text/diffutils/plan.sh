@@ -2,7 +2,7 @@ program="diffutils"
 
 pkg_name="diffutils"
 pkg_origin="core"
-pkg_version="3.8"
+pkg_version="3.10"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU Diffutils is a package of several programs related to finding differences \

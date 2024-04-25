@@ -2,7 +2,7 @@ program="coreutils"
 
 pkg_name="coreutils"
 pkg_origin="core"
-pkg_version="8.32"
+pkg_version="9.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Core Utilities are the basic file, shell and text manipulation \
@@ -12,7 +12,7 @@ expected to exist on every operating system.\
 pkg_upstream_url="https://www.gnu.org/software/coreutils/"
 pkg_license=("GPL-3.0-or-later")
 pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}.tar.xz"
-pkg_shasum="4458d8de7849df44ccab15e16b1548b285224dbba5f08fac070c1c0e0bcc4cfa"
+pkg_shasum="adbcfcfe899235b71e8768dcf07cd532520b7f54f9a8064843f8d199a904bbaa"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
@@ -32,7 +32,7 @@ pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/env bin/coreutils)
 
 do_prepare() {
-	patch -p1 <"$PLAN_CONTEXT/coreutils-getdents64.patch"
+	patch -p1 <"$PLAN_CONTEXT/coreutils-9.3-i18n-1.patch"
 }
 
 do_build() {

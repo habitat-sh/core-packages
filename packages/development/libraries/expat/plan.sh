@@ -1,6 +1,6 @@
 pkg_name="expat"
 pkg_origin="core"
-pkg_version="2.4.6"
+pkg_version="2.5.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Expat is a stream-oriented XML parser library written in C. Expat excels with \

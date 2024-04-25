@@ -24,6 +24,8 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
+	patch -Np1 -i <"$PLAN_CONTEXT/bzip2-1.0.8-install_docs-1.patch"
+	
 	# Makes the symbolic links in installation relative vs. absolute
 	# shellcheck disable=SC2016
 	sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile

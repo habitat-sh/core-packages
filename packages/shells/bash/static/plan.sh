@@ -2,8 +2,8 @@ program="bash"
 
 pkg_name="bash-static"
 pkg_origin="core"
-major_version="5.1"
-patch_version=".16"
+major_version="5.2"
+patch_version=".15"
 pkg_version="${major_version}${patch_version}"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\

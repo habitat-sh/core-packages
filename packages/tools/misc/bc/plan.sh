@@ -2,7 +2,7 @@ program="bc"
 
 pkg_name="bc"
 pkg_origin="core"
-pkg_version="6.0.4"
+pkg_version="6.6.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 bc is an arbitrary precision numeric processing language. Syntax is similar \

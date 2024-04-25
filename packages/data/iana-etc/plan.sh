@@ -1,6 +1,6 @@
 pkg_name="iana-etc"
 pkg_origin="core"
-pkg_version="20220922"
+pkg_version="20230810"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The iana-etc package provides the Unix/Linux /etc/services and /etc/protocols \

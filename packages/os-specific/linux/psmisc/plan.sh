@@ -1,6 +1,6 @@
 pkg_name="psmisc"
 pkg_origin="core"
-pkg_version="23.4"
+pkg_version="23.6"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The PSmisc package is a set of some small useful utilities that use the proc \

@@ -2,8 +2,8 @@ program="bash"
 
 pkg_name="bash"
 pkg_origin="core"
-pkg_version="5.1"
-patch_version=".16"
+pkg_version="5.2"
+patch_version=".15"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
  Bash is the GNU Project's shell. Bash is the Bourne Again SHell. Bash is an \

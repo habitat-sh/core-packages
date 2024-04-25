@@ -1,6 +1,6 @@
 pkg_name="sed"
 pkg_origin="core"
-pkg_version="4.8"
+pkg_version="4.9"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 sed (stream editor) is a non-interactive command-line text editor. sed is \

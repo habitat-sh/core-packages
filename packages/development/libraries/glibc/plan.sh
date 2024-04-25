@@ -2,7 +2,7 @@ program="glibc"
 
 pkg_name="glibc"
 pkg_origin="core"
-pkg_version="2.34"
+pkg_version="2.38"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU C Library project provides the core libraries for the GNU system and \
@@ -15,7 +15,7 @@ dlopen, pthread_create, crypt, login, exit and more.\
 pkg_upstream_url="https://www.gnu.org/software/libc"
 pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
-pkg_shasum="44d26a1fe20b8853a48f470ead01e4279e869ac149b195dda4e44a195d981ab2"
+pkg_shasum="fb82998998b2b29965467bc1b69d152e9c307d2cf301c9eafb4555b770ef3fd2"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
@@ -60,6 +60,9 @@ do_prepare() {
 	# hardcoded dependency and allowing us to update the `iana-etc` package independently
 	# of glibc. Thanks to https://github.com/NixOS/nixpkgs/pull/137601 for the solution.
 	patch -p1 <"$PLAN_CONTEXT/hab-nss-open-files.patch"
+
+	patch -p1 <"$PLAN_CONTEXT/glibc-2.38-memalign_fix-1.patch"
+	patch -p1 <"$PLAN_CONTEXT/glibc-2.38-fhs-1.patch"
 
 	# 'HAB_LD_LINK_MODE' is used to control the way the habitat linker wrapper adds rpath entries.
 	# By setting it to '', we instruct the linker wrapper to add an rpath entry only if a library

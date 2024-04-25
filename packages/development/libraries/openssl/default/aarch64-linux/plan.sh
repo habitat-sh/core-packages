@@ -2,7 +2,7 @@ program="openssl"
 
 pkg_name="openssl"
 pkg_origin="core"
-pkg_version="3.0.7"
+pkg_version="3.1.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 OpenSSL is an open source project that provides a robust, commercial-grade, \

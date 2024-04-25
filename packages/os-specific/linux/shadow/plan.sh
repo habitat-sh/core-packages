@@ -2,7 +2,7 @@ program="shadow"
 
 pkg_name="shadow"
 pkg_origin="core"
-pkg_version="4.9"
+pkg_version="4.13"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Password and account management tool suite.

@@ -20,6 +20,10 @@ pkg_build_deps=(
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
+do_prepare() {
+	patch -p1 <"$PLAN_CONTEXT/readline-8.2-upstream_fix-1.patch"
+}
+
 do_build() {
 	./configure \
 		--prefix="$pkg_prefix" \
