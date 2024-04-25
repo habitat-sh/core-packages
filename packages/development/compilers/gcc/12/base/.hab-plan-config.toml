@@ -1,8 +1,0 @@
-[rules]
-license-not-found = {level = "off", source-shasum = "e275e76442a6067341a27f04c5c6b83d8613144004c0413528863dc6b5c743da"}
-missing-license = {level = "off", source-shasum = "e275e76442a6067341a27f04c5c6b83d8613144004c0413528863dc6b5c743da"}
-# hab-cc-wrapper is used at runtime
-unused-dependency = {ignored_packages = [
-    "core/hab-cc-wrapper"
-]}
-unused-runpath-entry = {level = "off"}
