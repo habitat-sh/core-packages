@@ -11,7 +11,7 @@ a computer file.\
 pkg_upstream_url="https://www.darwinsys.com/file/"
 pkg_license=("LicenseRef-file")
 pkg_source="ftp://ftp.astron.com/pub/${program}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="13e532c7b364f7d57e23dfeea3147103150cb90593a57af86c10e4f6e411603f"
+pkg_shasum="fc97f51029bb0e2c9f4e3bffefdaf678f0e039ee872b9de5c002a6d09c784d82"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(

@@ -11,12 +11,12 @@ rlogin client and server, a tftp client and server, and much more...\
 pkg_upstream_url="http://www.gnu.org/software/inetutils/"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}.tar.xz"
-pkg_shasum="849d96f136effdef69548a940e3e0ec0624fc0c81265296987986a0dd36ded37"
+pkg_shasum="1789d6b1b1a57dfe2a7ab7b533ee9f5dfd9cbf5b59bb1bb3c2612ed08d0f68b2"
 pkg_deps=(
 	core/glibc
 	core/readline
 	core/ncurses
-	core/libidn
+	core/libidn2
 )
 pkg_build_deps=(
 	core/iana-etc

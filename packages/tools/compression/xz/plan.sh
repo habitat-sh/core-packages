@@ -12,7 +12,7 @@ work on some not-so-POSIX systems. XZ Utils are the successor to LZMA Utils.\
 pkg_upstream_url="http://tukaani.org/xz/"
 pkg_license=('GPL-2.0-or-later' 'LGPL-2.0-or-later')
 pkg_source="http://tukaani.org/${program}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="f6f4910fd033078738bd82bfba4f49219d03b17eb0794eb91efbae419f4aba10"
+pkg_shasum="705d0d96e94e1840e64dec75fc8d5832d34f6649833bec1ced9c3e08cf88132e"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(

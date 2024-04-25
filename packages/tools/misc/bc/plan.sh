@@ -13,7 +13,7 @@ draft standard.\
 pkg_upstream_url="https://git.yzena.com/gavin/bc"
 pkg_license=("BSD-2-Clause")
 pkg_source="https://github.com/gavinhoward/bc/releases/download/${pkg_version}/${program}-${pkg_version}.tar.xz"
-pkg_shasum="d1d8bd3c2bb4ec0f00aed9c14f2f1a1ed32343f3235bac1822cd18971ad130d3"
+pkg_shasum="309ef0faebf149376aa69446a496fac13c3ff483a100a51d9c67cea1a73b2906"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(

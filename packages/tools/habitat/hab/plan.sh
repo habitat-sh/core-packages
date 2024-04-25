@@ -17,7 +17,7 @@ pkg_build_deps=(
 	core/coreutils
 	core/perl
 	core/protobuf
-	core/rust/1.62.1
+	core/rust/1.68.2
 )
 pkg_bin_dirs=(bin)
 
@@ -30,6 +30,7 @@ do_unpack() {
 	update_pkg_version
 }
 
+# shellcheck disable=2155
 do_prepare() {
 	local protoc
 

@@ -20,7 +20,7 @@ pkg_build_deps=(
 	core/gcc
 	core/perl
 	core/protobuf
-	core/rust/1.62.1
+	core/rust/1.68.2
 	core/raml2html
 	core/pkg-config
 )
@@ -35,6 +35,7 @@ do_unpack() {
 	update_pkg_version
 }
 
+# shellcheck disable=2155
 do_prepare() {
 	local protoc
 	local gcc_libs

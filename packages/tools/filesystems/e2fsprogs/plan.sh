@@ -7,7 +7,7 @@ pkg_description="Ext2/3/4 filesystem userspace utilities"
 pkg_license=('GPL-2.0-or-later' 'LGPL-2.0-or-later' 'MIT')
 pkg_upstream_url="http://e2fsprogs.sourceforge.net/"
 pkg_source="https://git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git/snapshot/e2fsprogs-${pkg_version}.tar.gz"
-pkg_shasum="c011bf3bf4ae5efe9fa2b0e9b0da0c14ef4b79c6143c1ae6d9f027931ec7abe1"
+pkg_shasum="6667afde56eef0c6af26684974400e4d2288ea49e9441bf5e6229195d51a3578"
 pkg_deps=(
 	core/glibc
 	core/util-linux

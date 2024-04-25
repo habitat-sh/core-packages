@@ -1,4 +1,4 @@
 [rules]
-license-not-found = {level = "off", source-shasum = "03a0360edcd84bec156fe211bbc4fc8c78790973ce4e8b990a11d778d40b1a26"}
-missing-license = {level = "off", source-shasum = "03a0360edcd84bec156fe211bbc4fc8c78790973ce4e8b990a11d778d40b1a26"}
-unused-runpath-entry = {level = "off"}
+unused-runpath-entry = {ignored_files = ["lib/gawk/{fork,rwarray,readfile,readdir,time,revoutput,ordchr,revtwoway,fnmatch,inplace,filefuncs,intdiv}.*", "libexec/awkpwcat", "libexec/awk/{grcat,pwcat}"]}
+license-not-found = {level = "off", source-shasum = "3c1fce1446b4cbee1cd273bd7ec64bc87d89f61537471cd3e05e33a965a250e9"}
+missing-license = {level = "off", source-shasum = "3c1fce1446b4cbee1cd273bd7ec64bc87d89f61537471cd3e05e33a965a250e9"}

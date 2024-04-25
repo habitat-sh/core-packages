@@ -1,4 +1,4 @@
 [rules]
 # This is needed for SSL certificate verification
-unused-dependency = {ignored_packages = ["core/cacerts"]}
+unused-dependency = {ignored_packages = ["core/cacerts", "core/coreutils"]}
 unused-runpath-entry = {level = "off"}

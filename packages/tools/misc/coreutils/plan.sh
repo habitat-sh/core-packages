@@ -61,3 +61,9 @@ do_check() {
 	# Compile and run the expensive tests as the hab user
 	su hab -c "PATH=$PATH make RUN_EXPENSIVE_TESTS=yes check"
 }
+
+do_install() {
+	do_default_install
+
+	install -Dm644 ${CACHE_PATH}/COPYING ${pkg_prefix}
+}

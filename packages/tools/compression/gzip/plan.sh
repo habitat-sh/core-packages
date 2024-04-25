@@ -11,7 +11,7 @@ Gailly for the GNU project.\
 pkg_upstream_url="https://www.gnu.org/software/gzip/"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
-pkg_shasum="9b9a95d68fdcb936849a4d6fada8bf8686cddf58b9b26c9c4289ed0c92a77907"
+pkg_shasum="ce5e03e519f637e1f814011ace35c4f87b33c0bbabeec35baf5fbd3479e91956"
 
 pkg_deps=(
 	core/coreutils
