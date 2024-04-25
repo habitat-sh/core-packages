@@ -9,7 +9,7 @@ filesystem.\
 pkg_upstream_url="http://psmisc.sourceforge.net/index.html"
 pkg_license=('GPL-2.0-or-later')
 pkg_source="http://downloads.sourceforge.net/psmisc/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="7f0cceeace2050c525f3ebb35f3ba01d618b8d690620580bdb8cd8269a0c1679"
+pkg_shasum="257dde06159a4c49223d06f1cccbeb68933a4514fc8f1d77c64b54f0d108822a"
 pkg_deps=(
 	core/glibc
 	core/ncurses

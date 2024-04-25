@@ -10,7 +10,7 @@ Password and account management tool suite.
 pkg_upstream_url="https://github.com/shadow-maint/shadow"
 pkg_license=('Artistic-1.0')
 pkg_source="https://github.com/shadow-maint/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="feec1f2ce9c1b62798afd35a7d1b04cefdfa3a0a30ff3e75d6965ba8978c9144"
+pkg_shasum="9afe245d79a2e7caac5f1ed62519b17416b057ec89df316df1c3935502f9dd2c"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(

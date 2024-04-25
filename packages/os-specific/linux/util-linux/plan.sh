@@ -7,7 +7,7 @@ pkg_upstream_url="https://www.kernel.org/pub/linux/utils/util-linux"
 # https://git.kernel.org/pub/scm/utils/util-linux/util-linux.git/tree/README.licensing
 pkg_license=("GPL-2.0-only" "GPL-2.0-or-later" "LGPL-2.1-or-later" "GPL-3.0-or-later" "BSD-2-Clause" "BSD-3-Clause" "BSD-4-Clause-UC")
 pkg_source="https://www.kernel.org/pub/linux/utils/${pkg_name}/v${pkg_version%.?}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="bd07b7e98839e0359842110525a3032fdb8eaf3a90bedde3dd1652d32d15cce5"
+pkg_shasum="890ae8ff810247bd19e274df76e8371d202cda01ad277681b0ea88eeaa00286b"
 pkg_deps=(
 	core/glibc
 	core/zlib

@@ -10,7 +10,7 @@ status of entries in its process table.\
 pkg_upstream_url="https://gitlab.com/procps-ng/procps"
 pkg_license=('GPL-2.0-or-later' 'LGPL-2.0-or-later')
 pkg_source="https://downloads.sourceforge.net/project/${pkg_name}/Production/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="4518b3e7aafd34ec07d0063d250fd474999b20b200218c3ae56f5d2113f141b4"
+pkg_shasum="303c8ec4f96ae18d8eaef86c2bd0986938764a45dc505fe0a0af868c674dba92"
 pkg_dirname="${pkg_name}-${pkg_version}"
 
 pkg_deps=(
@@ -19,6 +19,9 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/gcc
+	core/make
+	core/grep
+	core/sed
 	core/pkg-config
 )
 pkg_bin_dirs=(bin)
