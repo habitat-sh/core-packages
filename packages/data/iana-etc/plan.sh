@@ -9,7 +9,7 @@ files.\
 pkg_upstream_url="http://sethwklein.net/iana-etc"
 pkg_license=('MIT')
 pkg_source="https://github.com/Mic92/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="fde3d069b904e5b13435deff6ad55252e35c321c59f6ada771fed9178d2da435"
+pkg_shasum="03039f3c7cc0f1c3edc7a4dc52dd7852f7ab93b7296fa73c88b2a725d8c79490"
 pkg_deps=()
 
 do_prepare() {

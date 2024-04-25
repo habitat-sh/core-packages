@@ -39,4 +39,6 @@ do_install() {
 
 	cp -v zone.tab zone1970.tab iso3166.tab "${pkg_prefix}"/share/zoneinfo
 	zic -d "${pkg_prefix}"/share/zoneinfo -p America/New_York
+
+	cp ${CACHE_PATH}/LICENSE "${pkg_prefix}"
 }
