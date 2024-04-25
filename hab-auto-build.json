@@ -10,7 +10,8 @@
                 "packages/bootstrap/build-tools/cross-tools/**"
             ],
             "ignored_packages": [
-                "draft/**"
+                "draft/**",
+                "packages/development/interpreters/ruby/30/**"
             ]
         }
     ]
