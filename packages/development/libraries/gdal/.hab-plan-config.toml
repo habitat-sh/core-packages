@@ -1,6 +1,5 @@
 [rules]
-license-not-found = {level = "off", source-shasum = "e6a2456907610639d73fc6a82bb10aa6fa02e2d03b24edacde34a16b6aa91080"}
-missing-license = {level = "off", source-shasum = "e6a2456907610639d73fc6a82bb10aa6fa02e2d03b24edacde34a16b6aa91080"}
-# The gcc-base lib folder is added to the built libraries by the build system
-missing-runpath-entry-dependency = {ignored_files = ["lib/*"]}
-unused-runpath-entry = {ignored_files = ["lib/*"]}
+license-not-found = {level = "off", source-shasum = "5cbc9df4a39c7ff69748defe38cbaf1c46267e124ee4d9b3975354c57dc2d618"}
+missing-license = {level = "off", source-shasum = "5cbc9df4a39c7ff69748defe38cbaf1c46267e124ee4d9b3975354c57dc2d618"}
+host-script-interpreter = {level = "off"}
+unused-runpath-entry = {level = "off"}

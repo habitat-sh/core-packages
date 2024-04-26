@@ -93,7 +93,7 @@ do_build() {
 		--prefix="$pkg_prefix" \
 		--with-headers="$(pkg_path_for linux-headers)/include" \
 		--sysconfdir="$pkg_prefix/etc" \
-		--enable-kernel=3.2 \
+		--enable-kernel=5.4 \
 		--enable-stack-protector=strong \
 		--enable-static-pie \
 		--disable-werror \

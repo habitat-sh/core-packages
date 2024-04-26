@@ -23,6 +23,16 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
+do_prepare() {
+	patch -p0 <"$PLAN_CONTEXT"/tests_fix.patch
+
+	# This flag is required for gcc 12 to be able to compile
+	# the source with no warnings which stop compilation
+	CXXFLAGS="-std=c++14 ${CXXFLAGS}"
+	export CXXFLAGS
+	build_line "Updating CXXFLAGS=${CXXFLAGS}"
+}
+
 do_build() {
 	# We need to enable libsodium explicitly.
 	# We also need to disable curve which will prevent

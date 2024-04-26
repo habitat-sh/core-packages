@@ -2,7 +2,7 @@ program="tcl"
 
 pkg_name="tcl"
 pkg_origin="core"
-pkg_version="8.6.11"
+pkg_version="8.6.13"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Tool Command Language -- A dynamic programming language."
 pkg_upstream_url="http://tcl.sourceforge.net/"
@@ -52,8 +52,8 @@ do_build() {
 	local itclver
 
 	srcdir=$(abspath ..)
-	tdbcver="tdbc1.1.2"
-	itclver="itcl4.2.1"
+	local tdbcver=tdbc1.1.3
+	local itclver=itcl4.2.2
 
 	sed \
 		-e "s#$srcdir/unix#$pkg_prefix/lib#" \

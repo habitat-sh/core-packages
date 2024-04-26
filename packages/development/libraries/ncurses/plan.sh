@@ -69,7 +69,7 @@ do_install() {
 		ln -sfv ${lib}w.pc "${pkg_prefix}/lib/pkgconfig/${lib}.pc"
 	done
 
-	# Add additional symbolic links so that any programs looking for curses
+	# Add additional linker scripts so that any programs looking for curses
 	# will find ncurses
 	ln -sfv "libncursesw.a" "${pkg_prefix}/lib/libcurses.a"
 	ln -sfv "libncursesw.so" "${pkg_prefix}/lib/libcurses.so"

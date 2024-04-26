@@ -2,7 +2,7 @@ program="binutils"
 
 pkg_name="binutils"
 pkg_origin="core"
-pkg_version="2.37"
+pkg_version="2.41"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Binary Utilities, or binutils, are a set of programming tools for \
@@ -51,6 +51,8 @@ do_prepare() {
 		sed -i "$f" -e 's|-lfl|-l:libfl.a|'
 	done
 
+	sed -i /hab/cache/src/binutils-2.41/ld/configure -e 's|-lfl|-l:libfl.a|'
+
 	# Use symlinks instead of hard links to save space (otherwise `strip(1)`
 	# needs to process each hard link seperately)
 	for f in binutils/Makefile.in gas/Makefile.in ld/Makefile.in gold/Makefile.in; do
@@ -62,7 +64,7 @@ do_prepare() {
 	# the way `ld` processes archive files.
 	# This patch should be removed once we upgrade binutils to a later version.
 	# Bug Report: https://sourceware.org/bugzilla/show_bug.cgi?id=28138
-	patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
+	# patch -p0 <"$PLAN_CONTEXT/malformarchive-linking-fix.patch"
 }
 
 do_build() {

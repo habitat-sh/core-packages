@@ -1,6 +1,6 @@
 pkg_name="texinfo"
 pkg_origin="core"
-pkg_version="6.8"
+pkg_version="7.0.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Texinfo is the official documentation format of the GNU project. It was \
@@ -30,10 +30,19 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 
-#Applying patch for gnulib error with newer glibc.
-#can be removed if the next version of texinfo, releases with fix
 do_prepare() {
-	patch -p1 <"$PLAN_CONTEXT/glibc-2.34-fix.patch"
+	# Fix `/usr/bin/env` interpreter in source files
+	# We need to correct the timestamp after modifying the interpreter
+	# otherwise it triggers unnecessary build rules that think the source
+	# has changed.
+	grep -lr '^#\!\s*/usr/bin/env' . | while read -r f; do
+		# Replace the interpreter
+		sed -e "s,^#\!\s*/usr/bin/env,#\!$(pkg_path_for coreutils)/bin/env,g" -i.bak "$f"
+		# Sync the timestamp of the modified file with the backup
+		touch -r "$f.bak" "$f"
+		# Remove the backup
+		rm "$f.bak"
+	done
 }
 
 do_check() {
