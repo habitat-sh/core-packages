@@ -11,8 +11,7 @@
             ],
             "ignored_packages": [
                 "draft/**",
-                "packages/development/interpreters/ruby/30/**",
-                "packages/applications/databases/postgresql/**"
+                "packages/development/interpreters/ruby/30/**"
             ]
         }
     ]
