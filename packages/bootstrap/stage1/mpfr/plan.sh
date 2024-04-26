@@ -12,7 +12,7 @@ correct rounding, based on GNU Multi-Precision Library.\
 pkg_upstream_url="http://www.mpfr.org/"
 pkg_license=('LGPL-3.0-or-later')
 pkg_source="http://www.mpfr.org/${program}-${pkg_version}/${program}-${pkg_version}.tar.xz"
-pkg_shasum="0c98a3f1732ff6ca4ea690552079da9c597872d30e96ec28414ee23c95558a7f"
+pkg_shasum="06a378df13501248c1b2db5aa977a2c8126ae849a9d9b7be2546fb4a9c26d993"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
