@@ -12,7 +12,7 @@ specified pattern. By default, Grep outputs the matching lines.\
 pkg_upstream_url="https://www.gnu.org/software/grep/"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.xz"
-pkg_shasum="5c10da312460aec721984d5d83246d24520ec438dd48d7ab5a05dbc0d6d6823c"
+pkg_shasum="1db2aedde89d0dea42b16d9528f894c8d15dae4e190b59aecc78f5a951276eab"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
