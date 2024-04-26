@@ -1,0 +1,6 @@
+[rules]
+unused-runpath-entry = {ignored_files = ["bin/*",  "lib/*"]}
+unused-dependency = {level = "off"}
+script-interpreter-not-found = {level = "off"}
+# core/postgresql15 is required to create this package
+duplicate-runtime-binary = {primary_packages = ["core/postgresql-with-ext15"]}
