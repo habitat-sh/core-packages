@@ -2,7 +2,7 @@ program="libcap"
 
 pkg_name="libcap-stage1"
 pkg_origin="core"
-pkg_version="2.60"
+pkg_version="2.69"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The Libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities \

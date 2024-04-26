@@ -1,6 +1,6 @@
 pkg_name="vim"
 pkg_origin="core"
-pkg_version="9.1.0318"
+pkg_version="9.0.1677"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Vim is a highly configurable text editor built to make creating and changing \

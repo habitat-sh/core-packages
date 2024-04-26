@@ -1,6 +1,6 @@
 pkg_name="perl"
 pkg_origin="core"
-pkg_version="5.34.0"
+pkg_version="5.38.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Perl 5 is a highly capable, feature-rich programming language with over 29 \
