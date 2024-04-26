@@ -1,7 +1,7 @@
 docker-image = "hab-bootstrap:20230523"
 [rules]
-missing-license = { level = "off", source-shasum="a4c4bec052f7b8370024e60389e194377f3f48b56618418ea51067f67aaab30b" }
-license-not-found = { level = "off", source-shasum="a4c4bec052f7b8370024e60389e194377f3f48b56618418ea51067f67aaab30b" }
+missing-license = { level = "off", source-shasum="e275e76442a6067341a27f04c5c6b83d8613144004c0413528863dc6b5c743da" }
+license-not-found = { level = "off", source-shasum="e275e76442a6067341a27f04c5c6b83d8613144004c0413528863dc6b5c743da" }
 host-elf-interpreter = "off"
 library-dependency-not-found = "off"
 # GCC uses binutils binaries at runtime
