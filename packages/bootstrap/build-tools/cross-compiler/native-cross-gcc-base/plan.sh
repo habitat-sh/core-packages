@@ -34,9 +34,9 @@ do_prepare() {
 	# Tell gcc not to look under the default `/lib/` and `/usr/lib/` directories
 	# for libraries
 	#
-	# Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/compilers/gcc/no-sys-dirs.patch
+	# Thanks to: https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/compilers/gcc/patches/no-sys-dirs.patch
 	# shellcheck disable=SC2002
-	# patch -p1 <"$PLAN_CONTEXT/no-sys-dirs.patch"
+	patch -p1 <"$PLAN_CONTEXT/no-sys-dirs.patch"
 }
 
 do_build() {
