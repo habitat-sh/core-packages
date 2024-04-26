@@ -2,8 +2,8 @@ docker-image = "hab-bootstrap:20230523"
 
 [rules]
 library-dependency-not-found = "off"
-license-not-found = {level = "off", source-shasum = "fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"}
-missing-license = {level = "off", source-shasum = "fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2"}
+license-not-found = {level = "off", source-shasum = "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898"}
+missing-license = {level = "off", source-shasum = "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898"}
 # Most host system linkers utilize the LD_RUN_PATH environment variable to set
 # the runpath for linked binaries. This is a standard practice and can be
 # disregarded safely. The hab-plan-build script automatically includes the current
