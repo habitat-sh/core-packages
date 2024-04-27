@@ -15,7 +15,7 @@ systems.\
 pkg_upstream_url="https://gcc.gnu.org/"
 pkg_license=('GPL-3.0-or-later WITH GCC-exception-3.1' 'LGPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}/${program}-${pkg_version}.tar.xz"
-pkg_shasum="f77bd47cf8170c57365ae7bf86696c118adb3b120d3259c64c502d3dc1e2d926"
+pkg_shasum="e275e76442a6067341a27f04c5c6b83d8613144004c0413528863dc6b5c743da"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_deps=(
