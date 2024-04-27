@@ -1,12 +1,12 @@
 pkg_name="linux-headers"
 pkg_origin="core"
-pkg_version="6.4.12"
+pkg_version="6.7.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The Linux kernel headers"
 pkg_upstream_url="https://kernel.org"
 pkg_license=('GPL-2.0-only')
 pkg_source="https://www.kernel.org/pub/linux/kernel/v6.x/linux-${pkg_version}.tar.xz"
-pkg_shasum="cca91be956fe081f8f6da72034cded96fe35a50be4bfb7e103e354aa2159a674"
+pkg_shasum="f68d9f5ffc0a24f850699b86c8aea8b8687de7384158d5ed3bede37de098d60c"
 pkg_dirname="linux-$pkg_version"
 
 pkg_include_dirs=(include)
