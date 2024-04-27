@@ -2,7 +2,7 @@ program="mpfr"
 
 pkg_name="mpfr-stage0"
 pkg_origin="core"
-pkg_version="4.2.0"
+pkg_version="4.2.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU MPFR (GNU Multiple Precision Floating-Point Reliably) is a GNU portable \
@@ -12,7 +12,7 @@ correct rounding, based on GNU Multi-Precision Library.\
 pkg_upstream_url="http://www.mpfr.org/"
 pkg_license=('LGPL-3.0-or-later')
 pkg_source="http://www.mpfr.org/${program}-${pkg_version}/${program}-${pkg_version}.tar.xz"
-pkg_shasum="06a378df13501248c1b2db5aa977a2c8126ae849a9d9b7be2546fb4a9c26d993"
+pkg_shasum="277807353a6726978996945af13e52829e3abd7a9a5b7fb2793894e18f1fcbb2"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
