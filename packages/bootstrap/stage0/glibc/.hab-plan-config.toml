@@ -1,5 +1,5 @@
 [rules]
-license-not-found = {level = "off", source-shasum = "fb82998998b2b29965467bc1b69d152e9c307d2cf301c9eafb4555b770ef3fd2"}
-missing-license = {level = "off", source-shasum = "fb82998998b2b29965467bc1b69d152e9c307d2cf301c9eafb4555b770ef3fd2"}
+license-not-found = {level = "off", source-shasum = "f77bd47cf8170c57365ae7bf86696c118adb3b120d3259c64c502d3dc1e2d926"}
+missing-license = {level = "off", source-shasum = "f77bd47cf8170c57365ae7bf86696c118adb3b120d3259c64c502d3dc1e2d926"}
 # Certain glibc headers include the linux headers, making it a runtime dependency
 unused-dependency = {ignored_packages = ["core/linux-headers"]}
