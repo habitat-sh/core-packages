@@ -3,7 +3,7 @@ native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
 pkg_name="build-tools-coreutils"
 pkg_origin="core"
-pkg_version="9.3"
+pkg_version="9.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Core Utilities are the basic file, shell and text manipulation \
@@ -13,7 +13,7 @@ expected to exist on every operating system.\
 pkg_upstream_url="https://www.gnu.org/software/coreutils/"
 pkg_license=("GPL-3.0-or-later")
 pkg_source="http://ftp.gnu.org/gnu/$program/${program}-${pkg_version}.tar.xz"
-pkg_shasum="adbcfcfe899235b71e8768dcf07cd532520b7f54f9a8064843f8d199a904bbaa"
+pkg_shasum="ea613a4cf44612326e917201bbbcdfbd301de21ffc3b59b6e5c07e040b275e52"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/build-tools-glibc
@@ -24,9 +24,9 @@ pkg_build_deps=(
 pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/env)
 
-do_prepare() {
-	patch -p1 <"$PLAN_CONTEXT/coreutils-9.3-i18n-1.patch"
-}
+# do_prepare() {
+# 	patch -p1 <"$PLAN_CONTEXT/coreutils-9.3-i18n-1.patch"
+# }
 
 do_build() {
 	./configure \
