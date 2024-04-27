@@ -1,6 +1,6 @@
 [rules]
-license-not-found = {level = "off", source-shasum = "67fc1a4030d08ee877a4867d3dcab35828148f87e1fd05da6db585ed5a166bd4"}
-missing-license = {level = "off", source-shasum = "67fc1a4030d08ee877a4867d3dcab35828148f87e1fd05da6db585ed5a166bd4"}
+license-not-found = {level = "off", source-shasum = "aa54850ebda5064c72cd4ec2d9b056c294252991486350d9a97ab2a6dfdfaf12"}
+missing-license = {level = "off", source-shasum = "aa54850ebda5064c72cd4ec2d9b056c294252991486350d9a97ab2a6dfdfaf12"}
 unused-dependency = {ignored_packages = [
     "core/bash-static",
     "core/hab-ld-wrapper"

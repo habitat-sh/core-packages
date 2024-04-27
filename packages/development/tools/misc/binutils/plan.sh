@@ -2,7 +2,7 @@ program="binutils"
 
 pkg_name="binutils"
 pkg_origin="core"
-pkg_version="2.41"
+pkg_version="2.42"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Binary Utilities, or binutils, are a set of programming tools for \
@@ -12,7 +12,7 @@ and assembly source code.\
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.bz2"
-pkg_shasum="67fc1a4030d08ee877a4867d3dcab35828148f87e1fd05da6db585ed5a166bd4"
+pkg_shasum="aa54850ebda5064c72cd4ec2d9b056c294252991486350d9a97ab2a6dfdfaf12"
 pkg_dirname="${program}-${pkg_version}"
 pkg_bin_dirs=(
 	bin
