@@ -1,0 +1,18 @@
+{
+    "repos": [
+        {
+            "id": "core",
+            "source": ".",
+            "native_packages": [
+                "packages/bootstrap/build-support/**/*",
+                "packages/bootstrap/build-tools/host-tools/**/*",
+                "packages/bootstrap/build-tools/cross-tools/**/*"
+            ],
+            "ignored_packages": [
+                "packages/bootstrap/build-tools-old/**/*",
+                "packages/tools/**/*",
+                "packages/**/compilers/**/go**"
+            ]
+        }
+    ]
+}

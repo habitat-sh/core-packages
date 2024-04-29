@@ -1,0 +1,9 @@
+[rules]
+missing-license = { level = "off", source-shasum = "8b5fcb24b4128cf04df1b0b9410ce8b1a729cb3c544e6da885d234280dedeac6" }
+# There are some binaries which use host script interpreters
+host-script-interpreter = { level = "off" }
+unused-rpath-entry = { level = "off" }
+# We allow all these violations as this is run on the host system
+library-dependency-not-found = { level = "off" }
+# TODO: remove after fixing ld wrapper
+missing-rpath-entry-dependency = { level = "off" }

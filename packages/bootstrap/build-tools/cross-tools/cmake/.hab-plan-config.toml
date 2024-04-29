@@ -1,0 +1,5 @@
+[rules]
+missing-license = { level = "off", source-shasum = "36db4b6926aab741ba6e4b2ea2d99c9193222132308b4dc824d4123cb730352e" }
+license-not-found = { level = "off", source-shasum = "36db4b6926aab741ba6e4b2ea2d99c9193222132308b4dc824d4123cb730352e" }
+# Ignore cmake modules in the share folder
+script-interpreter-not-found = { ignored_files = ["share/*"] }

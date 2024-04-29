@@ -1,0 +1,3 @@
+[rules]
+# The core/hab-ld-wrapper is used at runtime
+unused-dependency = { ignored_packages = ["core/hab-ld-wrapper"] }

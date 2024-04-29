@@ -1,0 +1,2 @@
+[rules]
+unused-dependency = { ignored_packages = ["core/{ld64,clang-base}", "core/hab-cc-wrapper"] }

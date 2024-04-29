@@ -1,0 +1,6 @@
+[rules]
+missing-license = { level = "off", source-shasum = "878ecf81e059507dd2ab256f59629a4fb00171035d2a2f5638cb582d999373b1" }
+# We ignore files in the documentation
+script-interpreter-not-found = { level = "off", ignored_files = ["share/doc/**/*"] }
+# We ignore the unused rpaths as the binaries are pre-compiled
+unused-rpath-entry = "off"
