@@ -1,2 +1,4 @@
 [rules]
+missing-license = { level = "off", source-shasum = "378f8864ec21cfceaa048f7e1869ac9b4597b449087caf1eb55e440d30273336" }
+license-not-found = { level = "off", source-shasum = "378f8864ec21cfceaa048f7e1869ac9b4597b449087caf1eb55e440d30273336" }
 unused-runpath-entry = {ignored_files = ["lib/gawk/*.so", "libexec/{awk,gawk}/{pwcat,grcat}"]}
