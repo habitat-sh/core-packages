@@ -1,2 +1,4 @@
 docker-image = "hab-bootstrap:20230523"
 [rules]
+missing-license = { level = "off", source-shasum = "14d55e32063ea9526e057fbf35fcabd53378e769787eff7919c3755b02d2b57e" }
+license-not-found = { level = "off", source-shasum = "14d55e32063ea9526e057fbf35fcabd53378e769787eff7919c3755b02d2b57e" }

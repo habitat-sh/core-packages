@@ -1,5 +1,7 @@
 docker-image = "hab-bootstrap:20230523"
 [rules]
+missing-license = { level = "off", source-shasum = "7454eb6935db17c6655576c2e1b0fabefd38b4d0936e0f87f48cd062ce91a057" }
+license-not-found = { level = "off", source-shasum = "7454eb6935db17c6655576c2e1b0fabefd38b4d0936e0f87f48cd062ce91a057" } 
 # grep, diffutils and coreutils are used in certain scripts of the gzip package
 unused-dependency = { ignored_packages = [
     "core/build-tools-grep",
