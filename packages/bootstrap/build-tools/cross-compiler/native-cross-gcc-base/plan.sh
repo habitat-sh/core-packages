@@ -88,17 +88,17 @@ do_install() {
 	# We then include this folder prior to the standard gcc search path to make gcc use the partial header
 	# when building glibc.
 
+	# Create the full limits.h file
+	cat ../gcc/limitx.h ../gcc/glimits.h ../gcc/limity.h >"$(dirname "$("$pkg_prefix"/bin/"$native_target"-gcc -print-libgcc-file-name)")"/install-tools/include/limits.h
+
+	# Install the full limits.h file
+	"$pkg_prefix"/libexec/gcc/"$native_target"/$pkg_version/install-tools/mkheaders -v
+
 	# Create a copy of the partial limits.h file that we use to compile glibc
 	# in a non-standard bootstrap-include folder. We will get this picked up
 	# when building glibc by adding extra -isystem flags to the CPPFLAGS
 	mkdir -v "$pkg_prefix/bootstrap-include"
 	cp -v "$pkg_prefix"/lib/gcc/"$native_target"/$pkg_version/include-fixed/* "$pkg_prefix/bootstrap-include"
-
-	# Create the full limits.h file
-	cat ../gcc/limitx.h ../gcc/glimits.h ../gcc/limity.h >"$(dirname "$("$pkg_prefix"/bin/"$native_target"-gcc -print-libgcc-file-name)")"/install-tools/include/limits.h
-
-	# Install the full limits.h file
-	"$pkg_prefix"/libexec/gcc/"$native_target"/$pkg_version/install-tools/mkheaders
 
 	# Remove unnecesary include folder created by 'make install'
 	rm -rf "$pkg_prefix/include"
