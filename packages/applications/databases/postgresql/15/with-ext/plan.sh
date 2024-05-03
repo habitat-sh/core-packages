@@ -1,6 +1,6 @@
 # shellcheck disable=SC2164
 pkg_name="postgresql-with-ext15"
-pkg_version="15.1"
+pkg_version="15.6"
 pkg_origin="core"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="PostgreSQL is a powerful, open source object-relational database system."
