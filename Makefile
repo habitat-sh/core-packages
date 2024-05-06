@@ -23,37 +23,43 @@ install-hab-auto-build: check-rust
 	|| (echo "Installing hab-auto-build"; \
 		cargo install --git $(HAB_AUTO_BUILD_GIT_REPO) --branch $(HAB_AUTO_BUILD_BRANCH); \
 		echo "Installed hab-auto-build")
-		
+
 update-hab-auto-build: check-rust
 	@echo "Updating hab-auto-build"
 	@cargo install --git $(HAB_AUTO_BUILD_GIT_REPO) --branch $(HAB_AUTO_BUILD_BRANCH) --quiet;
 	@echo "Updated hab-auto-build"
 
-setup: build-hab-bootstrap-image install-hab-auto-build
+check-and-create-origin-token:
+	ls /hab/cache/keys/core-* || sudo hab origin key generate core
+
+check-and-create-build-dir:
+	sudo mkdir -p .hab-auto-build
+
+setup: build-hab-bootstrap-image install-hab-auto-build check-and-create-build-dir check-and-create-origin-token
 	@echo "Installed all tools for building packages"
 
 update: build-hab-bootstrap-image update-hab-auto-build
 	@echo "Updated all tools for building packages"
 
-build-dry-run: check-hab-auto-build
-	hab-auto-build build -d $(PACKAGE)
+build-dry-run: check-hab-auto-build check-and-create-build-dir
+	sudo $$(which hab-auto-build) build -d $(PACKAGE)
 
 build-debug: setup check-hab-auto-build
 	@echo "Building all packages matching $(PACKAGE)"
-	@HAB_AUTO_BUILD_DEBUG=hab_auto_build=debug hab-auto-build build $(PACKAGE)
+	@HAB_AUTO_BUILD_DEBUG=hab_auto_build=debug sudo $$(which hab-auto-build) build $(PACKAGE)
 	@echo "Built all packages matching $(PACKAGE)"
 
 build-trace: setup check-hab-auto-build
 	@echo "Building all packages matching $(PACKAGE)"
-	@HAB_AUTO_BUILD_DEBUG=hab_auto_build=trace hab-auto-build build $(PACKAGE)
+	@HAB_AUTO_BUILD_DEBUG=hab_auto_build=trace sudo $$(which hab-auto-build) build $(PACKAGE)
 	@echo "Built all packages matching $(PACKAGE)"
 
 build: setup check-hab-auto-build
 	@echo "Building all packages matching $(PACKAGE)"
-	@HAB_AUTO_BUILD_DEBUG= hab-auto-build build $(PACKAGE)
+	@HAB_AUTO_BUILD_DEBUG= sudo $$(which hab-auto-build) build $(PACKAGE)
 	@echo "Built all packages matching $(PACKAGE)"
 
 check: check-hab-auto-build
 	@echo "Checking all packages matching $(PACKAGE)"
-	hab-auto-build check $(PACKAGE)
+	sudo $$(which hab-auto-build) check $(PACKAGE)
 	@echo "Checked all packages matching $(PACKAGE)"
