@@ -58,6 +58,10 @@ do_prepare() {
 		patch -p1
 
 	patch -p1 <"$PLAN_CONTEXT/dont-use-system-ld-so-cache.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2022-39046.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2023-0687.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2023-4911.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2023-6246.patch"
 
 	# 'HAB_LD_LINK_MODE' is used to control the way the habitat linker wrapper adds rpath entries.
 	# By setting it to 'minimal', we instruct the linker wrapper to add an rpath entry only if a library
