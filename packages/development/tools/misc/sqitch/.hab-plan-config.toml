@@ -1,0 +1,5 @@
+[rules]
+unused-runpath-entry = {ignored_files = ["lib/*"]}
+unused-dependency = {ignored_packages = ["core/cpanminus"]}
+script-interpreter-not-found = {ignored_files = ["lib/perl5/*"]}
+host-script-interpreter = {level = "off"}
