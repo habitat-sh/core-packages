@@ -11,7 +11,7 @@ pkg_shasum="4bc60a920635929bdf9fa9bb5d310fe3f82bccd441a1487680566694400e4304"
 pkg_bin_dirs=(bin)
 pkg_build_deps=(
     core/git
-    core/go19
+    core/go1_19
 )
 
 do_prepare() {

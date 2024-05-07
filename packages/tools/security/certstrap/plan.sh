@@ -12,7 +12,7 @@ pkg_deps=(
 	core/glibc
 )
 pkg_build_deps=(
-	core/go19
+	core/go1_19
 )
 
 pkg_bin_dirs=(bin)

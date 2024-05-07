@@ -14,7 +14,7 @@ pkg_exports=(
 )
 pkg_deps=(core/glibc)
 pkg_build_deps=(
-	core/go21 
+	core/go1_21 
 	core/git 
 	core/gcc 
 	core/cacerts
