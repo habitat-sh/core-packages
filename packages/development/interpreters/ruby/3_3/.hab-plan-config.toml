@@ -3,6 +3,8 @@
 env-script-interpreter-not-found = {ignored_files = [
     "lib/ruby/*/bundler/templates/*"
 ]}
+license-not-found = {level = "off", source-shasum = "96518814d9832bece92a85415a819d4893b307db5921ae1f0f751a9a89a56b7d"}
+missing-license = {level = "off", source-shasum = "96518814d9832bece92a85415a819d4893b307db5921ae1f0f751a9a89a56b7d"}
 # core/ncurses: The paths for these packages get written into 'lib/ruby/<version>/<arch>/rbconfig.rb' and
 # potentially affects further building of gems with the mkmf gem.
 # core/nss-myhostname: This is apparently required at runtime, for some DNS lookup behaviour?
@@ -10,7 +12,7 @@ env-script-interpreter-not-found = {ignored_files = [
 unused-dependency = {ignored_packages = ["core/{ncurses,nss-myhostname,readline,openssl}"]}
 unused-runpath-entry = {level = "off"}
 # we want ruby-stage1 binary as a base_ruby for building ruby33.so not adding as a run time dep.hence the below rule.
-missing-runpath-entry-dependency = {ignored_files = ["lib/ruby/3.3.0/x86_64-linux/*" ,
+missing-runpath-entry-dependency = {ignored_files = ["lib/ruby/3.3.0/x86_64-linux/*" , 
 "lib/ruby/gems/3.3.0/extensions/x86_64-linux/3.3.0/**/*.so" ,
 "bin/ruby"]}
 #ruby 33 adding src/build dir in run path for some shared files.so the below rule
