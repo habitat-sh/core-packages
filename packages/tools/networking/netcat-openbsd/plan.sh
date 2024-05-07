@@ -22,7 +22,7 @@ do_download() {
 
   # Download patches to apply on top of the BSD code
   build_line "Downloading patches series file..."
-  local patch_base_url=https://sources.debian.net/data/main/n/${pkg_name}/${pkg_version}-1/debian/patches
+  local patch_base_url=https://sources.debian.net/data/main/n/${pkg_name}/${pkg_version}-1.1/debian/patches
 
   download_file $patch_base_url/series series
 
