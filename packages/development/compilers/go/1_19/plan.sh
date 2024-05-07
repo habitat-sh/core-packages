@@ -1,6 +1,6 @@
 # shellcheck disable=SC2034
 program="go"
-pkg_name=go19
+pkg_name=go1_19
 pkg_origin=core
 pkg_version=1.19.13
 pkg_bootstrap_pkg="core/go-stage0"
