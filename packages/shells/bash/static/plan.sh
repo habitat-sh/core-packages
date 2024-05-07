@@ -2,8 +2,8 @@ program="bash"
 
 pkg_name="bash-static"
 pkg_origin="core"
-major_version="5.1"
-patch_version=".16"
+major_version="5.2"
+patch_version=".21"
 pkg_version="${major_version}${patch_version}"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
@@ -17,7 +17,7 @@ most sh scripts can be run by Bash without modification.\
 pkg_upstream_url="http://www.gnu.org/software/bash/bash.html"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="5bac17218d3911834520dad13cd1f85ab944e1c09ae1aba55906be1f8192f558"
+pkg_shasum="c8e31bdc59b69aaffc5b36509905ba3e5cbb12747091d27b4b977f078560d5b8"
 pkg_dirname="${program}-${pkg_version}"
 pkg_interpreters=(
 	bin/sh
