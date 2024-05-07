@@ -67,6 +67,10 @@ do_prepare() {
 	# hardcoded dependency and allowing us to update the `iana-etc` package independently
 	# of glibc. Thanks to https://github.com/NixOS/nixpkgs/pull/137601 for the solution.
 	patch -p1 <"$PLAN_CONTEXT/hab-nss-open-files.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2022-39046.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2023-0687.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2023-4911.patch"
+	patch -p1 <"$PLAN_CONTEXT/CVE-2023-6246.patch"
 
 	# 'HAB_LD_LINK_MODE' is used to control the way the habitat linker wrapper adds rpath entries.
 	# By setting it to '', we instruct the linker wrapper to add an rpath entry only if a library
