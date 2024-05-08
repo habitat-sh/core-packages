@@ -12,7 +12,7 @@ pkg_build_deps=(
   core/gcc
   core/libxml2
   core/make
-  core/python2
+  core/python2-stage1
 )
 pkg_pconfig_dirs=(lib/pkgconfig)
 

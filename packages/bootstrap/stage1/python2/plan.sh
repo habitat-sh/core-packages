@@ -1,5 +1,5 @@
 program="python2"
-pkg_name="python2"
+pkg_name="python2-stage1"
 pkg_distname=Python
 pkg_version="2.7.18"
 pkg_origin=core

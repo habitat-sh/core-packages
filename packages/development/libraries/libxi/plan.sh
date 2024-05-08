@@ -8,7 +8,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="X.Org Libraries: libXi"
 pkg_upstream_url="https://www.x.org/"
 pkg_license=('MIT-open-group' 'X11-distribute-modifications-variant' 'SMLNJ')
-pkg_source="https://www.x.org/releases/individual/lib/${pkg_distname}-${pkg_version}.tar.xz"
+pkg_source="https://www.x.org/releases/individual/lib/${pkg_distname}-${pkg_version}.tar.bz2"
 pkg_shasum="36a30d8f6383a72e7ce060298b4b181fd298bc3a135c8e201b7ca847f5f81061"
 pkg_deps=(
 	core/glibc 

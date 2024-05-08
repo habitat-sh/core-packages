@@ -19,7 +19,7 @@ pkg_build_deps=(
   core/libpthread-stubs
   core/make
   core/pkg-config
-  core/python2
+  core/python2-stage1
   core/util-macros
   core/xproto
   core/xcb-proto
