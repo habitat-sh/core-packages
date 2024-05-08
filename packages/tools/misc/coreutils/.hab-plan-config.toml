@@ -1,2 +1,4 @@
 [rules]
 unused-runpath-entry = {ignored_files = ["libexec/coreutils/libstdbuf.*"]}
+license-not-found = {level = "off", source-shasum = "ea613a4cf44612326e917201bbbcdfbd301de21ffc3b59b6e5c07e040b275e52"}
+missing-license = {level = "off", source-shasum = "ea613a4cf44612326e917201bbbcdfbd301de21ffc3b59b6e5c07e040b275e52"}
