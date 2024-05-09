@@ -68,7 +68,7 @@ do_check() {
 do_install() {
 	pushd build || exit 1
 	make install
-
+	cp $CACHE_PATH/COPYING "$pkg_prefix"
 	local gem_makefiles
 	# Remove unnecessary external intermediate files created by gems
 	gem_makefiles=$(find "$pkg_prefix"/lib/ruby/gems -name Makefile)

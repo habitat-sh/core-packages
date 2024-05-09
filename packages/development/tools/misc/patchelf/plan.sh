@@ -41,4 +41,5 @@ do_install() {
 	build_line "${HAB_CACHE_SRC_PATH}/${pkg_dirname}/src/${pkg_name}"
 	build_line "${pkg_prefix}/bin/"
 	cp "${HAB_CACHE_SRC_PATH}/${pkg_dirname}/src/${pkg_name}" "${pkg_prefix}/bin/"
+	cp ${CACHE_PATH}/COPYING "${pkg_prefix}"
 }
