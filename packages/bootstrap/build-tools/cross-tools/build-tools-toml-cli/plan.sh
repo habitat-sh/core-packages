@@ -11,10 +11,6 @@ pkg_source="https://github.com/gnprice/toml-cli/archive/refs/tags/v${pkg_version
 pkg_shasum="913f104612b0e549090e1cf77a7a49a12fa286af7e720dd46265bcc554b8f73a"
 pkg_dirname="${program}-${pkg_version}"
 pkg_bin_dirs=(bin)
-pkg_deps=(
-	core/build-tools-glibc
-	core/build-tools-gcc
-)
 pkg_build_deps=(
 	core/build-tools-rust
 )
@@ -22,8 +18,7 @@ do_prepare() {
 	export CARGO_HOME="$HAB_CACHE_SRC_PATH/$pkg_dirname/.cargo"
 	export CARGO_TARGET_DIR="$HAB_CACHE_SRC_PATH/$pkg_dirname/target"
 	# Add flags to build a static binary with the C runtime linked in
-	# commenting below line as toml-cli is built with build-tools-rust
-	#export RUSTFLAGS='-C target-feature=+crt-static'
+	export RUSTFLAGS='-C target-feature=+crt-static'
 	build_line "Setting CARGO_HOME=$CARGO_HOME"
 	build_line "Setting CARGO_TARGET_DIR=$CARGO_TARGET_DIR"
 	build_line "Setting RUSTFLAGS=${RUSTFLAGS}"

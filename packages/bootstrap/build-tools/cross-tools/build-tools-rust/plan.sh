@@ -13,7 +13,7 @@ pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-x86_64-
 pkg_shasum="473978b6f8ff216389f9e89315211c6b683cf95a966196e7914b46e8cf0d74f6"
 pkg_dirname="${program}-${pkg_version}-x86_64-unknown-linux-gnu"
 pkg_deps=(
-	core/native-cross-binutils
+	core/build-tools-binutils
 	core/build-tools-cacerts
 	core/build-tools-glibc
 	core/build-tools-gcc
@@ -29,7 +29,7 @@ pkg_lib_dirs=(lib)
 
 do_prepare() {
 	# Set gcc to use the correct binutils
-	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for native-cross-binutils)/bin"
+	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for build-tools-binutils)/bin"
 
     # The `/usr/bin/env` path is hardcoded, so we'll add a symlink if needed.
 	if [[ ! -r /usr/bin/env ]]; then
