@@ -97,6 +97,10 @@ do_install() {
 	pushd build || exit 1
 	make install
 
+	# Add a `lib64` -> `lib` symlink for `bin/ldd` to work correctly.
+    #
+    # Thanks to: https://github.com/NixOS/nixpkgs/blob/55b03266cfc25ae019af3cdd2cfcad0facdc68f2/pkgs/development/libraries/glibc/builder.sh#L43-L47
+    ln -sv "$pkg_prefix/lib" "$pkg_prefix/lib64"
 	# Remove unneccessary binaries
 	rm -v "${pkg_prefix}"/bin/{mtrace,sotruss,xtrace,sln}
 
