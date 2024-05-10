@@ -1,4 +1,5 @@
-pkg_name="rust"
+program="rust"
+pkg_name="build-tools-rust"
 pkg_origin="core"
 pkg_version="1.75.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -10,15 +11,13 @@ pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
 pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
 pkg_shasum="473978b6f8ff216389f9e89315211c6b683cf95a966196e7914b46e8cf0d74f6"
-pkg_dirname="${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu"
+pkg_dirname="${program}-${pkg_version}-x86_64-unknown-linux-gnu"
 pkg_deps=(
-	core/binutils
-	core/cacerts
-	core/glibc
-	core/gcc-base
-	core/iana-etc
-	core/tzdata
-	core/zlib
+	core/native-cross-binutils
+	core/build-tools-cacerts
+	core/build-tools-glibc
+	core/build-tools-gcc
+	core/build-tools-zlib
 )
 pkg_build_deps=(
 	core/build-tools-patchelf
@@ -30,9 +29,9 @@ pkg_lib_dirs=(lib)
 
 do_prepare() {
 	# Set gcc to use the correct binutils
-	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for binutils)/bin"
+	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for native-cross-binutils)/bin"
 
-		# The `/usr/bin/env` path is hardcoded, so we'll add a symlink if needed.
+    # The `/usr/bin/env` path is hardcoded, so we'll add a symlink if needed.
 	if [[ ! -r /usr/bin/env ]]; then
 		ln -sv "$(pkg_path_for build-tools-coreutils)/bin/env" /usr/bin/env
 		_clean_env=true
@@ -43,9 +42,6 @@ do_build() {
 	return 0
 }
 
-do_strip() {
-	return 0
-}
 
 do_install() {
 	local libc
@@ -53,9 +49,9 @@ do_install() {
 	local zlib
 	local dynamic_linker
 
-	libc="$(pkg_path_for glibc)"
-	gcc_base="$(pkg_path_for gcc-base)"
-	zlib="$(pkg_path_for zlib)"
+	libc="$(pkg_path_for build-tools-glibc)"
+	gcc_base="$(pkg_path_for build-tools-gcc)"
+	zlib="$(pkg_path_for build-tools-zlib)"
 	dynamic_linker="${libc}/lib/ld-linux-x86-64.so.2"
 
 	./install.sh --prefix="$pkg_prefix" --disable-ldconfig
@@ -102,7 +98,7 @@ wrap_rustc_binary() {
 	local actual_binary
 
 	binary="rustc"
-	gcc_base="$(pkg_path_for gcc-base)"
+	gcc_base="$(pkg_path_for build-tools-gcc)"
 	wrapper_binary="$pkg_prefix/bin/$binary"
 	actual_binary="$pkg_prefix/bin/$binary.real"
 
@@ -116,3 +112,8 @@ wrap_rustc_binary() {
 
 	chmod 755 "$wrapper_binary"
 }
+
+do_strip() {
+	return 0
+}
+
