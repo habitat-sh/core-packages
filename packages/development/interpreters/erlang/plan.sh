@@ -66,7 +66,7 @@ do_check() {
 
 do_install() {
 	make install
-
+	cp $CACHE_PATH/LICENSE.txt "$pkg_prefix"
 	# Fix all the script interpreters
 	grep -nrlI '^\#\! escript' "$pkg_prefix" | while read -r target; do
 		sed -e "s|#! escript|#!${pkg_prefix}/bin/escript|" -i "$target"

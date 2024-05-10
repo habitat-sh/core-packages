@@ -72,4 +72,5 @@ do_install() {
 	make install
 	mkdir -p "${pkg_prefix}/sbin"
 	cp "${HAB_CACHE_SRC_PATH}/${pkg_dirname}/objs/nginx" "${pkg_prefix}/sbin"
+	cp $CACHE_PATH/LICENSE "${pkg_prefix}"
 }

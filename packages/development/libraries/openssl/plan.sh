@@ -56,7 +56,7 @@ do_check() {
 
 do_install() {
 	do_default_install
-
+	cp $CACHE_PATH/LICENSE.txt "$pkg_prefix"
 	# Remove dependency on Perl at runtime
 	rm -rfv "$pkg_prefix/ssl/misc" "$pkg_prefix/bin/c_rehash"
 }
