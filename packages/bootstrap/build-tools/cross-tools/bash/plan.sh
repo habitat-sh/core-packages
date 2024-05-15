@@ -2,8 +2,9 @@ program="bash"
 
 pkg_name="build-tools-bash"
 pkg_origin="core"
-pkg_version="5.1"
+major_version="5.1"
 patch_version=".16"
+pkg_version="${major_version}${patch_version}"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
  Bash is the GNU Project's shell. Bash is the Bourne Again SHell. Bash is an \
@@ -15,8 +16,8 @@ most sh scripts can be run by Bash without modification.\
 "
 pkg_upstream_url="http://www.gnu.org/software/bash/bash.html"
 pkg_license=('GPL-3.0-or-later')
-pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}${patch_versoin}.tar.gz"
-pkg_shasum="cc012bc860406dcf42f64431bcd3d2fa7560c02915a601aba9cd597a39329baa"
+pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
+pkg_shasum="5bac17218d3911834520dad13cd1f85ab944e1c09ae1aba55906be1f8192f558"
 pkg_dirname="${program}-${pkg_version}"
 pkg_interpreters=(
     bin/sh

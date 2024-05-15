@@ -10,7 +10,6 @@ pkg_dirname="llvm-project-${pkg_version}.src"
 pkg_build_deps=(
     core/build-tools-cmake
     core/build-tools-make
-    core/build-tools-clang
     core/build-tools-python3
 
 )

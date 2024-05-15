@@ -1,12 +1,12 @@
 # shellcheck disable=2154
-commit_hash="4462a5566cbd81cdda56fd3bc7a98829b0dbb986"
+commit_hash="a2eaafed101a505eb2c201cd43a8f5ed0eb8144a"
 
 pkg_name="build-tools-hab"
 pkg_origin="core"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/habitat-sh/habitat/archive/${commit_hash}.tar.gz"
-pkg_shasum="d4c9ab7a5b40913171006b11205490ceae8d217735ca6b579e329bffc0e13947"
+pkg_shasum="a42199d8fbe4096068d68c89dac9784ef8a0a99d84d83ee65838603101fb9514"
 pkg_dirname="habitat-${commit_hash}"
 # The result is a portable, static binary in a zero-dependency package.
 pkg_deps=(

@@ -1,21 +1,21 @@
 # shellcheck disable=2154
-commit_hash="f240ff4fe4dc687da7f51741640e513233ddebc6"
+commit_hash="994473fe845744d3113b58d34d86722af1b008a8"
 native_target="${TARGET_ARCH:-${pkg_target%%-*}}-hab-linux-gnu"
 
-pkg_name="hab-ld-wrapper"
+pkg_name="hab-ld64-wrapper"
 pkg_origin="core"
 pkg_version="1.0.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/habitat-sh/hab-pkg-wrappers/archive/${commit_hash}.tar.gz"
-pkg_shasum="745ad24f2cce4f9a4727f77537110c477fd79fd41a092e6a0d1fec0318a68c19"
+pkg_shasum="46f1766b06a79a6a3a2b5e6f6f91b4bf5985d8bf070c90c3a4e133add0e3cde6"
 pkg_dirname="hab-pkg-wrappers-${commit_hash}"
 pkg_build_deps=(
-	core/build-tools-rust
+	core/native-rust
 )
 # We don't specify 'pkg_bin_dirs' as we always use the wrapper via it's full path
 
-bin="hab-ld-wrapper"
+bin="hab-ld64-wrapper"
 
 do_prepare() {
 	build_type="--release"

@@ -10,7 +10,6 @@
             ],
             "ignored_packages": [
                 "packages/bootstrap/build-tools-old/**/*",
-                "packages/tools/**/*",
                 "packages/**/compilers/**/go**"
             ]
         }

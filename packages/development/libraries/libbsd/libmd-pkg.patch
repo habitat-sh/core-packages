@@ -1,0 +1,37 @@
+diff -ru a/src/libbsd-overlay.pc.in b/src/libbsd-overlay.pc.in
+--- a/src/libbsd-overlay.pc.in	2022-12-26 13:10:09.755637943 +0000
++++ b/src/libbsd-overlay.pc.in	2022-12-26 14:04:23.977276949 +0000
+@@ -7,6 +7,6 @@
+ Description: Utility functions from BSD systems (overlay)
+ Version: @VERSION@
+ URL: https://libbsd.freedesktop.org/
+-Libs: -L${libdir} -lbsd
+-Libs.private: @LIBBSD_LIBS@ @MD5_LIBS@
+-Cflags: -isystem ${includedir}/bsd -DLIBBSD_OVERLAY
++Libs: -L${libdir} -L@LIBMD_LIB@ -lbsd
++Libs.private: @LIBBSD_LIBS@ -L@LIBMD_LIB@ @MD5_LIBS@
++Cflags: -isystem ${includedir}/bsd -isystem @LIBMD_INCLUDE@ -DLIBBSD_OVERLAY
+diff -ru a/src/libbsd.pc.in b/src/libbsd.pc.in
+--- a/src/libbsd.pc.in	2022-12-26 13:10:09.755637943 +0000
++++ b/src/libbsd.pc.in	2022-12-26 14:05:33.024634588 +0000
+@@ -7,6 +7,6 @@
+ Description: Utility functions from BSD systems
+ Version: @VERSION@
+ URL: https://libbsd.freedesktop.org/
+-Libs: -L${libdir} -lbsd
+-Libs.private: @LIBBSD_LIBS@ @MD5_LIBS@
++Libs: -L${libdir} -L@LIBMD_LIB@ -lbsd
++Libs.private: @LIBBSD_LIBS@ -L@LIBMD_LIB@ @MD5_LIBS@
+ Cflags: -I${includedir}
+diff -ru a/test/Makefile.in b/test/Makefile.in
+--- a/test/Makefile.in	2022-12-26 13:10:09.747638017 +0000
++++ b/test/Makefile.in	2022-12-26 13:40:36.966557945 +0000
+@@ -649,7 +649,7 @@
+ 
+ AM_TESTS_ENVIRONMENT = \
+ 	export CC="$(CC)"; \
+-	export CPPFLAGS="$(HEADERS_CPPFLAGS)"; \
++	export CPPFLAGS="$(HEADERS_CPPFLAGS) -isystem @LIBMD_INCLUDE@"; \
+ 	export top_srcdir="$(top_srcdir)"; \
+ 	$(nil)
+ 

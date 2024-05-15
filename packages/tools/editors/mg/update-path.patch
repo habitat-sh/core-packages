@@ -1,0 +1,22 @@
+--- mg-20221112/GNUmakefile	2022-11-12 10:05:42.000000000 +0000
++++ mg-20221112_fix/GNUmakefile	2022-12-14 07:22:55.322416335 +0000
+@@ -7,15 +7,15 @@
+ 
+ name=		mg
+ 
+-prefix=		/usr/local
++prefix=		@prefix@
+ bindir=		$(prefix)/bin
+ libdir=		$(prefix)/lib
+ includedir=	$(prefix)/include
+ mandir=		$(prefix)/man
+ 
+-PKG_CONFIG=	/usr/bin/pkg-config --silence-errors
+-INSTALL=	/usr/bin/install
+-STRIP=		/usr/bin/strip
++PKG_CONFIG=	@pkgconfig@/bin/pkg-config --silence-errors
++INSTALL=	@coreutils@/bin/install
++STRIP=		@binutils@/bin/strip
+ 
+ UNAME:=		$(shell uname)
+ ifeq ($(UNAME),FreeBSD)

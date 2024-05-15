@@ -24,10 +24,11 @@ do_prepare() {
 	patch -p1 <"$PLAN_CONTEXT/coreutils-getdents64.patch"
 }
 do_build() {
+	export FORCE_UNSAFE_CONFIGURE=1
     build_line "Running configure as $SUDO_USER"
-	sudo -u "$SUDO_USER" ./configure \
+	sudo -u "$SUDO_USER" -E ./configure \
 		--prefix="$pkg_prefix" \
 		--enable-install-program=hostname \
-		--enable-no-install-program=kill,uptime
+		--enable-no-install-program=kill,uptime,uname
 	make
 }

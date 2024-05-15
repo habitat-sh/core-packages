@@ -9,7 +9,7 @@ pkg_source=https://storage.googleapis.com/golang/go${pkg_version}.src.tar.gz
 pkg_shasum="9947fc705b0b841b5938c48b22dc33e9647ec0752bae66e50278df4f23f64959"
 pkg_dirname="go"
 pkg_deps=(core/iana-etc core/cacerts)
-pkg_build_deps=(core/coreutils core/inetutils core/bash core/patch core/gcc core/perl)
+pkg_build_deps=(core/coreutils core/inetutils core/bash core/patch core/perl)
 pkg_bin_dirs=(bin)
 
 do_prepare() {
@@ -36,11 +36,6 @@ do_prepare() {
   cat "$PLAN_CONTEXT/cacerts.patch" \
     | sed -e "s,@cacerts@,$(pkg_path_for cacerts)/ssl/cert.pem,g" \
     | patch -p1
-
-  # Set the dynamic linker from `glibc`
-  dynamic_linker="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
-  find src/cmd -name asm.c -exec \
-    sed -i "s,/lib/ld-linux.*\.so\.[0-9],$dynamic_linker," {} \;
 
   # Use the protocols database from `iana-etc`
   sed -e "s,/etc/protocols,$(pkg_path_for iana-etc)/etc/protocols," \

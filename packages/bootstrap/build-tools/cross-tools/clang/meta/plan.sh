@@ -6,7 +6,6 @@ pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('Apache-2.0 WITH LLVM-exception')
 pkg_deps=(
     core/hab-cc-wrapper
-    core/build-tools-clang-base
     core/build-tools-ld64
 )
 pkg_bin_dirs=(bin)
@@ -34,20 +33,17 @@ wrap_binary() {
     local env_prefix
     local hab_cc_wrapper
     local ld64
-    local clang
-    local xcode
     local system_dirs
 
     binary="$1"
-    env_prefix="BUILD_TOOLS_CLANG"
+    env_prefix="CLANG"
     hab_cc_wrapper="$(pkg_path_for hab-cc-wrapper)"
     ld64="$(pkg_path_for build-tools-ld64)"
-    xcode="$(xcrun --show-sdk-path)"
     system_dirs="/System/Library/Frameworks/:/Library/Frameworks/:/Applications/Xcode.app/"
-    clang="$(pkg_path_for build-tools-clang-base)"
+    
 
     local wrapper_binary="$pkg_prefix/bin/$binary"
-    local actual_binary="${clang}/bin/$binary"
+    local actual_binary="/usr/bin/$binary"
 
     build_line "Adding wrapper for $binary"
 

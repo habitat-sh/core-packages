@@ -5,7 +5,7 @@ pkg_version="xcode"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('APSL-2.0')
 
-pkg_deps=(core/hab-ld-wrapper)
+pkg_deps=(core/hab-ld64-wrapper)
 pkg_bin_dirs=(bin)
 
 do_build() {
@@ -21,11 +21,11 @@ do_install() {
     binary="ld"
     env_prefix="BUILD_TOOLS_LD64"
     wrapper_binary="$pkg_prefix/bin/$binary"
-    hab_ld_wrapper="$(pkg_path_for hab-ld-wrapper)"
+    hab_ld_wrapper="$(pkg_path_for hab-ld64-wrapper)"
 
     build_line "Adding wrapper for $binary"
     sed -e "s^@env_prefix@^${env_prefix}^g" \
-        -e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld-wrapper^g" \
+        -e "s^@wrapper@^${hab_ld_wrapper}/bin/hab-ld64-wrapper^g" \
         "$PLAN_CONTEXT/ld-wrapper.sh" \
         >"$wrapper_binary"
 
