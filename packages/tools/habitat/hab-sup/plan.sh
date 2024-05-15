@@ -20,7 +20,7 @@ pkg_build_deps=(
 	core/gcc
 	core/perl
 	core/protobuf
-	core/rust/1.68.2
+	core/rust/1.75.0
 	core/raml2html
 	core/pkg-config
 )
