@@ -1,7 +1,7 @@
 program="icu"
 pkg_origin="core"
 pkg_name="icu"
-pkg_version="72.1"
+pkg_version="74.2"
 pkg_description="ICU is a mature, widely used set of C/C++ and Java libraries providing \
   Unicode and Globalization support for software applications. ICU is widely \
   portable and gives applications the same results on all platforms and \
@@ -12,26 +12,30 @@ pkg_license=("ICU" "BSD-2-Clause" "BSD-3-Clause" "NAIST-2003" "Unicode-DFS-2015"
 # shellcheck disable=SC2059
 pkg_upstream_url="http://site.icu-project.org/"
 pkg_source="https://github.com/unicode-org/icu/releases/download/release-${pkg_version//./-}/icu4c-${pkg_version//./_}-src.tgz"
-pkg_shasum="a2d2d38217092a7ed56635e34467f92f976b370e20182ad325edea6681a71d68"
+pkg_shasum="68db082212a96d6f53e35d60f47d38b962e9f9d207a74cfac78029ae8ff5e08c"
 pkg_dirname="icu/source"
-pkg_bin_dirs=(bin)
+pkg_bin_dirs=(bin sbin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 pkg_build_deps=(
 	core/python
+	core/clang
 )
 
 do_prepare() {
-	# Add the lib folder to the rpath because several libraries
-	# look for deps in the same folder
-	LDFLAGS="${LDFLAGS} -Wl,-rpath=${pkg_prefix}/lib"
-	build_line "Updating LDFLAGS=${LDFLAGS}"
+	patch -p0 <"$PLAN_CONTEXT/patch-config-mh-darwin.diff"
+	patch -p0 <"$PLAN_CONTEXT/patch-i18n-formatted_string_builder.h.diff"
 }
 
 do_build() {
-	./configure --prefix="${pkg_prefix}"
+	export HAB_DEBUG=1
+	./configure \
+		--prefix="${pkg_prefix}" \
+		--disable-rpath \
+		--disable-layoutex \
+		--disable-samples
 	make -j"$(nproc)"
 }
 

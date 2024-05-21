@@ -21,9 +21,10 @@ pkg_deps=(
 	core/lzop
 	core/xz
 	core/zstd
+	core/gettext
 )
 pkg_build_deps=(
-	core/gettext
+	core/clang
 )
 pkg_bin_dirs=(bin)
 

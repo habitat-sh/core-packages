@@ -19,7 +19,6 @@ pkg_build_deps=(
 	core/pkg-config
 	core/python
 	core/wget
-	core/valgrind
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

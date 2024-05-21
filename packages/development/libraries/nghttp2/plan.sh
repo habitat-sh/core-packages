@@ -15,6 +15,7 @@ pkg_build_deps=(
 	core/make
 	core/python
 	core/pkg-config
+	core/clang
 )
 
 pkg_lib_dirs=(lib)

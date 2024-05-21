@@ -12,6 +12,7 @@ pkg_source="https://downloads.sourceforge.net/project/${pkg_name}/${pkg_name}/${
 pkg_shasum="d4cf38d26e21a56654ffe4acd9cd5481164619626802328506a2869afab29ab3"
 pkg_build_deps=(
 	core/coreutils
+	core/clang
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -31,5 +32,5 @@ do_install() {
 	do_default_install
 
 	# Install license file
-	install -Dm644 COPYING "$pkgdir/share/licenses/COPYING"
+	install -Dm644 COPYING "$pkg_prefix/share/licenses/COPYING"
 }

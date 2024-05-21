@@ -1,7 +1,7 @@
 # shellcheck disable=2034
 git_url="https://github.com/habitat-sh/habitat.git"
-commit_hash="a2eaafed101a505eb2c201cd43a8f5ed0eb8144a"
-pkg_shasum="a42199d8fbe4096068d68c89dac9784ef8a0a99d84d83ee65838603101fb9514"
+commit_hash="d7fd9155f8a692743ee208a783c1308389340c03"
+pkg_shasum="dd181b2306d2720848c8584d09b9799c89e4365fc2d58fe6682e995bc24ceb1a"
 
 pkg_name="hab"
 pkg_origin="core"
@@ -9,9 +9,6 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/habitat-sh/habitat/archive/${commit_hash}.tar.gz"
 pkg_dirname="habitat-${commit_hash}"
-
-# The result is a portable, static binary in a zero-dependency package.
-pkg_deps=()
 
 pkg_build_deps=(
 	core/coreutils
@@ -35,7 +32,7 @@ do_prepare() {
 
 	export CARGO_HOME="$HAB_CACHE_SRC_PATH/$pkg_dirname/.cargo"
 	export CARGO_TARGET_DIR="$HAB_CACHE_SRC_PATH/$pkg_dirname/target"
-	export rustc_target="${TARGET_ARCH:-${pkg_target%%-*}}-unknown-linux-gnu"
+	export rustc_target="${TARGET_ARCH:-${pkg_target%%-*}}-apple-darwin"
 
 	# Used by the `build.rs` program to set the version of the binaries
 	export PLAN_VERSION="${pkg_version}/${pkg_release}"
@@ -49,14 +46,6 @@ do_prepare() {
 	protoc="$(pkg_path_for protobuf)"
 	export PROTOC="${protoc}/bin/protoc"
 	export PROTOC_INCLUDE="${protoc}/include"
-
-	# We need a static hab binary when installing habitat on a new
-	# system for the first time to ensure it always works regardless
-	# of the host environment. This initial hab binary is then used
-	# to download and install all additional packages required.
-	# We can do this by linking in the C runtime statically into
-	# the generated rust binary.
-	export RUSTFLAGS='-C target-feature=+crt-static'
 
 	build_line "Building for target $rustc_target"
 	build_line "Setting CARGO_HOME=$CARGO_HOME"

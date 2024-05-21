@@ -15,13 +15,13 @@ pkg_source="https://ftp.gnu.org/gnu/libidn/libidn2-${pkg_version}.tar.gz"
 pkg_shasum="f3ac987522c00d33d44b323cae424e2cffcb4c63c6aa6cd1376edacbf1c36eb0"
 pkg_deps=(
 	core/libunistring
+	core/gettext
 )
 pkg_build_deps=(
 	core/diffutils
-	core/gettext
 	core/make
 	core/pkg-config
-	core/valgrind
+	core/clang
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)

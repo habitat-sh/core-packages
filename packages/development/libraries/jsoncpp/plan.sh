@@ -37,5 +37,6 @@ do_check() {
 do_install() {
 	pushd local-build || exit 1
 	cmake --install .
+	install_name_tool -id "$pkg_prefix/lib/libjsoncpp.$pkg_version.dylib" "$pkg_prefix/lib/libjsoncpp.$pkg_version.dylib"
 	popd || exit 1
 }

@@ -21,6 +21,7 @@ pkg_build_deps=(
 	core/tcl
 	core/perl
 	core/python
+	core/clang
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
@@ -39,6 +40,4 @@ do_check() {
 
 do_install() {
 	make install
-
-	chmod -v 0755 "${pkg_prefix}"/lib/preloadable_libintl.so
 }

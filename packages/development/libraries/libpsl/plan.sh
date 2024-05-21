@@ -20,6 +20,7 @@ pkg_build_deps=(
 	core/gettext
 	core/pkg-config
 	core/python
+	core/clang
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

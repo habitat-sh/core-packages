@@ -10,6 +10,7 @@ pkg_shasum="5bab55b49f75d77ed26b257997e919b693f29fd4a1bc22e0e6e024c246c72741"
 pkg_build_deps=(
 	core/texinfo
 	core/perl
+	core/clang
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

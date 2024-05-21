@@ -1,7 +1,7 @@
 # shellcheck disable=2034
 git_url="https://github.com/habitat-sh/habitat.git"
-commit_hash="a2eaafed101a505eb2c201cd43a8f5ed0eb8144a"
-pkg_shasum="a42199d8fbe4096068d68c89dac9784ef8a0a99d84d83ee65838603101fb9514"
+commit_hash="d7fd9155f8a692743ee208a783c1308389340c03"
+pkg_shasum="dd181b2306d2720848c8584d09b9799c89e4365fc2d58fe6682e995bc24ceb1a"
 
 pkg_name="hab-sup"
 pkg_origin="core"
@@ -15,6 +15,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/coreutils
+	core/libsodium
 	core/perl
 	core/protobuf
 	core/rust/1.75.0
@@ -34,11 +35,10 @@ do_unpack() {
 
 do_prepare() {
 	local protoc
-	local gcc_libs
 
 	export CARGO_HOME="$HAB_CACHE_SRC_PATH/$pkg_dirname/.cargo"
 	export CARGO_TARGET_DIR="$HAB_CACHE_SRC_PATH/$pkg_dirname/target"
-	export rustc_target="${TARGET_ARCH:-${pkg_target%%-*}}-unknown-linux-gnu"
+	export rustc_target="${TARGET_ARCH:-${pkg_target%%-*}}-apple-darwin"
 
 	# Used by the `build.rs` program to set the version of the binaries
 	export PLAN_VERSION="${pkg_version}/${pkg_release}"
@@ -52,12 +52,6 @@ do_prepare() {
 	protoc="$(pkg_path_for protobuf)"
 	export PROTOC="${protoc}/bin/protoc"
 	export PROTOC_INCLUDE="${protoc}/include"
-
-	# We need to pass in the path to core/gcc-libs lib folder to the rust
-	# compiler so that it is passed to the habitat linker script and added
-	# correctly in the rpath of the resulting binaries
-	gcc_libs="$(pkg_path_for gcc-libs)"
-	export RUSTFLAGS="-L ${gcc_libs}/lib"
 
 	build_line "Building for target $rustc_target"
 	build_line "Setting CARGO_HOME=$CARGO_HOME"

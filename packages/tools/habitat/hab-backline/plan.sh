@@ -1,7 +1,7 @@
 # shellcheck disable=2034
 git_url="https://github.com/habitat-sh/habitat.git"
-commit_hash="a2eaafed101a505eb2c201cd43a8f5ed0eb8144a"
-pkg_shasum="a42199d8fbe4096068d68c89dac9784ef8a0a99d84d83ee65838603101fb9514"
+commit_hash="d7fd9155f8a692743ee208a783c1308389340c03"
+pkg_shasum="dd181b2306d2720848c8584d09b9799c89e4365fc2d58fe6682e995bc24ceb1a"
 
 pkg_name="hab-backline"
 pkg_origin="core"

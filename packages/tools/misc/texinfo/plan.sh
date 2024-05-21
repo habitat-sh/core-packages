@@ -15,17 +15,25 @@ pkg_shasum="8eb753ed28bca21f8f56c1a180362aed789229bd62fff58bf8368e9beb59fec4"
 pkg_deps=(
 	core/gawk
 	core/perl
+	core/gettext
 )
 pkg_build_deps=(
 	core/automake
 	core/coreutils
 	core/diffutils
-	core/gettext
 	core/grep
 	core/make
 	core/sed
+	core/clang
 )
 pkg_bin_dirs=(bin)
+
+do_build() {
+	export PERL_EXT_CFLAGS="${CFLAGS}"
+	export PERL_EXT_LDFLAGS="${LDFLAGS}"
+	./configure --prefix="${pkg_prefix}"
+	make 
+}
 
 do_check() {
 	make check

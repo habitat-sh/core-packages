@@ -25,10 +25,9 @@ do_prepare() {
 }
 
 do_build() {
-	./configure \
-		--prefix "${pkg_prefix}" \
-		--dest-cpu "x64" \
-		--dest-os "linux"
+	export PATH="$PATH:/usr/sbin"
+	CC=clang ./configure \
+		--prefix "${pkg_prefix}"
 
 	make -j"$(nproc)"
 }

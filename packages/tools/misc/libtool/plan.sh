@@ -52,4 +52,6 @@ do_check() {
 do_install() {
 	make install
 	sed -e "s|^#!.*|#!/bin/sh|g" -i "$pkg_prefix"/bin/libtoolize
+	ln -sv libtool "$pkg_prefix/bin/glibtool"
+	ln -sv libtoolize "$pkg_prefix/bin/glibtoolize"
 }

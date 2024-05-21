@@ -1,7 +1,7 @@
 # shellcheck disable=2034
 git_url="https://github.com/habitat-sh/habitat.git"
-commit_hash="a2eaafed101a505eb2c201cd43a8f5ed0eb8144a"
-pkg_shasum="a42199d8fbe4096068d68c89dac9784ef8a0a99d84d83ee65838603101fb9514"
+commit_hash="d7fd9155f8a692743ee208a783c1308389340c03"
+pkg_shasum="dd181b2306d2720848c8584d09b9799c89e4365fc2d58fe6682e995bc24ceb1a"
 
 pkg_name="hab-studio"
 pkg_origin="core"
@@ -16,6 +16,8 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/hab
+	core/coreutils
+	core/sed
 )
 pkg_bin_dirs=(bin)
 
@@ -38,8 +40,9 @@ do_build() {
 
 do_install() {
 	# shellcheck disable=2154
-	install -v -D "$SRC_PATH"/components/studio/bin/hab-studio.sh "$pkg_prefix"/bin/hab-studio
-	install -v -D "$SRC_PATH"/components/studio/libexec/hab-studio-profile.sh "$pkg_prefix"/libexec/hab-studio-profile.sh
+	install -v -D "$SRC_PATH"/components/studio/bin/hab-studio-"${pkg_target#*-}".sh "$pkg_prefix"/bin/hab-studio
+	install -v -D "$SRC_PATH"/components/studio/libexec/darwin-sandbox.sb "$pkg_prefix"/libexec/darwin-sandbox.sb
+	install -v -D "$SRC_PATH"/components/studio/libexec/hab-studio-darwin-profile.sh "$pkg_prefix"/libexec/hab-studio-darwin-profile.sh
 	for f in "$SRC_PATH"/components/studio/libexec/hab-studio-type-*.sh; do
 		[[ -e $f ]] || break # see http://mywiki.wooledge.org/BashPitfalls#pf1
 		install -v -D "$f" "$pkg_prefix"/libexec/"$(basename "$f")"
@@ -54,6 +57,5 @@ do_install() {
 
 	cp -rv "${SRC_PATH}/components/studio/defaults" "${pkg_prefix}"
 
-	# Fix scripts
 	fix_interpreter "${pkg_prefix}/bin/*" core/bash bin/sh
 }

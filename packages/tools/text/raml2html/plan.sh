@@ -9,7 +9,7 @@ pkg_upstream_url="https://github.com/raml2html/raml2html"
 pkg_bin_dirs=(bin)
 
 do_build() {
-	env PREFIX="$CACHE_PATH" npm i -g "${pkg_name}@$pkg_version"
+	env PREFIX="$CACHE_PATH" npm i --cache "$CACHE_PATH/.npm" -g "${pkg_name}@$pkg_version"
 }
 
 do_install() {

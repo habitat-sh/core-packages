@@ -10,13 +10,21 @@ pkg_upstream_url="http://www.gnu.org/software/gdbm/gdbm.html"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="74b1081d21fff13ae4bd7c16e5d6e504a4c26f7cde1dca0d963a484174bbcacd"
+pkg_deps=(
+	core/readline
+)
 pkg_build_deps=(
 	# core/dejagnu-stage1
 	core/gzip
+	core/clang
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+
+do_prepare() {
+	patch -p0 <"$PLAN_CONTEXT/gdbm.h-tiger-stdio-no-offt.patch"
+}
 
 do_build() {
 	./configure \

@@ -13,13 +13,17 @@ pkg_source="https://static.rust-lang.org/dist/${program}-${pkg_version}-aarch64-
 pkg_shasum="878ecf81e059507dd2ab256f59629a4fb00171035d2a2f5638cb582d999373b1"
 pkg_dirname="${program}-${pkg_version}-aarch64-apple-darwin"
 pkg_deps=(
-	core/cacerts
+	core/git
 	core/iana-etc
 	core/ld64
 )
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
+
+do_prepare() {
+	set_runtime_env "CARGO_NET_GIT_FETCH_WITH_CLI" "true"
+}
 
 do_build() {
 	return 0

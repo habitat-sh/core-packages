@@ -11,6 +11,7 @@ pkg_filename=${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=d66c56ad259a82cf2a9dfc408b32bf5da52371500b84745f7fb8b645712df676
 pkg_build_deps=(
 	core/dejagnu
+	core/clang
 )
 
 pkg_lib_dirs=(lib)

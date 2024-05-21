@@ -21,6 +21,7 @@ pkg_deps=(
 pkg_build_deps=(
 	core/perl
 	core/pkg-config
+	core/clang
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)

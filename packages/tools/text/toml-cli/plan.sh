@@ -18,7 +18,6 @@ pkg_bin_dirs=(bin)
 
 do_prepare() {
 	# Add flags to build a static binary with the C runtime linked in
-	export RUSTFLAGS='-C target-feature=+crt-static'
 	export CARGO_HOME="$HAB_CACHE_SRC_PATH/$pkg_dirname/.cargo"
 	export CARGO_TARGET_DIR="$HAB_CACHE_SRC_PATH/$pkg_dirname/target"
 
@@ -36,5 +35,5 @@ do_install() {
 		--path . \
 		--root "${pkg_prefix}" \
 		--locked \
-		--target="${TARGET_ARCH:-${pkg_target%%-*}}-unknown-linux-gnu"
+		--target="${TARGET_ARCH:-${pkg_target%%-*}}-apple-darwin"
 }

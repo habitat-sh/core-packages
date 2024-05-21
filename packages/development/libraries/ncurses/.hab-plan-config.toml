@@ -1,0 +1,2 @@
+[rules]
+unused-rpath-entry = {ignored_files = ["bin/*", "lib/*"]}

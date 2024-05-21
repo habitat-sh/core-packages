@@ -28,6 +28,7 @@ pkg_build_deps=(
 	core/make
 	core/python
 	core/texinfo
+	core/clang
 )
 
 pkg_bin_dirs=(bin)
@@ -49,6 +50,10 @@ do_build() {
 		--with-libpcre2 \
 		--with-zlib
 	make -j"$(nproc)"
+}
+
+do_strip() {
+	return 0
 }
 
 do_check() {
