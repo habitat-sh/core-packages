@@ -103,6 +103,9 @@ do_install() {
 	# Remove unnecesary include folder created by 'make install'
 	rm -rf "$pkg_prefix/include"
 
+	# Remove the partial limits that is getting picked in 13.2.0 instead of include-fixed/limits.h
+	rm -f "$pkg_prefix/lib/gcc/$native_target/$pkg_version/include/limits.h"
+
 	popd || exit 1
 
 }
