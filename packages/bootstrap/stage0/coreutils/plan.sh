@@ -26,7 +26,7 @@ do_prepare() {
 do_build() {
 	export FORCE_UNSAFE_CONFIGURE=1
     build_line "Running configure as $SUDO_USER"
-	sudo -u "$SUDO_USER" ./configure \
+	./configure \
 		--prefix="$pkg_prefix" \
 		--enable-install-program=hostname \
 		--enable-no-install-program=kill,uptime,uname

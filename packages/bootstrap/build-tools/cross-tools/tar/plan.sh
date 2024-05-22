@@ -19,14 +19,10 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 
-do_prepare() {
-	# Fix ownership of the source folder so that config works
-	chown -R "$SUDO_USER:$SUDO_GID" .
-}
-
 do_build() {
+	export FORCE_UNSAFE_CONFIGURE=1
 	build_line "Running configure as $SUDO_USER"
-	sudo -u "$SUDO_USER" ./configure \
+	./configure \
 		--prefix="$pkg_prefix"
 	make
 }
