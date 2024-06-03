@@ -11,6 +11,7 @@ pkg_build_deps=(
 	core/autoconf
 	core/automake
 	core/libtool
+	core/clang
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

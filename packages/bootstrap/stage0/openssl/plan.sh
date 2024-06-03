@@ -17,6 +17,7 @@ pkg_shasum="83049d042a260e696f62406ac5c08bf706fd84383f945cf21bd61e9ed95c396e"
 pkg_dirname="${program}-${pkg_version}"
 pkg_build_deps=(
 	core/perl
+	core/clang
 )
 
 pkg_bin_dirs=(bin)

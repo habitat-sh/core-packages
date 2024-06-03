@@ -1,7 +1,7 @@
 # shellcheck disable=2034
 git_url="https://github.com/habitat-sh/habitat.git"
-commit_hash="d7fd9155f8a692743ee208a783c1308389340c03"
-pkg_shasum="dd181b2306d2720848c8584d09b9799c89e4365fc2d58fe6682e995bc24ceb1a"
+commit_hash="1516fb74f51df96c68231f4886c96de029e3ceb0"
+pkg_shasum="bb85a1804a47168c3f07cdd7f7dcf00708f1ecf040e9826e7c1be9f9bdea0e04"
 
 pkg_name="hab-plan-build"
 pkg_origin=core
@@ -28,6 +28,7 @@ pkg_deps=(
 	core/unzip
 	core/wget
 	core/xz
+	core/xcode
 )
 pkg_build_deps=(
 	core/bats
@@ -44,8 +45,15 @@ do_unpack() {
 	update_pkg_version
 }
 
+runtime_sandbox() {
+	echo '(version 1)
+(allow file* process-exec process-fork
+	(literal "/usr/bin/strip"))
+'
+}
+
 do_build() {
-	cp -v "$SRC_PATH"/components/plan-build/bin/${program}.sh "$CACHE_PATH/$program"
+	cp -v "$SRC_PATH"/components/plan-build/bin/${program}-"${pkg_target#*-}".sh "$CACHE_PATH/$program"
 
 	# Use the bash from our dependency list as the shebang. Also, embed the
 	# release version of the program.
@@ -66,6 +74,8 @@ do_install() {
 	install -D "$SRC_PATH"/components/plan-build/bin/shared.bash "$pkg_prefix"/bin/
 	install -D "$SRC_PATH"/components/plan-build/bin/public.bash "$pkg_prefix"/bin/
 	install -D "$SRC_PATH"/components/plan-build/bin/environment.bash "$pkg_prefix"/bin/
+	install -D "$SRC_PATH"/components/plan-build/bin/darwin-sandbox.sb "$pkg_prefix"/bin/
+	install -D "$SRC_PATH"/components/plan-build/bin/hab-plan-build-darwin-internal.bash "$pkg_prefix"/bin/
 
 	# Fix scripts
 	fix_interpreter "${pkg_prefix}/bin/*" core/bash bin/bash

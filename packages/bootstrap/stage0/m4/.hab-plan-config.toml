@@ -1,0 +1,2 @@
+[rules]
+unused-dependency = { level = "off" }

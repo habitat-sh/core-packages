@@ -20,19 +20,12 @@ pkg_deps=(
 	core/zstd
 )
 pkg_build_deps=(
-	# core/e2fsprogs
 	core/pkg-config
+	core/clang
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
-
-do_prepare() {
-	# We need to remove all references to linux/fs.h because it has
-	# been included within glibc since 2.36
-	# https://sourceware.org/glibc/wiki/Release/2.36#Usage_of_.3Clinux.2Fmount.h.3E_and_.3Csys.2Fmount.h.3E
-	sed '/linux\/fs\.h/d' -i libarchive/archive_read_disk_posix.c
-}
 
 do_build() {
 	./configure \

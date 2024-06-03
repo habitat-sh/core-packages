@@ -8,6 +8,11 @@ pkg_description="LZO is a portable lossless data compression library written in 
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename="${pkg_name}"-"${pkg_version}".tar.gz
 pkg_shasum="c0f892943208266f9b6543b3ae308fab6284c5c90e627931446fb49b4221a072"
+
+pkg_build_deps=(
+	core/clang
+)
+
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 

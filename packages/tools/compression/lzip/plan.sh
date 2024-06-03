@@ -9,6 +9,10 @@ pkg_source="http://download.savannah.gnu.org/releases/lzip/lzip-${pkg_version}.t
 pkg_shasum="c3342d42e67139c165b8b128d033b5c96893a13ac5f25933190315214e87a948"
 pkg_bin_dirs=(bin)
 
+pkg_build_deps=(
+	core/clang
+)
+
 do_build() {
 	./configure \
 		--prefix="${pkg_prefix}" \

@@ -13,6 +13,9 @@ pkg_dirname="${program}${pkg_version}"
 pkg_deps=(
 	core/zlib
 )
+pkg_build_deps=(
+	core/clang
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

@@ -15,6 +15,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/coreutils
+	core/clang
 	core/gawk
 	core/grep
 	core/make

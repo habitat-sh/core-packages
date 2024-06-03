@@ -23,6 +23,7 @@ pkg_build_deps=(
 	core/coreutils
 	core/grep
 	core/sed
+	core/clang
 )
 
 pkg_bin_dirs=(bin)

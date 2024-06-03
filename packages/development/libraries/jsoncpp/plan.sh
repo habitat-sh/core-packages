@@ -7,11 +7,10 @@ pkg_upstream_url="https://github.com/open-source-parsers/jsoncpp"
 pkg_description="A C++ library for interacting with JSON"
 pkg_source="https://github.com/open-source-parsers/jsoncpp/archive/refs/tags/${pkg_version}.tar.gz"
 pkg_shasum="f409856e5920c18d0c2fb85276e24ee607d2a09b5e7d5f0a371368903c275da2"
-pkg_deps=(
-)
 pkg_build_deps=(
 	core/build-tools-cmake
 	core/python
+	core/clang
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

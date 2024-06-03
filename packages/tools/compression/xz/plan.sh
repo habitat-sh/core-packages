@@ -14,7 +14,7 @@ pkg_license=('GPL-2.0-or-later' 'LGPL-2.0-or-later')
 pkg_source="http://tukaani.org/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="f6f4910fd033078738bd82bfba4f49219d03b17eb0794eb91efbae419f4aba10"
 pkg_dirname="${program}-${pkg_version}"
-
+pkg_build_deps=(core/clang)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

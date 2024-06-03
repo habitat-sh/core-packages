@@ -18,6 +18,9 @@ pkg_deps=(
 	core/grep
 	core/gawk
 )
+pkg_build_deps=(
+	core/clang
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 

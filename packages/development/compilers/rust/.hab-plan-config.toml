@@ -8,6 +8,6 @@ script-interpreter-not-found = {ignored_files = ["*.rs"]}
 # 3. core/tzdata - Needed for the proper operation of the GNU C Library (glibc).
 # 4. core/iana-etc - Also required for the functioning of glibc.
 unused-dependency = {ignored_packages = [
-    "core/{cacerts,git,ld64,iana-etc}"
+    "core/{cacerts,git,ld64,iana-etc,clang}"
 ]}
 unused-rpath-entry = { level = "off" }

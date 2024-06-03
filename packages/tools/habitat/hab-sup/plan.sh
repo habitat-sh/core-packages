@@ -1,7 +1,7 @@
 # shellcheck disable=2034
 git_url="https://github.com/habitat-sh/habitat.git"
-commit_hash="d7fd9155f8a692743ee208a783c1308389340c03"
-pkg_shasum="dd181b2306d2720848c8584d09b9799c89e4365fc2d58fe6682e995bc24ceb1a"
+commit_hash="1516fb74f51df96c68231f4886c96de029e3ceb0"
+pkg_shasum="bb85a1804a47168c3f07cdd7f7dcf00708f1ecf040e9826e7c1be9f9bdea0e04"
 
 pkg_name="hab-sup"
 pkg_origin="core"
@@ -26,6 +26,16 @@ pkg_bin_dirs=(bin)
 
 pkg_version() {
 	cat "$SRC_PATH/VERSION"
+}
+
+runtime_sandbox() {
+	echo '(version 1)
+(allow file-read*)'
+}
+
+buildtime_sandbox() {
+	echo '(version 1)
+(allow file-read-metadata (literal "/tmp"))'
 }
 
 do_unpack() {

@@ -13,6 +13,9 @@ pkg_shasum="7e72b62a8a60aff5200a047eea0773a8fb205caf7acbe1774d95147f305a2f41"
 pkg_deps=(
 	core/lzo
 )
+pkg_build_deps=(
+	core/clang
+)
 pkg_bin_dirs=(bin)
 
 do_check() {

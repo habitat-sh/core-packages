@@ -17,9 +17,16 @@ pkg_shasum="a2bfb8c09d436770edc59f50fa483e785b161a3b7b9d547573cb08065fd462fe"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
-	
+	core/clang
 )
 pkg_bin_dirs=(bin)
+
+buildtime_sandbox() {
+	# allow access to the service folder during build time
+	echo '(version 1)
+(allow file* (literal "/hab/svc/findutils/var/locate"))
+'
+}
 
 do_build() {
 	./configure \

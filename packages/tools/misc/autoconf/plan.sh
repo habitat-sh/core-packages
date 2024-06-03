@@ -14,10 +14,12 @@ pkg_shasum="f14c83cfebcc9427f2c3cea7258bd90df972d92eb26752da4ddad81c87a0faa4"
 
 pkg_deps=(
 	core/perl
+	core/m4
 )
 pkg_build_deps=(
 	core/zlib
 	core/libtool
+	core/clang
 )
 
 pkg_bin_dirs=(bin)

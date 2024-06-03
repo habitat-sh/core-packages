@@ -12,8 +12,7 @@ pkg_upstream_url="http://pkgconfig.freedesktop.org/wiki/"
 pkg_license=('GPL-2.0-or-later')
 pkg_source="http://pkgconfig.freedesktop.org/releases/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591"
-pkg_deps=()
-pkg_build_deps=()
+pkg_build_deps=(core/clang)
 pkg_bin_dirs=(bin)
 
 do_build() {

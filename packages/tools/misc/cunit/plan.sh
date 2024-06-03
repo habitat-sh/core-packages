@@ -15,6 +15,7 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
 	core/build-tools-cmake
+	core/clang
 )
 
 pkg_lib_dirs=(lib)

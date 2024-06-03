@@ -19,6 +19,9 @@ pkg_deps=(
 	core/bzip2
 	core/zlib
 )
+pkg_build_deps=(
+	core/clang
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

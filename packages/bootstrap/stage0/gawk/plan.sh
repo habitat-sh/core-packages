@@ -16,7 +16,7 @@ pkg_shasum="03a0360edcd84bec156fe211bbc4fc8c78790973ce4e8b990a11d778d40b1a26"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
-	
+	core/clang
 )
 pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/awk bin/gawk)

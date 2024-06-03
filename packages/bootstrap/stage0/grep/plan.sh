@@ -16,6 +16,7 @@ pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
 	core/sed
+	core/clang
 )
 pkg_bin_dirs=(bin)
 

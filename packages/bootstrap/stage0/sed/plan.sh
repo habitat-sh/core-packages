@@ -18,7 +18,7 @@ pkg_shasum="f79b0cfea71b37a8eeec8490db6c5f7ae7719c35587f21edb0617f370eeff633"
 pkg_dirname="${program}-${pkg_version}"
 
 pkg_build_deps=(
-	
+	core/clang
 )
 pkg_bin_dirs=(bin)
 

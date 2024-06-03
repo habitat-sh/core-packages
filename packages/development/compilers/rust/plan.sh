@@ -16,10 +16,22 @@ pkg_deps=(
 	core/git
 	core/iana-etc
 	core/ld64
+	core/clang
 )
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
+
+runtime_sandbox() {
+	echo '(version 1)
+;; Allow cargo to read the openssl files from the host system
+;; This is required since the cargo is a pre-compiled binary
+(allow file-read-metadata (literal "/etc"))
+(allow file-read*
+	(literal "/private/etc/ssl/openssl.cnf")
+	(literal "/private/etc/ssl/cert.pem"))
+'
+}
 
 do_prepare() {
 	set_runtime_env "CARGO_NET_GIT_FETCH_WITH_CLI" "true"

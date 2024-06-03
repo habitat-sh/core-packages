@@ -15,6 +15,7 @@ pkg_shasum="030644df4611007ff7dc962d981f390361e6c97a34e5cbc393ddfbe019ffe2c1"
 
 pkg_build_deps=(
 	core/python
+	core/clang
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)

@@ -11,7 +11,6 @@ pkg_shasum="5d2cc3d78bec3dbe212a9d7fa629ada25a7da928af432c93060ff5c17ee28a9c"
 pkg_filename="${pkg_name}-${pkg_version}.tar.xz"
 pkg_deps=(
 	core/zlib
-	
 	core/icu
 	core/xz
 )
@@ -19,6 +18,7 @@ pkg_build_deps=(
 	core/pkg-config
 	core/python
 	core/wget
+	core/clang
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

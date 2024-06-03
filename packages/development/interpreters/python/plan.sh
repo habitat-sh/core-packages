@@ -30,6 +30,7 @@ pkg_deps=(
 
 pkg_build_deps=(
 	core/pkg-config
+	core/clang
 )
 
 do_build() {

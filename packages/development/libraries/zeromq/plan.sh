@@ -16,6 +16,7 @@ pkg_deps=(
 pkg_build_deps=(
 	core/pkg-config
 	core/cmake
+	core/clang
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

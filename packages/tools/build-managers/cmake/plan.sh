@@ -27,6 +27,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/build-tools-cmake
+	core/clang
 )
 
 pkg_bin_dirs=(bin)

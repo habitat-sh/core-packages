@@ -1,7 +1,0 @@
-[rules]
-missing-license = { level = "off", source-shasum = "8b3cfd7bc695bd6cea0f37f53f0981f34f87496e79e2529874fd03a2f9dd3a8a" }
-# There are some binaries which use host script interpreters
-host-script-interpreter = { level = "off" }
-unused-rpath-entry = { level = "off" }
-# We allow all these violations as this is run on the host system
-library-dependency-not-found = { level = "off" }

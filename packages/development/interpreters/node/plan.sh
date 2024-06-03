@@ -11,13 +11,22 @@ pkg_deps=(
 	core/python
 	core/bash
 	core/coreutils
-
+)
+pkg_build_deps=(
+	core/clang
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_interpreters=(bin/node)
 pkg_lib_dirs=(lib)
 pkg_dirname="node-v${pkg_version}"
+
+runtime_sandbox() {
+	# Allow access to host system SSL configuration and certificates
+	echo '(version 1)
+(allow file-read* (subpath "/System/Library/OpenSSL"))
+'
+}
 
 do_prepare() {
 	# ./configure has a shebang of #!/usr/bin/env python. Fix it.

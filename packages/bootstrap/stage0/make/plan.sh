@@ -14,7 +14,9 @@ pkg_source="http://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
 pkg_shasum="e05fdde47c5f7ca45cb697e973894ff4f5d79e13b750ed57d7b66d8defc78e19"
 pkg_dirname="${program}-${pkg_version}"
 
-pkg_build_deps=()
+pkg_build_deps=(
+	core/clang
+)
 pkg_bin_dirs=(bin)
 
 do_build() {

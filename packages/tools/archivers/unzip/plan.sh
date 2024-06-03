@@ -15,7 +15,9 @@ pkg_dirname="unzip60"
 pkg_deps=(
 	core/bzip2
 )
-
+pkg_build_deps=(
+	core/clang
+)
 pkg_bin_dirs=(bin)
 
 do_prepare() {

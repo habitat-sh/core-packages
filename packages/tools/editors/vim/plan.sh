@@ -16,6 +16,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
 	core/autoconf
+	core/clang
 )
 pkg_bin_dirs=(bin)
 

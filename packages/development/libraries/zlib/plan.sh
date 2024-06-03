@@ -14,6 +14,8 @@ pkg_source="http://zlib.net/${program}-${pkg_version}.tar.gz"
 pkg_shasum="9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23"
 pkg_dirname="${program}-${pkg_version}"
 
+pkg_build_deps=(core/clang)
+
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)

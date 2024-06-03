@@ -16,6 +16,7 @@ pkg_shasum="6f504490b342a4f8a4c4a02fc9b866cbef8622d5df4e5452b46be121e46636c1"
 pkg_build_deps=(
 	core/autoconf
 	core/automake
+	core/clang
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

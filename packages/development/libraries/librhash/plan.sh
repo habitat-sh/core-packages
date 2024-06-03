@@ -9,6 +9,7 @@ pkg_description="Console utility and library for computing and verifying hash su
 pkg_source="https://github.com/rhash/RHash/archive/refs/tags/v${pkg_version}.tar.gz"
 pkg_shasum="1e40fa66966306920f043866cbe8612f4b939b033ba5e2708c3f41be257c8a3e"
 pkg_dirname="${program}-${pkg_version}"
+pkg_build_deps=(core/clang)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 

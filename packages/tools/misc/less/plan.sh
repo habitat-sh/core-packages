@@ -17,6 +17,10 @@ pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/libpcre2
 )
+pkg_build_deps=(
+	core/clang
+)
+
 pkg_bin_dirs=(bin)
 
 do_build() {

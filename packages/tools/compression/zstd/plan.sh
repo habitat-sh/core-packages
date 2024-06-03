@@ -22,6 +22,7 @@ pkg_build_deps=(
 	core/make
 	core/patch
 	core/sed
+	core/clang
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)

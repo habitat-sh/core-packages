@@ -18,6 +18,7 @@ pkg_shasum="8d36cd8cb6ea2a4c2bb358ff6411b0c788633a2a45dabbf1aeb4b701d1b5e840"
 pkg_dirname="${program}-${pkg_version}"
 pkg_build_deps=(
 	core/coreutils
+	core/clang
 	core/bzip2
 )
 pkg_bin_dirs=(bin)

@@ -22,6 +22,8 @@ pkg_build_deps=(
 	core/file
 	core/make
 	core/patch
+	core/m4
+	core/clang
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
