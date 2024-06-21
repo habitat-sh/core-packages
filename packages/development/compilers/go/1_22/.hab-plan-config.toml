@@ -1,0 +1,8 @@
+[rules]
+missing-license = { level = "off", source-shasum = "fed720678e728a7ca30ba8d1ded1caafe27d16028fab0232b8ba8e22008fb784" }
+license-not-found = { level = "off", source-shasum = "fed720678e728a7ca30ba8d1ded1caafe27d16028fab0232b8ba8e22008fb784" }
+host-elf-interpreter = "off"
+library-dependency-not-found = "off"
+host-script-interpreter = {level = "off"}
+unexpected-elf-interpreter = "off"
+unused-dependency = {ignored_packages = ["core/glibc"]}
