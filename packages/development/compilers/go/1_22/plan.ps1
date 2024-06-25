@@ -1,4 +1,4 @@
-$pkg_name="go22"
+$pkg_name="go1_22"
 $pkg_origin="core"
 $pkg_version="1.22.4"
 $pkg_description="Go is an open source programming language that makes it easy to build simple, reliable, and efficient software."
@@ -8,7 +8,7 @@ $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_source="https://dl.google.com/go/go$pkg_version.windows-amd64.msi"
 $pkg_shasum="3c21105d7b584759b6e266383b777caf6e87142d304a10b539dbc66ab482bb5f"
 $pkg_build_deps=@("core/lessmsi")
-$pkg_dirname="go22"
+$pkg_dirname="go1_22"
 $pkg_bin_dirs=@("bin")
 $pkg_lib_dirs=@("lib")
 
