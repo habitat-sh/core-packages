@@ -29,7 +29,6 @@ pkg_build_deps=(
   core/rsync
 )
 pkg_bin_dirs=(bin)
-pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 
 source_dir="${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
