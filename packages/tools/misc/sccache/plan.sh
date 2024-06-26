@@ -10,7 +10,7 @@ pkg_shasum=30b951b49246d5ca7d614e5712215cb5f39509d6f899641f511fb19036b5c4e5
 pkg_bin_dirs=(bin)
 pkg_deps=(
   core/glibc
-  core/gcc-libs
+  core/gcc-base
   core/openssl
 )
 pkg_build_deps=(

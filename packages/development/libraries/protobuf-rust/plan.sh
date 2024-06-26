@@ -8,7 +8,7 @@ pkg_upstream_url="https://github.com/stepancheg/rust-protobuf"
 pkg_description="Rust implementation of Google protocol buffers"
 pkg_deps=(
   core/glibc
-  core/gcc-libs
+  core/gcc-base
 )
 pkg_build_deps=(
   core/rust
