@@ -1,0 +1,6 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "23e47ea7a3015be3240f21185fd902adebdcf76530757c9b482c7eb5bd3417c2"}
+missing-license = {level = "off", source-shasum = "23e47ea7a3015be3240f21185fd902adebdcf76530757c9b482c7eb5bd3417c2"}
+unused-runpath-entry = {level = "off"}
+library-dependency-not-found = "off"
+unused-dependency = {ignored_packages = ["core/zlib"]}
