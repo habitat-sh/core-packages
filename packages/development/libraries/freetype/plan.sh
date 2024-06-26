@@ -5,7 +5,7 @@ pkg_origin=core
 pkg_description="A software library to render fonts"
 pkg_upstream_url="https://www.freetype.org"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('FreeType' 'GPL-2.0')
+pkg_license=('GPL-2.0')
 pkg_source=http://download.savannah.gnu.org/releases/freetype/${pkg_name}-${pkg_version}.tar.gz
 pkg_filename=${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=1ac27e16c134a7f2ccea177faba19801131116fd682efc1f5737037c5db224b5
@@ -26,7 +26,6 @@ pkg_deps=(
 )
 pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
-pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin)
 
 do_install() {

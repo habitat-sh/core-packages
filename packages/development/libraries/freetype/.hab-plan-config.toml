@@ -1,3 +1,4 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "1ac27e16c134a7f2ccea177faba19801131116fd682efc1f5737037c5db224b5"}
 missing-license = {level = "off", source-shasum = "1ac27e16c134a7f2ccea177faba19801131116fd682efc1f5737037c5db224b5"}
+unused-dependency = {ignored_packages = ["core/{sed,pkg-config,coreutils}"]}
