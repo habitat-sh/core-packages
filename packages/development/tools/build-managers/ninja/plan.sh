@@ -1,12 +1,12 @@
 pkg_name="ninja"
 pkg_origin="core"
-pkg_version="1.11.1"
+pkg_version="1.12.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="https://ninja-build.org/"
 pkg_description="A small build system with a focus on speed"
 pkg_licenses=('Apache-2.0')
 pkg_source="https://github.com/ninja-build/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum="31747ae633213f1eda3842686f83c2aa1412e0f5691d1c14dbbcc67fe7400cea"
+pkg_shasum="821bdff48a3f683bc4bb3b6f0b5fe7b2d647cf65d52aeb63328c91a6c6df285a"
 pkg_deps=(
 	core/glibc
 	core/gcc-libs
