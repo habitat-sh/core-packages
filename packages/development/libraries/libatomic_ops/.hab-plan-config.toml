@@ -1,0 +1,5 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "d305207fe207f2b3fb5cb4c019da12b44ce3fcbc593dfd5080d867b1a2419b51"}
+missing-license = {level = "off", source-shasum = "d305207fe207f2b3fb5cb4c019da12b44ce3fcbc593dfd5080d867b1a2419b51"}
+unused-dependency = {ignored_packages = ["core/glibc"]}
+
