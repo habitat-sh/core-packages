@@ -1,0 +1,5 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "ea3f3d8cfa2f6ae78c8722751d008f54bc17a3aed2be3f7399eb7bf5f4cda8f1"}
+missing-license = {level = "off", source-shasum = "ea3f3d8cfa2f6ae78c8722751d008f54bc17a3aed2be3f7399eb7bf5f4cda8f1"}
+unused-runpath-entry = {level = "off"}
+unused-dependency = {ignored_packages = ["core/python", "core/busybox-static"]}
