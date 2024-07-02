@@ -1,0 +1,7 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "008fae961dfd0df99cbc888a0279561458fe830797646234efe7daed8e512040"}
+missing-license = {level = "off", source-shasum = "008fae961dfd0df99cbc888a0279561458fe830797646234efe7daed8e512040"}
+unused-dependency = {ignored_packages = ["core/{freetype,alsa-lib,gcc-libs}"]}
+unused-runpath-entry = {level = "off"}
+host-elf-interpreter = "off"
+library-dependency-not-found = "off"
