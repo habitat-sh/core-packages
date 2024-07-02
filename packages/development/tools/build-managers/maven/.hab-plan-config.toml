@@ -1,0 +1,4 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "469580a1f25b998f294a07391412f4ec6eefdd05c328c0068f44588e438e702d"}
+missing-license = {level = "off", source-shasum = "469580a1f25b998f294a07391412f4ec6eefdd05c328c0068f44588e438e702d"}
+unused-dependency = {ignored_packages = ["core/{coreutils,corretto,which}"]}
