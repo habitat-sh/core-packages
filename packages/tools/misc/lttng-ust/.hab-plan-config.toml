@@ -1,0 +1,6 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "d4ef98dab9a37ad4f524ccafdfd50af4f266039b528dd5afabce78e49024d937"}
+missing-license = {level = "off", source-shasum = "d4ef98dab9a37ad4f524ccafdfd50af4f266039b528dd5afabce78e49024d937"}
+unused-runpath-entry = {ignored_files = ["bin/*", "lib/*"]}
+host-script-interpreter = {level = "off"}
+unused-dependency = {ignored_packages = ["core/userspace-rcu", "core/pkg-config"]}
