@@ -16,3 +16,11 @@ pkg_build_deps=(
 )
 pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
+do_prepare() {
+  #old config.guess doesn't guess system type. New config file is downloaded from the link given in the build log
+  # http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD 
+  ARCH=`uname -m`
+  if [ $ARCH = "aarch64" ]; then
+    cp "$PLAN_CONTEXT/config.guess" "$CACHE_PATH"/
+  fi
+}
