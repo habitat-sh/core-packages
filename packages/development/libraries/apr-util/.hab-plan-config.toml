@@ -1,4 +1,4 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "a41076e3710746326c3945042994ad9a4fcac0ce0277dd8fea076fec3c9772b5"}
 missing-license = {level = "off", source-shasum = "a41076e3710746326c3945042994ad9a4fcac0ce0277dd8fea076fec3c9772b5"}
-unlisted-script-interpreter = {level = "off"}
+unlisted-script-interpreter = {ignored_files = ["lib/aprutil.exp"]}
