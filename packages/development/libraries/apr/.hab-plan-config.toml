@@ -1,4 +1,4 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "fc648de983f3a2a6c9e78dea1f180639bd2fad6c06d556d4367a701fe5c35577"}
 missing-license = {level = "off", source-shasum = "fc648de983f3a2a6c9e78dea1f180639bd2fad6c06d556d4367a701fe5c35577"}
-unlisted-script-interpreter = {level = "off"}
+unlisted-script-interpreter = {ignored_files = ["lib/apr.exp"]}
