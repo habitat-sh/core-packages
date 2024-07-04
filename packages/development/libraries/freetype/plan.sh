@@ -15,14 +15,10 @@ pkg_build_deps=(
   core/make
 )
 pkg_deps=(
-  core/coreutils
   core/bzip2
   core/glibc
-  core/libpng
   core/zlib
   core/bash
-  core/sed
-  core/pkg-config
 )
 pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
