@@ -1,0 +1,4 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "7d5ea1b9cb6aa0b59ca3dde1c6adcb57ef83a1ba8e5432c0ecd06bf439b3ad88"}
+missing-license = {level = "off", source-shasum = "7d5ea1b9cb6aa0b59ca3dde1c6adcb57ef83a1ba8e5432c0ecd06bf439b3ad88"}
+unused-runpath-entry = {ignored_files = ["bin/*"]}
