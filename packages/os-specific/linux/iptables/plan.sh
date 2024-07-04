@@ -9,7 +9,10 @@ pkg_upstream_url="http://netfilter.org/projects/iptables"
 pkg_description="iptables is the userspace command line program used to configure the \
   Linux 2.4.x and later packet filtering ruleset"
 pkg_shasum=5cc255c189356e317d070755ce9371eb63a1b783c34498fb8c30264f3cc59c9c
-pkg_deps=(core/glibc)
+pkg_deps=(
+   core/glibc
+   core/bash
+)
 pkg_build_deps=(
   core/make
   core/gcc
@@ -31,3 +34,8 @@ do_build() {
     --with-xtlibdir="${pkg_prefix}/lib/xtlibs"
   make
 }
+do_install() {
+	do_default_install
+        fix_interpreter "$pkg_prefix/sbin/iptables-apply" core/bash bin/bash
+}	
+
