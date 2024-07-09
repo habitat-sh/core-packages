@@ -1,0 +1,5 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "f68f7d75d06cb1635c336d34d844af97436c3f64ea14bcb7c869782f96f44277"}
+missing-license = {level = "off", source-shasum = "f68f7d75d06cb1635c336d34d844af97436c3f64ea14bcb7c869782f96f44277"}
+unused-runpath-entry = {ignored_files = ["bin/*", "libexec/*"]}
+unused-dependency = {ignored_packages = ["core/gcc"]}
