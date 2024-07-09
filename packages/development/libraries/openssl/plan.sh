@@ -29,8 +29,16 @@ pkg_build_deps=(
 
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
-pkg_lib_dirs=(lib64)
-pkg_pconfig_dirs=(lib64/pkgconfig)
+case $pkg_target in
+        aarch64-linux)
+                pkg_lib_dirs=(lib)
+				pkg_pconfig_dirs=(lib/pkgconfig)
+                ;;
+        x86_64-linux)
+                pkg_lib_dirs=(lib64)
+				pkg_pconfig_dirs=(lib64/pkgconfig)
+                ;;
+        esac
 
 do_prepare() {
 	patch -p1 <"$PLAN_CONTEXT/hab-ssl-cert-file.patch"
