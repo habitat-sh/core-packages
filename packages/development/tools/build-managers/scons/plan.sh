@@ -24,7 +24,6 @@ do_build() {
 }
 
 do_install() {
-    #python setup.py install --prefix="$pkg_prefix" --no-version-script --no-install-bat --no-install-man --no-binary=":all"
     python -m pip install --prefix="${pkg_prefix}" scons
   
   for binary in scons scons-time sconsign
