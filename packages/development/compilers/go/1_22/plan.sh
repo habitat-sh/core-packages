@@ -1,19 +1,20 @@
 # shellcheck disable=SC2034
 program="go"
-pkg_name=go1_22
+
+pkg_name="go1_22"
 pkg_origin=core
-pkg_version=1.22.4
-# Rolled back recent change to core/go17 to facillitate a from-scratch
-# base-plan refresh.
+pkg_version="1.22.5"
+# Rolled back recent change to core/go17 to facillitate a from-scratch base-plan refresh.
 pkg_bootstrap_pkg="core/go1_21"
 pkg_description="Go is an open source programming language that makes it easy to
   build simple, reliable, and efficient software."
 pkg_upstream_url=https://golang.org/
-pkg_license=("BSD-3-Clause")
+pkg_license=('BSD-3-Clause' 'Apache-2.0' 'ISC' 'OpenSSL')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://dl.google.com/go/go${pkg_version}.src.tar.gz"
-pkg_shasum=fed720678e728a7ca30ba8d1ded1caafe27d16028fab0232b8ba8e22008fb784
+pkg_shasum="ac9c723f224969aee624bc34fd34c9e13f2a212d75c71c807de644bb46e112f6"
 pkg_dirname=go
+
 pkg_deps=(
   core/glibc
 )
@@ -26,6 +27,7 @@ pkg_build_deps=(
   "${pkg_bootstrap_pkg}"
   core/perl
 )
+
 pkg_bin_dirs=(bin)
 
 do_prepare() {
