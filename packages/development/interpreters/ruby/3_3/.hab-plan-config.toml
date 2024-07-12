@@ -14,6 +14,6 @@ unused-runpath-entry = {level = "off"}
 # we want ruby-stage1 binary as a base_ruby for building ruby33.so not adding as a run time dep.hence the below rule.
 missing-runpath-entry-dependency = {ignored_files = ["lib/ruby/3.3.0/x86_64-linux/*" , 
 "lib/ruby/gems/3.3.0/extensions/x86_64-linux/3.3.0/**/*.so" ,
-"bin/ruby"]}
+"bin/ruby" , "lib/ruby/3.3.0/aarch64-linux/*" , "lib/ruby/gems/3.3.0/extensions/aarch64-linux/3.3.0/**/*.so"]}
 #ruby 33 adding src/build dir in run path for some shared files.so the below rule
-bad-runpath-entry = {ignored_files = ["lib/ruby/3.3.0/x86_64-linux/enc/**/*.so"]}
+bad-runpath-entry = {ignored_files = ["lib/ruby/3.3.0/x86_64-linux/enc/**/*.so" , "lib/ruby/3.3.0/aarch64-linux/enc/**/*.so"]}
