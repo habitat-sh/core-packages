@@ -1,0 +1,6 @@
+[rules]
+library-dependency-not-found = "off"
+unused-runpath-entry = {ignored_files = ["bin/*"]}
+unexpected-elf-interpreter = { ignored_files = ["bin/*"] }
+host-elf-interpreter = "off"
+unused-dependency = {ignored_packages = ["core/openssl", "core/icu"]}
