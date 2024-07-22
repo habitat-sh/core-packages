@@ -12,11 +12,9 @@ pkg_deps=(
 )
 pkg_build_deps=(
   core/rust
-  core/gcc
 )
 
 do_build() {
-  #cargo add protobuf -- --root "${pkg_prefix}" --vers "${pkg_version}" -j"$(nproc)" --verbose
   cargo install protobuf --root "${pkg_prefix}" --vers "${pkg_version}" -j"$(nproc)" --verbose
 }
 
