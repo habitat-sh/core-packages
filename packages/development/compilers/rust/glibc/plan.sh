@@ -8,7 +8,8 @@ segfaults, and guarantees thread safety.\
 "
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
-pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
+_url_base="https://static.rust-lang.org/dist"
+pkg_source="$_url_base/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
 pkg_shasum="473978b6f8ff216389f9e89315211c6b683cf95a966196e7914b46e8cf0d74f6"
 pkg_dirname="${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu"
 pkg_deps=(
@@ -28,6 +29,14 @@ pkg_build_deps=(
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 
+_target_sources=(
+  "${_url_base}/${pkg_name}-std-${pkg_version}-x86_64-unknown-linux-musl.tar.gz"
+)
+
+_target_shasums=(
+    "c9ad24df044fc221d3032732ba6cb5604718e75e11d18b9e9d02c963955d4620"
+)
+
 do_prepare() {
 	# Set gcc to use the correct binutils
 	set_runtime_env "HAB_GCC_LD_BIN" "$(pkg_path_for binutils)/bin"
@@ -37,6 +46,37 @@ do_prepare() {
 		ln -sv "$(pkg_path_for build-tools-coreutils)/bin/env" /usr/bin/env
 		_clean_env=true
 	fi
+}
+
+do_download() {
+  do_default_download
+
+  # Download all target sources, providing the corresponding shasums so we can
+  # skip re-downloading if already present and verified
+  for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
+    p="${_target_sources[$i]}"
+    download_file "$p" "$(basename "$p")" "${_target_shasums[$i]}"
+  done; unset i p
+}
+
+do_verify() {
+  do_default_verify
+
+  # Verify all target sources against their shasums
+  for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
+    verify_file "$(basename "${_target_sources[$i]}")" "${_target_shasums[$i]}"
+  done; unset i
+}
+
+do_unpack() {
+  do_default_unpack
+
+  pushd "$HAB_CACHE_SRC_PATH/$pkg_dirname" > /dev/null
+    # Unpack all targets inside the main source directory
+    for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
+      tar xf "$HAB_CACHE_SRC_PATH/$(basename "${_target_sources[$i]}")"
+    done; unset i
+  popd > /dev/null
 }
 
 do_build() {
@@ -83,6 +123,16 @@ do_install() {
 		xargs -0 -I '%' patchelf \
 			--shrink-rpath \
 			%
+
+	# Install all targets
+	local dir
+	for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
+		dir="$(basename "${_target_sources[$i]/%.tar.gz/}")"
+		pushd "$HAB_CACHE_SRC_PATH/$pkg_dirname/$dir" > /dev/null
+		build_line "Installing $dir target for Rust"
+		./install.sh --prefix="$("$pkg_prefix/bin/rustc" --print sysroot)"
+		popd > /dev/null
+	done; unset i
 
 	# We wrap the rustc binary to include the core/gcc-base lib64 directory consistently in
 	# the LD_RUN_PATH. This guarantees its addition to the runpath of any auxiliary binaries
