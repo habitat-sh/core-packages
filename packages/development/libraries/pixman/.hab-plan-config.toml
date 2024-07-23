@@ -1,0 +1,2 @@
+[rules]
+unused-runpath-entry = {ignored_files = ["lib/libpixman-1.so*"]}
