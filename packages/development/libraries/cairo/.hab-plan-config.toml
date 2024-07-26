@@ -1,0 +1,4 @@
+[rules]
+unused-runpath-entry = {ignored_files = ["lib/*", "lib/cairo/*"] }
+library-dependency-not-found = {ignored_files = ["lib/*", "lib/cairo/*"] }
+unused-dependency = {ignored_packages = ["core/{freetype,pixman,libpng,zlib,libice}"] }
