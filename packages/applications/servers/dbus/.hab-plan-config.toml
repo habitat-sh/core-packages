@@ -1,0 +1,6 @@
+[rules]
+# directory 'var/' is required at runtime for dbus deamon
+empty-top-level-directory = { level ="off"}
+# ignore script interpret as it is example in docs
+host-script-interpreter = {ignored_files = ["share/doc/*"]}
+unused-runpath-entry = {ignored_files = ["lib/*"]}
