@@ -1,6 +1,6 @@
 pkg_name="rust"
 pkg_origin="core"
-pkg_version="1.75.0"
+pkg_version="1.79.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Rust is a systems programming language that runs blazingly fast, prevents \
@@ -8,8 +8,9 @@ segfaults, and guarantees thread safety.\
 "
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
-pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-aarch64-unknown-linux-gnu.tar.gz"
-pkg_shasum="30828cd904fcfb47f1ac43627c7033c903889ea4aca538f53dcafbb3744a9a73"
+_url_base="https://static.rust-lang.org/dist"
+pkg_source="$_url_base/${pkg_name}-${pkg_version}-aarch64-unknown-linux-gnu.tar.gz"
+pkg_shasum="f7d3b31581331b54af97cf3162e65b8c26c8aa14d42f71c1ce9adc1078ef54e5"
 pkg_dirname="${pkg_name}-${pkg_version}-aarch64-unknown-linux-gnu"
 pkg_deps=(
 	core/binutils
@@ -18,6 +19,7 @@ pkg_deps=(
 	core/gcc-base
 	core/iana-etc
 	core/tzdata
+	core/zlib
 )
 pkg_build_deps=(
 	core/build-tools-patchelf
@@ -26,6 +28,14 @@ pkg_build_deps=(
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
+
+_target_sources=(
+  "${_url_base}/${pkg_name}-std-${pkg_version}-aarch64-unknown-linux-musl.tar.gz"
+)
+
+_target_shasums=(
+    "8c65e465f3f82ae55fc2f43ac58de7d972497bc839829e0119784be98faa8431"
+)
 
 do_prepare() {
 	# Set gcc to use the correct binutils
@@ -38,6 +48,37 @@ do_prepare() {
 	fi
 }
 
+do_download() {
+   do_default_download
+
+   # Download all target sources, providing the corresponding shasums so we can
+   # skip re-downloading if already present and verified
+   for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
+     p="${_target_sources[$i]}"
+     download_file "$p" "$(basename "$p")" "${_target_shasums[$i]}"
+   done; unset i p
+ }
+
+ do_verify() {
+   do_default_verify
+
+   # Verify all target sources against their shasums
+   for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
+     verify_file "$(basename "${_target_sources[$i]}")" "${_target_shasums[$i]}"
+   done; unset i
+ }
+
+ do_unpack() {
+   do_default_unpack
+
+   pushd "$HAB_CACHE_SRC_PATH/$pkg_dirname" > /dev/null
+     # Unpack all targets inside the main source directory
+     for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
+       tar xf "$HAB_CACHE_SRC_PATH/$(basename "${_target_sources[$i]}")"
+     done; unset i
+   popd > /dev/null
+ }
+
 do_build() {
 	return 0
 }
@@ -49,10 +90,12 @@ do_strip() {
 do_install() {
 	local libc
 	local gcc_base
+	local zlib
 	local dynamic_linker
 
 	libc="$(pkg_path_for glibc)"
 	gcc_base="$(pkg_path_for gcc-base)"
+	zlib="$(pkg_path_for zlib)"
 	dynamic_linker="${libc}/lib/ld-linux-aarch64.so.1"
 
 	./install.sh --prefix="$pkg_prefix" --disable-ldconfig
@@ -63,7 +106,7 @@ do_install() {
 		*application/x-executable* | *application/x-pie-executable* | *application/x-sharedlib*)
 			patchelf \
 				--set-interpreter "${dynamic_linker}" \
-				--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib" \
+				--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib::${zlib}/lib" \
 				"$binary"
 			patchelf --shrink-rpath "$binary"
 			;;
@@ -72,14 +115,30 @@ do_install() {
 	done
 
 	# Set `RUNPATH` for all shared libraries under `lib/`
-	find "$pkg_prefix/lib" -name "*.so" -print0 |
-		xargs -0 -I '%' patchelf \
-			--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib" \
+	find "$pkg_prefix/lib" -name "*so*" -a -type f -print0 \
+ 		| xargs -0 file \
+ 		| grep "ELF.*shared object" \
+ 		| cut -d: -f1 \
+ 		| xargs -I '%' patchelf \
+			--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib:${zlib}/lib" \
 			%
-	find "$pkg_prefix/lib" -name "*.so" -print0 |
-		xargs -0 -I '%' patchelf \
+	find "$pkg_prefix/lib" -name "*so*" -a -type f -print0 \
+ 		| xargs -0 file \
+ 		| grep "ELF.*shared object" \
+ 		| cut -d: -f1 \
+ 		| xargs -I '%' patchelf \
 			--shrink-rpath \
 			%
+
+	# Install all targets
+ 	local dir
+ 	for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
+ 		dir="$(basename "${_target_sources[$i]/%.tar.gz/}")"
+ 		pushd "$HAB_CACHE_SRC_PATH/$pkg_dirname/$dir" > /dev/null
+ 		build_line "Installing $dir target for Rust"
+ 		./install.sh --prefix="$("$pkg_prefix/bin/rustc" --print sysroot)"
+ 		popd > /dev/null
+ 	done; unset i
 
 	# We wrap the rustc binary to include the core/gcc-base lib64 directory consistently in
 	# the LD_RUN_PATH. This guarantees its addition to the runpath of any auxiliary binaries
