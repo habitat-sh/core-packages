@@ -12,20 +12,15 @@ $pkg_build_deps=@("core/7zip")
 $pkg_bin_dirs=@(
     "Contents\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64",
     "Contents\VC\Redist\MSVC\14.40.33807\x64\Microsoft.VC143.CRT",
-    "Contents\MSBuild\Current\Bin\amd64",
-	"Contents\Windows Kits\10\bin\10.0.22621.0\x64"
+    "Contents\MSBuild\Current\Bin\amd64"
 )
 $pkg_lib_dirs=@(
-    #"Contents\VC\Tools\MSVC\14.40.33807\atlmfc\lib\x64",
-    "Contents\VC\Tools\MSVC\14.40.33807\lib\x64",
-	"Contents\Windows Kits\10\Lib\10.0.22621.0\um\x64",
-	"Contents\Windows Kits\10\Lib\10.0.22621.0\ucrt\x64"
+    "Contents\VC\Tools\MSVC\14.40.33807\atlmfc\lib\x64",
+    "Contents\VC\Tools\MSVC\14.40.33807\lib\x64"
 )
 $pkg_include_dirs=@(
-    #"Contents\VC\Tools\MSVC\14.40.33807\atlmfc\include",
-    "Contents\VC\Tools\MSVC\14.40.33807\include",
-	"Contents\Windows Kits\10\Include\10.0.22621.0\ucrt",
-	"Contents\Windows Kits\10\Include\10.0.22621.0\um"
+    "Contents\VC\Tools\MSVC\14.40.33807\atlmfc\include",
+    "Contents\VC\Tools\MSVC\14.40.33807\include"
 )
 
 function Invoke-SetupEnvironment {
@@ -57,8 +52,7 @@ function Invoke-Unpack {
         "Microsoft.VisualStudio.Component.SQL.SSDTBuildSku",
         "Microsoft.VisualStudio.Component.VC.ATLMFC",
         "Microsoft.VisualStudio.Component.NuGet.BuildTools",
-        "Microsoft.VisualStudio.Component.VC.CLI.Support",
-		"Microsoft.VisualStudio.Component.Windows10SDK"
+        "Microsoft.VisualStudio.Component.VC.CLI.Support"
     )
     foreach ($component in $components) {
         $installArgs += " --add $component"
