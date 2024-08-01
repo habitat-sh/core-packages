@@ -1,7 +1,7 @@
 program="rust"
 pkg_name="build-tools-rust"
 pkg_origin="core"
-pkg_version="1.75.0"
+pkg_version="1.79.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Rust is a systems programming language that runs blazingly fast, prevents \
@@ -10,13 +10,14 @@ segfaults, and guarantees thread safety.\
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
 pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-aarch64-unknown-linux-gnu.tar.gz"
-pkg_shasum="30828cd904fcfb47f1ac43627c7033c903889ea4aca538f53dcafbb3744a9a73"
+pkg_shasum="f7d3b31581331b54af97cf3162e65b8c26c8aa14d42f71c1ce9adc1078ef54e5"
 pkg_dirname="${program}-${pkg_version}-aarch64-unknown-linux-gnu"
 pkg_deps=(
 	core/build-tools-binutils
 	core/build-tools-cacerts
 	core/build-tools-glibc
 	core/build-tools-gcc
+	core/build-tools-zlib
 )
 pkg_build_deps=(
 	core/build-tools-patchelf
@@ -45,10 +46,12 @@ do_build() {
 do_install() {
 	local libc
 	local gcc_base
+	local zlib
 	local dynamic_linker
 
 	libc="$(pkg_path_for build-tools-glibc)"
 	gcc_base="$(pkg_path_for build-tools-gcc)"
+	zlib="$(pkg_path_for build-tools-zlib)"
 	dynamic_linker="${libc}/lib/ld-linux-aarch64.so.1"
 
 	./install.sh --prefix="$pkg_prefix" --disable-ldconfig
@@ -59,7 +62,7 @@ do_install() {
 		*application/x-executable* | *application/x-pie-executable* | *application/x-sharedlib*)
 			patchelf \
 				--set-interpreter "${dynamic_linker}" \
-				--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib" \
+				--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib::${zlib}/lib" \
 				"$binary"
 			patchelf --shrink-rpath "$binary"
 			;;
@@ -70,7 +73,7 @@ do_install() {
 	# Set `RUNPATH` for all shared libraries under `lib/`
 	find "$pkg_prefix/lib" -name "*.so" -print0 |
 		xargs -0 -I '%' patchelf \
-			--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib" \
+			--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib::${zlib}/lib" \
 			%
 	find "$pkg_prefix/lib" -name "*.so" -print0 |
 		xargs -0 -I '%' patchelf \
