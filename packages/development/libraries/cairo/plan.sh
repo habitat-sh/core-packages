@@ -29,7 +29,10 @@ pkg_build_deps=(
 )
 
 pkg_bin_dirs=(bin)
-pkg_include_dirs=(include)
+pkg_include_dirs=(
+  include
+  include/cairo
+)
 pkg_lib_dirs=(
   lib
   lib/cairo
