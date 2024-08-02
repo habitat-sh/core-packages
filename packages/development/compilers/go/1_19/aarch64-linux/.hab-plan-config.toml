@@ -1,0 +1,8 @@
+[rules]
+missing-license = { level = "off", source-shasum = "ccf36b53fb0024a017353c3ddb22c1f00bc7a8073c6aac79042da24ee34434d3"}
+license-not-found = { level = "off", source-shasum = "ccf36b53fb0024a017353c3ddb22c1f00bc7a8073c6aac79042da24ee34434d3"}
+host-elf-interpreter = "off"
+library-dependency-not-found = "off"
+host-script-interpreter = {level = "off"}
+unexpected-elf-interpreter = "off"
+unused-dependency = "off"
