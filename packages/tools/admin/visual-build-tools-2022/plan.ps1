@@ -12,7 +12,9 @@ $pkg_build_deps=@("core/7zip")
 $pkg_bin_dirs=@(
     "Contents\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64",
     "Contents\VC\Redist\MSVC\14.40.33807\x64\Microsoft.VC143.CRT",
-    "Contents\MSBuild\Current\Bin\amd64"
+    "Contents\MSBuild\Current\Bin\amd64",
+	"Contents\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin",
+	"Contents\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja"
 )
 $pkg_lib_dirs=@(
     "Contents\VC\Tools\MSVC\14.40.33807\atlmfc\lib\x64",
@@ -52,7 +54,9 @@ function Invoke-Unpack {
         "Microsoft.VisualStudio.Component.SQL.SSDTBuildSku",
         "Microsoft.VisualStudio.Component.VC.ATLMFC",
         "Microsoft.VisualStudio.Component.NuGet.BuildTools",
-        "Microsoft.VisualStudio.Component.VC.CLI.Support"
+        "Microsoft.VisualStudio.Component.VC.CLI.Support",
+		"Microsoft.VisualStudio.Component.VC.CMake.Project"
+		
     )
     foreach ($component in $components) {
         $installArgs += " --add $component"
