@@ -1,12 +1,15 @@
 [rules]
-missing-license = {level = "off", source-shasum = "30828cd904fcfb47f1ac43627c7033c903889ea4aca538f53dcafbb3744a9a73"}
+missing-license = {level = "off", source-shasum = "f7d3b31581331b54af97cf3162e65b8c26c8aa14d42f71c1ce9adc1078ef54e5"}
 # Some rust files in the docs start with #![feature(...)] which is misinterpreted as a script
 script-interpreter-not-found = {ignored_files = ["*.rs"]}
+library-dependency-not-found = {ignored_files = ["lib/*"]}
+unused-rpath-entry = {ignored_files = ["lib/*"]}
+host-elf-interpreter = {level = "off"}
 # The following dependencies are needed at runtime by Cargo for the associated reasons:
 # 1. core/cacerts - Provides SSL certificates necessary for secure connections.
 # 2. core/binutils - Supplies the 'ld' linker, utilized indirectly by Rust through gcc.
 # 3. core/tzdata - Needed for the proper operation of the GNU C Library (glibc).
 # 4. core/iana-etc - Also required for the functioning of glibc.
 unused-dependency = {ignored_packages = [
-    "core/{cacerts,binutils,tzdata,iana-etc}"
+    "core/{cacerts,binutils,tzdata,iana-etc,zlib}"
 ]}
