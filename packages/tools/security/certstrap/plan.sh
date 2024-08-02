@@ -22,7 +22,16 @@ pkg_svc_group="root"
 do_prepare() {
 	export GOOS=linux
 	build_line "Setting GOOS=$GOOS"
-	export GOARCH=amd64
+	case $pkg_target in
+        aarch64-linux)
+                GOARCH=arm64
+		export GOARCH=arm64
+                ;;
+        x86_64-linux)
+                GOARCH=amd64
+		export GOARCH=amd64
+                ;;
+        esac
 	build_line "Setting GOARCH=$GOARCH"
 	export GO111MODULE=on
 	build_line "Setting GO111MODULE=$GO111MODULE"
