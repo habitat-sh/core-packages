@@ -41,7 +41,11 @@ pkg_build_deps=(
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
-pkg_include_dirs=(include)
+pkg_include_dirs=(
+  include
+  include/glib-2.0
+  lib/glib-2.0/include
+)
 pkg_pconfig_dirs=(lib/pkgconfig)
 pkg_interpreters=(core/coreutils)
 
