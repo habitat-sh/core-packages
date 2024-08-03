@@ -10,8 +10,7 @@ $pkg_shasum="49b9d6cd12275d94a27724fcda646554f13af27857e3fe778b72cb245c74976e"
 $pkg_deps=("core/libsodium")
 $pkg_build_deps=(
     "core/visual-build-tools-2022", 
-    "core/windows-11-sdk",
-	"core/cmake"
+    "core/windows-11-sdk"
 )
 $pkg_bin_dirs=("bin")
 $pkg_include_dirs=("include")
@@ -23,7 +22,7 @@ function Invoke-Build {
     $sodium_includedir = "$(Get-HabPackagePath libsodium)\include"
 
     mkdir cmake-build
-    Set-Location cmake-build 
+    Set-Location cmake-build
     cmake -G "Visual Studio 17 2022" -A "x64" -T "v143" -DCMAKE_SYSTEM_VERSION="10.0" -DCMAKE_INSTALL_PREFIX="${prefix_path}\zeromq" -DWITH_LIBSODIUM="true" -DSODIUM_INCLUDE_DIRS="${sodium_includedir}" -DENABLE_CURVE="false" ..
 
     msbuild /p:Configuration=Release /p:Platform=x64 "ZeroMQ.sln"
