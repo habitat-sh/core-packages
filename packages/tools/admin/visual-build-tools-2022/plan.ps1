@@ -12,6 +12,7 @@ $pkg_build_deps=@("core/7zip")
 $pkg_bin_dirs=@(
     "Contents\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64",
     "Contents\VC\Redist\MSVC\14.40.33807\x64\Microsoft.VC143.CRT",
+    "Contents\VC\Redist\MSVC\14.40.33807\x86\Microsoft.VC143.CRT", # For packaged 32 bit cmake
     "Contents\MSBuild\Current\Bin\amd64",
 	"Contents\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin",
 	"Contents\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja"
@@ -27,8 +28,14 @@ $pkg_include_dirs=@(
 
 function Invoke-SetupEnvironment {
     Set-RuntimeEnv "DisableRegistryUse" "true"
+    # Setting this Windows Driver Kit variable is necessary to enable
+    # cmake to use this portable build tools package and not query
+    # the windows registry or the vieual studio installer components
+    Set-RuntimeEnv "EnterpriseWDK" "true"
     Set-RuntimeEnv "UseEnv" "true"
     Set-RuntimeEnv "VCToolsVersion" "14.40.33807"
+    Set-RuntimeEnv "VisualStudioVersion" "17.0"
+    Set-RuntimeEnv -IsPath "VSINSTALLDIR" "$pkg_prefix\Contents"
     Set-RuntimeEnv -IsPath "VCToolsInstallDir_170" "$pkg_prefix\Contents\VC\Redist\MSVC\14.40.33807"
 }
 
