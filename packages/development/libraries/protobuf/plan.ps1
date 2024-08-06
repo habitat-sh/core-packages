@@ -22,8 +22,7 @@ $pkg_include_dirs=@("include")
 
 
 function Invoke-Build {
-	
-	git clone https://github.com/abseil/abseil-cpp.git $HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\$pkg_name-$pkg_version\third_party/abseil-cpp
+	git clone -b lts_2023_08_02 https://github.com/abseil/abseil-cpp.git $HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\$pkg_name-$pkg_version\third_party/abseil-cpp
     Set-Location "$pkg_name-$pkg_version\cmake"
 
     $zlib_libdir = "$(Get-HabPackagePath zlib)\lib\zlibwapi.lib"
@@ -31,16 +30,8 @@ function Invoke-Build {
 
     mkdir build
     Set-Location build
-    cmake -G "Visual Studio 17 2022" -A x64 -T "v143" -DCMAKE_SYSTEM_VERSION="10.0" -DCMAKE_INSTALL_PREFIX=$pkg_prefix -DZLIB_LIBRARY_RELEASE="${zlib_libdir}" -DZLIB_INCLUDE_DIR="${zlib_includedir}" -Dprotobuf_BUILD_TESTS=OFF ../../ 
+    cmake -G "Visual Studio 17 2022" -A x64 -T "v143" -DCMAKE_SYSTEM_VERSION="10.0" -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" -DZLIB_LIBRARY_RELEASE="${zlib_libdir}" -DZLIB_INCLUDE_DIR="${zlib_includedir}" -Dprotobuf_BUILD_TESTS=OFF ../../ 
     # We'll build the required parts here
     msbuild /p:Configuration=Release /p:Platform=x64 "INSTALL.vcxproj"
     if($LASTEXITCODE -ne 0) { Write-Error "msbuild failed!" }
-
-    .\extract_includes.bat
-}
-
-function Invoke-Install {
-    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\$pkg_name-$pkg_version\cmake\build\Release\protoc.exe" "$pkg_prefix\bin\" -Force
-    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\$pkg_name-$pkg_version\cmake\build\Release\*.lib" "$pkg_prefix\lib\" -Force
-    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\$pkg_name-$pkg_version\cmake\build\include\*" "$pkg_prefix\include\" -Force -Recurse
 }
