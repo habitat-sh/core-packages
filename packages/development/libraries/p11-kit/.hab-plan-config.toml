@@ -1,0 +1,3 @@
+[rules]
+unused-runpath-entry = {ignored_files = ["lib/*", "libexec/*"]}
+library-dependency-not-found = {ignored_files = ["lib/*"]}
