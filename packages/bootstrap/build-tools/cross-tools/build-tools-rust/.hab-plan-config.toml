@@ -1,6 +1,6 @@
 docker-image = "hab-bootstrap:20230523"
 [rules]
-missing-license = {level = "off", source-shasum = "473978b6f8ff216389f9e89315211c6b683cf95a966196e7914b46e8cf0d74f6"}
+missing-license = {level = "off", source-shasum = "628efa8ef0658a7c4199883ee132281f19931448d3cfee4ecfd768898fe74c18"}
 script-interpreter-not-found = {ignored_files = ["*.rs"]}
 # The following dependencies are needed at runtime by Cargo for the associated reasons:
 # 1. core/cacerts - Provides SSL certificates necessary for secure connections.
