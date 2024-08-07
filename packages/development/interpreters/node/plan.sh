@@ -1,12 +1,12 @@
 pkg_name=node
 pkg_origin=core
-pkg_version=18.12.1
+pkg_version=18.20.4
 pkg_description="Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine."
 pkg_upstream_url=https://nodejs.org/
 pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://nodejs.org/dist/v${pkg_version}/node-v${pkg_version}.tar.gz"
-pkg_shasum=ba8174dda00d5b90943f37c6a180a1d37c861d91e04a4cb38dc1c0c74981c186
+pkg_shasum=349259af6821f730bc4ca3a0e6576efc75ba86e546d118629a5b75eb8ebc3a0b
 pkg_deps=(
 	core/glibc
 	core/gcc-libs
