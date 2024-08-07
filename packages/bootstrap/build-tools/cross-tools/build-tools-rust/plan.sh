@@ -1,7 +1,7 @@
 program="rust"
 pkg_name="build-tools-rust"
 pkg_origin="core"
-pkg_version="1.75.0"
+pkg_version="1.79.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Rust is a systems programming language that runs blazingly fast, prevents \
@@ -10,7 +10,7 @@ segfaults, and guarantees thread safety.\
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
 pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
-pkg_shasum="473978b6f8ff216389f9e89315211c6b683cf95a966196e7914b46e8cf0d74f6"
+pkg_shasum="628efa8ef0658a7c4199883ee132281f19931448d3cfee4ecfd768898fe74c18"
 pkg_dirname="${program}-${pkg_version}-x86_64-unknown-linux-gnu"
 pkg_deps=(
 	core/build-tools-binutils
