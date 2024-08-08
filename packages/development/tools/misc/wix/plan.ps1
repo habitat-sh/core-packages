@@ -1,12 +1,15 @@
 $pkg_name="wix"
 $pkg_origin="core"
-$pkg_version="5.0.0"
+$_base_version="3.14"
+$pkg_version="${_base_version}.1"
 $pkg_license=('MS-RL')
 $pkg_upstream_url="http://wixtoolset.org/"
 $pkg_description="The most powerful set of tools available to create your windows installation experience."
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://github.com/wixtoolset/wix/releases/download/v${pkg_version}/artifacts.zip"
-$pkg_shasum="723ea68773c51e63fcd9c14503bb35ed67acf3c58cfd2549ad6b22688559c80f"
+$pkg_filename=$pkg_name + ($_base_version).Replace(".", "") + "-binaries.zip"
+$_release_name=$pkg_name + ($pkg_version).Replace(".", "") + "rtm"
+$pkg_source="https://github.com/wixtoolset/wix3/releases/download/${_release_name}/${pkg_filename}"
+$pkg_shasum="6ac824e1642d6f7277d0ed7ea09411a508f6116ba6fae0aa5f2c7daa2ff43d31"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
@@ -16,3 +19,4 @@ function Invoke-Unpack {
 function Invoke-Install {
     Copy-Item * "$pkg_prefix/bin" -Recurse -Force
 }
+

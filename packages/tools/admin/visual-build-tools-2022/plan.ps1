@@ -54,16 +54,11 @@ function Invoke-Unpack {
 
     $installArgs =  "layout --quiet --layout $HAB_CACHE_SRC_PATH/$pkg_dirname --lang en-US --in $HAB_CACHE_SRC_PATH/$pkg_dirname/vs_bootstrapper_d15/vs_setup_bootstrapper.json"
     $components = @(
-        "Microsoft.VisualStudio.Workload.MSBuildTools",
-        "Microsoft.VisualStudio.Workload.VCTools",
-        "Microsoft.VisualStudio.Workload.WebBuildTools",
-        "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
-        "Microsoft.VisualStudio.Component.SQL.SSDTBuildSku",
-        "Microsoft.VisualStudio.Component.VC.ATLMFC",
-        "Microsoft.VisualStudio.Component.NuGet.BuildTools",
-        "Microsoft.VisualStudio.Component.VC.CLI.Support",
-		"Microsoft.VisualStudio.Component.VC.CMake.Project"
-		
+	 "Microsoft.Component.MSBuild",
+	 "Microsoft.VisualStudio.Component.VC.CoreBuildTools",
+         "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+	 "Microsoft.VisualStudio.Component.VC.ATLMFC",
+	 "Microsoft.VisualStudio.Component.VC.CMake.Project"	
     )
     foreach ($component in $components) {
         $installArgs += " --add $component"
