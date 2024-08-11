@@ -1,0 +1,4 @@
+[rules]
+unused-runpath-entry = {ignored_files = ["lib/*.so*"]}
+library-dependency-not-found = {ignored_files = ["lib/*.so*"]}
+unused-dependency = { ignored_packages = ["core/freetype", "core/cairo", "core/coreutils", "core/glib"]}
