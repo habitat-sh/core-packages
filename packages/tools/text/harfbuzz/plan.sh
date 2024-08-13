@@ -2,7 +2,7 @@ pkg_name=harfbuzz
 pkg_origin=core
 pkg_version="9.0.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('MIT' 'MIT-Modern-Variant' 'OFL-1.1-no-RFN')
+pkg_license=('MIT' 'MIT-Modern-Variant')
 #https://www.freedesktop.org/wiki/Software/HarfBuzz/
 pkg_upstream_url="http://harfbuzz.org/"
 pkg_description="HarfBuzz is an OpenType text shaping engine"
@@ -40,7 +40,7 @@ do_build() {
 
   meson setup builddir --prefix=${pkg_prefix} --buildtype=release -D tests=disabled -D docs=disabled
 
-  ninja -C builddir  
+  ninja -C builddir
 }
 
 do_install() {
