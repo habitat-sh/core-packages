@@ -1,0 +1,5 @@
+[rules]
+missing-license = {level = "off", source-shasum = "b7e481b109d19aefdba31e9f5888aa0cdfbe7608fed9a43494c060ce1f8a34d2"}
+unused-runpath-entry = {ignored_files = ["lib/*.so*"]}
+library-dependency-not-found = {ignored_files = ["lib/*.so*"]}
+unused-dependency = { ignored_packages = ["core/freetype", "core/cairo", "core/coreutils", "core/glib"]}
