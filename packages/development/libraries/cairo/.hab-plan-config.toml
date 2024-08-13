@@ -1,4 +1,5 @@
 [rules]
+missing-license = {level = "off", source-shasum = "243a0736b978a33dee29f9cca7521733b78a65b5418206fef7bd1c3d4cf10b64"}
 unused-runpath-entry = {ignored_files = ["lib/*", "lib/cairo/*"] }
 library-dependency-not-found = {ignored_files = ["lib/*", "lib/cairo/*"] }
 unused-dependency = {ignored_packages = ["core/{freetype,pixman,libpng,zlib,libice}"] }
