@@ -42,7 +42,6 @@ do_build() {
 	return 0
 }
 
-
 do_install() {
 	local libc
 	local gcc_base
@@ -71,14 +70,32 @@ do_install() {
 	done
 
 	# Set `RUNPATH` for all shared libraries under `lib/`
+	# Find all .so files and process them
 	find "$pkg_prefix/lib" -name "*.so" -print0 |
-		xargs -0 -I '%' patchelf \
-			--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib:${zlib}/lib" \
-			%
+	while IFS= read -r -d '' file; do
+		# Check if the file is an ELF file
+		if file "$file" | grep -q 'ELF'; then
+			# Apply patchelf and handle errors
+			if ! patchelf --set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib:${zlib}/lib" "$file" 2>&1; then
+				echo "Error applying patchelf to $file" >&2
+			fi
+		else
+			echo "Skipping non-ELF file: $file" >&2
+		fi
+	done
+
 	find "$pkg_prefix/lib" -name "*.so" -print0 |
-		xargs -0 -I '%' patchelf \
-			--shrink-rpath \
-			%
+	while IFS= read -r -d '' file; do
+		# Check if the file is an ELF file
+		if file "$file" | grep -q 'ELF'; then
+			# Apply patchelf and handle errors
+			if ! patchelf --shrink-rpath "$file" 2>&1; then
+				echo "Error shrinking rpath for $file" >&2
+			fi
+		else
+			echo "Skipping non-ELF file: $file" >&2
+		fi
+	done
 
 	# We wrap the rustc binary to include the core/gcc-base lib64 directory consistently in
 	# the LD_RUN_PATH. This guarantees its addition to the runpath of any auxiliary binaries
