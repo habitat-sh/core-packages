@@ -1,0 +1,3 @@
+[rules]
+unused-rpath-entry = { ignored_files = ["lib/*"]}
+unused-dependency = {ignored_packages = ["core/coreutils"]}
