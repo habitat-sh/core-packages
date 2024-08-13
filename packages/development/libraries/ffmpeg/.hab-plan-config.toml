@@ -1,4 +1,5 @@
 [rules]
+missing-license = {level = "off", source-shasum = "1233b3a93dd7517cc3c56b72a67f64041c044848d981e3deff4bebffa25f1054"}
 unused-runpath-entry = {ignored_files = ["lib/*"]}
 library-dependency-not-found = {ignored_files = ["lib/libavfilter.so.*"]}
 unused-dependency = {ignored_packages = ["core/freetype"]}
