@@ -1,2 +1,4 @@
 [rules]
+missing-license = {level = "off", source-shasum = "0db5f0621b6fbfae5960c30da4f132009fd72bf4687f1b04a87a4cfc2a08ea38"}
+license-not-found = {level = "off", source-shasum = "0db5f0621b6fbfae5960c30da4f132009fd72bf4687f1b04a87a4cfc2a08ea38"}
 unused-runpath-entry = {ignored_files = ["lib/libfribidi.so*"]}
