@@ -9,7 +9,7 @@ pkg_description="$(cat << EOF
 EOF
 )"
 pkg_source="https://download.gnome.org/sources/${pkg_name}/${pkg_version%.*}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_license=('Apache-2.0 WITH LLVM-exception' 'CC0-1.0' 'GPL-2.0-or-later' 'LGPL-2.1-or-later' 'MIT' 'MPL-1.1')
+pkg_license=('Apache-2.0 WITH LLVM-exception' 'CC0-1.0' 'LGPL-2.1-or-later' 'MIT' 'MPL-1.1')
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_upstream_url="https://developer.gnome.org/glib/"
 pkg_shasum="1665188ed9cc941c0a189dc6295e6859872523d1bfc84a5a84732a7ae87b02e4"
