@@ -9,7 +9,7 @@ segfaults, and guarantees thread safety.\
 "
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
-pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
+pkg_source="https://static.rust-lang.org/dist/${program}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
 pkg_shasum="628efa8ef0658a7c4199883ee132281f19931448d3cfee4ecfd768898fe74c18"
 pkg_dirname="${program}-${pkg_version}-x86_64-unknown-linux-gnu"
 pkg_deps=(
@@ -56,7 +56,7 @@ do_install() {
 	./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
 	# Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
-	for binary in "$pkg_prefix"/bin/* "$pkg_prefix"/lib/rustlib/*/bin/* "$pkg_prefix"/lib/rustlib/*/bin/gcc-ld/* "$pkg_prefix"/libexec/*; do
+	for binary in "$pkg_prefix"/bin/* "$pkg_prefix"/lib/rustlib/*/bin/* "$pkg_prefix"/lib/rustlib/*/bin/self-contained/* "$pkg_prefix"/lib/rustlib/*/bin/gcc-ld/* "$pkg_prefix"/libexec/*; do
 		case "$(file -bi "$binary")" in
 		*application/x-executable* | *application/x-pie-executable* | *application/x-sharedlib*)
 			patchelf \
@@ -71,7 +71,7 @@ do_install() {
 
 	# Set `RUNPATH` for all shared libraries under `lib/`
 	# Find all .so files and process them
-	find "$pkg_prefix/lib" -name "*.so" -print0 |
+	find "$pkg_prefix/lib" -name "*.so*" -print0 |
 	while IFS= read -r -d '' file; do
 		# Check if the file is an ELF file
 		if file "$file" | grep -q 'ELF'; then
@@ -84,7 +84,7 @@ do_install() {
 		fi
 	done
 
-	find "$pkg_prefix/lib" -name "*.so" -print0 |
+	find "$pkg_prefix/lib" -name "*.so*" -print0 |
 	while IFS= read -r -d '' file; do
 		# Check if the file is an ELF file
 		if file "$file" | grep -q 'ELF'; then
