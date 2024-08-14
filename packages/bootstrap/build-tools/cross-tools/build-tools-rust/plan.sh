@@ -9,7 +9,7 @@ segfaults, and guarantees thread safety.\
 "
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
-pkg_source="https://static.rust-lang.org/dist/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
+pkg_source="https://static.rust-lang.org/dist/${program}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
 pkg_shasum="628efa8ef0658a7c4199883ee132281f19931448d3cfee4ecfd768898fe74c18"
 pkg_dirname="${program}-${pkg_version}-x86_64-unknown-linux-gnu"
 pkg_deps=(
@@ -42,7 +42,6 @@ do_build() {
 	return 0
 }
 
-
 do_install() {
 	local libc
 	local gcc_base
@@ -57,7 +56,7 @@ do_install() {
 	./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
 	# Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
-	for binary in "$pkg_prefix"/bin/* "$pkg_prefix"/lib/rustlib/*/bin/* "$pkg_prefix"/lib/rustlib/*/bin/gcc-ld/* "$pkg_prefix"/libexec/*; do
+	for binary in "$pkg_prefix"/bin/* "$pkg_prefix"/lib/rustlib/*/bin/* "$pkg_prefix"/lib/rustlib/*/bin/self-contained/* "$pkg_prefix"/lib/rustlib/*/bin/gcc-ld/* "$pkg_prefix"/libexec/*; do
 		case "$(file -bi "$binary")" in
 		*application/x-executable* | *application/x-pie-executable* | *application/x-sharedlib*)
 			patchelf \
@@ -71,14 +70,32 @@ do_install() {
 	done
 
 	# Set `RUNPATH` for all shared libraries under `lib/`
-	find "$pkg_prefix/lib" -name "*.so" -print0 |
-		xargs -0 -I '%' patchelf \
-			--set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib:${zlib}/lib" \
-			%
-	find "$pkg_prefix/lib" -name "*.so" -print0 |
-		xargs -0 -I '%' patchelf \
-			--shrink-rpath \
-			%
+	# Find all .so files and process them
+	find "$pkg_prefix/lib" -name "*.so*" -print0 |
+	while IFS= read -r -d '' file; do
+		# Check if the file is an ELF file
+		if file "$file" | grep -q 'ELF'; then
+			# Apply patchelf and handle errors
+			if ! patchelf --set-rpath "${pkg_prefix}/lib:${gcc_base}/lib64:${libc}/lib:${zlib}/lib" "$file" 2>&1; then
+				echo "Error applying patchelf to $file" >&2
+			fi
+		else
+			echo "Skipping non-ELF file: $file" >&2
+		fi
+	done
+
+	find "$pkg_prefix/lib" -name "*.so*" -print0 |
+	while IFS= read -r -d '' file; do
+		# Check if the file is an ELF file
+		if file "$file" | grep -q 'ELF'; then
+			# Apply patchelf and handle errors
+			if ! patchelf --shrink-rpath "$file" 2>&1; then
+				echo "Error shrinking rpath for $file" >&2
+			fi
+		else
+			echo "Skipping non-ELF file: $file" >&2
+		fi
+	done
 
 	# We wrap the rustc binary to include the core/gcc-base lib64 directory consistently in
 	# the LD_RUN_PATH. This guarantees its addition to the runpath of any auxiliary binaries
