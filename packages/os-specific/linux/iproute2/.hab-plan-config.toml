@@ -1,3 +1,4 @@
 [rules]
-host-script-interpreter = {level = "off"}
-unused-runpath-entry = {level = "off"} 
+license-not-found = {level = "off", source-shasum = "2f643d09ea11a4a2a043c92e2b469b5f73228cbf241ae806760296ed0ec413d0"}
+missing-license = {level = "off", source-shasum = "2f643d09ea11a4a2a043c92e2b469b5f73228cbf241ae806760296ed0ec413d0"}
+unused-runpath-entry = {ignored_files = ["sbin/*"]}

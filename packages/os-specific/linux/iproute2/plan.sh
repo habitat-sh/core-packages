@@ -21,6 +21,8 @@ pkg_build_deps=(
 pkg_deps=(
     core/glibc
     core/iptables
+    core/coreutils
+    core/python
 )
 
 do_build() {
@@ -28,3 +30,9 @@ do_build() {
   export SBINDIR
   do_default_build
 }
+
+do_install() {
+  do_default_install
+  fix_interpreter "$pkg_prefix/sbin/routel" core/coreutils /bin/env
+} 
+
