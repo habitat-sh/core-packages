@@ -6,7 +6,7 @@ pkg_description="Network Security Services"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS"
 pkg_source="https://ftp.mozilla.org/pub/security/nss/releases/NSS_${pkg_version//./_}_RTM/src/nss-${pkg_version}.tar.gz"
-pkg_shasum="4ae9db6b117db1cc134bd587a23ff804d8da5bdd63fbb1bf0862b8e3e3aa2439"
+pkg_shasum="c29b03f24856db18a34fbcde737fcca6407c27b5f3f60baba5111460e6cb307b"
 
 pkg_deps=(
   core/glibc
