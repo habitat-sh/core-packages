@@ -1,14 +1,14 @@
 # shellcheck disable=2034
 git_url="https://github.com/habitat-sh/habitat.git"
-commit_hash="94d6d50138d1fe005e59f4a7117974ce1b977ae2"
-pkg_shasum="ba63a6638fb181c6a7f24d8efb5f5750a648d85fa9456a4a3a9be71471f098f1"
+_version="1.6.1108"
+pkg_shasum="5145d59c2ec86290c8c5329171ece2b1289e795a3524c3db97b533679dc668b9"
 
 pkg_name="hab-plan-build"
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
-pkg_source="https://github.com/habitat-sh/habitat/archive/${commit_hash}.tar.gz"
-pkg_dirname="habitat-${commit_hash}"
+pkg_source="https://github.com/habitat-sh/habitat/archive/refs/tags/${_version}.tar.gz"
+pkg_dirname="habitat-${_version}"
 
 pkg_bin_dirs=(bin)
 
