@@ -1,0 +1,2 @@
+[rules]
+host-script-interpreter = {level = "off"}

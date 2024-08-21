@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+exec 2>&1
+
+mkdir -p "{{pkg.svc_data_path}}/{{cfg.backend.path}}"
