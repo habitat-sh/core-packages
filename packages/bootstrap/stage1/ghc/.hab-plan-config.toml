@@ -1,0 +1,5 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "c4c0124857265926f1cf22a09d950d7ba989ff94053a4ddf3dcdab5359f4cab7"}
+duplicate-runtime-binary = {level = "off"}
+unused-runpath-entry = {level = "off"}
+unused-dependency = { level = "off" }
