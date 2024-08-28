@@ -1,5 +1,5 @@
-$pkg_name="dotnet-481-dev-pack-x64"
-$pkg_origin="chef"
+$pkg_name="dotnet-481-dev-pack"
+$pkg_origin="core"
 $pkg_version="4.8.1"
 $pkg_description=".net framework 4.8.1 with dev pack"
 $pkg_upstream_url="https://www.microsoft.com/net/download/all"
@@ -9,8 +9,8 @@ $pkg_source="https://download.microsoft.com/download/8/1/8/81877d8b-a9b2-4153-9a
 $pkg_shasum="fd9ae4b63cbc8f7637249c4b29d25281b1f70fbe6d650109dcbf2bdf596cf994"
 $pkg_build_deps=@("core/lessmsi", "core/wix")
 
-$pkg_bin_dirs=@("Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8.1 Tools\x64")
-$pkg_lib_dirs=@("Program Files (x86)\Windows Kits\NETFXSDK\4.8.1\Lib\um\x64")
+$pkg_bin_dirs=@("Program Files\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8.1 Tools\x64")
+$pkg_lib_dirs=@("Program Files\Windows Kits\NETFXSDK\4.8.1\Lib\um\x64")
 $pkg_include_dirs=@("Program Files\Windows Kits\NETFXSDK\4.8.1\Include\um")
 
 function Invoke-SetupEnvironment {
