@@ -3,8 +3,8 @@
 env-script-interpreter-not-found = {ignored_files = [
     "lib/ruby/*/bundler/templates/*"
 ]}
-license-not-found = {level = "off", source-shasum = "5ea498a35f4cd15875200a52dde42b6eb179e1264e17d78732c3a57cd1c6ab9e"}
-missing-license = {level = "off", source-shasum = "5ea498a35f4cd15875200a52dde42b6eb179e1264e17d78732c3a57cd1c6ab9e"}
+license-not-found = {level = "off", source-shasum = "0d0dafb859e76763432571a3109d1537d976266be3083445651dc68deed25c22"}
+missing-license = {level = "off", source-shasum = "0d0dafb859e76763432571a3109d1537d976266be3083445651dc68deed25c22"}
 # core/ncurses: The paths for these packages get written into 'lib/ruby/<version>/<arch>/rbconfig.rb' and
 # potentially affects further building of gems with the mkmf gem.
 # core/nss-myhostname: This is apparently required at runtime, for some DNS lookup behaviour?
