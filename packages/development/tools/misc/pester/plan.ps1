@@ -14,5 +14,5 @@ function Invoke-Build {
 	.\build.ps1 -Clean
 }
 function Invoke-Install {
-    Copy-Item "pester-$pkg_version\*" "$pkg_prefix/module" -Recurse -Force
+    Copy-Item "pester-$pkg_version\bin\*" "$pkg_prefix/module" -Recurse -Force
 }
