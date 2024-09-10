@@ -1,4 +1,5 @@
 [rules]
 missing-license = {level = "off", source-shasum = "1665188ed9cc941c0a189dc6295e6859872523d1bfc84a5a84732a7ae87b02e4"}
+license-not-found = {level = "off", source-shasum = "1665188ed9cc941c0a189dc6295e6859872523d1bfc84a5a84732a7ae87b02e4"}
 unused-rpath-entry = { ignored_files = ["lib/*"]}
 unused-dependency = {ignored_packages = ["core/coreutils"]}
