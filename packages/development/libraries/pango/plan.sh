@@ -10,33 +10,29 @@ pkg_shasum="8a9eed75021ee734d7fc0fdf3a65c3bba51dfefe4ae51a9b414a60c70b2d1ed8"
 pkg_filename=${pkg_name}-${pkg_version}.tar.xz
 
 pkg_deps=(
-  #core/glib
-  core/glibc
-  core/fontconfig
-  core/freetype
-  core/cairo
-  core/harfbuzz
-  core/expat
-  
-  #core/libpng
-  #core/xproto
-  #core/libxau
-  #core/libxcb
-  #core/libxdmcp  
+	core/glibc
+	core/gcc-libs
+	core/cairo
+	core/pixman
+	core/glib
+	core/pcre2
+	core/libffi
+	core/zlib
+	core/fontconfig
+	core/freetype
+	core/libxml2
+	core/libpng
+	core/util-linux
+	core/harfbuzz
+	core/fribidi
 )
 pkg_build_deps=(
-  core/gcc
-  core/cmake
-  core/pkg-config
-  core/fribidi
-  core/python
-  core/meson
-  core/ninja
-  core/git
-  core/libxml2
-  core/zlib
-  core/libpng
-  core/pixman
+	core/meson
+	core/ninja
+	core/gcc
+	core/cmake
+	core/pkg-config
+	core/patchelf
 )
 
 pkg_bin_dirs=(bin)
@@ -45,26 +41,22 @@ pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
-  export PYTHONPATH=${PYTHONPATH}:$(pkg_path_for meson)/lib/python3.10/site-packages/
+	export PYTHONPATH=${PYTHONPATH}:$(pkg_path_for meson)/lib/python3.10/site-packages/
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pkg_path_for glib)/lib
 
-  meson subprojects update
+	meson setup builddir --prefix=${pkg_prefix} \
+		--buildtype=release \
+		-Ddocumentation=false \
+		-Dintrospection="disabled" \
+		--wrap-mode=nofallback
 
-  meson setup builddir --prefix=${pkg_prefix} \
-    --buildtype=release \
-    -Ddocumentation=false \
-    -Dbuild-testsuite=false \
-    -Dbuild-examples=false \
-    -Dintrospection="disabled" \
-    -Dlibthai="disabled" \
-    -Dxft="disabled"
-
-  ninja -C builddir
+	ninja -C builddir
 }
 
 do_install() {
-  ninja -C builddir install
+	ninja -C builddir install
 }
 
 do_check() {
-  ninja -C builddir test
+	ninja -C builddir test
 }

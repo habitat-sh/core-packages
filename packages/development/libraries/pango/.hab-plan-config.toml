@@ -1,3 +1,6 @@
 [rules]
 missing-license = {level = "off", source-shasum = "8a9eed75021ee734d7fc0fdf3a65c3bba51dfefe4ae51a9b414a60c70b2d1ed8"}
 license-not-found = {level = "off", source-shasum = "8a9eed75021ee734d7fc0fdf3a65c3bba51dfefe4ae51a9b414a60c70b2d1ed8"}
+unused-runpath-entry = { ignored_files = ["lib/*", "bin/*"]}
+library-dependency-not-found = { ignored_files = ["lib/*", "bin/*"]}
+unused-dependency = { ignored_packages = ["core/{libpng,glib,zlib,pcre2,pixman,fribidi,harfbuzz,cairo,libxml2,libffi,freetype,fontconfig,gcc-libs,util-linux}"]}
