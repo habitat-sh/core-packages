@@ -1,0 +1,4 @@
+[rules]
+unused-runpath-entry = { level = "off" }
+unused-dependency = { level = "off" }
+env-script-interpreter-not-found = { level = "off"}
