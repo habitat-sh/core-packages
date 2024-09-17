@@ -1,0 +1,4 @@
+[rules]
+unused-dependency = {ignored_packages = ["core/{openssl,libunwind,lttng-ust,util-linux,krb5,icu,curl}"]}
+unused-runpath-entry = {level = "off"}
+library-dependency-not-found = "off"
