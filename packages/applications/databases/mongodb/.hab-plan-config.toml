@@ -1,0 +1,3 @@
+[rules]
+missing-license = {level = "off", source-shasum = "497c82256aa54b3daedcad6409bdb106f89cbb934d7fbb96475f399c9245741e"}
+unused-runpath-entry = { ignored_files = ["bin/*"]}
