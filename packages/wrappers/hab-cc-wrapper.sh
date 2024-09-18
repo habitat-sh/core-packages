@@ -1,3 +1,5 @@
+original_arguments=$@
+
 # Detect if C++ compiler is being used
 is_cxx=false
 if [[ "$HAB_CC_EXECUTABLE_NAME" == *"++" ]]; then
@@ -101,6 +103,14 @@ if [[ "$HAB_DEBUG" == "1" ]]; then
         echo "add_cxx_std_libs: $add_cxx_std_libs"
         echo "add_cxx_std_headers: $add_cxx_std_headers"
         echo "filtered_cc_arguments: ${filtered_arguments[@]}"
+	echo "filtered_cc_arguments: ["
+	for arg in "${filtered_arguments[@]}"; do
+    	    echo "    \"$arg\","
+	done
+	echo "]"
+	echo "work_dir: $(pwd)"
+	echo "original: @program@ $original_arguments"
+	echo "wrapped: @program@ ${filtered_arguments[@]}"
     } 1>&2
 fi
 
