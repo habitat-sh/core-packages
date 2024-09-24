@@ -1,0 +1,4 @@
+[rules]
+empty-top-level-directory = { level = "off" }
+duplicate-runtime-binary = { level = "off" }
+host-script-interpreter = { ignored_files = ["gems/bundler-2.5.19/lib/bundler/templates/Executable*"]}
