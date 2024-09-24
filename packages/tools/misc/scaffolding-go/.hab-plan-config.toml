@@ -1,0 +1,3 @@
+[rules]
+# Below packages are required when used as pkg_scaffolding
+unused-dependency = {ignored_packages = ["core/{go1_19,git,gcc,make}"]}
