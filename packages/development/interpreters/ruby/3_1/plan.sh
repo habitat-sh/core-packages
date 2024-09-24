@@ -21,6 +21,7 @@ pkg_deps=(
 	core/nss-myhostname
 	core/openssl
 	core/zlib
+        core/libarchive
 )
 pkg_build_deps=(
 	core/gcc
@@ -77,4 +78,8 @@ do_install() {
 	# Delete gem build logs
 	find "$pkg_prefix"/lib/ruby/gems \( -name gem_make.out -o -name mkmf.log \) -delete
 	popd || exit 1
+        
+        # Below gems are required for Infra-client.
+        gem install ffi -v "1.16.3" --no-document
+        gem install ffi-libarchive -v "1.1.14" --no-document
 }
