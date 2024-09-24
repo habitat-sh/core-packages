@@ -1,0 +1,3 @@
+[rules]
+unused-runpath-entry = { ignored_files = ["bin/*", "lib/*"]}
+unused-dependency = {ignored_packages = ["core/libcap"]}
