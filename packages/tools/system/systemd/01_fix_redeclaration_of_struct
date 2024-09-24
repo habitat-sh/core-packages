@@ -1,0 +1,10 @@
+--- systemd-stable-255.12/src/core/exec-invoke.c	2024-09-10 20:33:00.000000000 +0000
++++ systemd-stable-255.12_fix/src/core/exec-invoke.c	2024-09-24 11:27:51.168085715 +0000
+@@ -3,7 +3,6 @@
+ #include <linux/sched.h>
+ #include <sys/eventfd.h>
+ #include <sys/ioctl.h>
+-#include <sys/mount.h>
+ #include <sys/prctl.h>
+ 
+ #if HAVE_PAM
