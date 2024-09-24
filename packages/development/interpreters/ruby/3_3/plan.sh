@@ -52,6 +52,8 @@ do_build() {
 		--enable-shared \
 		--disable-install-doc \
 		--with-openssl-dir="$(pkg_path_for core/openssl)" \
+		--with-openssl-lib="$(pkg_path_for core/openssl)/lib64" \
+		--with-openssl-include="$(pkg_path_for core/openssl)/include" \
 		--with-libyaml-dir="$(pkg_path_for core/libyaml)" \
 		--with-baseruby="$(pkg_path_for core/ruby-stage1)/bin/ruby"
 
