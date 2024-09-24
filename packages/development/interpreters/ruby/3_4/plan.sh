@@ -52,6 +52,8 @@ do_build() {
 		--disable-install-doc \
 		--with-openssl-dir="$(pkg_path_for core/openssl)" \
 		--with-libyaml-dir="$(pkg_path_for core/libyaml)" \
+		--with-openssl-lib="$(pkg_path_for core/openssl)/lib64" \
+		--with-openssl-include="$(pkg_path_for core/openssl)/include" \
 		--with-baseruby="$(pkg_path_for core/ruby3_1)/bin/ruby"
 
 	make -j"$(nproc)"
