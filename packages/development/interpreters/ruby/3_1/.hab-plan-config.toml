@@ -9,5 +9,8 @@ missing-license = {level = "off", source-shasum = "0d0dafb859e76763432571a3109d1
 # potentially affects further building of gems with the mkmf gem.
 # core/nss-myhostname: This is apparently required at runtime, for some DNS lookup behaviour?
 # https://github.com/habitat-sh/core-plans/commit/7761ccef724292640d14143ccb0cd5466e877fa5
-unused-dependency = {ignored_packages = ["core/{ncurses,nss-myhostname}"]}
+# core/libarchive Needed for running ffi and ffi-libarchive gems
+unused-dependency = {ignored_packages = ["core/{ncurses,nss-myhostname,libarchive}"]}
 unused-runpath-entry = {level = "off"}
+# ignore interpreters from ffi-1.16.3 gem
+host-script-interpreter = {ignored_files = ["lib/ruby/gems/3.1.0/gems/ffi-1.16.3/ext/ffi_c/*"]}
