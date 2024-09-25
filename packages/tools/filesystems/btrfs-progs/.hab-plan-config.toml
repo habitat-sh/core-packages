@@ -1,3 +1,5 @@
 [rules]
+missing-license = { level = "off", source-shasum = "ba1b8017b82e22f874fb3b09805ac4f45e3265888dc56eaf4449f38f896f6fc4" }
+license-not-found = {level = "off", source-shasum = "ba1b8017b82e22f874fb3b09805ac4f45e3265888dc56eaf4449f38f896f6fc4"}
 unused-runpath-entry = { ignored_files = ["bin/*", "lib/*"]}
 unused-dependency = {ignored_packages = ["core/libcap"]}
