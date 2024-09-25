@@ -1,16 +1,14 @@
-pkg_origin=core
 pkg_name=systemd
+pkg_origin=core
 pkg_version="255.12"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="systemd is an init system used in Linux distributions to \
 bootstrap the user space. Subsequently to booting, it is used to manage system \
 processes."
-pkg_license=('')
+pkg_license=('GPL-2.0-only')
 #https://systemd.io
-#pkg_source="https://github.com/systemd/${pkg_name}/archive/v${pkg_version}.tar.gz"
 pkg_source="https://github.com/systemd/systemd-stable/archive/refs/tags/v${pkg_version}.tar.gz"
 pkg_upstream_url="https://github.com/systemd/systemd"
-#pkg_shasum="c085f162dec001407dd32f00abbf20b7e6ed7043dcfaf8ed954787d86707f409"
 pkg_shasum="fecc51873373f3db9e461b36277dfc6ff7945de3a8e3cb931296f74f63ee1f14"
 pkg_dirname="systemd-stable-${pkg_version}"
 
@@ -73,7 +71,6 @@ do_prepare() {
 	# https://github.com/systemd/systemd/commit/442bc2afee6c5f731c7b3e76ccab7301703a45a7
 	# Bug with 247
 	#  patch -p1 < "${PLAN_CONTEXT}"/patches/0001-meson-set-cxx-variable-before-using-it.patch
-	#patch -p0 <"${PLAN_CONTEXT}/patches/build_fix_meson.patch"
 	patch -p1 <"${PLAN_CONTEXT}/01_fix_redeclaration_of_struct"
 }
 
@@ -89,6 +86,14 @@ do_build() {
 		"-Ddbuspolicydir=${pkg_prefix}/etc/dbus-1/system.d"
 		"-Ddbussessionservicedir=${pkg_prefix}/etc/dbus-1/services"
 		"-Ddbussystemservicedir=${pkg_prefix}/etc/dbus-1/system-services"
+		"-Dlink-udev-shared=true"
+		"-Dlink-executor-shared=true"
+		"-Dlink-systemctl-shared=true"
+		"-Dlink-networkd-shared=true"
+		"-Dlink-timesyncd-shared=true"
+		"-Dlink-journalctl-shared=true"
+		"-Dlink-boot-shared=true"
+		"-Dlink-portabled-shared=true"
 		"-Dtests=false"
 	)
 	meson setup builddir "${meson_opts[@]}"
@@ -99,26 +104,21 @@ do_install() {
 	ninja -C builddir install
 
 	unset LD_LIBRARY_PATH
-	LD_RUN_PATH=$LD_RUN_PATH:$(pkg_path_for utlix-linux)/lib:$(pkg_path_for libseccomp)/lib
+	LIBPATH=$LD_LIBRARY_PATH:$(pkg_path_for zstd)/lib:$(pkg_path_for libseccomp)/lib:$(pkg_path_for util-linux)/lib:$(pkg_path_for libcap)/lib:$(pkg_path_for lz4)/lib:$(pkg_path_for xz)/lib
+
+	# set runtime path
+	push_runtime_env LD_LIBRARY_PATH $LIBPATH
 
 	# https://github.com/mesonbuild/meson/issues/6541
 	# Is meson stripping rpath here?
 	find "$pkg_prefix"/bin -type f -executable \
 		-exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {} \; \
-		-exec patchelf --force-rpath --set-rpath "${LD_RUN_PATH}" {} \;
-
-	find "$pkg_prefix"/bin -type f -executable \
-		-exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {} \; \
-		-exec patchelf --shrink-rpath {} \;
+		-exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
 
 	for lib in "${pkg_lib_dirs[@]}"; do
 		find "${pkg_prefix}/${lib}" -type f -executable \
 			-exec sh -c 'file -i "$1" | grep -q "x-pie-executable; charset=binary"' _ {} \; \
 			-exec patchelf --force-rpath --set-rpath "${LD_RUN_PATH}" {} \;
-
-		find "${pkg_prefix}/${lib}" -type f -executable \
-			-exec sh -c 'file -i "$1" | grep -q "x-pie-executable; charset=binary"' _ {} \; \
-			-exec patchelf --shrink-rpath {} \;
 	done
 
 	for lib in "${pkg_lib_dirs[@]}"; do
@@ -134,6 +134,10 @@ do_install() {
 
 do_check() {
 	meson test -C build/
+}
+
+do_strip() {
+	return 0
 }
 
 do_end() {

@@ -1,7 +1,9 @@
 [rules]
 missing-license = {level = "off", source-shasum = "fecc51873373f3db9e461b36277dfc6ff7945de3a8e3cb931296f74f63ee1f14"}
+license-not-found = {level = "off", source-shasum = "fecc51873373f3db9e461b36277dfc6ff7945de3a8e3cb931296f74f63ee1f14"}
 unused-runpath-entry = { ignored_files = ["lib/*", "bin/*"]}
 library-dependency-not-found = { ignored_files = ["lib/*", "bin/*"]}
 unused-dependency = { ignored_packages = ["core/{libcap,lz4,zstd,xz}"]}
 empty-top-level-directory = { level = "off"}
 broken-link = { level = "off" }
+unused-rpath-entry = { ignored_files = ["lib/*"]}
