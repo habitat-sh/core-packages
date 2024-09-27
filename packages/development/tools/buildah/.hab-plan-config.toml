@@ -1,0 +1,3 @@
+[rules]
+unused-runpath-entry = {ignored_files = ["bin/*"]}
+unused-dependency = {ignored_packages = ["core/{libassuan,libgpg-error}"]}
