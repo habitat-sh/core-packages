@@ -1,0 +1,7 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "ba7eee1bc2c6f83be73c0a40d159c625cbaed976b3ac044233404fb25ae1b979"}
+missing-license = {level = "off", source-shasum = "ba7eee1bc2c6f83be73c0a40d159c625cbaed976b3ac044233404fb25ae1b979"}
+unused-runpath-entry = {ignored_files = ["bin/*","lib/*"]}
+unused-dependency = {ignored_packages = ["core/{db,nspr,nss}"]}
+missing-runpath-entry-dependency = { level = "off"}
+library-dependency-not-found = {level = "off"}
