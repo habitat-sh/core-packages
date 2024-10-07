@@ -1,0 +1,5 @@
+[rules]
+license-not-found = {level = "off", source-shasum = "bd4b4cb6374bcd5fc5a3ba60cb80425d29da34f316b8821abc12c0db225cf6b4"}
+missing-license = {level = "off", source-shasum = "bd4b4cb6374bcd5fc5a3ba60cb80425d29da34f316b8821abc12c0db225cf6b4"}
+#  We are downloding entire lvm-project for building llvm, so lof of errors we are getting. So we are ignoring them
+unused-runpath-entry = {level = "off"}
