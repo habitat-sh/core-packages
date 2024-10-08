@@ -1,12 +1,12 @@
 pkg_name=dpkg
 pkg_origin=core
-pkg_version=1.22.6
+pkg_version=1.22.11
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0-or-later')
 pkg_upstream_url="https://wiki.debian.org/dpkg"
 pkg_description="dpkg is a package manager for Debian-based systems"
 pkg_source="http://http.debian.net/debian/pool/main/d/${pkg_name}/${pkg_name}_${pkg_version}.tar.xz"
-pkg_shasum="4379123466cf1804f82aaac7fbea7133c58aefa178dfbf7029cdc61a8d220655"
+pkg_shasum="f318eb949b8e7ecd802b17b1a7e7cf4b17094c9577e1060653e9b838cdd31d80"
 pkg_deps=(
   core/glibc
   core/ncurses
