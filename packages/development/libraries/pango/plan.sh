@@ -42,8 +42,6 @@ pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
 	export PYTHONPATH=${PYTHONPATH}:$(pkg_path_for meson)/lib/python3.10/site-packages/
-	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pkg_path_for glib)/lib
-
 	meson setup builddir --prefix=${pkg_prefix} \
 		--buildtype=release \
 		-Ddocumentation=false \
@@ -54,7 +52,25 @@ do_build() {
 }
 
 do_install() {
+	#ravi changes-->
+	#freetype is not added to LD_RUN_PATH though it is added in pkg_deps.
+	# not sure why. need to check from hab-auto-build.
+	#so appending freetype below
+	export LD_RUN_PATH="$LD_RUN_PATH:$(pkg_path_for freetype)/lib"
+
 	ninja -C builddir install
+	
+	build_line "Setting rpath for all binaries to '${LD_RUN_PATH}'"
+	#freetype is not getting set for some binaries with --set-rpath 
+	#so using --add-needed for freetype .so. TO use --add-needed freetype
+	#should be in the RUN PATH.
+	find "${pkg_prefix}/bin" -type f -executable \
+	-exec patchelf --set-interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
+	--set-rpath "${LD_RUN_PATH}" --add-needed libfreetype.so.6 {} \;
+
+	find "${pkg_prefix}/lib" -type f -name "*.so.*" \
+    -exec patchelf --set-rpath "${LD_RUN_PATH}" --add-needed libfreetype.so.6 {} \;
+	#-->
 }
 
 do_check() {
