@@ -51,8 +51,11 @@ do_build() {
 }
 
 do_install() {
+	#freetype is not added to LD_RUN_PATH though it is added in pkg_deps.
+	# not sure why. need to check from hab-auto-build.
+	#so appending freetype below
+	export LD_RUN_PATH="$LD_RUN_PATH:$(pkg_path_for freetype)/lib"
 	ninja -C builddir install
-
 	find "${pkg_prefix}/lib" -type f -name "*.so*" -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
 }
 
