@@ -22,7 +22,7 @@ pkg_deps=(
 )
 
 pkg_build_deps=(
-  core/gcc
+  core/gcc-base
   core/make
   core/build-tools-patchelf
 )
@@ -34,12 +34,16 @@ do_unpack() {
 }
 
 do_build() {
+   export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}":"$(pkg_path_for gmp)/lib"
   ./configure \
-    --prefix="${pkg_prefix}"
+    --prefix="${pkg_prefix}" \
+    CC="$(pkg_path_for gcc-base)/bin/gcc" \
+    CXX="$(pkg_path_for gcc-base)/bin/g++" \
+    --disable-ld-override
 }
 
 do_install() {
-  # make install
+  make lib/settings
   cp -r bin include lib wrappers "${pkg_prefix}"
 
   # The ghc binary (ghc-${pkg_version}) requires libtinfo.so.6, which is not available
