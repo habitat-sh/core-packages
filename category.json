@@ -1078,7 +1078,7 @@
       "pkg_origin": "core",
       "pkg_name": "postgresql13",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "postgresql",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
@@ -1088,7 +1088,7 @@
       "pkg_origin": "core",
       "pkg_name": "postgresql13-client",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "postgresql",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
@@ -1098,7 +1098,7 @@
       "pkg_origin": "core",
       "pkg_name": "postgresql14",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "postgresql",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
@@ -1108,7 +1108,7 @@
       "pkg_origin": "core",
       "pkg_name": "postgresql14-client",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "postgresql",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
@@ -1118,7 +1118,7 @@
       "pkg_origin": "core",
       "pkg_name": "postgresql15",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "postgresql",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
@@ -1128,7 +1128,7 @@
       "pkg_origin": "core",
       "pkg_name": "postgresql15-client",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "postgresql",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux",
@@ -1139,7 +1139,7 @@
       "pkg_origin": "core",
       "pkg_name": "postgresql-with-ext15",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "postgresql",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
@@ -1354,7 +1354,7 @@
       "pkg_origin": "core",
       "pkg_name": "erlang26",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "erlang",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
@@ -1406,7 +1406,7 @@
       "pkg_origin": "core",
       "pkg_name": "ruby3_1",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "ruby",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
@@ -1416,7 +1416,7 @@
       "pkg_origin": "core",
       "pkg_name": "ruby3_4",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "ruby",
       "pkg_platform": [
         "x86_64-linux"
       ]
@@ -1425,7 +1425,7 @@
       "pkg_origin": "core",
       "pkg_name": "ruby3_3",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "ruby",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
@@ -2945,7 +2945,7 @@
       "pkg_origin": "core",
       "pkg_name": "go1_21",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "go",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux",
@@ -2956,7 +2956,7 @@
       "pkg_origin": "core",
       "pkg_name": "go1_22",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "go",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux",
@@ -2967,7 +2967,7 @@
       "pkg_origin": "core",
       "pkg_name": "go1_19",
       "pkg_category": "Multiple Major Single Minor",
-      "pkg_family": "",
+      "pkg_family": "go",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
