@@ -1,53 +1,81 @@
-program="wget"
-
-pkg_name="wget-static"
-pkg_origin="core"
-pkg_version="1.24.5"
+pkg_name=wget-static
+_distname="wget"
+pkg_origin=core
+pkg_version=1.24.5
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_dirname=${_distname}-${pkg_version}
 pkg_description="\
 GNU Wget is a free software package for retrieving files using HTTP, HTTPS, \
 FTP and FTPS the most widely-used Internet protocols.\
 "
 pkg_upstream_url="https://www.gnu.org/software/wget/"
 pkg_license=('GPL-3.0-or-later')
-pkg_source="https://ftp.gnu.org/gnu/${program}/${program}-${pkg_version}.tar.gz"
-pkg_shasum="fa2dc35bab5184ecbc46a9ef83def2aaaa3f4c9f3c97d4bd19dcb07d4da637de"
-pkg_dirname="${program}-${pkg_version}"
-
-pkg_deps=(
-	core/glibc
-	core/openssl
-	core/libidn2
-	core/pcre2
-	core/libpsl
-	core/zlib
-)
+pkg_source="https://ftp.gnu.org/gnu/${_distname}/${_distname}-${pkg_version}.tar.gz"
+pkg_shasum=fa2dc35bab5184ecbc46a9ef83def2aaaa3f4c9f3c97d4bd19dcb07d4da637de
 
 pkg_build_deps=(
-	core/coreutils
-	core/gcc
-	core/gettext
-	core/pkg-config
-	core/build-tools-perl
+  core/linux-headers-musl
+  core/musl
+  core/coreutils
+  core/diffutils
+  core/flex
+  core/gcc
+  core/gettext
+  core/grep
+  core/patch
+  core/perl
+  core/pkg-config
+  core/sed
+  core/cacerts
+  core/glibc
+  core/libiconv
+  core/libidn2
+  core/openssl-musl
+  core/pcre2
+  core/zlib-musl
 )
-
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-	# Purge the codebase (mostly tests & build Perl scripts) of the hardcoded
-	# reliance on `/usr/bin/env`.
-	grep -lr '/usr/bin/env' . | while read -r f; do
-		sed -e "s,/usr/bin/env,$(pkg_path_for coreutils)/bin/env,g" -i "$f"
-	done
+  CFLAGS="-I$(pkg_path_for linux-headers-musl)/include -I$(pkg_path_for musl)/include"
+  build_line "Setting CFLAGS=$CFLAGS"
+
+  LDFLAGS="-static $LDFLAGS"
+  build_line "Setting LDFLAGS=$LDFLAGS"
+
+  export CC=musl-gcc
+  build_line "Setting CC=$CC"
+
+  _wget_common_prepare
 }
 
 do_build() {
-	./configure \
-		--prefix="$pkg_prefix" \
-		--with-ssl=openssl
-	make -j"$(nproc)"
+  ./configure \
+    --prefix="$pkg_prefix" \
+    --with-ssl=openssl \
+    --without-libuuid
+  make
+}
+
+do_install() {
+  do_default_install
+
+  cat <<EOF >> "$pkg_prefix/etc/wgetrc"
+
+# Default root CA certs location
+ca_certificate=$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem
+EOF
 }
 
 do_check() {
-	make check
+  PERL_MM_USE_DEFAULT=1 cpan HTTP:Daemon
+  make check
+}
+
+_wget_common_prepare() {
+  # Purge the codebase (mostly tests & build Perl scripts) of the hardcoded
+  # reliance on `/usr/bin/env`.
+  grep -lr '/usr/bin/env' . | while read -r f; do
+    sed -e "s,/usr/bin/env,$(pkg_path_for coreutils)/bin/env,g" -i "$f"
+  done
 }
