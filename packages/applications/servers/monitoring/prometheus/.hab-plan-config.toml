@@ -1,4 +1,5 @@
 [rules]
 license-not-found = {level = "off", source-shasum = "7ad08da161abae07b7fbf08e733a37f738152fba89b0104f5d0bc4ece1eb7ee6"}
 missing-license = {level = "off", source-shasum = "7ad08da161abae07b7fbf08e733a37f738152fba89b0104f5d0bc4ece1eb7ee6"}
-
+# core/bash is required for fixing interpreter
+unused-dependency = {ignored_packages = ["core/bash"]}
