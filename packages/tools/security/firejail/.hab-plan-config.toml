@@ -1,2 +1,4 @@
 [rules]
+missing-license = { level = "off", source-shasum = "fa641abe2f673cef304cee6ef0a8ddb69db7919e0b69752f89762a341a87fabc" }
+license-not-found = { level = "off", source-shasum = "fa641abe2f673cef304cee6ef0a8ddb69db7919e0b69752f89762a341a87fabc" }
 unused-runpath-entry = {ignored_files = ["lib/firejail/*", "bin/*"]}

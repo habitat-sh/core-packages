@@ -1,4 +1,6 @@
 [rules]
+missing-license = { level = "off", source-shasum = "ba1f21d2bd9d339da2d4aa8780c09df32fea87998b73da24f49ab9df1e36a50f" }
+license-not-found = { level = "off", source-shasum = "ba1f21d2bd9d339da2d4aa8780c09df32fea87998b73da24f49ab9df1e36a50f" }
 # directory 'var/' is required at runtime for dbus deamon
 empty-top-level-directory = { level ="off"}
 # ignore script interpret as it is example in docs
