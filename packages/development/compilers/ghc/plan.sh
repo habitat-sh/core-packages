@@ -47,9 +47,9 @@ do_install() {
 
 	# The ghc binary (ghc-${pkg_version}) requires libtinfo.so.6, which is not available
 	# in the current ncurses build because it was built with the --enable-widec option.
-	ln -sfv "$(pkg_path_for ncurses)/lib/libtinfow.so" "${pkg_prefix}/lib/x86_64-linux-ghc-${pkg_version}/libtinfo.so.6"
+	ln -sfv "$(pkg_path_for ncurses)/lib/libtinfow.so" "${pkg_prefix}/bin/libtinfo.so.6"
 
-	export LD_RUN_PATH="${LD_RUN_PATH}:${pkg_prefix}/lib/x86_64-linux-ghc-${pkg_version}"
+	export LD_RUN_PATH="${LD_RUN_PATH}:${pkg_prefix}/lib/x86_64-linux-ghc-${pkg_version}:${pkg_prefix}/bin"
 
 	build_line "Setting rpath for all binaries to '${LD_RUN_PATH}'"
 	find "${pkg_prefix}/bin" -type f -executable \
