@@ -51,7 +51,8 @@ do_build() {
 		--enable-ext-mouse \
 		--enable-sigwinch \
 		--enable-overwrite \
-		--enable-widec
+		--enable-widec \
+		--with-versioned-syms # enable symbol versioning for ABI compactibilty with binaries
 
 	make
 }
