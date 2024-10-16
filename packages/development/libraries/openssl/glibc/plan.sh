@@ -17,6 +17,7 @@ pkg_shasum="eb1ab04781474360f77c318ab89d8c5a03abc38e63d65a603cabbf1b00a1dc90"
 pkg_dirname="${program}-${pkg_version}"
 pkg_deps=(
 	core/glibc
+	core/cacerts
 )
 pkg_build_deps=(
 	core/coreutils
@@ -24,6 +25,7 @@ pkg_build_deps=(
 	core/grep
 	core/make
 	core/sed
+	core/patch
 	core/build-tools-perl
 )
 
@@ -32,8 +34,30 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib64)
 pkg_pconfig_dirs=(lib64/pkgconfig)
 
+_common_prepare() {
+	do_default_prepare
+	# Make cert.pem to get from the cacerts hab package.
+	# Fix for net/protocol.rb:46:in `connect_nonblock': SSL_connect returned=1 errno=0 peeraddr=xxx.xx.xx.xx:443 state=error:
+	# certificate verify failed (unable to get local issuer certificate) (OpenSSL::SSL::SSLError)\n"
+	# ruby -ropenssl -e 'puts OpenSSL::X509::DEFAULT_CERT_FILE' to return our cacerts path.
+	# Set CA dir to `$pkg_prefix/ssl` by default and use the cacerts from the
+	# `cacerts` package. Note that `patch(1)` is making backups because
+	# we need an original for the test suite.
+	# DO NOT REMOVE
+	sed -e "s,@cacerts_prefix@,$(pkg_path_for cacerts),g" \
+		"$PLAN_CONTEXT/cacert-path.patch" |
+		patch -p1 --backup
+
+	if [[ ! -f "/bin/rm" ]]; then
+		hab pkg binlink core/coreutils rm --dest /bin
+		BINLINKED_RM=true
+	fi
+}
+
 do_prepare() {
+	_common_prepare
 	patch -p1 <"$PLAN_CONTEXT/hab-ssl-cert-file.patch"
+
 
 	export CROSS_SSL_ARCH="${native_target}"
 	PERL=$(pkg_path_for core/build-tools-perl)/bin/perl
