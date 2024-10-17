@@ -20,7 +20,6 @@ pkg_deps=(
 	core/build-tools-glibc
 	core/build-tools-libstdcxx
 	core/build-tools-linux-headers
-	core/hab-cc-wrapper
 )
 
 pkg_bin_dirs=(bin)
@@ -47,7 +46,6 @@ do_install() {
 wrap_binary() {
 	local binary
 	local env_prefix
-	local hab_cc_wrapper
 	local binutils
 	local gcc_base
 	local linux_headers
@@ -55,10 +53,10 @@ wrap_binary() {
 	local libcxx
 	local wrapper_binary
 	local actual_binary
+	local bash
 
 	binary="$1"
 	env_prefix="NATIVE_CROSS_GCC"
-	hab_cc_wrapper="$(pkg_path_for hab-cc-wrapper)"
 	binutils="$(pkg_path_for native-cross-binutils)"
 	gcc_base="$(pkg_path_for native-cross-gcc-base)"
 	linux_headers="$(pkg_path_for build-tools-linux-headers)"
@@ -66,6 +64,7 @@ wrap_binary() {
 	libcxx="$(pkg_path_for build-tools-libstdcxx)"
 	wrapper_binary="$pkg_prefix/bin/$binary"
 	actual_binary="$gcc_base/bin/$binary"
+	bash=/bin/bash
 
 	case $native_target in
 	aarch64-hab-linux-gnu)
@@ -81,10 +80,9 @@ wrap_binary() {
 	rm -v "$wrapper_binary"
 
 	sed "$PLAN_CONTEXT/cc-wrapper.sh" \
+	    -e "s^@shell@^${bash}^g" \
 		-e "s^@env_prefix@^${env_prefix}^g" \
 		-e "s^@executable_name@^${binary}^g" \
-		-e "s^@wrapper@^${hab_cc_wrapper}/bin/hab-cc-wrapper^g" \
-		-e "s^@program@^${actual_binary}^g" \
 		-e "s^@ld_bin@^${binutils}/${native_target}/bin^g" \
 		-e "s^@dynamic_linker@^${dynamic_linker}^g" \
 		-e "s^@c_start_files@^${libc}/lib^g" \
@@ -93,6 +91,8 @@ wrap_binary() {
 		-e "s^@cxx_std_libs@^${libcxx}/lib^g" \
 		-e "s^@cxx_std_headers@^${libcxx}/include/c++/${pkg_version}:${libcxx}/include/c++/${pkg_version}/${native_target}:${libcxx}/include/c++/${pkg_version}/backward^g" \
 		>"$wrapper_binary"
+
+	sed "s^@program@^${actual_binary}^g" "$PLAN_CONTEXT/../../../../wrappers/hab-cc-wrapper.sh" >> "$wrapper_binary"
 
 	chmod 755 "$wrapper_binary"
 }
