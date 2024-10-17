@@ -1689,6 +1689,15 @@
     },
     {
       "pkg_origin": "core",
+      "pkg_name": "devicemapper",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
       "pkg_name": "packer",
       "pkg_category": "Single Major Single Minor",
       "pkg_family": "",
@@ -1921,6 +1930,15 @@
     },
     {
       "pkg_origin": "core",
+      "pkg_name": "libaio",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
       "pkg_name": "libarchive",
       "pkg_category": "Single Major Single Minor",
       "pkg_family": "",
@@ -2140,6 +2158,15 @@
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "alex",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
       ]
     },
     {
@@ -2794,6 +2821,15 @@
     },
     {
       "pkg_origin": "core",
+      "pkg_name": "libnl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
       "pkg_name": "attr",
       "pkg_category": "Single Major Single Minor",
       "pkg_family": "",
@@ -3012,6 +3048,16 @@
     },
     {
       "pkg_origin": "core",
+      "pkg_name": "prometheus",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
       "pkg_name": "numactl",
       "pkg_category": "Single Major Single Minor",
       "pkg_family": "",
@@ -3106,6 +3152,15 @@
     },
     {
       "pkg_origin": "core",
+      "pkg_name": "iptables",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
       "pkg_name": "iproute2",
       "pkg_category": "Single Major Single Minor",
       "pkg_family": "",
@@ -3134,12 +3189,30 @@
     },
     {
       "pkg_origin": "core",
+      "pkg_name": "llvm",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
       "pkg_name": "e2fsprogs",
       "pkg_category": "Single Major Single Minor",
       "pkg_family": "",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "happy",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
       ]
     },
     {
@@ -3429,6 +3502,15 @@
     },
     {
       "pkg_origin": "core",
+      "pkg_name": "pango",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
       "pkg_name": "which",
       "pkg_category": "Single Major Single Minor",
       "pkg_family": "",
@@ -3581,7 +3663,7 @@
     },
     {
       "pkg_origin": "core",
-      "pkg_name": "corretto11",
+      "pkg_name": "corretto",
       "pkg_category": "Single Major Single Minor",
       "pkg_family": "",
       "pkg_platform": [
@@ -3688,6 +3770,15 @@
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "rpm",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
       ]
     },
     {
