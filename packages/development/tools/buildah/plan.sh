@@ -8,6 +8,8 @@ pkg_deps=(
     core/libassuan
     core/libgpg-error
     core/libseccomp
+    core/netavark
+    core/runc
 )
 pkg_build_deps=(
     core/bzip2
@@ -30,6 +32,10 @@ do_download() {
         --single-branch \
         "${pkg_upstream_url}" \
         "${repo_path}"
+}
+
+do_setup_environment() {
+  set_runtime_env CONTAINERS_HELPER_BINARY_DIR "$(pkg_path_for core/netavark)/bin"
 }
 
 do_prepare() {
