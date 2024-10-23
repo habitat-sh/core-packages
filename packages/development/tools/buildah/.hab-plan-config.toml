@@ -1,3 +1,4 @@
 [rules]
 unused-runpath-entry = {ignored_files = ["bin/*"]}
-unused-dependency = {ignored_packages = ["core/{libassuan,libgpg-error}"]}
+# core/runc and core/netavark are required for habitat container exporter. Added by Matt Wrock
+unused-dependency = {ignored_packages = ["core/{libassuan,libgpg-error,runc,netavark}"]}
