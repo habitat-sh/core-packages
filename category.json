@@ -984,6 +984,7 @@
     {
       "pkg_origin": "core",
       "pkg_name": "dotnet-481-dev-pack",
+      "pkg_category": "Single Major Single Minor",
       "pkg_family": "",
       "pkg_platform": [
         "x86_64-windows"
