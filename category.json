@@ -1,0 +1,3940 @@
+{
+  "description": "categorization of packages based on maintenance/release frequency",
+  "data": [
+    {
+      "pkg_origin": "core",
+      "pkg_name": "7zip",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "acl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "acl-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "alex",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "alsa-lib",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "apr",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "apr-util",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "asciinema",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "attr",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "attr-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "autoconf",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "autogen",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "automake",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "avisynthplus",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "aws-cli",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "bash",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "bash-static",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "bats",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "bc",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "bdwgc",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "bind",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "binutils",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "binutils-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "binutils-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "bison",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "boost",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-bash-static",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-binutils",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-bison",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-cacerts",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-coreutils",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-diffutils",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-file",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-findutils",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-gawk",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-gcc",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-gcc-libs",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-gettext",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-glibc",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-gmp",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-grep",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-gzip",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-hab",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-hab-backline",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-hab-plan-build",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-hab-studio",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-isl",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-libmpc",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-libstdcxx",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-linux-headers",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-m4",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-make",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-mpfr",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-ncurses",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-openssl",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-patch",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-patchelf",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-perl",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-python",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-rust",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-sed",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-tar",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-texinfo",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-toml-cli",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-util-linux",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-wget",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-xz",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "build-tools-zlib",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "buildah",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "buildkite-agent",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "buildkite-cli",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "bundler",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "busybox",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "busybox-static",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "bzip2",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "bzip2-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "cabal-install",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "cacerts",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "cairo",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "certstrap",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "check",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "cmake",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "cmake-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "concourse",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "coreutils",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "coreutils-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "corretto11",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "cpanminus",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "cunit",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "curl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "cyrus-sasl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "db",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "dbus",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "dejagnu",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "dejagnu-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "devicemapper",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "dex",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "diffutils",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "docker",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "docker-credential-helper",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "dotnet-481-dev-pack",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "dotnet-core",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "dotnet-core-sdk",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "doxygen",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "dpkg",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "e2fsprogs",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "elfutils",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "erlang26",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "erlang",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "expat",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "expect",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "expect-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "ffmpeg",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "file",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "findutils",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "firejail",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "fixesproto",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "flex",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "flex-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "flex-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "fontconfig",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "freetype",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "fribidi",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gawk",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gcc",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gcc-base",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gcc-libs",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gcc-libs-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gcc-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gcc-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gcc-stage1-with-glibc",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gdal",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gdbm",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gecode",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "geos",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gettext",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "ghc",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "giflib",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "git",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "glib",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "glibc",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "glibc-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gmp",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gmp-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gmp-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gnupg",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gnutls",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "go-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "go1_19",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "go",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "go1_21",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "go",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "go1_22",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "go",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gperf",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gpgme",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "grep",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "groff",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "grpcurl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "guile",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gzip",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "hab",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "hab-backline",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "hab-cc-wrapper",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "hab-launcher",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "hab-ld-wrapper",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "hab-plan-build",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "hab-studio",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "hab-sup",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "happy",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "haproxy",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "harfbuzz",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "iana-etc",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "icu",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "inetutils",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "innounp",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "inputproto",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "iproute2",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "iptables",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "isl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "isl-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "isl-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "jbigkit",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "jq-static",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "json-c",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "jsoncpp",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "kbproto",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "krb5",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "lcms2",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "lerc",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "less",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "lessmsi",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libaio",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libarchive",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libassuan",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libatomic_ops",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libb2",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libbsd",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libcap",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libcap-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libdeflate",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libdrm",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libedit",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libevent",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libffi",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libgcrypt",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libgeotiff",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libgpg-error",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libice",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libiconv",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libidn2",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libjpeg-turbo",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libksba",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libmd",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libmpc",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libmpc-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libmpc-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libnl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libossp-uuid",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libpcap",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libpciaccess",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libpcre2",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libpng",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libpsl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libpthread-stubs",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "librhash",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libseccomp",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libsm",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libsodium",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libtasn1",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libtiff",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libtool",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libunistring",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libunwind",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libuv",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libwebp",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libxau",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libxcb",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libxdmcp",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libxext",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libxfixes",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libxi",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libxml2",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libxrender",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libxslt",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libxtst",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "libyaml",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "linux-headers",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "linux-headers-musl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "llvm",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "local-lib",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "lsof",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "lttng-ust",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "lua",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "lz4",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "lzip",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "lzo",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "lzop",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "m4",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "m4-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "make",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "maven",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "maven-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "memcached",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "meson",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "mg",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "minio",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "mongodb",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "mpfr",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "mpfr-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "mpfr-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "musl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "mysql-client",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "nasm",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "native-busybox-static",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "native-cross-binutils",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "native-cross-gcc",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "native-cross-gcc-base",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "native-file",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "native-gmp",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "native-isl",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "native-libmpc",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "native-mpfr",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "native-patchelf",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "native-rust",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "ncurses",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "ncurses-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "net-tools",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "netavark",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "netcat",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "netcat-openbsd",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "nettle",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "nghttp2",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "nginx",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "ninja",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "node",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "npth",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "nspr",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "nss",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "nss-myhostname",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "nuget",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "numactl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "oniguruma",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "openjpeg",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "openldap",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "openssh",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "openssl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "openssl-musl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "p11-kit",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "packer",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "pango",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "parallel",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "patch",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "patchelf",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "pcre2",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "perl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "pester",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "pixman",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "pkg-config",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "popt",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "postgis3",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "postgresql-with-ext15",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "postgresql",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "postgresql13",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "postgresql",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "postgresql13-client",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "postgresql",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "postgresql14",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "postgresql",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "postgresql14-client",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "postgresql",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "postgresql15",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "postgresql",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "postgresql15-client",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "postgresql",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "powershell",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "procps-ng",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "proj",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "prometheus",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "protobuf",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "protobuf-c",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "protobuf-cpp",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "protobuf-rust",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "ps-lock",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "psmisc",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "psscriptanalyzer",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "python",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "python2-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "raml2html",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "re2c",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "readline",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "readline-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "recordproto",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "redis",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "renderproto",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "rpm",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "rsync",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "ruby-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "ruby3_1",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "ruby",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "ruby3_3",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "ruby",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "ruby3_4",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "ruby",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "runc",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "runit",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "rust",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "scaffolding-base",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "scaffolding-go",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "sccache",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "scons",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "sed",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "shadow",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "shellcheck",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "sqitch",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "sqlite",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "strace",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "sudo",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "tar",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "tcl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "tcl-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "terraform",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "texinfo",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "toml-cli",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "tzdata",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "unzip",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "userspace-rcu",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "util-linux",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "util-macros",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "valgrind",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "vault",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "vim",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "visual-build-tools-2022",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "visual-cpp-redist-2022",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "wget",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "wget-static",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "which",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "windows-11-sdk",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "wix",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "xcb-proto",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "xextproto",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "xlib",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "xproto",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "xtrans",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "xxhash",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "xz",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "xz-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "yarn",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "zeromq",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "zlib",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux",
+        "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "zlib-musl",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "zlib-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "zlib-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "zstd",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "zstd-stage0",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "zstd-stage1",
+      "pkg_category": "internal",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    }
+  ]
+}
