@@ -46,9 +46,9 @@ for pkg_name in "${repo_array[@]}"; do
     fi
   done
   if [[ $found == false ]]; then
-    echo "$pkg_name not in maintainance cycle"
+    echo package "$pkg_name is not in maintainance cycle"
     exit 1
   fi
 done
 
-echo "All packages from core-packages repo has maintainance cycle"
+echo "All packages from core-packages repo have maintainance cycle"
