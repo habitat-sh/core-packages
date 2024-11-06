@@ -34,9 +34,15 @@ function Set-PackageVersion {
         $_.StartsWith($datePrefix)
     }
     $buildDate = $dateLine.Substring($datePrefix.Length)
-
+    if ($dateString -match '\b\d{1}\b') {
+        # If it's a single digit day (e.g., '4')
+        $format = 'ddd MMM d HH:mm:ss yyyy GMT'
+    } else {
+        # If it's a double digit day (e.g., '25')
+        $format = 'ddd MMM dd HH:mm:ss yyyy GMT'
+    }
     # Update the `$pkg_version` value with the build date
-    $script:pkg_version=[datetime]::ParseExact($buildDate, "ddd MMM  d HH:mm:ss yyyy GMT", $null).ToString("yyyy.MM.dd")
+    $script:pkg_version=[datetime]::ParseExact($buildDate, $format, $null).ToString("yyyy.MM.dd")
     Write-BuildLine "Version updated to $pkg_version from CA Certs file"
 
     # Several metadata values get their defaults from the value of `$pkg_version`
