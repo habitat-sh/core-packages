@@ -5,8 +5,13 @@ $pkg_description="Standalone compiler, libraries and scripts"
 $pkg_upstream_url="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022"
 $pkg_license=@("Microsoft Software License")
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://aka.ms/vs/17/release/vs_BuildTools.exe"
-$pkg_shasum="7d9ec4afc0346130be7244673bb60ab159eb99794e1e5101d4dc973047c5eeee"
+# When accessing the vs_BuildTools.exe from https://aka.ms/vs/17/release/vs_BuildTools.exe, 
+# it always provides the latest version of the build tools, which, in turn, can change dependencies. 
+# This may cause issues due to differences in the build time and result in a loss of reproducibility. 
+# Instead, we should always use the exact version of the build tools based on the configured version.
+# https://github.com/microsoft/winget-pkgs/tree/master/manifests/m/Microsoft/VisualStudio/2022/BuildTools
+$pkg_source="https://download.visualstudio.microsoft.com/download/pr/7593f7f0-1b5b-43e1-b0a4-cceb004343ca/9a5b493178cde0ec0aa3543d3285c3e037956119ca426aaed14f59d24fe62e90/vs_BuildTools.exe"
+$pkg_shasum="9a5b493178cde0ec0aa3543d3285c3e037956119ca426aaed14f59d24fe62e90"
 $pkg_build_deps=@("core/7zip")
 
 $pkg_bin_dirs=@(
