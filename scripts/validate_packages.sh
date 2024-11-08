@@ -88,7 +88,7 @@ validate_package_category_per_family() {
 usage() {
 	echo "A script to validate meta data about packages in repo."
 	echo
-	echo "Syntax: validate_packages.sh [-f file | -c | -h | -n]"
+	echo "Syntax: bash validate_packages.sh [-f file | -c | -h | -n]"
 	echo "options:"
 	echo "f        Specify category.json file."
 	echo "c        Validate package category of each package family."
