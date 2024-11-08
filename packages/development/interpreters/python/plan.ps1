@@ -9,6 +9,14 @@ $pkg_build_deps=@("core/nuget")
 $pkg_bin_dirs=@("bin", "bin/Scripts")
 
 function Invoke-Build {
+    # Check if any NuGet sources are configured
+    $sources = nuget sources list
+    if ($sources -is [string]) {
+        Write-Host "No valid nuget.org source found. Adding nuget.org as a source..."
+        nuget sources add -Name "nuget.org" -Source "https://api.nuget.org/v3/index.json"
+    } else {
+        Write-Host "nuget.org source is already configured."
+    }
     nuget install python -version $pkg_version -ExcludeVersion -OutputDirectory "$HAB_CACHE_SRC_PATH/$pkg_dirname"
 }
 
