@@ -855,6 +855,15 @@
     },
     {
       "pkg_origin": "core",
+      "pkg_name": "corretto",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
       "pkg_name": "cpanminus",
       "pkg_category": "Single Major Single Minor",
       "pkg_family": "",
