@@ -38,6 +38,9 @@ do_build() {
 
 do_install() {
 	do_default_install
+	# With the musl target on aarch64, some crates are looking for `aarch64-linux-musl-gcc`.  
+	# Create a symlink to the binary so that Rust crates can find it during the build process.  
+	ln -sv "musl-gcc" "$pkg_prefix/bin/aarch64-linux-musl-gcc"
 
 	# Install license
 	install -Dm0644 COPYRIGHT "$pkg_prefix/share/licenses/COPYRIGHT"
