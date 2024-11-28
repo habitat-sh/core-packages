@@ -1,0 +1,3 @@
+[rules]
+missing-runpath-entry-dependency = {ignored_files = ["lib/*", "bin/*"]}
+unused-runpath-entry = {ignored_files = ["lib/*","bin/*"]}
