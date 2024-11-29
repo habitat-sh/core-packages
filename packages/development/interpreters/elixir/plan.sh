@@ -11,7 +11,6 @@ pkg_license=('Apache-2.0')
 pkg_source="https://github.com/elixir-lang/elixir/archive/v${pkg_version}.tar.gz"
 pkg_shasum=6116c14d5e61ec301240cebeacbf9e97125a4d45cd9071e65e0b958d5ebf3890
 pkg_deps=(
-  core/busybox
   core/cacerts
   core/coreutils
   core/openssl
