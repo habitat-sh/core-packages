@@ -845,21 +845,21 @@
     },
     {
       "pkg_origin": "core",
+      "pkg_name": "corretto",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
       "pkg_name": "corretto11",
       "pkg_category": "Single Major Single Minor",
       "pkg_family": "",
       "pkg_platform": [
         "x86_64-linux",
         "x86_64-windows"
-      ]
-    },
-    {
-      "pkg_origin": "core",
-      "pkg_name": "corretto",
-      "pkg_category": "Single Major Single Minor",
-      "pkg_family": "",
-      "pkg_platform": [
-        "x86_64-linux"
       ]
     },
     {
@@ -3173,6 +3173,24 @@
         "x86_64-linux",
         "aarch64-linux",
         "x86_64-windows"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "postgresql17",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "postgresql",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "postgresql17-client",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "postgresql",
+      "pkg_platform": [
+        "x86_64-linux"
       ]
     },
     {
