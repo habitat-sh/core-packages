@@ -1057,6 +1057,15 @@
     },
     {
       "pkg_origin": "core",
+      "pkg_name": "elixir",
+      "pkg_category": "Single Major Single Minor",
+      "pkg_family": "",
+      "pkg_platform": [
+        "x86_64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
       "pkg_name": "erlang26",
       "pkg_category": "Multiple Major Single Minor",
       "pkg_family": "erlang",
@@ -1303,9 +1312,19 @@
     },
     {
       "pkg_origin": "core",
-      "pkg_name": "gecode",
-      "pkg_category": "Single Major Single Minor",
-      "pkg_family": "",
+      "pkg_name": "gecode3",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "gecode",
+      "pkg_platform": [
+        "x86_64-linux",
+        "aarch64-linux"
+      ]
+    },
+    {
+      "pkg_origin": "core",
+      "pkg_name": "gecode6",
+      "pkg_category": "Multiple Major Single Minor",
+      "pkg_family": "gecode",
       "pkg_platform": [
         "x86_64-linux",
         "aarch64-linux"
