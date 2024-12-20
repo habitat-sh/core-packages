@@ -14,7 +14,7 @@ $pkg_lib_dirs=@("lib")
 
 function Invoke-Build {
     Set-Location "$pkg_name-$pkg_name-$pkg_version"
-    perl Configure VC-WIN64A --prefix=$pkg_prefix --openssldir=$pkg_prefix\SSL
+    perl Configure VC-WIN64A --prefix=$pkg_prefix --openssldir=$pkg_prefix\SSL enable-fips
     nmake
     if($LASTEXITCODE -ne 0) { Write-Error "nmake failed!" }
 }
