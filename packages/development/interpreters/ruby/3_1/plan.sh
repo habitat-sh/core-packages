@@ -13,6 +13,7 @@ pkg_shasum=0d0dafb859e76763432571a3109d1537d976266be3083445651dc68deed25c22
 pkg_deps=(
 	core/bash
 	core/coreutils
+	core/gcc
 	core/glibc
 	core/gmp
 	core/libyaml
@@ -24,7 +25,6 @@ pkg_deps=(
         core/libarchive
 )
 pkg_build_deps=(
-	core/gcc
 	core/git
 )
 pkg_lib_dirs=(lib)
