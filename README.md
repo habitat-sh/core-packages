@@ -13,5 +13,3 @@ To compile all the packages contained within this repository, clone the reposito
 ```bash
 make build
 ```
-
-The Habitat Auto Build tool is utilized internally to build the packages. For more complex tasks, please refer to the Habitat Auto Build tool's [readme](https://github.com/habitat-sh/hab-auto-build/tree/v2).
