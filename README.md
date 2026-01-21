@@ -13,3 +13,7 @@ To compile all the packages contained within this repository, clone the reposito
 ```bash
 make build
 ```
+
+# Copyright
+
+See [COPYRIGHT.md](./COPYRIGHT.md).
