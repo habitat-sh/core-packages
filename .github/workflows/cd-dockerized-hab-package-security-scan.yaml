@@ -1,0 +1,196 @@
+# this workflow installs a specified Chef Habitat package and runs a Grype security scan against it.
+# It supports multiple OS runners (Linux, Windows, MacOS) and allows dynamic input of package details.
+# The results of the Grype scan are uploaded as artifacts for further analysis.
+
+# Example hab pkg install command:
+# hab pkg install core/7zip/24.09/20250708070501 --channel base-2025 --auth HAB_PERSONAL_ACCESS_TOKEN 
+# -z, --auth <AUTH_TOKEN>            Authentication token for Builder [env: HAB_AUTH_TOKEN=]
+#     --binlink-dir <BINLINK_DIR>    Binlink all binaries from installed package(s) into BINLINK_DIR [env: HAB_BINLINK_DIR=]  [default: /bin]
+# -u, --url <BLDR_URL>               Specify an alternate Builder endpoint. If not specified, the value will be taken from the HAB_BLDR_URL environment variable if defined. (default: https://bldr.habitat.sh)
+# -c, --channel <CHANNEL>            Install from the specified release channel [env: HAB_BLDR_CHANNEL=]  [default: stable]
+
+# Example hab pkg download command (we do not use this in the workflow but it's here for reference; allows --target):
+# hab pkg download core/nginx/<VERSION>/<RELEASE> \
+# --channel stable \  
+# --target x86_64-linux \
+# --download-directory /tmp/habitat_packages
+name: Dispatch Grype Scan
+
+on:
+  workflow_dispatch:
+    inputs:
+      hab_package:
+        description: "Chef Habitat package to install (e.g., core/nginx)"
+        required: true
+        default: "core/nginx"
+      hab_version:
+        description: "Chef Habitat package version (optional)"
+        required: false
+      hab_release:
+        description: "Chef Habitat package release (optional)"
+        required: false
+      hab_channel:
+        description: "Chef Habitat package channel (e.g., stable, base, base-2025); default is stable"
+        required: false
+        default: "stable"
+      hab_auth_token:
+        description: "Chef Habitat authentication token (optional, uses repo secret if not provided)"
+        required: false
+        
+      # hab_target:  THIS IS DONE BASED ON THE ACTUAL RUNNER TYPE DETECTED
+      #   description: "Chef Habitat package target architecture (e.g., x86_64-linux); if blank, will test all supported targets"
+      #   required: false
+      #   # default: "x86_64-linux"
+      # download_directory:
+      #   description: "Chef Habitat package download directory (optional)"
+      #   required: false
+    
+jobs:
+  grype-scan:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        # , macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Install Chef Habitat (MacOS and Linux)
+        if: runner.os != 'Windows'
+        run: |
+          curl https://raw.githubusercontent.com/habitat-sh/habitat/main/components/hab/install.sh | sudo bash
+
+      - name: Install Chef Habitat (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          Set-ExecutionPolicy Bypass -Scope Process -Force;
+          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+          iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/habitat-sh/habitat/main/components/hab/install.ps1'))
+
+      - name: Configure Habitat (MacOS and Linux)
+        if: runner.os != 'Windows'
+        run: |
+          # Add Habitat to PATH (for current session and future steps if needed, though install.sh usually handles symlinks)
+          echo "/hab/bin" >> $GITHUB_PATH
+          
+          # Accept the license
+          echo "HAB_LICENSE=accept-no-persist" >> $GITHUB_ENV
+          
+          # Create the necessary directory structure for license file
+          sudo mkdir -p /hab/accepted-licenses/
+          sudo touch /hab/accepted-licenses/habitat
+
+      - name: Configure Habitat (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          # Accept the license
+          echo "HAB_LICENSE=accept-no-persist" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          
+          # Create the necessary directory structure for license file
+          New-Item -ItemType Directory -Force -Path "C:\hab\accepted-licenses"
+          New-Item -ItemType File -Force -Path "C:\hab\accepted-licenses\habitat"
+          
+      - name: Install Grype (Linux and MacOS)
+        continue-on-error: true
+        if: runner.os != 'Windows'
+        run: |
+          curl -sSfL https://get.anchore.io/grype | sh -s -- -b /usr/local/bin
+
+      - name: Install Grype (Windows)
+        continue-on-error: true
+        if: runner.os == 'Windows'
+        run: |
+          $ErrorActionPreference = 'Stop'
+          # Download and install Grype for Windows
+          $grypeVersion = (Invoke-RestMethod -Uri "https://api.github.com/repos/anchore/grype/releases/latest").tag_name
+          $grypeUrl = "https://github.com/anchore/grype/releases/download/$grypeVersion/grype_$($grypeVersion.TrimStart('v'))_windows_amd64.zip"
+          $grypeZip = "$env:TEMP\grype.zip"
+          $grypeDir = "$env:TEMP\grype"
+          
+          # Download Grype
+          Invoke-WebRequest -Uri $grypeUrl -OutFile $grypeZip
+          
+          # Extract Grype
+          Expand-Archive -Path $grypeZip -DestinationPath $grypeDir -Force
+          
+          # Add Grype to PATH for subsequent steps
+          echo "$grypeDir" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          
+          # Verify installation
+          & "$grypeDir\grype.exe" version
+
+      - name: Install Habitat Package under test (example core/nginx on MacOS and Linux)
+        if: runner.os != 'Windows'
+        run: |
+          PACKAGE="${{ inputs.hab_package }}"
+          if [ -n "${{ inputs.hab_version }}" ]; then
+            PACKAGE="${PACKAGE}/${{ inputs.hab_version }}"
+          fi
+          if [ -n "${{ inputs.hab_release }}" ]; then
+            PACKAGE="${PACKAGE}/${{ inputs.hab_release }}"
+          fi
+          
+          INSTALL_CMD="sudo hab pkg install ${PACKAGE}"
+          
+          if [ -n "${{ inputs.hab_channel }}" ]; then
+            INSTALL_CMD="${INSTALL_CMD} --channel ${{ inputs.hab_channel }}"
+          fi
+          
+          AUTH_TOKEN="${{ inputs.hab_auth_token }}"
+          if [ -z "${AUTH_TOKEN}" ]; then
+            AUTH_TOKEN="${{ secrets.HAB_AUTH_TOKEN }}"
+          fi
+          if [ -n "${AUTH_TOKEN}" ]; then
+            INSTALL_CMD="${INSTALL_CMD} --auth ${AUTH_TOKEN}"
+          fi
+          
+          echo "Installing: ${INSTALL_CMD}"
+          eval ${INSTALL_CMD}
+
+      - name: Install Habitat Package under test (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          $Package = "${{ inputs.hab_package }}"
+          if ("${{ inputs.hab_version }}" -ne "") {
+            $Package = "${Package}/${{ inputs.hab_version }}"
+          }
+          if ("${{ inputs.hab_release }}" -ne "") {
+            $Package = "${Package}/${{ inputs.hab_release }}"
+          }
+          
+          $InstallCmd = "hab pkg install ${Package}"
+          
+          if ("${{ inputs.hab_channel }}" -ne "") {
+            $InstallCmd = "${InstallCmd} --channel ${{ inputs.hab_channel }}"
+          }
+          
+          $AuthToken = "${{ inputs.hab_auth_token }}"
+          if ([string]::IsNullOrEmpty($AuthToken)) {
+            $AuthToken = "${{ secrets.HAB_AUTH_TOKEN }}"
+          }
+          if (-not [string]::IsNullOrEmpty($AuthToken)) {
+            $InstallCmd = "${InstallCmd} --auth ${AuthToken}"
+          }
+          
+          Write-Host "Installing: ${InstallCmd}"
+          Invoke-Expression $InstallCmd
+
+      - name: Run Grype Scan on Habitat Package
+        timeout-minutes: 15 # Sets a 15-minute timeout for this specific step
+        # if: runner.os != 'Windows'
+        run: |
+          # Find the installed package path. 'hab pkg path' returns the path to the latest installed version.
+          PKG_PATH=$(hab pkg path ${{ inputs.hab_package }})
+          # run grype in runner
+          grype dir:$PKG_PATH --name ${{ inputs.hab_package }} 
+          # run grype to output to file (which is uploaded to the job as an artifact)
+          OUTPUT_FILE="grype-results-${{ inputs.hab_package }}.txt"
+          OUTPUT_FILE="${OUTPUT_FILE//\//-}"
+          echo $OUTPUT_FILE
+          grype dir:$PKG_PATH --name ${{ inputs.hab_package }} > $OUTPUT_FILE
+          echo "OUTPUT_FILE=$OUTPUT_FILE" >> $GITHUB_ENV
+          
+      - name: Upload Grype Scan Results
+        if: runner.os != 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: grype-results-${{ matrix.os }}
+          path: ${{ env.OUTPUT_FILE }}
